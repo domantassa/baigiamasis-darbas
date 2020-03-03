@@ -247,6 +247,14 @@
                 
                 <script src="https://js.pusher.com/5.1/pusher.min.js"></script>
                 <script>	
+
+                    moment.fn.fromNowOrNow = function (a) {
+                        if (Math.abs(moment().diff(this)) < 1000) { // 1000 milliseconds
+                            return 'just now';
+                        }
+                        return this.fromNow(a);
+                    }
+
                     var pusher = new Pusher('9457793ed2d8ec121ebf', {
                     cluster: 'eu',
                     forceTLS: true

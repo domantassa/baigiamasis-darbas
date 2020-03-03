@@ -29222,7 +29222,7 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: 'pusher',
   key: '9457793ed2d8ec121ebf',
   cluster: 'eu',
-  encrypted: true
+  encrypted: false
 });
 
 /***/ }),

@@ -1063,11 +1063,11 @@ select.form-control:focus::-ms-value {
 }
 
 .border-primary-light {
-  border-color: #98aee2 !important;
+  border-color: #148ea6 !important;
 }
 
 .border-primary-lighter {
-  border-color: #cbd7f0 !important;
+  border-color: #1cc1e1 !important;
 }
 
 .border-primary-dark {
@@ -1095,7 +1095,7 @@ select.form-control:focus::-ms-value {
 }
 
 .border-primary {
-  border-color: #5c80d1 !important;
+  border-color: #0c5462 !important;
 }
 
 .border-secondary {

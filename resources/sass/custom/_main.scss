@@ -12,7 +12,32 @@
 // @import 'component1';
 
 
+//.contentShadowInset{
+ // -webkit-box-shadow: inset 0px 0px 13px 2px rgba(0,0,0,0.75);
+//  -moz-box-shadow: inset 0px 0px 13px 2px rgba(0,0,0,0.75);
+//  box-shadow: inset 0px 0px 13px 2px rgba(0,0,0,0.75);
+//}
 
+//.blockWithTopMargin{
+ // margin-top: 50px;
+//}
+body {
+  
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+}
+
+body::-webkit-scrollbar {
+  width: 0.8em;
+}
+ 
+body::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+ 
+body::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}
 
 input[type="file"] {
     display: none;

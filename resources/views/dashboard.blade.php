@@ -30,10 +30,10 @@
     <!-- END Hero -->
 
     <!-- Page Content -->
-    <div class="content">
+    <div class="contentShadowInset">
         <div class="row justify-content-center">
             <div class="col-md-8 col-xl-8">
-                <div class=" {{ $files->count() ? 'block' : '' }}">
+                <div class=" {{ $files->count() ? 'blockWithTopMargin' : '' }}">
 
                     <div class="block-content">
                         <p class="font-size-sm text-muted">

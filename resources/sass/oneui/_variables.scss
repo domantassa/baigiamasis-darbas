@@ -51,8 +51,8 @@ $btn-alt-primary-bg:        lighten(theme-color("primary-lighter"), 5%);
 // Header
 
 $header-height:             3.75rem !default;           // Best values > 3rem and < 5rem
-$header-bg:                 $white !default;
-$header-dark-bg:            theme-color("primary-darker") !default;
+$header-bg:                 theme-color("primary-darker") !default;
+$header-dark-bg:            $white !default;
 
 
 // Sidebar and Side Overlay
