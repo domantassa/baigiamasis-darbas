@@ -57,10 +57,11 @@
 @media only screen and (max-width: 600px) {
   .SideChatting
   {
+    padding-bottom: 170px;
     width:100%;
     height:20%; 
     position:fixed; 
-    bottom:4em; 
+    bottom:0em; 
     left:0em; 
     border-top:0px solid ; 
     background-color: #353847 !important;
