@@ -932,7 +932,7 @@
                                     </div>
                                     <div class="col-6">
                                         <!-- Products -->
-                                        <a class="block block-rounded block-themed bg-danger" href="javascript:void(0)">
+                                        <a class="block block-rounded block-themed bg-default" href="javascript:void(0)">
                                             <div class="block-content text-center">
                                                 <i class="si si-rocket fa-2x text-white-75"></i>
                                                 <p class="font-w600 font-size-sm text-white mt-2 mb-3">
@@ -944,7 +944,7 @@
                                     </div>
                                     <div class="col-6">
                                         <!-- Sales -->
-                                        <a class="block block-rounded block-themed bg-success mb-0" href="javascript:void(0)">
+                                        <a class="block block-rounded block-themed bg-default mb-0" href="javascript:void(0)">
                                             <div class="block-content text-center">
                                                 <i class="si si-plane fa-2x text-white-75"></i>
                                                 <p class="font-w600 font-size-sm text-white mt-2 mb-3">
@@ -956,7 +956,7 @@
                                     </div>
                                     <div class="col-6">
                                         <!-- Payments -->
-                                        <a class="block block-rounded block-themed bg-warning mb-0" href="javascript:void(0)">
+                                        <a class="block block-rounded block-themed bg-default mb-0" href="javascript:void(0)">
                                             <div class="block-content text-center">
                                                 <i class="si si-wallet fa-2x text-white-75"></i>
                                                 <p class="font-w600 font-size-sm text-white mt-2 mb-3">

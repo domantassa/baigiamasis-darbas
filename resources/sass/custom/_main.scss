@@ -21,8 +21,23 @@
 //.blockWithTopMargin{
  // margin-top: 50px;
 //}
+//.contentShadowInset::after
+//{
+//  content: "";
+//  opacity: 0.01;
+//  background-image: url('../storage/background.gif');
+//  background-repeat: no-repeat;
+//  background-size: cover;
+//  top: 0;
+//  left: 0;
+//  bottom: 0;
+//  right: 0;
+//  position: absolute;
+//  z-index: -1;   
+//}
+
+
 body {
-  
   overflow-x: hidden; /* Hide horizontal scrollbar */
 }
 
