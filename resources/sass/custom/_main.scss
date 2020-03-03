@@ -36,6 +36,12 @@
 //  z-index: -1;   
 //}
 
+
+.dashboardas{
+  margin-right: 0px !important;
+}
+
+
 .SideChatting
 {
   width:100%;
@@ -60,9 +66,7 @@
   }
 }
 
-body {
-  overflow-x: hidden; /* Hide horizontal scrollbar */
-}
+
 
 body::-webkit-scrollbar {
   width: 0.8em;

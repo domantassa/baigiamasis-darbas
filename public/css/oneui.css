@@ -26812,6 +26812,10 @@ div.dataTables_wrapper div.dataTables_paginate ul.pagination {
   }
 }
 
+.dashboardas {
+  margin-right: 0px !important;
+}
+
 .SideChatting {
   width: 100%;
   height: 20%;
@@ -26833,11 +26837,6 @@ div.dataTables_wrapper div.dataTables_paginate ul.pagination {
     background-color: #353847 !important;
   }
 }
-body {
-  overflow-x: hidden;
-  /* Hide horizontal scrollbar */
-}
-
 body::-webkit-scrollbar {
   width: 0.8em;
 }

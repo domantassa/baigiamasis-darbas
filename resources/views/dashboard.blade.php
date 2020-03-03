@@ -31,7 +31,7 @@
 
     <!-- Page Content -->
     <div class="contentShadowInset">
-        <div class="row justify-content-center">
+        <div class="row justify-content-center dashboardas">
             <div class="col-md-8 col-xl-8">
                 <div class=" {{ $files->count() ? 'blockWithTopMargin' : '' }}">
 
