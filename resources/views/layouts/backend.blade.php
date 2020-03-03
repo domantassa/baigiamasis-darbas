@@ -396,7 +396,7 @@
                         	
                     </div>	
                     	
-                    <form action="dashboard/sendMessage" method="post" id="message-form"  style="width:100%;height:20%; position:fixed; bottom:0px; left:0; border-top:0px solid ; background-color: #353847 !important">	
+                    <form class="SideChatting" action="dashboard/sendMessage" method="post" id="message-form" >	
                         @csrf	
                         <div class="form-group" class="WhiteBox"  >	
                             	

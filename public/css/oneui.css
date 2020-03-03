@@ -26812,6 +26812,27 @@ div.dataTables_wrapper div.dataTables_paginate ul.pagination {
   }
 }
 
+.SideChatting {
+  width: 100%;
+  height: 20%;
+  position: fixed;
+  bottom: 0em;
+  left: 0em;
+  border-top: 0px solid;
+  background-color: #353847 !important;
+}
+
+@media only screen and (max-width: 600px) {
+  .SideChatting {
+    width: 100%;
+    height: 20%;
+    position: fixed;
+    bottom: 4em;
+    left: 0em;
+    border-top: 0px solid;
+    background-color: #353847 !important;
+  }
+}
 body {
   overflow-x: hidden;
   /* Hide horizontal scrollbar */
