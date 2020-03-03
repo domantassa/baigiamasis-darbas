@@ -141,6 +141,7 @@ class RegisterController extends Controller
                 'username' => $chatkit_id,//$chatkit_id,
                 'roomID' => $roomId,
                 'email' => $data['email'],
+                'position' => 'user',
                 'password' => Hash::make($data['password']),
             ]);
         }
