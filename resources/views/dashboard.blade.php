@@ -72,7 +72,7 @@
                           <tr>
                             <th scope="col">#</th>
                             <td colspan="8">Download</td>
-                            <th scope="col">Uploaded</th>
+                            <th scope="col" class="d-none d-md-table-cell">Uploaded</th>
                             <th scope="col"><i class="fas fa-folder-minus"></i></th>
                             
                           </tr>
@@ -85,7 +85,7 @@
                         <tr>
                             <th scope="col">{{$file->id}}</th>
                             <td colspan="8"><a href="{{ route('download', ['file' => $file->id]) }}">{{$file->name}}</a></td>
-                            <td colspan="col">{{$file->created_at}}</td>
+                            <td colspan="col" class="d-none d-md-table-cell">{{$file->created_at}}</td>
                             <td colspan="col"><a href="{{ route('deleteFile', ['file' => $file->id]) }}"><i class="fas fa-folder-minus"></i></a></td>
                         </tr>
                         @endforeach
