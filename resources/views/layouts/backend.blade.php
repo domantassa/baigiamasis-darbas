@@ -839,7 +839,7 @@
 
                         <!-- Toggle Side Overlay -->
                         <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
-                        @if(Auth::user()->position != 'admin')
+                        @if($user->position != 'admin')
                         <button type="button" onclick="messageAsideToZero()" class="btn btn-sm btn-dual ml-2" data-toggle="layout" data-action="side_overlay_toggle">
                             <i class="far fa-comment-alt"></i>
                             <span id="messageCount" class="badge badge-primary badge-pill">!</span>
