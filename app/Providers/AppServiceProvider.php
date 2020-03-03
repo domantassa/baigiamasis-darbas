@@ -6,6 +6,8 @@ use Illuminate\Support\ServiceProvider;
 
 use Illuminate\Support\Facades\Date;
 
+use Illuminate\Database\Schema\Builder;
+
 use Carbon\CarbonImmutable;
 
 class AppServiceProvider extends ServiceProvider
