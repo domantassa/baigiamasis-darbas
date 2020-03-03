@@ -72,7 +72,7 @@
                           <tr>
                             <th scope="col">#</th>
                             <td colspan="8">Download</td>
-                            <th scope="col">Updated at</th>
+                            <th scope="col">Uploaded</th>
                             <th scope="col"><i class="fas fa-folder-minus"></i></th>
                             
                           </tr>
