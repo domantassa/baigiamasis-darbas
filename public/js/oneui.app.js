@@ -27907,7 +27907,7 @@ function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\dmnts\ForClientsEmpty\resources\js\oneui\app.js */"./resources/js/oneui/app.js");
+module.exports = __webpack_require__(/*! C:\Users\dmnts\OneDrive\Attachments\Desktop\projektai\ForClientsEmpty\resources\js\oneui\app.js */"./resources/js/oneui/app.js");
 
 
 /***/ })

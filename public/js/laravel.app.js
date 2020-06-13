@@ -29300,13 +29300,13 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\dmnts\ForClientsEmpty\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\Users\dmnts\ForClientsEmpty\resources\sass\main.scss */"./resources/sass/main.scss");
-__webpack_require__(/*! C:\Users\dmnts\ForClientsEmpty\resources\sass\oneui\themes\amethyst.scss */"./resources/sass/oneui/themes/amethyst.scss");
-__webpack_require__(/*! C:\Users\dmnts\ForClientsEmpty\resources\sass\oneui\themes\city.scss */"./resources/sass/oneui/themes/city.scss");
-__webpack_require__(/*! C:\Users\dmnts\ForClientsEmpty\resources\sass\oneui\themes\flat.scss */"./resources/sass/oneui/themes/flat.scss");
-__webpack_require__(/*! C:\Users\dmnts\ForClientsEmpty\resources\sass\oneui\themes\modern.scss */"./resources/sass/oneui/themes/modern.scss");
-module.exports = __webpack_require__(/*! C:\Users\dmnts\ForClientsEmpty\resources\sass\oneui\themes\smooth.scss */"./resources/sass/oneui/themes/smooth.scss");
+__webpack_require__(/*! C:\Users\dmnts\OneDrive\Attachments\Desktop\projektai\ForClientsEmpty\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\Users\dmnts\OneDrive\Attachments\Desktop\projektai\ForClientsEmpty\resources\sass\main.scss */"./resources/sass/main.scss");
+__webpack_require__(/*! C:\Users\dmnts\OneDrive\Attachments\Desktop\projektai\ForClientsEmpty\resources\sass\oneui\themes\amethyst.scss */"./resources/sass/oneui/themes/amethyst.scss");
+__webpack_require__(/*! C:\Users\dmnts\OneDrive\Attachments\Desktop\projektai\ForClientsEmpty\resources\sass\oneui\themes\city.scss */"./resources/sass/oneui/themes/city.scss");
+__webpack_require__(/*! C:\Users\dmnts\OneDrive\Attachments\Desktop\projektai\ForClientsEmpty\resources\sass\oneui\themes\flat.scss */"./resources/sass/oneui/themes/flat.scss");
+__webpack_require__(/*! C:\Users\dmnts\OneDrive\Attachments\Desktop\projektai\ForClientsEmpty\resources\sass\oneui\themes\modern.scss */"./resources/sass/oneui/themes/modern.scss");
+module.exports = __webpack_require__(/*! C:\Users\dmnts\OneDrive\Attachments\Desktop\projektai\ForClientsEmpty\resources\sass\oneui\themes\smooth.scss */"./resources/sass/oneui/themes/smooth.scss");
 
 
 /***/ })

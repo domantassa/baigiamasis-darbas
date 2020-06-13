@@ -32,9 +32,7 @@
         <!-- Scripts -->
         <script>window.Laravel = {!! json_encode(['csrfToken' => csrf_token(),]) !!};</script>
 
-        <script src="https://unpkg.com/@pusher/chatkit-client@1/dist/web/chatkit.js"></script>	
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>	
-        <script src="https://js.pusher.com/5.0/pusher.min.js"></script>	
         
         
         <script src="{{ asset('js/echo.iife.js') }}"></script>
@@ -72,98 +70,7 @@
             }
 
         window.onload = codeAddress;
-        
 
-        Pusher.logToConsole = true;
-        window.Echo = new Echo({
-            broadcaster: 'pusher',
-            key: '9457793ed2d8ec121ebf',
-            cluster: 'eu',
-            forceTLS: true
-        });
-        </script>
-
-        <script>
-
-            
-            
-
-            Echo.private('pool.{{$user->id}}')
-            .listen('EndPool', (e) => {
-                
-                var new_row = document.createElement('tr');
-                var new_col1 = document.createElement('th');
-                var new_col2 = document.createElement('td');
-                var new_col3 = document.createElement('td');
-                var new_col4 = document.createElement('td');
-                var new_col2a = document.createElement('a');
-                var new_col4a = document.createElement('a');
-                var new_col4i = document.createElement('i');
-                var tableFileTable = document.getElementById("FileTable");
-                new_col1.scope = "col";
-                new_col1.innerHTML = e.pool.fileId;
-                new_col2.colSpan = "8";
-                new_col2a.innerHTML = e.pool.message;
-                new_col3.scope = "col";
-                new_col3.innerHTML = e.pool.created_at;
-                new_col4.scope = "col";
-                new_col4i.className = "fas fa-folder-minus";
-                new_col2a.href = APP_URL+"/dashboard/download/"+e.pool.fileId; 
-                new_col4a.href = APP_URL+"/dashboard/download/"+e.pool.fileId;
-                new_col4a.appendChild(new_col4i);
-                new_col4.appendChild(new_col4a);
-                new_col2.appendChild(new_col2a);
-                new_row.appendChild(new_col1);
-                new_row.appendChild(new_col2);
-                new_row.appendChild(new_col3);
-                new_row.appendChild(new_col4);
-                
-                tableFileTable.appendChild(new_row);
-                console.log("pirmas");
-                var notifli = document.createElement('li');
-                var notifa = document.createElement('a');
-                var notifdiv = document.createElement('div');
-                var notifi = document.createElement('i');
-                var notifdiv2 = document.createElement('div');
-                var notifdiv3 = document.createElement('div');
-                var notifsmall = document.createElement('small');
-                console.log("antras");
-                notifa.className = "text-dark media py-2";
-                notifdiv.className = "mr-2 ml-3";
-                notifi.className = "fa fa-fw fa-check-circle text-success";
-                notifdiv2.className = "media-body pr-2";
-                notifdiv3.className = "font-w600";
-                notifsmall.className = "text-muted";
-                notifsmall.innerHTML = e.pool.created_at;
-                notifdiv3.innerHTML = "New file: " + e.pool.message;
-                notifa.href = APP_URL+"/dashboard/deleteNotif/"+e.pool.user_id;
-                console.log("trecias");
-                notifdiv2.appendChild(notifdiv3);
-                notifdiv2.appendChild(notifsmall);
-                notifdiv.appendChild(notifi);
-                notifa.appendChild(notifdiv);
-                notifa.appendChild(notifdiv2);
-                notifli.appendChild(notifa)
-                var NotifTable = document.getElementById("manoNotifai2");
-                var notifCountSpan = document.getElementById("notifCount");
-                var kint = notifCountSpan.innerHTML;
-                kint2 = parseInt(kint);
-                
-                //document.getElementById("tableDiv").style.visibility = "visible";
-                notifCountSpan.innerHTML = parseInt(kint2 + 1);
-                NotifTable.appendChild(notifli);
-                console.log("ketvirtas");
-                console.log(NotifTable);
-                
-                
-                
-
-                
-                
-            });
-        </script>
-
-        <script>	
         	
         	
         	
@@ -245,7 +152,6 @@
 
                 <!-- Side Content -->
                 
-                <script src="https://js.pusher.com/5.1/pusher.min.js"></script>
                 <script>	
 
                     moment.fn.fromNowOrNow = function (a) {
@@ -254,132 +160,17 @@
                         }
                         return this.fromNow(a);
                     }
-
-                    var pusher = new Pusher('9457793ed2d8ec121ebf', {
-                    cluster: 'eu',
-                    forceTLS: true
-                    });
                     	
-                    	
-                    const tokenProvider = new Chatkit.TokenProvider({	
-                        url: "https://us1.pusherplatform.io/services/chatkit_token_provider/v1/ec529a06-e34c-4515-88ac-966a42488d21/token"	
-                    });	
                     	
                     var useris = {!! json_encode(auth()->user(), JSON_HEX_TAG) !!};	
                     var sites = {!! json_encode($user->toArray(), JSON_HEX_TAG) !!};	
                     var admin = {!! json_encode($users->toArray(), JSON_HEX_TAG) !!};	
                     var nowUser;	
-                    console.log("auth user", useris);	
-                    console.log("siunciamas user ", sites);	
-                    console.log("Admino acc ", admin[0]);	
                     	
                         	
-                        const chatManager = new Chatkit.ChatManager({	
-                            instanceLocator: "v1:us1:ec529a06-e34c-4515-88ac-966a42488d21",	
-                            userId: useris.username,	
-                            tokenProvider: tokenProvider,	
-                        });	
-                        	
-                    	
-                        var channel = pusher.subscribe('my-channel');
-                        channel.bind('my-event', function(data) {
-                            //alert(JSON.stringify(data));
-                        });
                     		
                 	
-                          	
-                        //currentUser.rooms[0]	
-                        chatManager	
-                            .connect()	
-                            .then(currentUser => {	
-                            currentUser.subscribeToRoomMultipart({	
-                                roomId: sites.roomID,	
-                                hooks: {	
-                                onMessage: message => {	
-                                    
-                                    console.log("Dabartinio userio kambariai", currentUser.rooms);	
-                                    console.log("currentRoom:", currentUser.rooms[0]);	
-                                    console.log("sites room ID",sites.roomID);	
-                                    const divas = document.getElementById("chatting");	
-                                    const div1 = document.createElement("div");	
-                                    const div2 = document.createElement("div");	
-                                    const div2Their = document.createElement("div");	
-                                    const h3as = document.createElement("span");	
-                                    const smallas = document.createElement("small");	
-                                    const div3 = document.createElement("div");	
-                                    const pas = document.createElement("p");	
-                                    const imgas = document.createElement("img");	
-                                    	
-                                    div1.className = "block block-bordered";	
-                                    div2.className = "block-header";	
-                                    h3as.className = "block-title";	
-                                    div3.className = "block-content";	
-                                    imgas.className = "rounded";	
-                                    imgas.src = "{{asset('storage/CustomerSupport.jpg')}}";	
-                                    //imgas.src = "{{asset('media/avatars/avatar66.jpg')}}";	
-                                    	
-                                    if(message.senderId == 'admin')	
-                                        div1.style.background = "linear-gradient(90deg, rgba(235,232,232,1) 0%, rgba(255,255,255,1) 100%)";	
-                                    div1.style.boxShadow = "0px 0px 5px 6px rgba(156,145,156,1)";	
-                                    div2.style.borderBottom = "1px solid rgba(224,220,224,1)";	
-                                    if(message.senderId == 'admin')	
-                                        h3as.style.textAlign = "right";	
-                                    h3as.style.position = "relative";	
-                                    	
-                                    if(message.senderId == 'admin')	
-                                        div3.style.textAlign = "right";	
-                                    div3.style.position = "relative";	
-                                    pas.style.marginTop = "-10px";	
-                                    pas.style.wordWrap = "break-word";	
-                                    pas.style.lineHeight= "1.2";	
-                                    pas.style.fontSize= "19px";	
-                                    	
-                                    imgas.style.width ="40px";	
-                                    	
-                                    smallas.innerHTML =  moment(message.createdAt).fromNow();	
-                                    if(message.senderId == 'admin')	
-                                        h3as.appendChild(document.createTextNode(`Customer support`));	
-                                    else	
-                                        h3as.appendChild(document.createTextNode(`${sites.name}`));	
-                                    h3as.appendChild(document.createElement("br"));	
-                                    h3as.appendChild(smallas);	
-                                	
-                                    	
-                                    pas.appendChild(	
-                                    document.createTextNode(`${ message.parts[0].payload.content}`));	
-                                    if(message.senderId == 'admin')	
-                                        div2.appendChild(imgas);	
-                                    div2.appendChild(h3as);	
-                                    div3.appendChild(pas);	
-                                    div1.appendChild(div2);	
-                                    div1.appendChild(div3);	
-                                    divas.insertBefore(div1, divas.childNodes[3]);	
-                                    document.getElementById("messageCount").innerHTML = "!";
-                                    	
-                                    	
-                                }	
-                                }	
-                            });	
-                            	
-                            const form = document.getElementById("message-form");	
-                            form.addEventListener("submit", e => {	
-                                e.preventDefault();	
-
-                                const input = document.getElementById("message-text");	
-                                currentUser.sendSimpleMessage({	
-                                text: input.value,	
-                                roomId: sites.roomID	
-                                	
-                                });	
-                                	
-                                	
-                                	
-                                input.value = "";	
-                            });	
-                            })	
-                            .catch(error => {	
-                            console.error("error:", error);	
-                            }); 	
+                        
                     	
                     	
                     	
@@ -717,7 +508,7 @@
 
                         <!-- Notifications Dropdown -->
                        
-                        
+                        @if ($notif->count() > 0)
                             <div class="dropdown d-inline-block ml-2">
                                 <button type="button" class="btn btn-sm btn-dual" id="page-header-notifications-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="si si-bell"></i>
@@ -834,17 +625,13 @@
                             </div>
                         
                         @endif
+                        @endif
                         
                         <!-- END Notifications Dropdown -->
 
                         <!-- Toggle Side Overlay -->
                         <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
-                        @if($user->position != 'admin')
-                        <button type="button" onclick="messageAsideToZero()" class="btn btn-sm btn-dual ml-2" data-toggle="layout" data-action="side_overlay_toggle">
-                            <i class="far fa-comment-alt"></i>
-                            <span id="messageCount" class="badge badge-primary badge-pill">!</span>
-                        </button>
-                        @endif
+                        
                         <!-- END Toggle Side Overlay -->
                     </div>
                     <!-- END Right Section -->

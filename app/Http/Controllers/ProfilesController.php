@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\User;
 use App\file;
 use App\FileNotification;
-use Chatkit\Laravel\Facades\Chatkit;
 
 //use Illuminate\Support\Facades\Cache;
 //use Illuminate\Support\Facades\Auth;
@@ -16,17 +15,14 @@ use Chatkit\Laravel\Facades\Chatkit;
 class ProfilesController extends Controller
 {
 
-    private $chatkit;
     private $roomId;
     public function __construct()
     {
         
-        $this->chatkit = app('ChatKit');
         $expiresAt = now()->addMinutes(5);
         $now = now();
        
         //Cache::put('user-is-online-' . Auth::user()->id, true, $expiresAt);
-        //$this->roomId = env('CHATKIT_GENERAL_ROOM_ID');
         
     }
 

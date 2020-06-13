@@ -40,13 +40,11 @@ class RegisterController extends Controller
      * @return void
      */
 
-    private $chatkit;
     //private $roomId;
 
     public function __construct()
     {
         $this->middleware('guest');
-        $this->chatkit = app('ChatKit');
     }
 
     /**
@@ -59,7 +57,6 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-            'username' => 'required|string|max:255|unique:users',
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -73,43 +70,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $chatkit_id = $data['username'].''.strtolower(Str::random(5));
-        $roomName = $data['username'].''.strtolower(Str::random(5));
-        $roomId = $data['username'].''.strtolower(Str::random(5));
         // Create User account on ChatKit
-
-        if(is_null(User::first()))
-        {
-            $this->chatkit->createUser([
-                'id' =>  'admin',
-                'name' => $data['name'],
-            ]);
-            $this->chatkit->createRoom([
-                'id' => $roomId,
-                'creator_id' => 'admin',
-                'name' => $chatkit_id,
-                'private' => true,
-    
-            ]);
-        }
-        else
-        {
-            $this->chatkit->createUser([
-                'id' =>  $chatkit_id,
-                'name' => $data['name'],
-            ]);
-            $this->chatkit->createRoom([
-                'id' => $roomId,
-                'creator_id' => 'admin',
-                'name' => $chatkit_id,
-                'private' => false,
-    
-            ]);
-            $this->chatkit->addUsersToRoom([
-                'room_id' => $roomId,
-                'user_ids' => [$chatkit_id],
-            ]);
-        }
 
         
         
@@ -127,8 +88,6 @@ class RegisterController extends Controller
         {
             return User::create([
                 'name' => $data['name'],
-                'username' => 'admin',
-                'roomID' => $roomId,
                 'email' => $data['email'],
                 'position' => 'admin',
                 'password' => Hash::make($data['password']),
@@ -138,8 +97,6 @@ class RegisterController extends Controller
         {
             return User::create([
                 'name' => $data['name'],
-                'username' => $chatkit_id,//$chatkit_id,
-                'roomID' => $roomId,
                 'email' => $data['email'],
                 'position' => 'user',
                 'password' => Hash::make($data['password']),

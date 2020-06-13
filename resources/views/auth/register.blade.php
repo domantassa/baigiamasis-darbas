@@ -35,15 +35,6 @@
                                         </span>
                                         @endif
                                     </div>
-
-                                    <div class="form-group">
-                                        <input type="text" class="form-control form-control-lg form-control-alt {{ $errors->has('username') ? ' is-invalid' : '' }}" id="username" name="username" placeholder="Username" value="{{ old('username') }}">
-                                        @if ($errors->has('username'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('username') }}</strong>
-                                        </span>
-                                        @endif
-                                    </div>
                                     
                                     <div class="form-group">
                                         <input type="email" class="form-control form-control-lg form-control-alt {{ $errors->has('email') ? ' is-invalid' : '' }}" id="email" name="email" placeholder="Email" value="{{ old('email') }}">
