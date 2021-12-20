@@ -41,6 +41,7 @@ $theme-amethyst-sidebar-dark-bg:               $theme-amethyst-darker !default;
 $theme-amethyst-side-overlay-bg:               $white !default;
 
 $theme-amethyst-btn-alt-primary-bg:            $theme-amethyst-lighter;
+$theme-amethyst-hue : 110deg;
 
 
 // City Theme
@@ -82,6 +83,7 @@ $theme-city-sidebar-dark-bg:               $theme-city-darker !default;
 $theme-city-side-overlay-bg:               $white !default;
 
 $theme-city-btn-alt-primary-bg:            lighten($theme-city-lighter, 8%);
+$theme-city-hue : 180deg;
 
 
 // Flat Theme
@@ -123,6 +125,7 @@ $theme-flat-sidebar-dark-bg:               $theme-flat-darker !default;
 $theme-flat-side-overlay-bg:               $white !default;
 
 $theme-flat-btn-alt-primary-bg:            lighten($theme-flat-lighter, 5%);
+$theme-flat-hue : 30deg;
 
 
 // Modern Theme
@@ -164,6 +167,8 @@ $theme-modern-sidebar-dark-bg:               $theme-modern-darker !default;
 $theme-modern-side-overlay-bg:               $white !default;
 
 $theme-modern-btn-alt-primary-bg:            #b6e7ee;
+$theme-modern-hue : 30deg;
+
 
 
 // Smooth Theme
@@ -205,3 +210,4 @@ $theme-smooth-sidebar-dark-bg:               $theme-smooth-darker !default;
 $theme-smooth-side-overlay-bg:               $white !default;
 
 $theme-smooth-btn-alt-primary-bg:            lighten($theme-smooth-lighter, 7%);
+$theme-smooth-hue : 130deg;

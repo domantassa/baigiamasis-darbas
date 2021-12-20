@@ -5,18 +5,19 @@
     <div class="bg-body-light">
         <div class="content content-full">
             <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
-                <h1 class="flex-sm-fill h3 my-2">ALL USERS </h1>
+            <div class="content content-full pt-2" >
+            <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
+                <h1 class="flex-sm-fill h2 my-2 invisible" data-toggle="appear"
+                data-class="animated fadeInUp"
+                data-timeout="250"
+                data-offset="-100">
+                Visos aktyvios paskyros </h1>
+            </div>
                 
-                <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
-                    <ol class="breadcrumb breadcrumb-alt">
-                        <li class="breadcrumb-item">
-                            <a class="link-fx" href="{{'/'}}">Dashboard</a>
-                        </li>
-                        <li class="breadcrumb-item" aria-current="page">
-                            <a class="link-fx" href="{{'/'}}">Users</a>
-                        </li>
-                    </ol>
-                </nav>
+            
+       </div>
+                
+                
             </div>
        </div>
     </div>
@@ -54,23 +55,26 @@
                     <table class="table table-hover .table-responsive">
                         <thead>
                           <tr>
-                            <th scope="col">ID</th>
-                            <td colspan="8">Name & Lastname</td>
-                            <th scope="col">Registered at</th>
+                            <td colspan="8">Vardas & Pavardė</td>
+                            <th scope="col">Užsiregistravo</th>
+                            <th scope="col">Planas</th>
                             <th scope="col"><i class="fas fa-user-minus"></i></th>
+                            <th scope="col"><i class="fas fa-user-edit"></i></th>
                             
                           </tr>
                         </thead>
                         <tbody>
                             
                         
-                        @foreach ($users as $user)
+                        @foreach ($users as $user1)
                         
                         <tr>
-                            <th scope="col">{{$user->id}}</th>
-                            <td colspan="8"><a href="{{ url('dashboard/'.$user->id)}}">{{$user->name}}</a></td>
-                            <td colspan="col">{{$user->created_at}}</td>
-                            <td colspan="col"><a href="{{ route('deleteUser', ['user' => $user->id]) }} " data-toggle="tooltip" data-placement="top" title="Remove User"><i class="fas fa-user-minus"></i></a></td>
+                            <td colspan="8"><a href="{{ url('dashboard/'.$user1->id)}}">{{$user1->name}}</a></td>
+                            <td colspan="col">{{$user1->created_at}}</td>
+                            <td colspan="col">{{$user1->plan}}</td>
+                            <td colspan="col"><a href="{{ route('deleteUser', ['user' => $user1->id]) }} " data-toggle="tooltip" data-placement="top" title="Remove User"><i class="fas fa-user-minus"></i></a></td>
+                            <td colspan="col"><a href="{{ route('user.show', ['user' => $user1->id]) }} " ><i class="fas fa-user-edit"></i></a></td>
+                            
                         </tr>
                         @endforeach
 

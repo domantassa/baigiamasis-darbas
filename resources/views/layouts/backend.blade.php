@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="{{ config('app.locale') }}">
+<html lang="{{ config('app.locale') }}" style="background: #f9f9f9 !important">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <title>For clients</title>	
         <meta name="description" content="For clients">	
         <meta name="author" content="DomantasSabaliauskas">
@@ -17,14 +17,15 @@
         <link rel="shortcut icon" href="{{ asset('media/favicons/favicon.png') }}">
         <link rel="icon" sizes="192x192" type="image/png" href="{{ asset('media/favicons/favicon-192x192.png') }}">
         <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('media/favicons/apple-touch-icon-180x180.png') }}">
-
+        <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+         <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
         <!-- Fonts and Styles -->
         @yield('css_before')
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,600,700%7COpen+Sans:300,400,400italic,600,700">
-        <link rel="stylesheet" id="css-main" href="{{ mix('/css/oneui.css') }}">
-
+        <link rel="stylesheet" id="css-main" href="{{ asset('/css/oneui.css') }}">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
         <!-- You can include a specific file from public/css/themes/ folder to alter the default color theme of the template. eg: -->
-        <!-- <link rel="stylesheet" id="css-theme" href="{{ mix('/css/themes/amethyst.css') }}"> -->
+        <!-- <link rel="stylesheet" id="css-theme" href="{{ asset('/css/themes/amethyst.css') }}"> -->
         @yield('css_after')
 
         
@@ -33,7 +34,6 @@
         <script>window.Laravel = {!! json_encode(['csrfToken' => csrf_token(),]) !!};</script>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>	
-        
         
         <script src="{{ asset('js/echo.iife.js') }}"></script>
         <script src="{{ asset('js/echo.js') }}"></script>
@@ -59,7 +59,6 @@
 
 
             function codeAddress() {
-            //alert('ok');
             $(document).ajaxComplete(function() {
                 $('table').each(function(){
                     if($('tbody:empty',this))
@@ -72,53 +71,16 @@
         window.onload = codeAddress;
 
         	
-        	
-        	
         </script>
-
+                <meta property="og:title" content="Reklamos ekositema klientų sistema" />
+        <meta property="og:url" content="http://klientams.reklamosekosistema.lt" />
+        <meta property="og:image" content="https://reklamosekosistema.lt/wp-content/uploads/2019/11/reklamos-ekosistema-logo.png" />
     </head>
     <body onload="myFunction()">
+
+    
         
-        <!-- Page Container -->
-        <!--
-            Available classes for #page-container:
-
-        GENERIC
-
-            'enable-cookies'                            Remembers active color theme between pages (when set through color theme helper Template._uiHandleTheme())
-
-        SIDEBAR & SIDE OVERLAY
-
-            'sidebar-r'                                 Right Sidebar and left Side Overlay (default is left Sidebar and right Side Overlay)
-            'sidebar-mini'                              Mini hoverable Sidebar (screen width > 991px)
-            'sidebar-o'                                 Visible Sidebar by default (screen width > 991px)
-            'sidebar-o-xs'                              Visible Sidebar by default (screen width < 992px)
-            'sidebar-dark'                              Dark themed sidebar
-
-            'side-overlay-hover'                        Hoverable Side Overlay (screen width > 991px)
-            'side-overlay-o'                            Visible Side Overlay by default
-
-            'enable-page-overlay'                       Enables a visible clickable Page Overlay (closes Side Overlay on click) when Side Overlay opens
-
-            'side-scroll'                               Enables custom scrolling on Sidebar and Side Overlay instead of native scrolling (screen width > 991px)
-
-        HEADER
-
-            ''                                          Static Header if no class is added
-            'page-header-fixed'                         Fixed Header
-
-        HEADER STYLE
-
-            ''                                          Light themed Header
-            'page-header-dark'                          Dark themed Header
-
-        MAIN CONTENT LAYOUT
-
-            ''                                          Full width Main Content if no class is added
-            'main-content-boxed'                        Full width Main Content with a specific maximum width (screen width > 1200px)
-            'main-content-narrow'                       Full width Main Content with a percentage width (screen width > 1200px)
-        -->
-        <div id="page-container" class="sidebar-o enable-page-overlay sidebar-dark side-scroll page-header-fixed enable-cookies">
+        <div id="page-container" class="enable-cookies sidebar-o enable-page-overlay sidebar-dark side-scroll page-header-fixed page-header-dark enable-cookies ">
             <!-- Side Overlay-->
             <aside id="side-overlay" class="font-size-sm" style="background-color: #353847 !important;">
                 <!-- Side Header -->
@@ -143,7 +105,7 @@
 
                     <!-- Close Side Overlay -->
                     <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
-                    <a class="ml-auto btn btn-sm btn-dual" href="javascript:void(0)" data-toggle="layout" data-action="side_overlay_close">
+                    <a class="ml-auto btn btn-round btn-sm btn-dual" href="javascript:void(0)" data-toggle="layout" data-action="side_overlay_close">
                         <i class="fa fa-fw fa-times text-primary"></i>
                     </a>
                     <!-- END Close Side Overlay -->
@@ -161,19 +123,10 @@
                         return this.fromNow(a);
                     }
                     	
-                    	
                     var useris = {!! json_encode(auth()->user(), JSON_HEX_TAG) !!};	
                     var sites = {!! json_encode($user->toArray(), JSON_HEX_TAG) !!};	
                     var admin = {!! json_encode($users->toArray(), JSON_HEX_TAG) !!};	
                     var nowUser;	
-                    	
-                        	
-                    		
-                	
-                        
-                    	
-                    	
-                    	
                     	
                     </script>	
                 	
@@ -181,7 +134,6 @@
 
                 </div>
                 <div class="content-side wrapper" id="chatting" style="background-color: #353847 !important; padding-bottom: 250px;">	
-                    	
                     	
                     <div class="block" style=" background: linear-gradient(90deg, rgba(235,232,232,1) 0%, rgba(255,255,255,1) 100%); box-shadow: -4px 6px 27px -5px rgba(166,159,166,1);">	
                         	
@@ -194,7 +146,7 @@
                             	
                             <textarea class="form-control" style="margin:10px; width: 95%" id="message-text" name="message-text" rows="4" placeholder="Textarea content.."></textarea>	
                             <div style="position:relative; text-align:right; margin: 10px;">	
-                                <button type="submit" class="btn btn-sm btn-primary" style="color:white;">	
+                                <button type="submit" class="btn btn-round btn-sm btn-primary" style="color:white;">	
                                     <i class="fa fa-check mr-1"></i> Send	
                                 </button>	
                             </div>	
@@ -219,27 +171,11 @@
             <!-- END Side Overlay -->
 
             <!-- Sidebar -->
-            <!--
-                Sidebar Mini Mode - Display Helper classes
-
-                Adding 'smini-hide' class to an element will make it invisible (opacity: 0) when the sidebar is in mini mode
-                Adding 'smini-show' class to an element will make it visible (opacity: 1) when the sidebar is in mini mode
-                    If you would like to disable the transition animation, make sure to also add the 'no-transition' class to your element
-
-                Adding 'smini-hidden' to an element will hide it when the sidebar is in mini mode
-                Adding 'smini-visible' to an element will show it (display: inline-block) only when the sidebar is in mini mode
-                Adding 'smini-visible-block' to an element will show it (display: block) only when the sidebar is in mini mode
-            -->
             <nav id="sidebar" aria-label="Main Navigation">
                 <!-- Side Header -->
                 <div class="content-header bg-white-5">
                     <!-- Logo -->
-                    <a class="font-w600 text-dual" href="/">
-                        <i class="fa fa-circle-notch text-primary"></i>
-                        <span class="smini-hide">
-                            <span class="font-w700 font-size-h5">Menu</span>
-                        </span>
-                    </a>
+                    <a href="{{route('files')}}"><img class="brand-logo" src="{{asset('media/logos/reklamos-ekosistema-logo.png')}}"></a>
                     <!-- END Logo -->
 
                     <!-- Options -->
@@ -256,51 +192,28 @@
                                     <span>Default</span>
                                     <i class="fa fa-circle text-default"></i>
                                 </a>
-                                <a class="dropdown-item d-flex align-items-center justify-content-between" data-toggle="theme" data-theme="{{ mix('css/themes/amethyst.css') }}" href="#">
+                                <a class="dropdown-item d-flex align-items-center justify-content-between" data-toggle="theme" data-theme="{{ asset('css/themes/amethyst.css') }}" href="#">
                                     <span>Amethyst</span>
                                     <i class="fa fa-circle text-amethyst"></i>
                                 </a>
-                                <a class="dropdown-item d-flex align-items-center justify-content-between" data-toggle="theme" data-theme="{{ mix('css/themes/city.css') }}" href="#">
+                                <a class="dropdown-item d-flex align-items-center justify-content-between" data-toggle="theme" data-theme="{{ asset('css/themes/city.css') }}" href="#">
                                     <span>City</span>
                                     <i class="fa fa-circle text-city"></i>
                                 </a>
-                                <a class="dropdown-item d-flex align-items-center justify-content-between" data-toggle="theme" data-theme="{{ mix('css/themes/flat.css') }}" href="#">
+                                <a class="dropdown-item d-flex align-items-center justify-content-between" data-toggle="theme" data-theme="{{ asset('css/themes/flat.css') }}" href="#">
                                     <span>Flat</span>
                                     <i class="fa fa-circle text-flat"></i>
                                 </a>
-                                <a class="dropdown-item d-flex align-items-center justify-content-between" data-toggle="theme" data-theme="{{ mix('css/themes/modern.css') }}" href="#">
+                                <a class="dropdown-item d-flex align-items-center justify-content-between" data-toggle="theme" data-theme="{{ asset('css/themes/modern.css') }}" href="#">
                                     <span>Modern</span>
                                     <i class="fa fa-circle text-modern"></i>
                                 </a>
-                                <a class="dropdown-item d-flex align-items-center justify-content-between" data-toggle="theme" data-theme="{{ mix('css/themes/smooth.css') }}" href="#">
+                                <a class="dropdown-item d-flex align-items-center justify-content-between" data-toggle="theme" data-theme="{{ asset('css/themes/smooth.css') }}" href="#">
                                     <span>Smooth</span>
                                     <i class="fa fa-circle text-smooth"></i>
                                 </a>
                                 <!-- END Color Themes -->
 
-                                <div class="dropdown-divider"></div>
-
-                                <!-- Sidebar Styles -->
-                                <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
-                                <a class="dropdown-item" data-toggle="layout" data-action="sidebar_style_light" href="#">
-                                    <span>Sidebar Light</span>
-                                </a>
-                                <a class="dropdown-item" data-toggle="layout" data-action="sidebar_style_dark" href="#">
-                                    <span>Sidebar Dark</span>
-                                </a>
-                                <!-- Sidebar Styles -->
-
-                                <div class="dropdown-divider"></div>
-
-                                <!-- Header Styles -->
-                                <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
-                                <a class="dropdown-item" data-toggle="layout" data-action="header_style_light" href="#">
-                                    <span>Header Light</span>
-                                </a>
-                                <a class="dropdown-item" data-toggle="layout" data-action="header_style_dark" href="#">
-                                    <span>Header Dark</span>
-                                </a>
-                                <!-- Header Styles -->
                             </div>
                         </div>
                         <!-- END Themes -->
@@ -325,14 +238,31 @@
                                 <span class="nav-main-link-name">{{$user->name}}</span>
                             </a>
                         </li>
-                        <li class="nav-main-heading">Various</li>
+                        <li class="nav-main-heading">Meniu</li>
+                        <li class="nav-main-item open">	
+                                <a class="nav-main-link" href="{{route('orders.dashboard')}}">	
+                                    <span class="nav-main-link-name">Pradžia</span>
+                                </a>
+                        </li>
+                       
+                            <li class="nav-main-item open">	
+                                <a class="nav-main-link" href="{{route('files')}}">	
+                                    <span class="nav-main-link-name">Mano failai</span>
+                                </a>
+                            </li>
+                            <li class="nav-main-item open">	
+                                <a class="nav-main-link" href="{{route('orders.index')}}">	
+                                    <span class="nav-main-link-name">Užsakymų istorija</span>
+                                </a>
+                            </li>
+
                         @if((Auth::user()->position == 'admin'))
                         <li class="nav-main-item{{ request()->is('pages/*') ? ' open' : '' }}">
                             <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="true" href="#">
-                                <i class="nav-main-link-icon fas fa-user"></i>	
-                                <span class="nav-main-link-name">Select user</span>	
+                              <!--   <i class="nav-main-link-icon fas fa-user"></i>	-->
+                                <span class="nav-main-link-name">Pasirinkti paskyrą</span>	
                             </a>	
-                            	
+	
                             @foreach ($users as $oneUser)	
                                 <ul class="nav-main-submenu">	
                                     <li class="nav-main-item">	
@@ -345,47 +275,22 @@
                                 </ul>	
                             @endforeach	
                          @endif	
-                            <li class="nav-main-item open">	
-                                <a class="nav-main-link" href="{{'/'}}">	
-                                    <i class="nav-main-link-icon fas fa-folder-open"></i>	
-                                    <span class="nav-main-link-name">Files</span>
-                                </a>
-                            </li>
-
-                        
                         @if((Auth::user()->position == 'admin'))	
                         <li class="nav-main-item open">	
-                            <a class="nav-main-link" href="{{'users'}}">	
-                                <i class="nav-main-link-icon fas fa-users"></i>	
-                                <span class="nav-main-link-name">All users</span>	
+                            <a class="nav-main-link" href="{{route('users')}}">	
+                                <!-- <i class="nav-main-link-icon fas fa-users"></i>	-->
+                                <span class="nav-main-link-name">Visos paskyros</span>	
                             </a>
                         </li>
-                        @endif	
-                        </li>	
-                        	
-                        @if(Auth::user()->position == 'admin')
-                        <li class="nav-main-heading">More</li>
-                        <li class="nav-main-item open">
-                            <a class="nav-main-link" href="/">
-                                <i class="nav-main-link-icon si si-globe"></i>
-                                <span class="nav-main-link-name">Landing</span>
-                            </a>
-                        </li>
-                        @else	
-                        <li class="nav-main-heading">Pages</li>	
-                        <li class="nav-main-item open">	
-                            <a class="nav-main-link" href="/">	
-                                <i class="nav-main-link-icon si si-globe"></i>	
-                                <span class="nav-main-link-name">Refresh</span>	
-                            </a>	
-                        </li>	
-                        <li class="nav-main-item open">	
-                            <a class="nav-main-link" href="https://reklamosekosistema.lt/">	
-                                <i class="nav-main-link-icon si si-globe"></i>	
-                                <span class="nav-main-link-name">Main page</span>	
-                            </a>	
-                        </li>	
                         @endif
+                        	
+                        </li>	
+                        <li class="nav-main-item open">	
+                            <a class="nav-main-link" href="{{route('duk')}}">	
+                                <!-- <i class="nav-main-link-icon fas fa-users"></i>	-->
+                                <span class="nav-main-link-name">D.U.K</span>	
+                            </a>
+                        </li>
                     </ul>
                     <div id="MySidebarBlock" class="sidebar-dark"  style="width:100%;height:20%; position:fixed; bottom:0px; left:0; border-top:0px solid ;">	
                         	
@@ -412,37 +317,31 @@
 
                         <!-- Toggle Mini Sidebar -->
                         <!-- Layout API, functionality initialized in Template._uiApiLayout()-->
-                        <button type="button" class="btn btn-sm btn-dual mr-2 d-none d-lg-inline-block" data-toggle="layout" data-action="sidebar_mini_toggle">
-                            <i class="fa fa-fw fa-ellipsis-v"></i>
-                        </button>
                         <!-- END Toggle Mini Sidebar -->
+                        
+                        @if(Auth::user()->position == 'admin')	
+                        <a href="{{route('register')}}" class="btn btn-sm btn-dual  btn-round btn-white mr-2 d-none d-lg-inline-block">
+                            Sukurti paskyrą
+                        </a>
+                                        @else
+                                        @if(Auth::user()->remaining > 0)		
+                                        <a href="{{route('orders.create')}}" class="btn btn-sm btn-dual  btn-round btn-white mr-2 d-none d-lg-inline-block">
+                            Pradėti užsakymą
+                        </a>
+                        @else
+                        
+                        <div data-toggle="tooltip" data-placement="bottom" title="Gausite naujų užsakymų prasidėjus naujam mėnesiui"  class="btn btn-sm btn-dual btn-white btn-round  mr-2 d-none d-lg-inline-block  disabled-button cursor">
+                            Užsakymai baigėsi
+                </div>
 
-                        <!-- Apps Modal -->
-                        <!-- Opens the Apps modal found at the bottom of the page, after footer’s markup -->
-                        <button type="button" class="btn btn-sm btn-dual mr-2" data-toggle="modal" data-target="#one-modal-apps">
-                            <i class="si si-grid"></i>
-                        </button>
-                        <!-- END Apps Modal -->
-
-                        <!-- Open Search Section (visible on smaller screens) -->
-                        <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
-                        <button type="button" class="btn btn-sm btn-dual d-sm-none" data-toggle="layout" data-action="header_search_on">
-                            <i class="si si-magnifier"></i>
-                        </button>
-                        <!-- END Open Search Section -->
-
-                        <!-- Search Form (visible on larger screens) -->
-                        <form class="d-none d-sm-inline-block" action="/dashboard" method="POST">
-                            @csrf
-                            <div class="input-group input-group-sm">
-                                <input type="text" class="form-control form-control-alt" placeholder="Search.." id="page-header-search-input2" name="page-header-search-input2">
-                                <div class="input-group-append">
-                                    <span class="input-group-text bg-body border-0">
-                                        <i class="si si-magnifier"></i>
-                                    </span>
-                                </div>
-                            </div>
-                        </form>
+                        @endif	
+                        @if(Auth::user()->remaining > 0)	
+                        <a href="{{route('orders.create')}}" data-toggle="tooltip" data-placement="bottom" title="Likę užsakymai šiam mėnesiui" class="btn btn-sm btn-dual  btn-round btn-white mr-2 d-none d-lg-inline-block">
+                            {{ Auth::user()->remaining }}
+                        </a>
+                        @endif	
+                                        @endif	
+                        
                         <!-- END Search Form -->
                     </div>
                     <!-- END Left Section -->
@@ -451,25 +350,25 @@
                     <div class="d-flex align-items-center">
                         <!-- User Dropdown -->
                         <div class="dropdown d-inline-block ml-2">
-                            <button type="button" class="btn btn-sm btn-dual" id="page-header-user-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <button type="button" class="btn btn-sm btn-dual btn-round btn-white" style="padding:8px 8px" id="page-header-user-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <img class="rounded" src="{{ asset('media/avatars/avatar10.jpg') }}" alt="Header Avatar" style="width: 18px;">
                                 <span class="d-none d-sm-inline-block ml-1">
                                     @if(Auth::check())	
                                         @if(Auth::user()->position == 'admin')	
-                                            Admin	
+                                            Admin profilis	
                                         @else	
-                                            User	
+                                            Mano profilis
                                         @endif	
                                     @endif
                                 </span>
                                 <i class="fa fa-fw fa-angle-down d-none d-sm-inline-block"></i>
-                            </button>
+                            
                             <div class="dropdown-menu dropdown-menu-right p-0 border-0 font-size-sm" aria-labelledby="page-header-user-dropdown">
                                 <div class="p-3 text-center bg-primary">
                                     <img class="img-avatar img-avatar48 img-avatar-thumb" src="{{ asset('media/avatars/avatar10.jpg') }}" alt="">
                                 </div>
                                 <div class="p-2">
-                                    <h5 class="dropdown-header text-uppercase">User Options</h5>
+                              <!--      <h5 class="dropdown-header text-uppercase">User Options</h5>
                                     <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">
                                         <span>Inbox</span>
                                         <span>
@@ -493,9 +392,9 @@
                                     <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">
                                         <span>Lock Account</span>
                                         <i class="si si-lock ml-1"></i>
-                                    </a>
+                                    </a>-->
                                     <a class="dropdown-item d-flex align-items-center justify-content-between" href="{{ route('logout') }} " onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                        <span>Log Out</span>
+                                        <span>Atsijungti</span>
                                         <i class="si si-logout ml-1"></i>
                                     </a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">	
@@ -510,129 +409,47 @@
                        
                         @if ($notif->count() > 0)
                             <div class="dropdown d-inline-block ml-2">
-                                <button type="button" class="btn btn-sm btn-dual" id="page-header-notifications-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <button type="button" class="btn btn-sm btn-dual badge-notif" style="vertical-align:middle" id="page-header-notifications-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="si si-bell"></i>
-                                    <span id="notifCount" class="badge badge-primary badge-pill">{{$notif->count()}}</span>
+                                    <span id="notifCount" class="badge badge-dark badge-pill">{{$notif->count()}}</span>
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-0 border-0 font-size-sm" aria-labelledby="page-header-notifications-dropdown">
                                     <div class="p-2 bg-primary text-center">
-                                        <h5 class="dropdown-header text-uppercase text-white">Notifications</h5>
+                                        <h5 class="dropdown-header text-uppercase text-white">Pranešimai</h5>
                                     </div>
                                     <ul id="manoNotifai2" class="nav-items mb-0">
-                                        @if ($user->position == 'admin')	
-                                        @foreach ($notif as $oneNotif)	
+                                        <div style="overflow:auto;max-height:300px">
+                                            @foreach ($notif->sortByDesc('id') as $oneNotif)	
                                         
-                                        <li>
-                                            <a class="text-dark media py-2" href="{{route('deleteNotif', ['user' => 1])}}">
-                                                <div class="mr-2 ml-3">
-                                                    <i class="fa fa-fw fa-check-circle text-success"></i>
-                                                </div>
-                                                <div class="font-w600">New user: {{$oneNotif->message}}</div>	
-                                                    <small class="text-muted">{{$oneNotif->created_at}}</small>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        @endforeach	
-                                        @else
-    
-                                        @foreach ($notif as $oneNotif)	
-                                                
-                                            <li>	
-                                                    
-                                                <a class="text-dark media py-2" href="{{route('deleteNotif', ['user' => $user->id])}}">	
-                                                    <div class="mr-2 ml-3">	
-                                                        <i class="fa fa-fw fa-check-circle text-success"></i>	
-                                                    </div>	
-                                                    <div class="media-body pr-2">	
-                                                        <div class="font-w600">New file: {{$oneNotif->message}}</div>	
-                                                        <small class="text-muted">{{$oneNotif->created_at}}</small>	
-                                                    </div>	
-                                                        
-                                                        
-                                                </a>	
-                                            </li>	
+                                        
+                                            <form class="" action="/dashboard/deletenotification" method="POST">
+                                                @csrf
+                                                <li class="">
+                                                <label class="click notif-item text-dark media py-2" for="submitas-{{$oneNotif->id}}" id="label-fileToUpload">
+                                                <input type="hidden" name="notification" value="{{$oneNotif->id}}" />
+                                                <input type="hidden" name="link" value="{{$oneNotif->link}}" />
+                                                <input type="submit" id="submitas-{{$oneNotif->id}}" class="d-none" value="">
+                                               
+                                                <div class="font-w600"><i class=" mr-2 ml-3 fa fa-fw fa-check-circle"></i><small class="text-muted">{{$oneNotif->message}}</small>
+                                                <br><small class=" mr-2 ml-5 text-muted">{{$oneNotif->created_at}}</small>
+                                               </div>
+                                               </label>
+                                               </li>
+                                            </form>
+                                        
+                                        
                                             @endforeach	
-                                        
-                                            
-                                            
-                                            
-                                        <!-- 
-                                        <li>
-                                            <a class="text-dark media py-2" href="javascript:void(0)">
-                                                <div class="mr-2 ml-3">
-                                                    <i class="fa fa-fw fa-plus-circle text-info"></i>
-                                                </div>
-                                                <div class="media-body pr-2">
-                                                    <div class="font-w600">1 new sale, keep it up</div>
-                                                    <small class="text-muted">22 min ago</small>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="text-dark media py-2" href="javascript:void(0)">
-                                                <div class="mr-2 ml-3">
-                                                    <i class="fa fa-fw fa-times-circle text-danger"></i>
-                                                </div>
-                                                <div class="media-body pr-2">
-                                                    <div class="font-w600">Update failed, restart server</div>
-                                                    <small class="text-muted">26 min ago</small>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="text-dark media py-2" href="javascript:void(0)">
-                                                <div class="mr-2 ml-3">
-                                                    <i class="fa fa-fw fa-plus-circle text-info"></i>
-                                                </div>
-                                                <div class="media-body pr-2">
-                                                    <div class="font-w600">2 new sales, keep it up</div>
-                                                    <small class="text-muted">33 min ago</small>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="text-dark media py-2" href="javascript:void(0)">
-                                                <div class="mr-2 ml-3">
-                                                    <i class="fa fa-fw fa-user-plus text-success"></i>
-                                                </div>
-                                                <div class="media-body pr-2">
-                                                    <div class="font-w600">You have a new subscriber</div>
-                                                    <small class="text-muted">41 min ago</small>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="text-dark media py-2" href="javascript:void(0)">
-                                                <div class="mr-2 ml-3">
-                                                    <i class="fa fa-fw fa-check-circle text-success"></i>
-                                                </div>
-                                                <div class="media-body pr-2">
-                                                    <div class="font-w600">You have a new follower</div>
-                                                    <small class="text-muted">42 min ago</small>
-                                                </div>
-                                            </a>
-                                        </li>
-                                         -->
-                                    </ul>
-                                    <!--
-                                    <div class="p-2 border-top">
-                                        <a class="btn btn-sm btn-light btn-block text-center" href="javascript:void(0)">
-                                            <i class="fa fa-fw fa-arrow-down mr-1"></i> Load More..
-                                        </a>
-                                    </div>
-                                     -->
-                                </div>
-                            </div>
-                        
-                        @endif
-                        @endif
-                        
-                        <!-- END Notifications Dropdown -->
+                                        </div>
+                                        <li class="notif-item">
+                                            <a class="" href="{{route('notifications.delete', ['user' => $user->id])}}">
 
-                        <!-- Toggle Side Overlay -->
-                        <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
-                        
-                        <!-- END Toggle Side Overlay -->
+                                            <div class="p-2 text-center">
+                                                <h5 class="dropdown-header text-uppercase">Ištrinti visus pranešimus</h5>
+                                            </div>
+                                    
+                                            </a>
+                                        </li>
+                        @endif
                     </div>
                     <!-- END Right Section -->
                 </div>
@@ -641,11 +458,10 @@
                 <!-- Header Search -->
                 <div id="page-header-search" class="overlay-header bg-white">
                     <div class="content-header">
-                        <form class="w-100" action="/dashboard" method="POST">
+                        <form class="w-100" action="/dashboard/sendMessage" method="POST">
                             @csrf
                             <div class="input-group input-group-sm">
                                 <div class="input-group-prepend">
-                                    <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
                                     <button type="button" class="btn btn-danger" data-toggle="layout" data-action="header_search_off">
                                         <i class="fa fa-fw fa-times-circle"></i>
                                     </button>
@@ -671,7 +487,7 @@
             <!-- END Header -->
 
             <!-- Main Container -->
-            <main id="main-container">
+            <main id="main-container" class="bg-body-light">
                 @yield('content')
             </main>
             <!-- END Main Container -->
@@ -680,12 +496,7 @@
             <footer id="page-footer" class="bg-body-light">
                 <div class="content py-3">
                     <div class="row font-size-sm">
-                        <div class="col-sm-6 order-sm-2 py-1 text-center text-sm-right">
-                            Crafted by <a class="font-w600" href="https://reklamosekosistema.lt/" target="_blank">Domantas Sabaliauskas</a>
-                        </div>
-                        <div class="col-sm-6 order-sm-1 py-1 text-center text-sm-left">
-                            <a class="font-w600" href="https://google.com/" target="_blank">Domanto svetainė</a> &copy; <span data-toggle="year-copy">2020</span>
-                        </div>
+
                     </div>
                 </div>
             </footer>
@@ -766,12 +577,39 @@
         <!-- END Page Container -->
 
         <!-- OneUI Core JS -->
-        <script src="{{ mix('js/oneui.app.js') }}"></script>
+        <script src="{{ asset('js/oneui.app.js') }}"></script>
 
         <!-- Laravel Scaffolding JS -->
-        <!-- <script src="{{ mix('/js/laravel.app.js') }}"></script> -->
+        <!-- <script src="{{ asset('/js/laravel.app.js') }}"></script> -->
 
         @yield('js_after')
+        <!-- Load Facebook SDK for JavaScript -->
+      <div id="fb-root"></div>
+      <script>
+        window.fbAsyncInit = function() {
+          FB.init({
+            xfbml            : true,
+            version          : 'v7.0'
+          });
+        };
+
+        (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));</script>
+
+      <!-- Your Chat Plugin code -->
+      <div class="fb-customerchat"
+        attribution=setup_tool
+        page_id="107718147275446"
+        theme_color="#006A56"
+        logged_in_greeting="Sveiki! Turite klausimų?"
+        logged_out_greeting="Sveiki! Turite klausimų?">
+      </div>
+
     </body>
     
     <script>

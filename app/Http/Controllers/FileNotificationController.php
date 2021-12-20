@@ -78,9 +78,18 @@ class FileNotificationController extends Controller
      * @param  \Clients\FileNotification  $fileNotification
      * @return \Illuminate\Http\Response
      */
-    public function destroy($userId)
+
+    public function destroy(Request $request)
     {
-        $fileNotification = FileNotification::where('user_id', $userId)->take(FileNotification::where('user_id', $userId)->count());
+        $fileNotification = FileNotification::where('id', $request->notification)->take(1);
+        $fileNotification->delete();
+        return (redirect('/dashboard/'.$request->link));
+        
+    }
+
+    public function delete($user)
+    {
+        $fileNotification = FileNotification::where('user_id', $user)->take(FileNotification::where('user_id', $user)->count());
         $fileNotification->delete();
         //if($userId == 1 )
             //return (redirect('dashboard/'.$userId));

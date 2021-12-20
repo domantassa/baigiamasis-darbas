@@ -12,4 +12,8 @@ class file extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function Order()
+    {
+        return $this->belongsTo('App\Order');
+    }
 }

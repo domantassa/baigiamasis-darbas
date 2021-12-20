@@ -17,6 +17,7 @@ class CreateFileNotificationTable extends Migration
             $table->increments('id');
             $table->string('message');
             $table->string('fileId');
+            $table->string('link');
             $table->unsignedBigInteger('user_id');
 
             $table->timestamps();
@@ -30,6 +31,6 @@ class CreateFileNotificationTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('file_notification');
+        Schema::dropIfExists('file_notifications');
     }
 }

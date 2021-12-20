@@ -4,11 +4,14 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 
-        <title>OneUI - Bootstrap 4 Admin Template &amp; UI Framework</title>
+        <title>Reklamos ekositema klientų sistema</title>
 
-        <meta name="description" content="OneUI - Bootstrap 4 Admin Template &amp; UI Framework created by pixelcave and published on Themeforest">
-        <meta name="author" content="pixelcave">
+        <meta name="description" content="Reklamos ekositema klientų sistema">
+        <meta name="author" content="Domantas Sabaliauskas">
         <meta name="robots" content="noindex, nofollow">
+        <meta property="og:title" content="Reklamos ekositema klientų sistema" />
+        <meta property="og:url" content="http://klientams.reklamosekosistema.lt" />
+        <meta property="og:image" content="https://reklamosekosistema.lt/wp-content/uploads/2019/11/reklamos-ekosistema-logo.png" />
 
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -21,10 +24,10 @@
         <!-- Fonts and Styles -->
         @yield('css_before')
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,600,700%7COpen+Sans:300,400,400italic,600,700">
-        <link rel="stylesheet" id="css-main" href="{{ mix('/css/oneui.css') }}">
+        <link rel="stylesheet" id="css-main" href="{{ asset('/css/oneui.css') }}">
 
         <!-- You can include a specific file from public/css/themes/ folder to alter the default color theme of the template. eg: -->
-        <!-- <link rel="stylesheet" id="css-theme" href="{{ mix('/css/themes/amethyst.css') }}"> -->
+        <!-- <link rel="stylesheet" id="css-theme" href="{{ asset('/css/themes/amethyst.css') }}"> -->
         @yield('css_after')
 
         <!-- Scripts -->
@@ -80,10 +83,10 @@
         <!-- END Page Container -->
 
         <!-- OneUI Core JS -->
-        <script src="{{ mix('js/oneui.app.js') }}"></script>
+        <script src="{{ asset('js/oneui.app.js') }}"></script>
 
         <!-- Laravel Scaffolding JS -->
-        <!-- <script src="{{ mix('/js/laravel.app.js') }}"></script> -->
+        <!-- <script src="{{ asset('/js/laravel.app.js') }}"></script> -->
 
         @yield('js_after')
     </body>

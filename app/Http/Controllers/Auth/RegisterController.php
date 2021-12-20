@@ -44,7 +44,14 @@ class RegisterController extends Controller
 
     public function __construct()
     {
+        $users=User::all();
+        if(count($users)==0)
+        {
         $this->middleware('guest');
+        }
+        else{
+            $this->middleware('admin');
+        }
     }
 
     /**
@@ -70,16 +77,25 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        // Create User account on ChatKit
-
-        
-        
-
-        
+        $refreshdate = date('U');
+        //$refreshdate= strtotime($refreshdate);
+       // dd($refreshdate+12012151);
+        //$refreshdate= strtotime($refreshdate+86400);
+       
+        $refreshdate=date('Y-m-d H:i:s',$refreshdate+2592000);
+        if($data['plan'] == 'Hidrosfera')
+            $remaining = 12;
+        else if ($data['plan'] == 'Ekosfera')
+            $remaining = 20;
+        else if ($data['plan'] == 'Atmosfera')
+            $remaining = 40;
+        else
+            $remaining = 8;
 
         FileNotification::create([
             'user_id' => 1,                 //JEI BUS DAUGIAU NEI VIENAS ADMIN, PAKEISTI SIA EILUTE
-            'message' => $data['name'],
+            'message' => 'New user: '.$data['name'],
+            'link' => 'users',
         ]);
 
         
@@ -91,6 +107,7 @@ class RegisterController extends Controller
                 'email' => $data['email'],
                 'position' => 'admin',
                 'password' => Hash::make($data['password']),
+                
             ]);
         }
         else
@@ -100,7 +117,12 @@ class RegisterController extends Controller
                 'email' => $data['email'],
                 'position' => 'user',
                 'password' => Hash::make($data['password']),
+                'plan' => $data['plan'],
+                'remaining' => $remaining,
+                'refresh_date' => $refreshdate
             ]);
         }
     }
+
+    
 }

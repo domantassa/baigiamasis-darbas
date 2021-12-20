@@ -29,13 +29,16 @@
                    $sidebar-bg,
                    $sidebar-dark-bg,
                    $side-overlay-bg,
-                   $btn-alt-primary-bg) {
+                   $btn-alt-primary-bg,
+                   $hue) {
     // Scaffolding
     body {
         color: $body-color;
         background-color: $body-bg;
     }
-
+    .vector {
+        filter: hue-rotate($hue);
+    }
     // Links
     a {
         color: $link-color;

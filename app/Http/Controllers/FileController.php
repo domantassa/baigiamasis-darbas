@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Order;
 use App\file;
 use App\Events\EndPool;
 use App\FileNotification;
@@ -27,6 +28,15 @@ class FileController extends Controller
     public function index()
     {
         //
+
+                    
+       
+        $notif = Auth()->User()->notifications()->get();
+        //event(new NewMessageOrFile('hello world'));
+        
+        $files = file::where('owner_id', Auth()->User()->id)->get();
+        
+        return view('dashboard', ['user' => Auth()->User(), 'users' => User::all(), 'files'=>$files, 'notif' => $notif]);
     }
 
     /**
@@ -85,10 +95,10 @@ class FileController extends Controller
                 
                 $fileNotification = FileNotification::create([
                 'user_id' => $user->id,
-                'message' => $file->getClientOriginalName(),
+                'message' => 'Naujas failas: '.$file->getClientOriginalName(),
+                'link' => 'files',
                 'fileId' => $naujasFile->id,
                 ]);
-                event(new EndPool($fileNotification));
             }
 
             
@@ -154,25 +164,47 @@ class FileController extends Controller
             Storage::deleteDirectory($file->name);
             
             $file->delete();
-            return redirect('dashboard');
+            return back();
         }
         return back();
         
        
     }
 
-    public function download($file)
+    public function download($id)
     {
-        $file = file::find($file);
+        $file = file::find($id);
+
+        //dd($file,$id);
+        if($file)
+        {
         $user = User::find($file->owner_id);
-        if(Auth()->user()->id != $file->owner_id || Auth()->user()->position != 'admin')
+        if($file->order_id)
+        {
+        $order = Order::find($file->order_id);
+        $user = User::find($order->owner_id);
+        //$order_user = User::find($order->owner_id);
+            if(  Auth()->user()->id == $order->owner_id || Auth()->user()->position == 'admin' ){
+                return Storage::download('public/'.$user->name.'/'.$file->name);
+            }
+        }
+        else{
+        if(Auth()->user()->id == $file->owner_id  || Auth()->user()->position == 'admin' )
         {
             
             return Storage::download('public/'.$user->name.'/'.$file->name);
-    
+            //return 1;
         }
-        
+     }
+    }
         return back();
     }
-
+    public function form()
+    {
+        //$files=file::all();
+       // $user=User::find(1);
+        $notif = Auth()->User()->notifications()->get();
+        $files = file::where('owner_id', Auth()->User()->id)->get();
+        return view('forma')->with(['user' => Auth()->User(), 'users' => User::all(), 'files'=>$files, 'notif' => $notif]);
+    }
 }

@@ -18,7 +18,7 @@
                         </div>
                         <div class="block-content">
                             <div class="p-sm-3 px-lg-4 py-lg-5">
-                                <h1 class="mb-2">OneUI</h1>
+                                <h1 class="mb-2">REKO</h1>
                                 <p>Please provide your account’s email and we will send you your password.</p>
 
                                 <!-- Reminder Form -->

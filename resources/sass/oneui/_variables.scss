@@ -9,7 +9,7 @@ $theme-colors: map-merge((
     "primary-light":        lighten($primary, 15%),
     "primary-lighter":      lighten($primary, 28%),
     "primary-dark":         #3e4a59,
-    "primary-darker":       #2c343f,
+    "primary-darker":       #006A56,
     "success-light":        #daf5e6,
     "info-light":           #e3f2fc,
     "warning-light":        #fcf1e1,
@@ -52,7 +52,7 @@ $btn-alt-primary-bg:        lighten(theme-color("primary-lighter"), 5%);
 
 $header-height:             3.75rem !default;           // Best values > 3rem and < 5rem
 $header-bg:                 theme-color("primary-darker") !default;
-$header-dark-bg:            $white !default;
+$header-dark-bg:            theme-color("primary-darker") !default;
 
 
 // Sidebar and Side Overlay

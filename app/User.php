@@ -46,9 +46,12 @@ class User extends Authenticatable
     
     public function files()
     {
-        return $this->hasMany('App\file');
+        return $this->hasMany('App\file','owner_id');
     }
-
+    public function orders()
+    {
+        return $this->hasMany('App\Order','owner_id');
+    }
     public function notifications()
     {
         return $this->hasMany('App\FileNotification');

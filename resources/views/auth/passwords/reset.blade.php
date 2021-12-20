@@ -46,7 +46,7 @@
             </div>
         </div>
         <div class="content content-full font-size-sm text-muted text-center">
-            <strong>OneUI 4.0</strong> &copy; <span data-toggle="year-copy">2018</span>
+            <strong>REKO</strong> &copy; <span data-toggle="year-copy">2021</span>
         </div>
     </div>
 </div>
