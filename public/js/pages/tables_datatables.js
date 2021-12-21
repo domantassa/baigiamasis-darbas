@@ -97,7 +97,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
 
 /*
  *  Document   : tables_datatables.js
@@ -105,21 +105,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
  *  Description: Custom JS code used in Plugin Init Example Page
  */
 // DataTables, for more examples you can check out https://www.datatables.net/
-var pageTablesDatatables =
-/*#__PURE__*/
-function () {
+var pageTablesDatatables = /*#__PURE__*/function () {
   function pageTablesDatatables() {
     _classCallCheck(this, pageTablesDatatables);
   }
 
   _createClass(pageTablesDatatables, null, [{
     key: "initDataTables",
-
+    value:
     /*
      * Init DataTables functionality
      *
      */
-    value: function initDataTables() {
+    function initDataTables() {
       // Override a few default classes
       jQuery.extend(jQuery.fn.dataTable.ext.classes, {
         sWrapper: "dataTables_wrapper dt-bootstrap4",
@@ -194,7 +192,7 @@ jQuery(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\dmnts\OneDrive\Attachments\Desktop\projektai\ForClientsEmpty\resources\js\pages\tables_datatables.js */"./resources/js/pages/tables_datatables.js");
+module.exports = __webpack_require__(/*! C:\Users\User\Documents\ForClientsEmpty\resources\js\pages\tables_datatables.js */"./resources/js/pages/tables_datatables.js");
 
 
 /***/ })

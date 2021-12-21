@@ -4,8 +4,7 @@ body {
 }
 
 .vector {
-  -webkit-filter: hue-rotate(110deg);
-          filter: hue-rotate(110deg);
+  filter: hue-rotate(110deg);
 }
 
 a {
