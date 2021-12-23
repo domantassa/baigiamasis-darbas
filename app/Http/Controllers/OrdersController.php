@@ -125,7 +125,7 @@ class OrdersController extends Controller
                 $headers = "Content-Type: text/html; charset=UTF-8\r\n";
                // mail($admin->email,'Naujas užsakymas',view('mail.notification',['data'=>'Naujas užsakymas nuo '.Auth()->User()->name,'link'=>'orders/'.$order->id.'/edit']),$headers);
                 $data=array(['data'=>'Naujas užsakymas nuo '.Auth()->User()->name,'link'=>'orders/'.$order->id.'/edit']);
-                Mail::to($admin->email)->send(new Notification($data));
+                //Mail::to($admin->email)->send(new Notification($data));
             }
 
             
@@ -234,12 +234,8 @@ class OrdersController extends Controller
             $order->save();
 
 
-
-
-
             if($user->id == 1)
             {
-                
                 FileNotification::create([
                     'user_id' => $order->owner_id,                 //JEI BUS DAUGIAU NEI VIENAS ADMIN, PAKEISTI SIA EILUTE
                     'message' => 'Pakeista užsakymo '.$order->name. ' būsena',
@@ -249,7 +245,7 @@ class OrdersController extends Controller
                 $headers = "Content-Type: text/html; charset=UTF-8\r\n";
                 //mail($user1->email,'Pakeista užsakymo būsena',view('mail.notification',['data'=>'Pakeista užsakymo '.$order->name. ' būsena','link'=>'orders-dashboard']),$headers);
                 $data=array(['data'=>'Pakeista užsakymo '.$order->name. ' būsena','link'=>'orders-dashboard']);
-                Mail::to($user1->email)->send(new Notification($data));
+                //Mail::to($user1->email)->send(new Notification($data));
             }
             
         
@@ -290,9 +286,7 @@ class OrdersController extends Controller
         $files = file::where('owner_id', Auth()->User()->id)->get();
         if(Auth()->user()->id != $file->owner_id || Auth()->user()->position != 'admin')
         {
-            
             return Storage::download('public/'.Auth()->user()->name.'/'.$file->name);
-    
         }
         
         return back();
@@ -311,7 +305,7 @@ class OrdersController extends Controller
         $headers = "Content-Type: text/html; charset=UTF-8\r\n";
         //mail($admin->email,'Užsakymo atsiliepimas',view('mail.notification',['data'=>'Order "'.$order->name.'" finished','link'=>'orders']),$headers);
         $data=array(['data'=>'Order "'.$order->name.'" finished','link'=>'orders']);
-        Mail::to($admin->email)->send(new Notification($data));
+        //Mail::to($admin->email)->send(new Notification($data));
         return view('responses.project-finished',['user' => Auth()->User(),'order' => $order , 'users' => User::all() , 'notif' => Auth()->User()->notifications()->get() ]);
     }
     public function feedback_finished(Request $request,$id)
@@ -327,7 +321,7 @@ class OrdersController extends Controller
         $admin=User::find(1);
         $headers = "Content-Type: text/html; charset=UTF-8\r\n";
         $data=array(['data'=>'Order "'.$order->name.'" finished','link'=>'orders']);
-        Mail::to($admin->email)->send(new Notification($data));
+        //Mail::to($admin->email)->send(new Notification($data));
         //mail($admin->email,'Užsakymo atsiliepimas',view('mail.notification',['data'=>'Order "'.$order->name.'" finished','link'=>'orders']),$headers);
        
         return view('responses.project-finished-feedback',['user' => Auth()->User() , 'users' => User::all() , 'notif' => Auth()->User()->notifications()->get() ]);
@@ -347,7 +341,7 @@ class OrdersController extends Controller
         $admin=User::find(1);
         //mail($admin->email,'Užsakymo atsiliepimas',view('mail.notification',['data'=>'Naujas atsiliepimas užsakymui "'.$order->name.'"','link'=>'orders/'.$id.'/edit']),$headers);
         $data=array(['data'=>'Naujas atsiliepimas užsakymui "'.$order->name.'"','link'=>'orders/'.$id.'/edit']);
-        Mail::to($admin->email)->send(new Notification($data));
+        //Mail::to($admin->email)->send(new Notification($data));
         return view('responses.feedback',['user' => Auth()->User() , 'users' => User::all() , 'notif' => Auth()->User()->notifications()->get() ]);
     }
     public function preview($id)

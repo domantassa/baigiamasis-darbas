@@ -6,6 +6,7 @@ use App\User;
 use App\Order;
 use App\file;
 use App\Events\EndPool;
+use App\Events\MyEvent;
 use App\FileNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -59,7 +60,7 @@ class FileController extends Controller
     public function store(Request $request, $user)
     {
         
-
+        event(new MyEvent('hello world'));
         if(Auth()->user()->id == $user || Auth()->user()->position == 'admin')
         {
             $user = User::findOrFail($user);  

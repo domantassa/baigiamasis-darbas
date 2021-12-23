@@ -36,15 +36,6 @@
                         <p class="font-size-sm text-muted">
                              <strong></strong>
                         </p>
-
-                        
-
-                        
-
-                        
-
-                        
-
                         <p class="font-size-md font-italic">
                             
                        </p>

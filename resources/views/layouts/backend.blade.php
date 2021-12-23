@@ -30,6 +30,24 @@
 
         
 
+        <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+        <script>
+
+            function snackBarShow() {
+            var x = document.getElementById("snackbar");
+                x.className = "show";
+                setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+            }
+
+            var pusher = new Pusher('9457793ed2d8ec121ebf', {
+            cluster: 'eu'
+            });
+
+            var channel = pusher.subscribe('my-channel');
+            channel.bind('my-event', function(data) {
+            alert(JSON.stringify(data));
+            });
+        </script>
         <!-- Scripts -->
         <script>window.Laravel = {!! json_encode(['csrfToken' => csrf_token(),]) !!};</script>
 
@@ -78,6 +96,7 @@
     </head>
     <body onload="myFunction()">
 
+    <div id="snackbar">Prisiregistravo naujas vartotojas!</div>
     
         
         <div id="page-container" class="enable-cookies sidebar-o enable-page-overlay sidebar-dark side-scroll page-header-fixed page-header-dark enable-cookies ">
@@ -243,6 +262,7 @@
                                 <a class="nav-main-link" href="{{route('orders.dashboard')}}">	
                                     <span class="nav-main-link-name">Pradžia</span>
                                 </a>
+                                <button class="snackbarButton" onclick="snackBarShow()">Show Snackbar</button>
                         </li>
                        
                             <li class="nav-main-item open">	
