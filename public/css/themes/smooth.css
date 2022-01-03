@@ -4,8 +4,7 @@ body {
 }
 
 .vector {
-  -webkit-filter: hue-rotate(130deg);
-          filter: hue-rotate(130deg);
+  filter: hue-rotate(130deg);
 }
 
 a {
@@ -1567,4 +1566,12 @@ a.block.block-link-shadow:active {
 .flatpickr-months .flatpickr-prev-month:hover svg,
 .flatpickr-months .flatpickr-next-month:hover svg {
   fill: #ff6c9d;
+}
+
+.color-primary {
+  color: #ff6c9d;
+}
+
+.background-primary {
+  background-color: #ff6c9d;
 }

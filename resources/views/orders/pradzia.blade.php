@@ -8,7 +8,7 @@
                 data-class="animated fadeInUp"
                 data-timeout="250"
                 data-offset="-100">
-                Aktyvūs projektai</h1>
+                {{__('Aktyvūs projektai')}}</h1>
             </div>
                 
             
@@ -28,13 +28,13 @@
                 <table style="overflow:scroll; width:1400px">
                     <thead >
                         
-                         <th style="width:516px"><h1 class="h4 m-0">Pavadinimas</h1></th>
-                        <th style="width:293px"><h1 class="h4 m-0">Užsakymo data</h1></th>
-                        <th style="width:259px"><h1 class="h4 m-0">Užsakymo tipas</h1></th>
-                        <th style="width:293px"><h1 class="h4 m-0">Tikėtina už:</h1></th>
-                        <th style="width:293px"><h1 class="h4 m-0">Būsena</h1></th>
+                         <th style="width:516px"><h1 class="h4 m-0">{{__('Pavadinimas')}}</h1></th>
+                        <th style="width:293px"><h1 class="h4 m-0">{{__('Užsakymo data')}}</h1></th>
+                        <th style="width:259px"><h1 class="h4 m-0">{{__('Užsakymo tipas')}}</h1></th>
+                        <th style="width:293px"><h1 class="h4 m-0">{{__('Tikėtina už:')}}</h1></th>
+                        <th style="width:293px"><h1 class="h4 m-0">{{__('Būsena')}}</h1></th>
 
-                        <th><h1 class="h4 m-0">Peržiūrėti</h1></th>
+                        <th><h1 class="h4 m-0">{{__('Peržiūrėti')}}</h1></th>
                     </thead>
                 <tbody>
                     
@@ -48,14 +48,14 @@
                             <td class="p-1"> <div class="btn-primary btn btn-round order-btn-primary expected" data-time="{{$order->expected_at}}">{{$order->expected_at}}</div></a></td>
                             @if($order->state=="Projektas atliktas") 
                             <td class="p-1"><div class="  btn-round btn-primary order-btn-primary" >{{$order->state}}</div></td>
-                            <td class="p-1"> <a href="{{route('orders.show',$order->id)}}"><div class="btn-primary btn btn-round order-btn-primary">Peržiūrėti</div></a></td>
+                            <td class="p-1"> <a href="{{route('orders.show',$order->id)}}"><div class="btn-primary btn btn-round order-btn-primary">{{__('Peržiūrėti')}}</div></a></td>
                             @elseif($order->state=="Projektas uždarytas")
                             <td class="p-1"><div class="  btn-round btn-primary order-btn-primary" >{{$order->state}}</div></td>
-                            <td class="p-1"><a href="{{route('download',$order->file()->orderby('id','desc')->first()->id)}}"><div class="btn-primary btn btn-round order-btn-primary">Atsisiųsti</div></a></td>
+                            <td class="p-1"><a href="{{route('download',$order->file()->orderby('id','desc')->first()->id)}}"><div class="btn-primary btn btn-round order-btn-primary">{{__('Atsisiųsti')}}</div></a></td>
                             @else
                              <td class="p-1"><div class=" btn-round order-btn-grey" >{{$order->state}}</div></td>
                                 @if( $order->state=="Projektas kuriamas")
-                                <td class="p-1"> <a href="{{route('orders.edit',$order->id)}}"><div class="btn-primary btn btn-round order-btn-primary">Atidaryti</div></a></td>
+                                <td class="p-1"> <a href="{{route('orders.edit',$order->id)}}"><div class="btn-primary btn btn-round order-btn-primary">{{__('Atidaryti')}}</div></a></td>
                                 @else
                                 <td></td>
                                 @endif
@@ -80,12 +80,12 @@
                             <table style="overflow:scroll;width:1400px">
                             <thead>
                                 
-                            <th style="width:400px"><h1 class="h4 m-0">Pavadinimas</h1></th>
-                            <th style="width:230px"><h1 class="h4 m-0">Užsakymo data</h1></th>
-                            <th style="width:280px"><h1 class="h4 m-0">Užsakymo tipas</h1></th>
-                            <th style="width:190px"><h1 class="h4 m-0">Tikėtina už:</h1></th>
-                            <th style="width:272px"><h1 class="h4 m-0">Būsena</h1></th>
-                            <th><h1 class="h4 m-0">Peržiūrėti</h1></th>
+                            <th style="width:400px"><h1 class="h4 m-0">{{__('Pavadinimas')}}</h1></th>
+                            <th style="width:230px"><h1 class="h4 m-0">{{__('Užsakymo data')}}</h1></th>
+                            <th style="width:280px"><h1 class="h4 m-0">{{__('Užsakymo tipas')}}</h1></th>
+                            <th style="width:190px"><h1 class="h4 m-0">{{__('Tikėtina už:')}}</h1></th>
+                            <th style="width:272px"><h1 class="h4 m-0">{{__('Būsena')}}</h1></th>
+                            <th><h1 class="h4 m-0">{{__('Peržiūrėti')}}</h1></th>
                             
                             </thead>
                             <tbody>
@@ -99,14 +99,14 @@
                                 <td class="p-1"> <div class="btn-primary btn btn-round order-btn-primary expected no-click" data-time="{{$order->expected_at}}">{{$order->expected_at}}</div></a></td>
                                 @if($order->state=="Projektas atliktas") 
                                 <td class="p-1"><div class="  btn-round btn-primary order-btn-primary" >{{$order->state}}</div></td>
-                                <td class="p-1"> <a href="{{route('orders.show',$order->id)}}"><div class="btn-primary btn btn-round order-btn-primary">Peržiūrėti</div></a></td>
+                                <td class="p-1"> <a href="{{route('orders.show',$order->id)}}"><div class="btn-primary btn btn-round order-btn-primary">{{__('Peržiūrėti')}}</div></a></td>
                                 @elseif($order->state=="Projektas uždarytas")
                                 <td class="p-1"><div class="  btn-round btn-primary order-btn-primary" >{{$order->state}}</div></td>
-                                <td class="p-1"><a href="{{route('download',$order->file()->orderby('id','desc')->first()->id)}}"><div class="btn-primary btn btn-round order-btn-primary">Atsisiųsti</div></a></td>
+                                <td class="p-1"><a href="{{route('download',$order->file()->orderby('id','desc')->first()->id)}}"><div class="btn-primary btn btn-round order-btn-primary">{{__('Atsisiųsti')}}</div></a></td>
                                 @else
                                 <td class="p-1"><div class=" btn-round order-btn-grey" >{{$order->state}}</div></td>
                                     @if( $order->state=="Projektas kuriamas")
-                                    <td class="p-1"> <a href="{{route('orders.edit',$order->id)}}"><div class="btn-primary btn btn-round order-btn-primary">Koreguoti</div></a></td>
+                                    <td class="p-1"> <a href="{{route('orders.edit',$order->id)}}"><div class="btn-primary btn btn-round order-btn-primary">{{__('Koreguoti')}}</div></a></td>
                                     @else
                                     <td></td>
                                     @endif
@@ -119,7 +119,7 @@
                             </tbody>
                             </table>
                             @else
-                            <h1 class="h4 m-0">Klientas užsakymų dar nepadarė</h1>
+                            <h1 class="h4 m-0">{{__('Klientas užsakymų dar nepadarė')}}</h1>
                         @endif
                             @endif
                         @endforeach

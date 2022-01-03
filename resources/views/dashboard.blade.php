@@ -9,15 +9,16 @@
                 data-class="animated fadeInUp"
                 data-timeout="250"
                 data-offset="-100">
-                Mano failai </h1>
+                {{__('Mano failai')}} </h1>
             </div>
                 
                         <label class="custom-file-upload btn btn-round btn-primary btn-green" for="file-upload" >
                             
-                        
-                        Prisegti failą
+                        {{__('Prisegti failą')}}
+                       
                         
                     </label>
+                    
                     <form action="{{ route('upload', ['user' => $user]) }}" method="post" role="form" class="file-form" enctype="multipart/form-data">
                              @csrf    
                              <!--
@@ -65,7 +66,7 @@
                            <tr>
                             
                                 <td style="width:100%"><div  class=" col btn-round btn-grey mr-2" style="text-align:left">{{$file->name}}</div></td>
-                                <td style="width:100px"><a href="{{route('download',$file->id)}}"><div  class=" btn btn-round btn-primary btn-green">Parsisiusti</div></a></td>
+                                <td style="width:100px"><a href="{{route('download',$file->id)}}"><div  class=" btn btn-round btn-primary btn-green">{{__('Parsisiusti')}}</div></a></td>
                                 <td  style="width:30px"><div  class="  btn-round btn-trash"><a href="{{ route('deleteFile', ['file' => $file->id]) }}"><i class="fa fa-trash trash"></i></a></div></td>
                             
                             </tr>
@@ -96,7 +97,7 @@
                         @if ($files->first() && Auth::user()->position == 'admin')
 
                         <form action="{{ route('deleteDir', ['user' => $user]) }}">
-                            <input type="submit" class="btn btn-primary" value="Delete all" />
+                            <input type="submit" class="btn btn-primary" value="{{__('Delete')}} {{ __('all')}}" />
                             
                         </form>
                         @endif 

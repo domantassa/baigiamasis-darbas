@@ -1,5 +1,6 @@
 <?php
 use App\User;
+use Illuminate\Support\Facades\App;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -53,4 +54,8 @@ Route::prefix('dashboard')->middleware('auth')->group(function(){
 });
 Route::get('/', 'ProfilesController@index')->middleware('auth');
 
+Route::get('/lang/{locale}', function($locale){
 
+ Session::put('locale',$locale);
+  return back();
+})->name('lang');

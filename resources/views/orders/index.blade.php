@@ -9,7 +9,7 @@
                 data-class="animated fadeInUp"
                 data-timeout="250"
                 data-offset="-100">
-                Užsakymų istorija </h1>
+                {{__('Užsakymų istorija')}} </h1>
             </div>
                 
             
@@ -29,10 +29,10 @@
                 <table style="overflow:scroll;width:1200px">
                     <thead>
                         
-                         <th style="width:516px"><h1 class="h4 m-0">Pavadinimas</h1></th>
-                        <th style="width:273px"><h1 class="h4 m-0">Užsakymo data</h1></th>
-                        <th style="width:259px"><h1 class="h4 m-0">Užsakymo tipas</h1></th>
-                        <th style="width:160px"><h1 class="h4 m-0">Peržiūrėti</h1></th>
+                         <th style="width:516px"><h1 class="h4 m-0">{{__('Pavadinimas')}}</h1></th>
+                        <th style="width:273px"><h1 class="h4 m-0">{{__('Užsakymo data')}}</h1></th>
+                        <th style="width:259px"><h1 class="h4 m-0">{{__('Užsakymo tipas')}}</h1></th>
+                        <th style="width:160px"><h1 class="h4 m-0">{{__('Peržiūrėti')}}</h1></th>
                     </thead>
                 <tbody>
                     
@@ -43,7 +43,7 @@
                             <td class="p-1"><div class=" btn-round  order-btn-primary">{{$order->name}}</div></td>
                             <td class="p-1"><div class="  btn-round order-btn-grey" >{{$order->created_at}}</div></td>
                             <td class="p-1"><div class="  btn-round order-btn-grey" >{{$order->type}}</div></td>
-                            <td class="p-1"> <a href="{{route('orders.preview',$order->id)}}"><div class=" btn btn-round order-btn-black">Peržiūrėti</div></a></td>
+                            <td class="p-1"> <a href="{{route('orders.preview',$order->id)}}"><div class=" btn btn-round order-btn-black">{{__('Peržiūrėti')}}</div></a></td>
                         
                         </tr>
                     @endforeach
@@ -51,7 +51,7 @@
                 </table>
                 @endif
                     @if((Auth::user()->position == 'admin'))	
-                    <h1 class="my-3">Visi užsakymai</h1>
+                    <h1 class="my-3">{{__('Visi užsakymai')}}</h1>
                     @if(count($orders->where('state','Projektas uždarytas'))>0)
                     
                     @foreach($users as $user1)
@@ -61,10 +61,10 @@
                     <table style="overflow:scroll;width:1200px">
                     <thead>
                         
-                        <th style="width:516px"><h1 class="h4 m-0">Pavadinimas</h1></th>
-                        <th style="width:273px"><h1 class="h4 m-0">Užsakymo data</h1></th>
-                        <th style="width:259px"><h1 class="h4 m-0">Užsakymo tipas</h1></th>
-                        <th style="width:160px"><h1 class="h4 m-0">Peržiūrėti</h1></th>
+                        <th style="width:516px"><h1 class="h4 m-0">{{__('Pavadinimas')}}</h1></th>
+                        <th style="width:273px"><h1 class="h4 m-0">{{__('Užsakymo data')}}</h1></th>
+                        <th style="width:259px"><h1 class="h4 m-0">{{__('Užsakymo tipas')}}</h1></th>
+                        <th style="width:160px"><h1 class="h4 m-0">{{__('Peržiūrėti')}}</h1></th>
                     
                     </thead>
                     <tbody>
@@ -86,12 +86,12 @@
                     @endif
                     @endforeach
                     @else
-                        <h3 class="my-3">Nėra uždarytų projektų</h3>
+                        <h3 class="my-3">{{__('Nėra uždarytų projektų')}}</h3>
                     @endif
                     @endif
                     @if((Auth::user()->position != 'admin'))
                     @if(count($orders->where('state','Projektas uždarytas'))==0)
-                    <a href="{{route('orders.create')}}" class=" btn-round btn btn-primary">Pradėti užsakymą </a>
+                    <a href="{{route('orders.create')}}" class=" btn-round btn btn-primary">{{__('Pradėti užsakymą')}} </a>
                     @endif
                     @endif
                 </div>

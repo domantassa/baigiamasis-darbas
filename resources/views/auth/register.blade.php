@@ -1,5 +1,10 @@
 @extends('layouts.auth')
+<?php 
 
+use App\User;
+$users=User::all();
+
+?>
 @section('content')
 
 <div class="bg-image login-bg" style="background-image: url('{{ asset('media/photos/photo6@2x.jpg')}}');" >
@@ -65,7 +70,7 @@
                                         <input type="password" type="password" style="text-align: center;" class="mx-auto form-control login-input  {{ $errors->has('password') ? ' is-invalid' : '' }}" id="password-confirmation" name="password_confirmation" placeholder="Repeat password">
                                         
                                     </div>
-                                    
+                                    @if(count($users)>1)
 
                                     <div class="custom-form-group" style="text-align: center;" >
                                         <select name="plan"  class=" minimal btn-round form-btn" style="width:auto" >
@@ -77,7 +82,7 @@
                                         </select>
                                     </div>
                                     
-                                    
+                                    @endif
                                     
                                         
                                         

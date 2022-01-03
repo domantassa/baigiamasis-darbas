@@ -11,7 +11,7 @@
                 data-class="animated fadeInUp"
                 data-timeout="250"
                 data-offset="-100">
-                Visos aktyvios paskyros </h1>
+                {{__('Visos aktyvios paskyros')}} </h1>
             </div>
                 
             
@@ -55,9 +55,9 @@
                     <table class="table table-hover .table-responsive">
                         <thead>
                           <tr>
-                            <td colspan="8">Vardas & Pavardė</td>
-                            <th scope="col">Užsiregistravo</th>
-                            <th scope="col">Planas</th>
+                            <td colspan="8">{{__('Vardas')}} & {{__('Pavardė')}}</td>
+                            <th scope="col">{{__('Užsiregistravo')}}</th>
+                            <th scope="col">{{__('Planas')}}</th>
                             <th scope="col"><i class="fas fa-user-minus"></i></th>
                             <th scope="col"><i class="fas fa-user-edit"></i></th>
                             
