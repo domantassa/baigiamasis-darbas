@@ -358,7 +358,7 @@
                             </a>
                         </li>
                         <li class="nav-main-item open">	
-                            <a class="nav-main-link" href="{{route('duk')}}">	
+                            <a class="nav-main-link" href="{{route('chatting')}}">	
                                 <span class="nav-main-link-name">{{__('Žinutės')}}</span>	
                             </a>
                         </li>

@@ -21,3 +21,13 @@ Homestead.yaml
 Homestead.json
 /.vagrant
 .phpunit.result.cache
+mix-manifest.json
+oneui.css
+amethyst.css
+city.css
+flat.css
+modern.css
+smooth.css
+laravel.app.js
+oneui.app.js 
+tables_datatables.js 
