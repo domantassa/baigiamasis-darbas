@@ -9,7 +9,13 @@
                 data-class="animated fadeInUp"
                 data-timeout="250"
                 data-offset="-100">
-                {{__('Mano failai')}} </h1>
+                @if((Auth::user()->name === $user->name))
+                {{__('Mano ')}}
+                @else
+                {{__('Kliento ')}}
+                @endif
+                {{__('failai')}}
+                </h1>
             </div>
                 
                         <label class="custom-file-upload btn btn-round btn-primary btn-green" for="file-upload" >

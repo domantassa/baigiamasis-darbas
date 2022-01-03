@@ -357,6 +357,11 @@
                                 <span class="nav-main-link-name">{{__('D.U.K')}}</span>	
                             </a>
                         </li>
+                        <li class="nav-main-item open">	
+                            <a class="nav-main-link" href="{{route('duk')}}">	
+                                <span class="nav-main-link-name">{{__('Žinutės')}}</span>	
+                            </a>
+                        </li>
                         <li class="nav-main-item"><div class="bg-white"><a href="{{ route('lang','en') }}" > {{__('En')}}</a><a href="{{ route('lang','lt')}}" > {{__('lt')}}</a></div></li>
                     </ul>
                     <div id="MySidebarBlock" class="sidebar-dark"  style="width:100%;height:20%; position:fixed; bottom:0px; left:0; border-top:0px solid ;">	
