@@ -1,5 +1,8 @@
 <?php
 use App\User;
+use App\Events\Message;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,6 +28,20 @@ Route::prefix('dashboard')->middleware('auth')->group(function(){
     
     return view('duk')->with(['user'=>Auth::user(),'users' =>User::all(),'notif'=>Auth()->User()->notifications()->get()]);
   })->name('duk');
+  Route::get('chat', function(){
+    return view('chat/chat')->with(['user'=>Auth::user(),'users' =>User::all(),'notif'=>Auth()->User()->notifications()->get()]);
+  })->name('chat');
+
+  Route::get('chatting', function(){
+    return view('chat/chatting')->with(['user'=>Auth::user(),'users' =>User::all(),'notif'=>Auth()->User()->notifications()->get()]);
+  })->name('chatting');
+
+  Route::post('/send-message', function() {
+    event(new Message(
+      $request->input['username'], 
+      $request->input['message']));
+  });
+
   Route::post('/deletenotification', 'FileNotificationController@destroy')->name('notifications.destroy');
   Route::get('/deleteNotifications/{user}', 'FileNotificationController@delete')->name('notifications.delete');
   Route::get('files', 'FileController@index')->name('files');

@@ -33,8 +33,40 @@
         <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
         <script>
 
+            $(function(){
+                $(".heading-compose").click(function() {
+                $(".side-two").css({
+                    "left": "0"
+                });
+                });
+
+                $(".newMessage-back").click(function() {
+                $(".side-two").css({
+                    "left": "-100%"
+                });
+                });
+            }) 
+
             function snackBarShow() {
             var x = document.getElementById("snackbar");
+            x.className = "show";
+                setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+            }
+
+            function snackBar1Show() {
+            var x = document.getElementById("snackbar-new-user");
+                x.className = "show";
+                setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+            }
+
+            function snackBar2Show() {
+            var x = document.getElementById("snackbar-new-order");
+                x.className = "show";
+                setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+            }
+
+            function snackBar3Show() {
+            var x = document.getElementById("snackbar-new-results");
                 x.className = "show";
                 setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
             }
@@ -43,9 +75,19 @@
             cluster: 'eu'
             });
 
-            var channel = pusher.subscribe('my-channel');
-            channel.bind('my-event', function(data) {
-            alert(JSON.stringify(data));
+            var channel = pusher.subscribe('new-user-channel');
+            channel.bind('new-user-channel', function(data) {
+            snackBar1Show();
+            });
+
+            var channel = pusher.subscribe('new-order-channel');
+            channel.bind('new-order-channel', function(data) {
+            snackBar2Show();
+            });
+
+            var channel = pusher.subscribe('new-results-channel');
+            channel.bind('new-results-channel', function(data) {
+            snackBar3Show();
             });
         </script>
         <!-- Scripts -->
@@ -96,7 +138,10 @@
     </head>
     <body onload="myFunction()">
 
-    <div id="snackbar">Prisiregistravo naujas vartotojas!</div>
+    
+    <div id="snackbar-new-user">Prisiregistravo naujas vartotojas!</div>
+    <div id="snackbar-new-order">Naujas užsakymas!</div>
+    <div id="snackbar-new-results">Įkelti užsakymo rezultatai!</div>
     
         
         <div id="page-container" class="enable-cookies sidebar-o enable-page-overlay sidebar-dark side-scroll page-header-fixed page-header-dark enable-cookies ">
@@ -254,7 +299,7 @@
                         <li class="nav-main-item">
                             <a class="nav-main-link{{ request()->is('dashboard') ? ' active' : '' }}" href="/dashboard">
                                 <i class="nav-main-link-icon fas fa-user-tie"></i>
-                                <span class="nav-main-link-name">{{$user->name}}</span>
+                                <span class="nav-main-link-name">{{ Auth::user()->name }}</span>
                             </a>
                         </li>
                         <li class="nav-main-heading">Meniu</li>
@@ -262,12 +307,13 @@
                                 <a class="nav-main-link" href="{{route('orders.dashboard')}}">	
                                     <span class="nav-main-link-name">Pradžia</span>
                                 </a>
-                                <button class="snackbarButton" onclick="snackBarShow()">Show Snackbar</button>
                         </li>
                        
                             <li class="nav-main-item open">	
                                 <a class="nav-main-link" href="{{route('files')}}">	
-                                    <span class="nav-main-link-name">Mano failai</span>
+                                    <span class="nav-main-link-name">
+                                    Mano failai
+                                    </span>	
                                 </a>
                             </li>
                             <li class="nav-main-item open">	
@@ -309,6 +355,11 @@
                             <a class="nav-main-link" href="{{route('duk')}}">	
                                 <!-- <i class="nav-main-link-icon fas fa-users"></i>	-->
                                 <span class="nav-main-link-name">D.U.K</span>	
+                            </a>
+                        </li>
+                        <li class="nav-main-item open">	
+                            <a class="nav-main-link" href="{{route('chatting')}}">	
+                                <span class="nav-main-link-name">Žinutės</span>	
                             </a>
                         </li>
                     </ul>

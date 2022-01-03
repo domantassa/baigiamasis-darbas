@@ -26189,6 +26189,78 @@ select.minimal:focus {
   animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
 
+#snackbar-new-order {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: #006A56;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+  font-size: 17px;
+  border-radius: 50px;
+  box-shadow: 0px 5px 3px darkgray;
+}
+
+#snackbar-new-order.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+#snackbar-new-results {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: #006A56;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+  font-size: 17px;
+  border-radius: 50px;
+  box-shadow: 0px 5px 3px darkgray;
+}
+
+#snackbar-new-results.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+#snackbar-new-user {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: #006A56;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+  font-size: 17px;
+  border-radius: 50px;
+  box-shadow: 0px 5px 3px darkgray;
+}
+
+#snackbar-new-user.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
 @-webkit-keyframes fadein {
   from {
     bottom: 0;

@@ -9,7 +9,13 @@
                 data-class="animated fadeInUp"
                 data-timeout="250"
                 data-offset="-100">
-                Mano failai </h1>
+                @if((Auth::user()->name === $user->name))
+                Mano 
+                @else
+                Kliento
+                @endif
+                failai
+                </h1>
             </div>
                 
                         <label class="custom-file-upload btn btn-round btn-primary btn-green" for="file-upload" >

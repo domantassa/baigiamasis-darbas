@@ -42,10 +42,10 @@
                         <tr>
                         
                        
-                            <td class="p-1"><div class="  btn-round btn-primary  order-btn-primary">{{$order->name}}</div></td>
+                            <td class="p-1"><a href="{{route('orders.edit',$order->id)}}"><div class="  btn-round btn-primary  order-btn-primary">{{$order->name}}</div></a></td>
                             <td class="p-1"><div class="btn-round order-btn-grey" >{{$order->created_at}}</div></td>
                             <td class="p-1"><div class="btn-round order-btn-grey" >{{$order->type}}</div></td>
-                            <td class="p-1"> <div class="btn-primary btn btn-round order-btn-primary expected" data-time="{{$order->expected_at}}">{{$order->expected_at}}</div></a></td>
+                            <td class="p-1"> <div class="btn-round order-btn-grey expected" style="width:293px" data-time="{{$order->expected_at}}">{{$order->expected_at}}</div></a></td>
                             @if($order->state=="Projektas atliktas") 
                             <td class="p-1"><div class="  btn-round btn-primary order-btn-primary" >{{$order->state}}</div></td>
                             <td class="p-1"> <a href="{{route('orders.show',$order->id)}}"><div class="btn-primary btn btn-round order-btn-primary">Peržiūrėti</div></a></td>
@@ -55,7 +55,7 @@
                             @else
                              <td class="p-1"><div class=" btn-round order-btn-grey" >{{$order->state}}</div></td>
                                 @if( $order->state=="Projektas kuriamas")
-                                <td class="p-1"> <a href="{{route('orders.edit',$order->id)}}"><div class="btn-primary btn btn-round order-btn-primary">Atidaryti</div></a></td>
+                                <td class="p-1"> <a href="{{route('orders.edit',$order->id)}}"><div class="btn-primary btn btn-round order-btn-primary">Atidaryti</div></td>
                                 @else
                                 <td></td>
                                 @endif
@@ -93,10 +93,10 @@
                             <tr>
                             
                         
-                                <td class="p-1"><div class="  btn-round btn-primary  order-btn-primary">{{$order->name}}</div></td>
+                                <td class="p-1"><a href="{{route('orders.edit',$order->id)}}"><div class="  btn-round btn-primary  order-btn-primary">{{$order->name}}</div></a></td>
                                 <td class="p-1"><div class="btn-round order-btn-grey" >{{$order->created_at}}</div></td>
                                 <td class="p-1"><div class="btn-round order-btn-grey" >{{$order->type}}</div></td>
-                                <td class="p-1"> <div class="btn-primary btn btn-round order-btn-primary expected no-click" data-time="{{$order->expected_at}}">{{$order->expected_at}}</div></a></td>
+                                <td class="p-1"> <div class="btn-round order-btn-grey expected" data-time="{{$order->expected_at}}">{{$order->expected_at}}</div></a></td>
                                 @if($order->state=="Projektas atliktas") 
                                 <td class="p-1"><div class="  btn-round btn-primary order-btn-primary" >{{$order->state}}</div></td>
                                 <td class="p-1"> <a href="{{route('orders.show',$order->id)}}"><div class="btn-primary btn btn-round order-btn-primary">Peržiūrėti</div></a></td>

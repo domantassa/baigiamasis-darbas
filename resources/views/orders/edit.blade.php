@@ -14,11 +14,12 @@
             
             </div>
                             
-            <label class="custom-file-upload btn btn-round btn-primary btn-green" >
-                            
-                            <input type="file"/>
-                            Parsisiųsti pavyzdį
-                        </label>
+            <!-- parsisiųsti pavyzdį
+            <label class="custom-file-upload btn btn-round btn-primary btn-green" >    
+                <input type="file"/>
+                Parsisiųsti pavyzdį
+            </label>
+            -->
                 
        </div>
     </div>

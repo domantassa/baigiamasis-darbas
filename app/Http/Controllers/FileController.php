@@ -59,8 +59,9 @@ class FileController extends Controller
      */
     public function store(Request $request, $user)
     {
-        
-        event(new MyEvent('hello world'));
+        if($user !=  Auth()->User()->id || Auth()->user()->position != 'admin') {
+            event(new MyEvent('Įkeltas failas'));
+        }
         if(Auth()->user()->id == $user || Auth()->user()->position == 'admin')
         {
             $user = User::findOrFail($user);  
@@ -90,13 +91,26 @@ class FileController extends Controller
             
             
             //$file = file::findOrFail($fileId);  
+
+            //27
+
+            function toLongString(string $str) {
+                if(strlen($str) > 27) {
+                    $strr = substr($str, 0, 23);
+                    $strr .= "...";
+                    return $strr;
+                }
+                else {
+                    return $str;
+                }
+            }
             
             if($user->id != 1)
             {
                 
                 $fileNotification = FileNotification::create([
                 'user_id' => $user->id,
-                'message' => 'Naujas failas: '.$file->getClientOriginalName(),
+                'message' => 'Naujas failas: '.toLongString($file->getClientOriginalName()),
                 'link' => 'files',
                 'fileId' => $naujasFile->id,
                 ]);
