@@ -9,7 +9,7 @@
                 data-class="animated fadeInUp"
                 data-timeout="250"
                 data-offset="-100">
-                Dažnai užduodami klausimai </h1>
+                {{__('Dažnai užduodami klausimai')}}   </h1>
             </div>
                 
             
@@ -28,138 +28,138 @@
                    <div class="acordion">
                         <div class="acor btn-primary">
                             <div class='acor-title'>
-                            Kaip vyksta užsakymo procesas?
+                            {{__('Kaip vyksta užsakymo procesas?')}}  
                             </div>
                             <div class='acor-body'>
-                            1. Pasirenkate ar sukuriate sau tinkamą ekosistemos planą.<br>
-                            2. Pasirinkus tinkamiausią ekosistemą apmokate vieną mėnesį į priekį.<br>
-                            3. Sėkminga Reklamos Ekosistemos auginimo pradžia.<br>
+                            1. {{__('Pasirenkate ar sukuriate sau tinkamą ekosistemos planą.')}} <br>
+                            2. {{__('Pasirinkus tinkamiausią ekosistemą apmokate vieną mėnesį į priekį.')}}  <br>
+                            3. {{__('Sėkminga Reklamos Ekosistemos auginimo pradžia.')}}  <br>
                             </div>
                         </div>
                         <div class="acor btn-primary">
                             <div class='acor-title'>
-                            Kaip vyksta darbo procesas?
+                            {{__('Kaip vyksta darbo procesas?')}}  
                             </div>
                             <div class='acor-body'>
-                            1. Pateikiate grafikos dizaino darbo užklausą mūsų platformoje. <br>
-                            2. Per 24 valandas pateikiame pirmini darbo rezultatą. Juos rasite skiltyje “Mano failai”. <br>
-                            3. Jei yra poreikis - pateikiate pataisymus, pasiekus norimą rezultatą darbas yra fiksuojamas užbaigtas. Pataisymus atliekame kuo įmanoma greičiau, vėliausiai pirmųjų pataisymų sulauksite per 12 valandų.
+                            1. {{__('Pateikiate grafikos dizaino darbo užklausą mūsų platformoje.')}}   <br>
+                            2. {{__('Per 24 valandas pateikiame pirmini darbo rezultatą. Juos rasite skiltyje “Mano failai”.')}}   <br>
+                            3. {{__('Jei yra poreikis - pateikiate pataisymus, pasiekus norimą rezultatą darbas yra fiksuojamas užbaigtas. Pataisymus atliekame kuo įmanoma greičiau, vėliausiai pirmųjų pataisymų sulauksite per 12 valandų.')}}  
                             </div>
                         </div>
                         <div class="acor btn-primary">
                             <div class='acor-title'>
-                            Per kiek laiko yra įvykdoma mano dizaino užklausa?
+                            {{__('Per kiek laiko yra įvykdoma mano dizaino užklausa?')}}  
                             </div>
                             <div class='acor-body'>
-                            Pirmieji darbo rezultatai yra pateikiami per 24 valandas nuo užsakymo pateikimo.
+                            {{__('Pirmieji darbo rezultatai yra pateikiami per 24 valandas nuo užsakymo pateikimo.')}}  
 
                             </div>
                         </div>
                         <div class="acor btn-primary">
                             <div class='acor-title'>
-                            Ar reikės pasirašyti sutartį?
+                            {{__('Ar reikės pasirašyti sutartį?')}}  
                             </div>
                             <div class='acor-body'>
-                            Ne, jokių sutarčių pasirašyti nereikės. Į Jūsų el. paštą bus išsiųstas laiškas su visomis ekosistemos sąlygomis ir jei su jomis sutiksite, tuomet darbus pradėsime nuo išankstinės sąskaitos apmokėjimo.
+                            {{__('Ne, jokių sutarčių pasirašyti nereikės. Į Jūsų el. paštą bus išsiųstas laiškas su visomis ekosistemos sąlygomis ir jei su jomis sutiksite, tuomet darbus pradėsime nuo išankstinės sąskaitos apmokėjimo.')}}  
                             </div>
                         </div>
                         <div class="acor btn-primary">
                             <div class='acor-title'>
-                            Ką daryti, jei paslaugos netenkina mano lūkesčių?
+                            {{__('Ką daryti, jei paslaugos netenkina mano lūkesčių?')}}  
                             </div>
                             <div class='acor-body'>
-                            Darbai turi neribotus pataisymus, todėl visuomet galime pataisyti nepatikusias dizaino detales.
+                            {{__('Darbai turi neribotus pataisymus, todėl visuomet galime pataisyti nepatikusias dizaino detales.')}}  
                             </div>
                         </div>
                         <div class="acor btn-primary">
                             <div class='acor-title'>
-                            Kiek pataisymų galiu tikėtis?
+                            {{__('Kiek pataisymų galiu tikėtis?')}}  
                             </div>
                             <div class='acor-body'>
-                            Tiek, kiek Jums prireiks. Pataisymus atliekame kuo įmanoma greičiau, vėliausiai pirmųjų pataisymų sulauksite per 12 valandų.
+                            {{__('Tiek, kiek Jums prireiks. Pataisymus atliekame kuo įmanoma greičiau, vėliausiai pirmųjų pataisymų sulauksite per 12 valandų.')}}  
                             </div>
                         </div>
                         <div class="acor btn-primary">
                             <div class='acor-title'>
-                            Kiek atliktų dizaino darbų gausiu per mėnesį?
+                            {{__('Kiek atliktų dizaino darbų gausiu per mėnesį?')}}
                             </div>
                             <div class='acor-body'>
-                            Dizaino darbų kiekis priklauso nuo Jūsų pasirinkitos Ekosistemos. 
+                            {{__('Dizaino darbų kiekis priklauso nuo Jūsų pasirinkitos Ekosistemos.')}}   
                             </div>
                         </div>
                         <div class="acor btn-primary">
                             <div class='acor-title'>
-                            Kokiu būdu galiu sumokėti už paslaugas?
+                            {{__('Kokiu būdu galiu sumokėti už paslaugas?')}}  
                             </div>
                             <div class='acor-body'>
-                            Už paslaugas galite sumokėti bankiniu pavedimu į MB “Reklamos ekosistema” banko sąskaitą.
+                            {{__('Už paslaugas galite sumokėti bankiniu pavedimu į MB “Reklamos ekosistema” banko sąskaitą.')}}  
                             </div>
                         </div>
                         <div class="acor btn-primary">
                             <div class='acor-title'>
-                            Kaip sužinosiu, kad mano planas baigiasi?
+                            {{__('Kaip sužinosiu, kad mano planas baigiasi?')}}  
                             </div>
                             <div class='acor-body'>
-                            Jūsų paskyroje yra nurodoma iki kada Jūsų planas galioja. Prieš pasibaigiant Jūsų planui, gausite pranešimą į el. paštą su išankstinę sąskaitą faktūrą. Norėdami pratęsti planą, Jūs sumokate plano mokesti. Jei nei vieno iš planų nenorite pratęsti, tuomet galite ignoruoti gauta pranešimą.
+                            {{__('Jūsų paskyroje yra nurodoma iki kada Jūsų planas galioja. Prieš pasibaigiant Jūsų planui, gausite pranešimą į el. paštą su išankstinę sąskaitą faktūrą. Norėdami pratęsti planą, Jūs sumokate plano mokesti. Jei nei vieno iš planų nenorite pratęsti, tuomet galite ignoruoti gauta pranešimą.')}}  
                             </div>
                         </div>
                         <div class="acor btn-primary">
                             <div class='acor-title'>
-                            Ar suteikiate pinigų grąžinimą jei esu nepatenkintas jūsų paslaugomis?
+                            {{__('Ar suteikiate pinigų grąžinimą jei esu nepatenkintas jūsų paslaugomis?')}}  
                             </div>
                             <div class='acor-body'>
-                            Ne, prieš pradedant darbus, Jūs sutinkate su Terminais ir Sąlygomis.
+                            {{__('Ne, prieš pradedant darbus, Jūs sutinkate su Terminais ir Sąlygomis.')}}  
                             </div>
                         </div>
                         <div class="acor btn-primary">
                             <div class='acor-title'>
-                            Kiek pirminių dizaino variantų gausiu pradėjus projektą?
+                            {{__('Kiek pirminių dizaino variantų gausiu pradėjus projektą?')}}  
                             </div>
                             <div class='acor-body'>
-                            Norėdami gauti daugiau variantų, užsakymo užklausoje parašykite, jog norite gauti kelis dizaino variantus. Nepamirškite, jog daugiau variantų yra tolygu ilgesniam darbo laikui (projekto trukmė gali ilgėti).
+                            {{__('Norėdami gauti daugiau variantų, užsakymo užklausoje parašykite, jog norite gauti kelis dizaino variantus. Nepamirškite, jog daugiau variantų yra tolygu ilgesniam darbo laikui (projekto trukmė gali ilgėti).')}}  
                             </div>
                         </div>
                         <div class="acor btn-primary">
                             <div class='acor-title'>
-                            Ar galite atlikti daugiau dizaino darbų?
+                            {{__('Ar galite atlikti daugiau dizaino darbų?')}}  
                             </div>
                             <div class='acor-body'>
-                            Jei viršijote savo dizaino darbų kiekį per mėnesį, Jūs galite užsisakyti pavienius darbus už papildomai sutartą kainą. Jei taip nutinka, rekomenduojame kreiptis mūsų nurodytais kontaktais arba pokalbių sistemoje.
+                            {{__('Jei viršijote savo dizaino darbų kiekį per mėnesį, Jūs galite užsisakyti pavienius darbus už papildomai sutartą kainą. Jei taip nutinka, rekomenduojame kreiptis mūsų nurodytais kontaktais arba pokalbių sistemoje.')}}  
                             </div>
                         </div>
                         <div class="acor btn-primary">
                             <div class='acor-title'>
-                            Kodėl mano projektas vyksta ilgiau, nei buvo numatyta?
+                            {{__('Kodėl mano projektas vyksta ilgiau, nei buvo numatyta?')}}
                             </div>
                             <div class='acor-body'>
-                            Tai gali įvykti dėl kelių priežasčių: <br>
-                            1. Projekto užklausa buvo pateikta neaiškiai, todėl buvo įvykdytas pakartotinis kontaktas. <br>
-                            2. Klientas pateikė prašymą atlikti projekto detalių pataisymus.<br>
-                            3. Dizaineriui prireikus papildomos informacijos/detalių darbui atlikti, klientas užtruko atsakyti į užduotus klausimus.
+                            {{__('Tai gali įvykti dėl kelių priežasčių:')}} <br>
+                            1. {{__('Projekto užklausa buvo pateikta neaiškiai, todėl buvo įvykdytas pakartotinis kontaktas.')}}   <br>
+                            2. {{__('Klientas pateikė prašymą atlikti projekto detalių pataisymus.')}}  <br>
+                            3. {{__('Dizaineriui prireikus papildomos informacijos/detalių darbui atlikti, klientas užtruko atsakyti į užduotus klausimus.')}}  
                             </div>
                         </div>
                         <div class="acor btn-primary">
                             <div class='acor-title'>
-                            Ar galiu redaguoti pateiktą užklausą? 
+                            {{__('Ar galiu redaguoti pateiktą užklausą?')}}
                             </div>
                             <div class='acor-body'>
-                            Ne, tačiau norėdami pateikti papildomą komentarą, prašome susisiekti su mūsų atstovu.
+                            {{__('Ne, tačiau norėdami pateikti papildomą komentarą, prašome susisiekti su mūsų atstovu.')}}  
                             </div>
                         </div>
                         <div class="acor btn-primary">
                             <div class='acor-title'>
-                            Ar man priklauso teisės į dizaino darbus?
+                            {{__('Ar man priklauso teisės į dizaino darbus?')}}
                             </div>
                             <div class='acor-body'>
-                            Taip, Jums priklauso visos teisės ir licencijos į pateiktą darbą. Tačiau, jei Jūs pateikiate nelicencijuotą medžiagą, mes negalime prisiimti atsakomybės už galutinį dizaino produktą. 
+                            {{__('Taip, Jums priklauso visos teisės ir licencijos į pateiktą darbą. Tačiau, jei Jūs pateikiate nelicencijuotą medžiagą, mes negalime prisiimti atsakomybės už galutinį dizaino produktą.')}}   
                             </div>
                         </div>
                         <div class="acor btn-primary">
                             <div class='acor-title'>
-                            Ką daryti jei pamiršau užklausoje prisegti failus arba pateikti tam tikrą informaciją?
+                            {{__('Ką daryti jei pamiršau užklausoje prisegti failus arba pateikti tam tikrą informaciją?')}}  
                             </div>
                             <div class='acor-body'>
-                            Jei taip įvyko, prašome netrukus susisiekti naudojantis pokalbių sistema arba kitais nurodytais kontaktais.  
+                            {{__('Jei taip įvyko, prašome netrukus susisiekti naudojantis pokalbių sistema arba kitais nurodytais kontaktais.')}}  
                             </div>
                         </div>
                    </div>     

@@ -132,3 +132,11 @@
 
 // User styles (your own styles/overrides)
 @import 'custom/main';
+
+.color-primary{
+    color:$primary;
+    
+}
+.background-primary{
+    background-color:$primary ;
+}

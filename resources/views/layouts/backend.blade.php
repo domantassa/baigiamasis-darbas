@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ config('app.locale') }}" style="background: #f9f9f9 !important">
+<html lang="lt" style="background: #f9f9f9 !important">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -150,6 +150,7 @@
                 <!-- Side Header -->
                 <div class="content-header" style="background-color: #353847 !important;">
                     <!-- User Avatar -->
+                   
                     <a class="img-link mr-1" href="javascript:void(0)">
                         <img class="img-avatar img-avatar32" src="{{Auth::user()->position == 'admin' ? asset('media/avatars/avatar10.jpg') : asset('storage/CustomerSupport.jpg')}}" alt="">
                     </a>
@@ -211,7 +212,7 @@
                             <textarea class="form-control" style="margin:10px; width: 95%" id="message-text" name="message-text" rows="4" placeholder="Textarea content.."></textarea>	
                             <div style="position:relative; text-align:right; margin: 10px;">	
                                 <button type="submit" class="btn btn-round btn-sm btn-primary" style="color:white;">	
-                                    <i class="fa fa-check mr-1"></i> Send	
+                                    <i class="fa fa-check mr-1"></i> {{__('Send')}}	
                                 </button>	
                             </div>	
                         </div>	
@@ -253,27 +254,27 @@
                                 <!-- Color Themes -->
                                 <!-- Layout API, functionality initialized in Template._uiHandleTheme() -->
                                 <a class="dropdown-item d-flex align-items-center justify-content-between" data-toggle="theme" data-theme="default" href="#">
-                                    <span>Default</span>
+                                    <span>{{__('Default')}}</span>
                                     <i class="fa fa-circle text-default"></i>
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center justify-content-between" data-toggle="theme" data-theme="{{ asset('css/themes/amethyst.css') }}" href="#">
-                                    <span>Amethyst</span>
+                                    <span>{{__('Amethyst')}}</span>
                                     <i class="fa fa-circle text-amethyst"></i>
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center justify-content-between" data-toggle="theme" data-theme="{{ asset('css/themes/city.css') }}" href="#">
-                                    <span>City</span>
+                                    <span>{{__('City')}}</span>
                                     <i class="fa fa-circle text-city"></i>
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center justify-content-between" data-toggle="theme" data-theme="{{ asset('css/themes/flat.css') }}" href="#">
-                                    <span>Flat</span>
+                                    <span>{{__('Flat')}}</span>
                                     <i class="fa fa-circle text-flat"></i>
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center justify-content-between" data-toggle="theme" data-theme="{{ asset('css/themes/modern.css') }}" href="#">
-                                    <span>Modern</span>
+                                    <span>{{__('Modern')}}</span>
                                     <i class="fa fa-circle text-modern"></i>
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center justify-content-between" data-toggle="theme" data-theme="{{ asset('css/themes/smooth.css') }}" href="#">
-                                    <span>Smooth</span>
+                                    <span>{{__('Smooth')}}</span>
                                     <i class="fa fa-circle text-smooth"></i>
                                 </a>
                                 <!-- END Color Themes -->
@@ -302,23 +303,22 @@
                                 <span class="nav-main-link-name">{{ Auth::user()->name }}</span>
                             </a>
                         </li>
-                        <li class="nav-main-heading">Meniu</li>
+                       
+                        <li class="nav-main-heading">{{__('Meniu')}}</li>
                         <li class="nav-main-item open">	
                                 <a class="nav-main-link" href="{{route('orders.dashboard')}}">	
-                                    <span class="nav-main-link-name">Pradžia</span>
+                                    <span class="nav-main-link-name">{{__('Pradžia')}}</span>
                                 </a>
                         </li>
                        
                             <li class="nav-main-item open">	
                                 <a class="nav-main-link" href="{{route('files')}}">	
-                                    <span class="nav-main-link-name">
-                                    Mano failai
-                                    </span>	
+                                    <span class="nav-main-link-name">{{__('Mano failai')}}</span>
                                 </a>
                             </li>
                             <li class="nav-main-item open">	
                                 <a class="nav-main-link" href="{{route('orders.index')}}">	
-                                    <span class="nav-main-link-name">Užsakymų istorija</span>
+                                    <span class="nav-main-link-name">{{__('Užsakymų istorija')}}</span>
                                 </a>
                             </li>
 
@@ -326,7 +326,7 @@
                         <li class="nav-main-item{{ request()->is('pages/*') ? ' open' : '' }}">
                             <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="true" href="#">
                               <!--   <i class="nav-main-link-icon fas fa-user"></i>	-->
-                                <span class="nav-main-link-name">Pasirinkti paskyrą</span>	
+                                <span class="nav-main-link-name">{{__('Pasirinkti paskyrą')}}</span>	
                             </a>	
 	
                             @foreach ($users as $oneUser)	
@@ -345,7 +345,7 @@
                         <li class="nav-main-item open">	
                             <a class="nav-main-link" href="{{route('users')}}">	
                                 <!-- <i class="nav-main-link-icon fas fa-users"></i>	-->
-                                <span class="nav-main-link-name">Visos paskyros</span>	
+                                <span class="nav-main-link-name">{{__('Visos paskyros')}}</span>	
                             </a>
                         </li>
                         @endif
@@ -354,14 +354,10 @@
                         <li class="nav-main-item open">	
                             <a class="nav-main-link" href="{{route('duk')}}">	
                                 <!-- <i class="nav-main-link-icon fas fa-users"></i>	-->
-                                <span class="nav-main-link-name">D.U.K</span>	
+                                <span class="nav-main-link-name">{{__('D.U.K')}}</span>	
                             </a>
                         </li>
-                        <li class="nav-main-item open">	
-                            <a class="nav-main-link" href="{{route('chatting')}}">	
-                                <span class="nav-main-link-name">Žinutės</span>	
-                            </a>
-                        </li>
+                        <li class="nav-main-item"><div class="bg-white"><a href="{{ route('lang','en') }}" > {{__('En')}}</a><a href="{{ route('lang','lt')}}" > {{__('lt')}}</a></div></li>
                     </ul>
                     <div id="MySidebarBlock" class="sidebar-dark"  style="width:100%;height:20%; position:fixed; bottom:0px; left:0; border-top:0px solid ;">	
                         	
@@ -392,7 +388,7 @@
                         
                         @if(Auth::user()->position == 'admin')	
                         <a href="{{route('register')}}" class="btn btn-sm btn-dual  btn-round btn-white mr-2 d-none d-lg-inline-block">
-                            Sukurti paskyrą
+                        {{__('Sukurti paskyrą')}}
                         </a>
                                         @else
                                         @if(Auth::user()->remaining > 0)		
@@ -402,7 +398,7 @@
                         @else
                         
                         <div data-toggle="tooltip" data-placement="bottom" title="Gausite naujų užsakymų prasidėjus naujam mėnesiui"  class="btn btn-sm btn-dual btn-white btn-round  mr-2 d-none d-lg-inline-block  disabled-button cursor">
-                            Užsakymai baigėsi
+                        {{__('Užsakymai baigėsi')}}
                 </div>
 
                         @endif	
@@ -426,9 +422,9 @@
                                 <span class="d-none d-sm-inline-block ml-1">
                                     @if(Auth::check())	
                                         @if(Auth::user()->position == 'admin')	
-                                            Admin profilis	
+                                        {{__('Admin')}} {{__('profilis')}}	
                                         @else	
-                                            Mano profilis
+                                        {{__('Mano')}} {{__('profilis')}}
                                         @endif	
                                     @endif
                                 </span>
@@ -465,7 +461,7 @@
                                         <i class="si si-lock ml-1"></i>
                                     </a>-->
                                     <a class="dropdown-item d-flex align-items-center justify-content-between" href="{{ route('logout') }} " onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                        <span>Atsijungti</span>
+                                        <span>{{__('Atsijungti')}}</span>
                                         <i class="si si-logout ml-1"></i>
                                     </a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">	
@@ -486,7 +482,7 @@
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-0 border-0 font-size-sm" aria-labelledby="page-header-notifications-dropdown">
                                     <div class="p-2 bg-primary text-center">
-                                        <h5 class="dropdown-header text-uppercase text-white">Pranešimai</h5>
+                                        <h5 class="dropdown-header text-uppercase text-white">{{__('Pranešimai')}}</h5>
                                     </div>
                                     <ul id="manoNotifai2" class="nav-items mb-0">
                                         <div style="overflow:auto;max-height:300px">
@@ -515,7 +511,7 @@
                                             <a class="" href="{{route('notifications.delete', ['user' => $user->id])}}">
 
                                             <div class="p-2 text-center">
-                                                <h5 class="dropdown-header text-uppercase">Ištrinti visus pranešimus</h5>
+                                                <h5 class="dropdown-header text-uppercase">{{__('Ištrinti visus pranešimus')}}</h5>
                                             </div>
                                     
                                             </a>
@@ -580,7 +576,7 @@
                     <div class="modal-content">
                         <div class="block block-themed block-transparent mb-0">
                             <div class="block-header bg-primary-dark">
-                                <h3 class="block-title">Apps</h3>
+                                <h3 class="block-title">{{__('Apps')}}</h3>
                                 <div class="block-options">
                                     <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
                                         <i class="si si-close"></i>
@@ -595,7 +591,7 @@
                                             <div class="block-content text-center">
                                                 <i class="si si-speedometer fa-2x text-white-75"></i>
                                                 <p class="font-w600 font-size-sm text-white mt-2 mb-3">
-                                                    CRM
+                                                {{__('CRM')}}
                                                 </p>
                                             </div>
                                         </a>
@@ -607,7 +603,7 @@
                                             <div class="block-content text-center">
                                                 <i class="si si-rocket fa-2x text-white-75"></i>
                                                 <p class="font-w600 font-size-sm text-white mt-2 mb-3">
-                                                    Products
+                                                {{__('Products')}}
                                                 </p>
                                             </div>
                                         </a>
@@ -619,7 +615,7 @@
                                             <div class="block-content text-center">
                                                 <i class="si si-plane fa-2x text-white-75"></i>
                                                 <p class="font-w600 font-size-sm text-white mt-2 mb-3">
-                                                    Sales
+                                                {{__(' Sales')}}
                                                 </p>
                                             </div>
                                         </a>
@@ -631,7 +627,7 @@
                                             <div class="block-content text-center">
                                                 <i class="si si-wallet fa-2x text-white-75"></i>
                                                 <p class="font-w600 font-size-sm text-white mt-2 mb-3">
-                                                    Payments
+                                                {{__('Payments')}}
                                                 </p>
                                             </div>
                                         </a>

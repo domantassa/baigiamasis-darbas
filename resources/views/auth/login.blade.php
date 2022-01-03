@@ -26,7 +26,7 @@
                         -->
                         <div class="block-content" >
                             <div class="p-sm-3 px-lg-4 py-lg-5">
-                                <h1 class="mb-2" style="text-align: center; font-family: 'Poppins', sans-serif;">Prisijungimas</h1>
+                                <h1 class="mb-2" style="text-align: center; font-family: 'Poppins', sans-serif;">{{__('Prisijungimas')}}</h1>
                                 <!--<p>Welcome, please login.</p>-->
 
                                 <!-- Sign In Form -->
@@ -37,7 +37,7 @@
                                     <div class="pt-3">
                                         <div class="form-group" >
                                             <!--form-control form-control-alt form-control-lg -->
-                                            <input type="text" style="text-align: center;" class="mx-auto form-control login-input {{ $errors->has('email') ? ' is-invalid' : '' }}" id="email" name="email" placeholder="Email" value="{{  old('email') }}">
+                                            <input type="text" style="text-align: center;" class="mx-auto form-control login-input {{ $errors->has('email') ? ' is-invalid' : '' }}" id="email" name="email" placeholder="{{__('Email')}}" value="{{  old('email') }}">
                                             @if ( $errors->has('email'))
                                             <span class="invalid-feedback" style="text-align: center">
                                                 <strong>{{ $errors->first('email') ?: $errors->first('email') }}</strong>
@@ -45,7 +45,7 @@
                                             @endif
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" style="text-align: center;" class=" mx-auto form-control login-input " id="password" name="password" placeholder="Password">
+                                            <input type="password" style="text-align: center;" class=" mx-auto form-control login-input " id="password" name="password" placeholder="{{__('Password')}}">
                                             @if ($errors->has('password'))
                                             <span class="invalid-feedback" role="alert" style="text-align: center">
                                                 <strong>{{ $errors->first('password') }}</strong>
@@ -65,12 +65,13 @@
                                     <div class="form-group row">
                                         <div class="col-md-6 col-xl-5 mx-auto" style='text-align:center'>
                                             <button type="submit" class=" btn btn-round btn-primary btn-green ">
-                                                Jungtis
+                                                {{__('Jungtis')}}
                                             </button>
                                         </div>
                                     </div>
                                     
                                 </form>
+                                <div class="bg-white"><a href="{{ route('lang','en') }}" > {{__('En')}}</a><a href="{{ route('lang','lt')}}" > {{__('lt')}}</a></div>
                                 <!-- END Sign In Form -->
                             </div>
 </div>

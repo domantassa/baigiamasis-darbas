@@ -1,0 +1,116 @@
+{
+    "Prisegti failą":"File upload",
+    "Mano":"My",
+    "Failai":"files",
+    "Sukurti":"Create",
+    "paskyrą":"account",
+    "Administratorius":"admin",
+    "Profilis":"Paskyra",
+    "Atsijungti":"Log out",
+    "Prisijungti":"Log in",
+    "Pasirinkti":"Chose",
+    "Visos":"All",
+    "Visi":"All",
+    
+    
+    "D.U.K":"Q&A",
+    "Dažnai užduodami klausimai":"Frequently asked questions",
+
+    "Kaip vyksta užsakymo procesas?":"How does the ordering process work?",
+    "Pasirenkate ar sukuriate sau tinkamą ekosistemos planą.":"You choose or create an ecosystem plan that works for you.",
+    "Pasirinkus tinkamiausią ekosistemą apmokate vieną mėnesį į priekį.":"By choosing the most suitable ecosystem, you pay one month ahead.",
+    "Sėkminga Reklamos Ekosistemos auginimo pradžia.":"Successful start of growing the Advertising Ecosystem.",
+    
+    "Kaip vyksta darbo procesas?":"How is the work process going?",
+    "Pateikiate grafikos dizaino darbo užklausą mūsų platformoje.":"You are requesting a graphic design job on our platform.",
+    "Per 24 valandas pateikiame pirmini darbo rezultatą. Juos rasite skiltyje “Mano failai”.":"We provide the initial result of the work within 24 hours. You can find them in the “My Files” section.",
+    "Jei yra poreikis - pateikiate pataisymus, pasiekus norimą rezultatą darbas yra fiksuojamas užbaigtas. Pataisymus atliekame kuo įmanoma greičiau, vėliausiai pirmųjų pataisymų sulauksite per 12 valandų.":"If there is a need - you submit corrections, when the desired result is achieved, the work is recorded completed. We will make the corrections as soon as possible, and you will receive the first corrections within 12 hours at the latest.",
+    
+    "Per kiek laiko yra įvykdoma mano dizaino užklausa?":"How long does it take to complete my design request?",
+    "Pirmieji darbo rezultatai yra pateikiami per 24 valandas nuo užsakymo pateikimo.":"The first results of the work are delivered within 24 hours of placing the order.",
+    
+    "Ar reikės pasirašyti sutartį?":"Will I need to sign a contract?",
+    "Ne, jokių sutarčių pasirašyti nereikės. Į Jūsų el. paštą bus išsiųstas laiškas su visomis ekosistemos sąlygomis ir jei su jomis sutiksite, tuomet darbus pradėsime nuo išankstinės sąskaitos apmokėjimo.":"No, you will not need to sign any contracts. To your e-mail a letter will be sent in the mail with all the conditions of the ecosystem and if you agree with them, then we will start work from the advance payment of the bill.",
+    
+    "Ką daryti, jei paslaugos netenkina mano lūkesčių?":"What if my services don't live up to my expectations?",
+    "Darbai turi neribotus pataisymus, todėl visuomet galime pataisyti nepatikusias dizaino detales.":"The works have unlimited corrections, so we can always correct unpleasant design details.",
+    
+    "Kiek pataisymų galiu tikėtis?":"How many fixes can I expect?",
+    "Tiek, kiek Jums prireiks. Pataisymus atliekame kuo įmanoma greičiau, vėliausiai pirmųjų pataisymų sulauksite per 12 valandų.":"As much as you need. We will make the corrections as soon as possible, and you will receive the first corrections within 12 hours at the latest.",
+    
+    "Kiek atliktų dizaino darbų gausiu per mėnesį?":"How much design work will I receive per month?",
+    "Dizaino darbų kiekis priklauso nuo Jūsų pasirinkitos Ekosistemos.":"The amount of design work depends on the Ecosystem you choose.",
+    
+    "Kokiu būdu galiu sumokėti už paslaugas?":"How can I pay for services?",
+    "Už paslaugas galite sumokėti bankiniu pavedimu į MB “Reklamos ekosistema” banko sąskaitą.":"You can pay for the services by bank transfer to the bank account of MB “Reklamos ekosistema”.",
+    
+    "Kaip sužinosiu, kad mano planas baigiasi?":"How do I know my plan is ending?",
+    "Jūsų paskyroje yra nurodoma iki kada Jūsų planas galioja. Prieš pasibaigiant Jūsų planui, gausite pranešimą į el. paštą su išankstinę sąskaitą faktūrą. Norėdami pratęsti planą, Jūs sumokate plano mokesti. Jei nei vieno iš planų nenorite pratęsti, tuomet galite ignoruoti gauta pranešimą.":"Your account indicates how long your plan is valid. You will receive an email before your plan expires. mail with a pre-invoice. To extend the plan, you pay a plan fee. If you do not want to extend any of the plans, then you can ignore the message you received.",
+    
+    "Ar suteikiate pinigų grąžinimą jei esu nepatenkintas jūsų paslaugomis?":"Do you provide a refund if I am dissatisfied with your services?",
+    "Ne, prieš pradedant darbus, Jūs sutinkate su Terminais ir Sąlygomis.":"No, you agree to the Terms and Conditions before starting work.",
+    
+    "Kiek pirminių dizaino variantų gausiu pradėjus projektą?":"How many initial design options will I get when I start a project?",
+    "Norėdami gauti daugiau variantų, užsakymo užklausoje parašykite, jog norite gauti kelis dizaino variantus. Nepamirškite, jog daugiau variantų yra tolygu ilgesniam darbo laikui (projekto trukmė gali ilgėti).":"For more options, write in the order request that you want to get several design options. Keep in mind that more options are equivalent to longer working hours (project duration may be longer).",
+    
+    "Ar galite atlikti daugiau dizaino darbų?":"Can you do more design work?",
+    "Jei viršijote savo dizaino darbų kiekį per mėnesį, Jūs galite užsisakyti pavienius darbus už papildomai sutartą kainą. Jei taip nutinka, rekomenduojame kreiptis mūsų nurodytais kontaktais arba pokalbių sistemoje.":"If you have exceeded the number of your design works per month, you can order individual works for an additional agreed price. If this happens, we recommend that you contact the contacts or chat system provided by us.",
+
+    "Kodėl mano projektas vyksta ilgiau, nei buvo numatyta?":"Why is my project taking longer than expected?",
+    "Tai gali įvykti dėl kelių priežasčių:":"This can happen for several reasons:",
+    "Projekto užklausa buvo pateikta neaiškiai, todėl buvo įvykdytas pakartotinis kontaktas.":"The project request was unclear, so re-contact was made.",
+    "Klientas pateikė prašymą atlikti projekto detalių pataisymus.":"The client submitted a request for corrections to the project details.", 
+    "Dizaineriui prireikus papildomos informacijos/detalių darbui atlikti, klientas užtruko atsakyti į užduotus klausimus.":"When the designer needed additional information / details to do the work, the client took time to answer the questions asked.",
+   
+    "Ar galiu redaguoti pateiktą užklausą?":"Can I edit the request?",
+    "Ne, tačiau norėdami pateikti papildomą komentarą, prašome susisiekti su mūsų atstovu.":"No, but please contact our representative for additional comment.",
+    
+    "Ar man priklauso teisės į dizaino darbus?":"Do I own the rights to the design work?",
+    "Taip, Jums priklauso visos teisės ir licencijos į pateiktą darbą. Tačiau, jei Jūs pateikiate nelicencijuotą medžiagą, mes negalime prisiimti atsakomybės už galutinį dizaino produktą.":"Yes, you own all rights and licenses to the work submitted. However, if you provide unlicensed material, we cannot take responsibility for the final design product.",
+    
+    "Ką daryti jei pamiršau užklausoje prisegti failus arba pateikti tam tikrą informaciją?":"What if I forgot to attach files or provide certain information in the request?",
+    "Jei taip įvyko, prašome netrukus susisiekti naudojantis pokalbių sistema arba kitais nurodytais kontaktais.":"If this happens, please contact us shortly using the chat system or other contacts listed.",
+    
+    
+    "profilis":"profile",
+    "Mano":"My",
+    "Admin":"Admin",
+    "Sukurti paskyrą":"Create an account",
+    "Mano failai":"My files",
+    "Meniu":"Menu",
+    "Pradžia":"Home",
+    "Užsakymų istorija":"Order history",
+    "Pasirinkti paskyrą":"Chose an account",
+    "Visos paskyros":"All accounts",
+    "Aktyvūs projektai":"Active projects",
+    "Nėra uždarytų projektų":"No closed projects",
+    "Vardas":"First name",
+    "Pavardė":"Last name",
+    "Užsiregistravo":"Registered",
+    "Planas":"Plan",
+    "Visos aktyvios paskyros":"All active accounts",
+    "Pavadinimas":"Name",
+    "Visi užsakymai":"All orders",
+    "Ištrinti visus pranešimus":"Delete all notifications",
+    "Jungtis":"Log in",
+    "Prisijungimas":"Sign in",
+
+
+    "Pranešimai":"Notifications",
+    "":"",
+    "":"",
+    "":"",
+    "":"",
+    "":"",
+    "":"",
+    "":"",
+    "":"",
+    "":"",
+    "":"",
+    "":"",
+
+
+
+
+    "":""
+}

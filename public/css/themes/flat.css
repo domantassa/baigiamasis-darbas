@@ -1567,3 +1567,11 @@ a.block.block-link-shadow:active {
 .flatpickr-months .flatpickr-next-month:hover svg {
   fill: #45b5ae;
 }
+
+.color-primary {
+  color: #45b5ae;
+}
+
+.background-primary {
+  background-color: #45b5ae;
+}
