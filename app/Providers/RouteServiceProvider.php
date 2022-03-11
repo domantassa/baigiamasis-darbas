@@ -4,7 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
-
+use App\Message;
+use App\brand;
 class RouteServiceProvider extends ServiceProvider
 {
     /**
@@ -23,7 +24,11 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+
+        $messages = Message::all();
+        $brands = brand::all();
+
+        view()->share(['messages'=>$messages, 'allBrands'=>$brands]);
 
         parent::boot();
     }

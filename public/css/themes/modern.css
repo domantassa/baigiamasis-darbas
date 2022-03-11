@@ -1575,3 +1575,13 @@ a.block.block-link-shadow:active {
 .background-primary {
   background-color: #14adc4;
 }
+
+.language-toggle a {
+  color: #14adc4;
+}
+.language-toggle .my-on {
+  background: #14adc4;
+}
+.language-toggle .my-off {
+  color: #14adc4;
+}

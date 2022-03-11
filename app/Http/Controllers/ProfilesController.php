@@ -66,6 +66,7 @@ class ProfilesController extends Controller
                     $refresh_date=date('Y-m-d H:i:s',$refresh_dateTime+2592000);
                     //prideti prie refreshdate + 1 men
                     $user->refresh_date = $refresh_date;
+                
                     $user->save();
                 }
             }
@@ -83,7 +84,6 @@ class ProfilesController extends Controller
         $user = User::findOrFail($id);
         //event(new NewMessageOrFile('hello world'));
         $notif = Auth()->User()->notifications()->get();
-        //$files = Storage::allFiles('public/'.$user->name);
         $files = file::where('owner_id', $id)->get();
         
         return view('dashboard', ['user' => $user, 'users' => User::all(), 'files'=>$files, 'notif' => $notif]);
@@ -102,16 +102,9 @@ class ProfilesController extends Controller
         $user = User::findOrFail($user);
         Storage::deleteDirectory('public/'.$user->name);
         Storage::makeDirectory('public/'.$user->name);
-
-        //while(file::where('owner_id', $user->id)->get() != null)
-        //{
-            
-        //}
         
         $file = file::where('owner_id', $user->id)->take(file::where('owner_id', $user->id)->count());
             $file->delete();
-        
-        //
 
         return redirect('dashboard');
     }
@@ -146,9 +139,6 @@ class ProfilesController extends Controller
         $files = file::where('owner_id', Auth()->User()->id)->get();
         
         return view('users', ['user' => Auth()->User(), 'users' => User::all(), 'files'=>$files, 'notif' => $notif]);
-           
-        
-        
     }
 
     public function getAdminProfile()
@@ -177,7 +167,5 @@ class ProfilesController extends Controller
             
         return view('users', ['user' => Auth()->User(), 'users' => User::all(), 'files'=>$files, 'notif' => $notif]);
     }
-
-    
 }
 

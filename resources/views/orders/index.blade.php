@@ -40,9 +40,9 @@
                         <tr>
                         
                        
-                            <td class="p-1"><div class=" btn-round  order-btn-primary">{{$order->name}}</div></td>
-                            <td class="p-1"><div class="  btn-round order-btn-grey" >{{$order->created_at}}</div></td>
-                            <td class="p-1"><div class="  btn-round order-btn-grey" >{{$order->type}}</div></td>
+                            <td class="p-1"><div class=" btn-round  order-btn-primary">{{ __('$order->name') }}</div></td>
+                            <td class="p-1"><div class="  btn-round order-btn-grey" >{{ __('$order->created_at') }}</div></td>
+                            <td class="p-1"><div class="  btn-round order-btn-grey" >{{ __('$order->type') }}</div></td>
                             <td class="p-1"> <a href="{{route('orders.preview',$order->id)}}"><div class=" btn btn-round order-btn-black">{{__('Peržiūrėti')}}</div></a></td>
                         
                         </tr>
@@ -73,10 +73,10 @@
                             <tr>
                             
                         
-                            <td class="p-1"><div class="btn-primary  btn-round  order-btn-primary">{{$order->name}}</div></td>
-                            <td class="p-1"><div class="  btn-round order-btn-grey" >{{$order->created_at}}</div></td>
-                            <td class="p-1"><div class="  btn-round order-btn-grey" >{{$order->type}}</div></td>
-                            <td class="p-1"> <a href="{{route('orders.preview',$order->id)}}"><div class=" btn btn-round order-btn-black">Peržiūrėti</div></a></td>
+                            <td class="p-1"><div class="btn-primary  btn-round  order-btn-primary">{{ $order->name }}</div></td>
+                            <td class="p-1"><div class="  btn-round order-btn-grey" >{{ __('$order->created_at') }}</div></td>
+                            <td class="p-1"><div class="  btn-round order-btn-grey" >{{ __('$order->type') }}</div></td>
+                            <td class="p-1"> <a href="{{route('orders.preview',$order->id)}}"><div class=" btn btn-round order-btn-black">{{ __('Peržiūrėti') }}</div></a></td>
                         
                             </tr>
                         @endforeach

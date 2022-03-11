@@ -37,30 +37,31 @@
                         
                         <input name="_method" type="hidden" value="PUT">
                         <div class="custom-form-group">
-                            <h1 class="h4 m-0">1. Užsakymo pavadinimas</h1>
+                            <h1 class="h4 m-0">1. {{ __('Užsakymo pavadinimas')}}</h1>
                                 <input type="text" placeholder="Pavadinimas" name="title" value="{{$order->name}}"  class=" btn-round order-btn-grey form-btn">
-                        </div>  
+                        </div> 
+                         
                         <div class="custom-form-group">
-                            <h1 class="h4 m-0">2. Pasirinkite užsakymo tipą</h1>
+                            <h1 class="h4 m-0">2. {{ __('Pasirinkite užsakymo tipą') }}</h1>
                             <select name="type" class=" minimal btn-round order-btn-grey form-btn" style="width:auto">
                             <option>{{$order->type}}</option >   
-                            <option> Soc. medijų baneris</option >   
-                            <option> Vizitinė kortelė</option >
-                                <option> Nuolaidų kuponas</option >
-                                <option> Lankstinukas</option >   
-                            <option> Prezentacija</option >
-                                <option> Kvietimas</option >
-                                <option> Ikona</option >   
-                            <option> Nuotraukų redagavimas</option >
-                                <option> FB, IG Story dizainas</option >
-                                <option> Lauko reklama</option >   
-                            <option> Lipdukas</option >
-                                <option> Pakuočių dizainas</option >
-                                <option> Skrajutės</option >   
-                            <option> Marškinėlių dizainas</option >
-                                <option> Infografika</option >
-                                <option> Sąs. faktūrų dizainas</option >
-                                <option> Etiketė</option >
+                            <option> {{ __('Soc. medijų baneris') }}</option >   
+                            <option> {{ __('Vizitinė kortelė') }}</option >
+                            <option> {{ __('Nuolaidų kuponas') }}</option >
+                            <option> {{ __('Lankstinukas') }}</option >   
+                            <option> {{ __('Prezentacija') }}</option >
+                            <option> {{ __('Kvietimas') }}</option >
+                            <option> {{ __('Ikona') }}</option >   
+                            <option> {{ __('Nuotraukų redagavimas') }}</option >
+                            <option> {{ __('FB, IG Story dizainas') }}</option >
+                            <option> {{ __('Lauko reklama') }}</option >   
+                            <option> {{ __('Lipdukas') }}</option >
+                            <option> {{ __('Pakuočių dizainas') }}</option >
+                            <option> {{ __('Skrajutės') }}</option >   
+                            <option> {{ __('Marškinėlių dizainas') }}</option >
+                            <option> {{ __('Infografika') }}</option >
+                            <option> {{ __('Sąs. faktūrų dizainas') }}</option >
+                            <option> {{ __('Etiketė') }}</option >
 
 
 
@@ -68,15 +69,15 @@
                         </div>
                         
                         <div class="custom-form-group">
-                            <h1 class="h4 m-0">3. Kas turi matytis galutiniame rezultate :</h1>
+                            <h1 class="h4 m-0">3. {{ __('Kas turi matytis galutiniame rezultate') }} :</h1>
                             <textarea name="result" rows="6" class=" btn-round order-btn-grey form-btn" placeholder="Pradėti rašyti">{{$order->result}}</textarea>
                         </div>
                         <div class="custom-form-group">
-                            <h1 class="h4 m-0">4. Darbo reikalavimai :</h1>
+                            <h1 class="h4 m-0">4. {{ __('Darbo reikalavimai') }} :</h1>
                             <textarea rows="6" name="requirements" class=" btn-round order-btn-grey form-btn" placeholder="Pradėti rašyti">{{$order->requirements}}</textarea>
                         </div>
                         <div class="custom-form-group">
-                            <h1 class="h4 m-0">5. Reikalingi failai / pavyzdžiai :</h1>
+                            <h1 class="h4 m-0">5. {{ __('Reikalingi failai / pavyzdžiai')}} :</h1>
                             @foreach($order->file()->get() as $file)
                         <div>
                         <a href="{{route('download',$file->id)}}"><label class="btn btn-round order-btn-grey form-btn mr-2" style="width:auto">Atsisiųsti</label></a>
@@ -85,13 +86,13 @@
                         @endforeach
 
                         <input type="file" name="files[]" id="fileToUpload" multiple readonly><label for="fileToUpload" id="label-fileToUpload" class="btn btn-round order-btn-grey form-btn" style="width:auto"><diva id="btn-text" >Prisegti failus </diva>
-                        <i class="fas fa-check-circle file-form"></i></label><div class="  btn-round btn-trash file-input-trash hide pointer"><i class="fa fa-trash trash"></i></div>
+                        <i class="fas fa-check-circle file-form"></i></label><div class="  btn-round btn-trash file-input-trash hide click"><i class="fa fa-trash trash"></i></div>
                         </div>
                         <script>
 
                             </script>
                         <div class="custom-form-group">
-                            <h1 class="h4 m-0">6. Papildomi komentarai :</h1>
+                            <h1 class="h4 m-0">6. {{ __('Papildomi komentarai') }} :</h1>
                             <textarea rows="3" name="feedback" class=" btn-round order-btn-grey form-btn" placeholder="Pradėti rašyti">{{$order->feedback}}</textarea>
                         </div>
 
@@ -105,7 +106,7 @@
                             </select>
                         </div>
                         <div class="custom-form-group">
-                            <h1 class="h4 m-0">8. Tikėtina darbo pabaiga :</h1>
+                            <h1 class="h4 m-0">8. {{ __('Tikėtina darbo pabaiga') }} :</h1>
                                 <input type="text" placeholder="Tikėtina" name="expected_at" value="{{$order->expected_at}}"  class=" btn-round order-btn-grey form-btn">
                         </div> 
                         @else 
@@ -114,32 +115,53 @@
                         
                         <input name="_method" type="hidden" value="PUT">
                         <div class="custom-form-group">
-                            <h1 class="h4 m-0">1. Užsakymo pavadinimas :</h1>
+                            <h1 class="h4 m-0">1. {{ __('Užsakymo pavadinimas')}} :</h1>
                                 <input type="text" placeholder="Pavadinimas" name="title" value="{{$order->name}}"  class=" btn-round order-btn-grey form-btn" readonly>
-                        </div>  
+                        </div>
+                        
                         <div class="custom-form-group">
-                            <h1 class="h4 m-0">2. Pasirinkite užsakymo tipą :</h1>
+                            <h1 class="h4 m-0">2. {{ __('Pasirinkite sukurtą įmonės prekės ženklą') }}</h1>
+                            <select name="brand" class=" minimal btn-round order-btn-grey form-btn form-btn2" style="width:auto" disabled >
+                            
+                            <option> {{ __('Nepasirinkta') }}</option >
+
+                            @foreach ($allBrands as $oneBrand)
+                                @if((Auth::user()->id === $oneBrand->user_id))
+
+                                    <option> {{$oneBrand->name}}</option >
+
+                                @endif	
+                            @endforeach	
+
+                            @if(count($allBrands) == 0)
+                                <option> {{ __('Nepasirinkta') }}</option >
+                            @endif
+                            </select>
+                        </div>
+                        
+                        <div class="custom-form-group">
+                            <h1 class="h4 m-0">3. {{ __('Pasirinkite užsakymo tipą') }} :</h1>
                             
                             <input name="type" value='{{$order->type}}' type="hidden">
                             <select  class=" minimal btn-round order-btn-grey form-btn" style="width:auto" disabled>
                             <option>{{$order->type}}</option >   
-                            <option> Soc. medijų baneris</option >   
-                            <option> Vizitinė kortelė</option >
-                                <option> Nuolaidų kuponas</option >
-                                <option> Lankstinukas</option >   
-                            <option> Prezentacija</option >
-                                <option> Kvietimas</option >
-                                <option> Ikona</option >   
-                            <option> Nuotraukų redagavimas</option >
-                                <option> FB, IG Story dizainas</option >
-                                <option> Lauko reklama</option >   
-                            <option> Lipdukas</option >
-                                <option> Pakuočių dizainas</option >
-                                <option> Skrajutės</option >   
-                            <option> Marškinėlių dizainas</option >
-                                <option> Infografika</option >
-                                <option> Sąs. faktūrų dizainas</option >
-                                <option> Etiketė</option >
+                            <option> {{ __('Soc. medijų baneris') }}</option >   
+                            <option> {{ __('Vizitinė kortelė') }}</option >
+                                <option> {{ __('Nuolaidų kuponas') }}</option >
+                                <option> {{ __('Lankstinukas') }}</option >   
+                            <option> {{ __('Prezentacija') }}</option >
+                                <option> {{ __('Kvietimas') }}</option >
+                                <option> {{ __('Ikona') }}</option >   
+                            <option> {{ __('Nuotraukų redagavimas') }}</option >
+                                <option> {{ __('FB, IG Story dizainas') }}</option >
+                                <option> {{ __('Lauko reklama') }}</option >   
+                            <option> {{ __('Lipdukas') }}</option >
+                                <option> {{ __('Pakuočių dizainas') }}</option >
+                                <option> {{ __('Skrajutės') }}</option >   
+                            <option> {{ __('Marškinėlių dizainas') }}</option >
+                                <option> {{ __('Infografika') }}</option >
+                                <option> {{ __('Sąs. faktūrų dizainas') }}</option >
+                                <option> {{ __('Etiketė') }}</option >
 
 
 
@@ -147,20 +169,20 @@
                         </div>
                         
                         <div class="custom-form-group">
-                            <h1 class="h4 m-0">3. Kas turi matytis galutiniame rezultate :</h1>
+                            <h1 class="h4 m-0">4. {{ __('Kas turi matytis galutiniame rezultate') }} :</h1>
                             <textarea name="result" rows="6" class=" btn-round order-btn-grey form-btn" placeholder="Pradėti rašyti" readonly>{{$order->result}}</textarea>
                         </div>
                         <div class="custom-form-group">
-                            <h1 class="h4 m-0">4. Darbo reikalavimai :</h1>
+                            <h1 class="h4 m-0">5. {{ __('Darbo reikalavimai') }} :</h1>
                             <textarea rows="6" name="requirements" class=" btn-round order-btn-grey form-btn" placeholder="Pradėti rašyti" readonly>{{$order->requirements}}</textarea>
                         </div>
                         @if(count($order->file()->get()) > 0)
 
                         <div class="custom-form-group">
-                            <h1 class="h4 m-0">5. Reikalingi failai / pavyzdžiai :</h1>
+                            <h1 class="h4 m-0">6. {{ __('Reikalingi failai / pavyzdžiai')}} :</h1>
                             @foreach($order->file()->get() as $file)
                         <div>
-                        <a href="{{route('download',$file->id)}}"><label class="btn btn-round order-btn-grey form-btn mr-2" style="width:auto" readonly>Atsisiųsti</label></a>
+                        <a href="{{route('download',$file->id)}}"><label class="btn btn-round order-btn-grey form-btn mr-2" style="width:auto" readonly>{{ __('Atsisiųsti') }}</label></a>
                         {{$file->name}}
                         </div>
                         @endforeach
@@ -169,10 +191,10 @@
                         </div>
                         @else
                         <div class="custom-form-group">
-                            <h1 class="h4 m-0">5. Prisegtų failų nėra</h1>
+                            <h1 class="h4 m-0">7. {{ __('Prisegtų failų nėra') }}</h1>
                         <div>
                         @endif
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
                             <script>
                                 $("#fileToUpload").change(function(){
                                     //alert(1);
@@ -185,26 +207,26 @@
                                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
                         <div class="custom-form-group">
-                            <h1 class="h4 m-0">6. Papildomi komentarai :</h1>
-                            <textarea rows="3" name="feedback" class=" btn-round order-btn-grey form-btn" placeholder="Pradėti rašyti" readonly>{{$order->feedback}}</textarea>
+                            <h1 class="h4 m-0"> {{ __('7. Papildomi komentarai') }}:</h1>
+                            <textarea rows="3" name="feedback" class=" btn-round order-btn-grey form-btn" placeholder="{{ __('Pradėti rašyti') }}">{{$order->feedback}}</textarea>
                         </div>
                         <div class="custom-form-group">
-                            <h1 class="h4 m-0">7. Užsakymo būsena :</h1>
+                            <h1 class="h4 m-0">8. {{ __('Užsakymo būsena') }}:</h1>
                             <input type="hidden" name="state" value="{{$order->state}}">
                             <select class="minimal btn-round order-btn-grey form-btn"  style="width:auto" disabled>
-                            <option selected>{{$order->state}}</option>
-                            <option> Projektas atliktas</option >   
-                            <option> Projektas kuriamas</option >
-                                <option> Projektas atšauktas</option >
+                            <option selected>{{ __($order->state) }}</option>
+                            <option> {{ __('Projektas atliktas') }}</option >   
+                            <option> {{ __('Projektas kuriamas') }}</option >
+                                <option> {{ __('Projektas atšauktas') }}</option >
                             </select>
                         </div>
                         <div class="custom-form-group">
-                            <h1 class="h4 m-0">8. Tikėtina darbo pabaiga :</h1>
-                                <input type="text" placeholder="Tikėtina" name="expected_at" value="{{$order->expected_at}}"  class=" btn-round order-btn-grey form-btn" readonly>
+                            <h1 class="h4 m-0">9. {{ __('Tikėtina darbo pabaiga') }}:</h1>
+                                <input type="text" placeholder="{{ __('Tikėtina') }}" name="expected_at" value="{{$order->expected_at}}"  class=" btn-round order-btn-grey form-btn" readonly>
                         </div> 
                         @endif
 
-                        <input type="submit" value="Patvirtinti" class="mt-2 btn btn-green btn-primary btn-round">
+                        <input type="submit" value="{{ __('Patvirtinti') }}" class="mt-2 btn btn-green btn-primary btn-round">
                         </form>
 
                     <div class="block-content">
@@ -217,7 +239,7 @@
 
                         <form action="{{ route('upload', ['user' => $user]) }}" method="post" role="form" enctype="multipart/form-data">
                             @csrf
-                            <input type="file" name="file" id="file" aria-label="File browser example" >
+                            <input type="file" name="file" id="file" aria-label="File browser" >
                             
                             
                         </form>
@@ -248,42 +270,14 @@
                                    $("#btn-text").text("Prisegti failus");
                                 });
                                 </script>
-                                
-
-                       
-                    
-                        
-                     
-
-
                         </tbody>
                     </table>
+                    </div>     
+                    </div>      
                     </div>
-                    
-                    
-                       
-
-
-
-                        
-                           
-                        
-                    </div>
-                            
-                        
-                        
-                    </div>
-
-                    
-
-                    
-
                     <div class="block-header">
                         <h3 class="block-title"></h3>
                     </div>
-                    
-                    
-
                 </div>
             </div>
         </div>

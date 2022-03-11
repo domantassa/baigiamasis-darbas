@@ -27,14 +27,7 @@
                     
                     <form action="{{ route('upload', ['user' => $user]) }}" method="post" role="form" class="file-form" enctype="multipart/form-data">
                              @csrf    
-                             <!--
-                            <label for="file-upload" class="custom-file-upload border-0" data-toggle="tooltip" data-placement="top" title="Press to upload a file">
-                                <span style="font-size: 16px; color: Dodgerred;">
-                                    <i class="fas fa-file mt-1"></i>
-                                </span>    
-                                
-                            </label>
-                            -->
+
                             <input id="file-upload" type="file" name="file" />
                             <button type="submit" class="file-custom btn " data-toggle="tooltip" data-placement="top" title="Press to submit" >
                                 <span style="font-size: 17px;">
@@ -45,12 +38,9 @@
                         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
                             <script>
                                 $("#file-upload").change(function(){
-                                    //alert(1);
                                    $(".file-form").addClass("d-inline-block");
-                                   //$("").removeClass("order-btn-grey");
-                                  
                                 });
-                                </script>
+                            </script>
             
        </div>
     </div>
@@ -72,7 +62,7 @@
                            <tr>
                             
                                 <td style="width:100%"><div  class=" col btn-round btn-grey mr-2" style="text-align:left">{{$file->name}}</div></td>
-                                <td style="width:100px"><a href="{{route('download',$file->id)}}"><div  class=" btn btn-round btn-primary btn-green">{{__('Parsisiusti')}}</div></a></td>
+                                <td style="width:100px"><a href="{{route('download',$file->id)}}"><div  class=" btn btn-round btn-primary btn-green">{{__('Parsisiųsti')}}</div></a></td>
                                 <td  style="width:30px"><div  class="  btn-round btn-trash"><a href="{{ route('deleteFile', ['file' => $file->id]) }}"><i class="fa fa-trash trash"></i></a></div></td>
                             
                             </tr>

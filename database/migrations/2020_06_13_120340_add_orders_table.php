@@ -17,9 +17,11 @@ class AddOrdersTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedInteger('owner_id');
             $table->unsignedInteger('file_id')->nullable();
+            $table->unsignedInteger('brand_id')->nullable();
             $table->string('name');
             $table->string('type');
             $table->string('state');
+            $table->string('brand')->nullable();
             $table->text('result')->nullable();
             $table->text('requirements')->nullable();
             $table->text('comment')->nullable();

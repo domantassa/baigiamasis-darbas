@@ -7,31 +7,14 @@
         
             <div class="row cont justify-content-center m-0">
             <div class="col-7 p-0 login-cover hide-md" style=";background-image: url('{{ asset('media/photos/vector.png')}}');">
-            a
             </div>
                 <div class="col-md-5 p-0 m-0  block block-themed align-items-center" style="background: #FFFFFF">
-                    <!-- Sign In Block -->
                     <div class="row m-0 align-items-center">
                     <div class="col-12 p-0">
                     <div class=" mb-0" >
-                       <!-- <div class="block-header">
-                            <h3 class="block-title">Log In</h3>
-                            <div class="block-options">
-                                <a class="btn-block-option font-size-sm" href="{{ route('password.request') }}">Forgot Password?</a>
-                                <a class="btn-block-option" href="{{ route('register') }}" data-toggle="tooltip" data-placement="left" title="New Account">
-                                    <i class="fa fa-user-plus"></i>
-                                </a>
-                            </div>
-                        </div>
-                        -->
                         <div class="block-content" >
                             <div class="p-sm-3 px-lg-4 py-lg-5">
-                                <h1 class="mb-2" style="text-align: center; font-family: 'Poppins', sans-serif;">Paskyros redagavimas</h1>
-                                <!--<p>Welcome, please login.</p>-->
-
-                                <!-- Sign In Form -->
-                                <!-- jQuery Validation (.js-validation-signin class is initialized in js/pages/op_auth_signin.min.js which was auto compiled from _es6/pages/op_auth_signin.js) -->
-                                <!-- For more info and examples you can check out https://github.com/jzaefferer/jquery-validation -->
+                                <h1 class="mb-2" style="text-align: center; font-family: 'Poppins', sans-serif;">{{__('Paskyros redagavimas')}}</h1>
                                 <form class="js-validation-signup" action="{{ route('user.update') }}" method="POST">
                                 <div class="py-3">
                                     <div class="form-group">
@@ -72,7 +55,7 @@
                                     <div  class="custom-form-group mt-3" style="text-align: center;" >
                                         <select name="plan"  class=" minimal btn-round form-btn" style="width:auto" >
                                         <option selected>{{$user->plan}}</option>
-                                        <option> 8 darbai</option > 
+                                        <option> {{__('8 jobs')}}</option > 
                                         <option> Hidrosfera</option >   
                                         <option> Ekosfera</option >   
                                         <option> Atmosfera</option >   
@@ -81,30 +64,22 @@
                                     </div>
                                     <input type="hidden" id="id" name="id" value="{{$user->id}}">
 
-                                    
-                                    
-                                    
-                                        
-                                        
-                                    
                                 </div>
                                 <div class="form-group row">
                                         <div class="col-md-6 col-xl-5 mx-auto" style='text-align:center;border: grey'>
                                             <button type="submit" class=" btn btn-round btn-primary btn-green ">
-                                                Atnaujinti
+                                                {{__('Atnaujinti')}}
                                             </button>
                                         </div>
                                     </div>
                                     
                                 @csrf
                             </form>
-                                <!-- END Sign In Form -->
                             </div>
-</div>
-</div>
+                            </div>
+                            </div>
                         </div>
                     </div>
-                    <!-- END Sign In Block -->
                 </div>
             </div>
         

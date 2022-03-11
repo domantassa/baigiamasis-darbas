@@ -1101,5 +1101,18 @@
     .background-primary{
         background-color:$brand-primary ;
     }
-    
+
+
+    .language-toggle {
+        a{
+            color:$brand-primary;
+        }
+
+        .my-on{
+    background:$brand-primary;
+        }
+        .my-off{
+    color:$brand-primary;
+        }
+    }
 }

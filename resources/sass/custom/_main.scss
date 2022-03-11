@@ -1,40 +1,4 @@
-//
-// Custom Main
-//
-// Add your own styles or override existing ones
-//
-// This file is included last, so you have access
-// to all Bootstrap and OneUI functions/mixins/styles etc
-// --------------------------------------------------
 
-// If you have many custom styles, you can create and import additional files
-// For example you can create _component1.scss and include it as follows:
-// @import 'component1';
-
-
-//.contentShadowInset{
- // -webkit-box-shadow: inset 0px 0px 13px 2px rgba(0,0,0,0.75);
-//  -moz-box-shadow: inset 0px 0px 13px 2px rgba(0,0,0,0.75);
-//  box-shadow: inset 0px 0px 13px 2px rgba(0,0,0,0.75);
-//}
-
-//.blockWithTopMargin{
- // margin-top: 50px;
-//}
-//.contentShadowInset::after
-//{
-//  content: "";
-//  opacity: 0.01;
-//  background-image: url('../storage/background.gif');
-//  background-repeat: no-repeat;
-//  background-size: cover;
-//  top: 0;
-//  left: 0;
-//  bottom: 0;
-//  right: 0;
-//  position: absolute;
-//  z-index: -1;   
-//}
 @mixin for-md(){
   @media (max-width:768px){
     @content
@@ -63,7 +27,24 @@ textarea,select,input{
   background-color: #353847 !important;
 }
 
+.show-on-monitor {
+  display: inline;
+}
+
+.show-on-phone {
+  display: none;
+}
+
 @media only screen and (max-width: 600px) {
+
+  .show-on-monitor {
+    display: none;
+  }
+
+  .show-on-phone {
+    display: inline;
+  }
+
   .SideChatting
   {
     padding-bottom: 170px;
@@ -501,7 +482,7 @@ height:
 
 
 
-#snackbar-new-order {
+#snackbar-new {
   visibility: hidden;
   min-width: 250px;
   margin-left: -125px;
@@ -519,59 +500,13 @@ height:
   box-shadow: 0px 5px 3px darkgray;
 }
 
-#snackbar-new-order.show {
+#snackbar-new.show {
   visibility: visible;
   -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
   animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
 
-#snackbar-new-results {
-  visibility: hidden;
-  min-width: 250px;
-  margin-left: -125px;
-  background-color: $primary;
-  color: #fff;
-  text-align: center;
-  border-radius: 2px;
-  padding: 16px;
-  position: fixed;
-  z-index: 1;
-  left: 50%;
-  bottom: 30px;
-  font-size: 17px;
-  border-radius: 50px;
-  box-shadow: 0px 5px 3px darkgray;
-}
 
-#snackbar-new-results.show {
-  visibility: visible;
-  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-  animation: fadein 0.5s, fadeout 0.5s 2.5s;
-}
-
-#snackbar-new-user {
-  visibility: hidden;
-  min-width: 250px;
-  margin-left: -125px;
-  background-color: $primary;
-  color: #fff;
-  text-align: center;
-  border-radius: 2px;
-  padding: 16px;
-  position: fixed;
-  z-index: 1;
-  left: 50%;
-  bottom: 30px;
-  font-size: 17px;
-  border-radius: 50px;
-  box-shadow: 0px 5px 3px darkgray;
-}
-
-#snackbar-new-user.show {
-  visibility: visible;
-  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-  animation: fadein 0.5s, fadeout 0.5s 2.5s;
-}
 @-webkit-keyframes fadein {
   from {bottom: 0; opacity: 0;} 
   to {bottom: 30px; opacity: 1;}
@@ -590,4 +525,225 @@ height:
 @keyframes fadeout {
   from {bottom: 30px; opacity: 1;}
   to {bottom: 0; opacity: 0;}
+}
+
+.message-field{
+  border-radius: 15px / 15px;
+  background-color: #fff;
+  position: relative;
+    bottom:0;
+    width: 100%;
+  .row{
+    
+  margin: 0;
+  //margin-left:-30px;
+  //height:75px;
+  div{
+    padding: 0;
+  }
+  }
+      .messages{
+        height:80vh;
+        width: 100%;
+        overflow-y: auto;
+        p{
+          
+          border-radius:25px;
+          //padding:25px;
+          padding:12px 15px;
+          max-width: 60%;
+          margin:5px;
+        }
+        .message-sent{
+          background-color: #ccc;
+          color:#000;
+          position: relative;
+          left:20px;
+        }
+        .message-received{
+          background-color: $primary;
+          color:#fff;
+          position: relative;
+          right:20px;
+          margin-left:auto;
+        }
+      }
+      input{
+        width: 100%;
+        height: 100%;
+        border-radius: 0px 0px 0px 15px;
+      }
+      button{
+        border-radius: 0px 0px 15px 0px;
+        
+        width: 100%;
+        height: 100%;
+        background-color: $primary;
+        color:#fff;
+        
+      }
+
+}
+
+.my-switch {
+  position: relative;
+  display: inline-block;
+  margin: 0 5px;
+}
+
+.my-switch > a, .my-switch > span {
+  position: absolute;
+  top: 14px;
+  pointer-events: none;
+  font-family: 'Helvetica', Arial, sans-serif;
+  font-weight: bold;
+  font-size: 12px;
+  text-transform: uppercase;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, .06);
+  width: 50%;
+  text-align: center;
+}
+
+input.my-check-toggle-round-flat:checked ~ .my-off {
+  color: #F36F25;
+}
+
+input.my-check-toggle-round-flat:checked ~ .my-on {
+  color: #fff;
+}
+
+.my-switch > .my-on {
+  left: 0;
+  padding-left: 2px;
+  color: #F36F25;
+}
+
+.my-switch > .my-off {
+  right: 0;
+  padding-right: 4px;
+  color: #fff;
+}
+
+.my-check-toggle {
+  position: absolute;
+  margin-left: -9999px;
+  visibility: hidden;
+}
+.my-check-toggle + label {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+}
+
+input.my-check-toggle-round-flat + label {
+  padding: 2px;
+  width: 102px;
+  height: 43px;
+  background-color: #F36F25;
+
+  border-radius: 60px;
+}
+input.my-check-toggle-round-flat + label:before, input.my-check-toggle-round-flat + label:after {
+  display: block;
+  position: absolute;
+  content: "";
+}
+
+input.my-check-toggle-round-flat + label:before {
+  top: 2px;
+  left: 2px;
+  bottom: 2px;
+  right: 2px;
+  background-color: #F36F25;
+
+  border-radius: 60px;
+}
+input.my-check-toggle-round-flat + label:after {
+  top: 4px;
+  left: 4px;
+  bottom: 4px;
+  width: 48px;
+  background-color: #fff;
+  border-radius: 52px;
+  transition: margin 0.2s;
+}
+
+input.my-check-toggle-round-flat:checked + label:after {
+  margin-left: 44px;
+}
+
+.language-toggle {
+  a{
+    display: inline-block;
+    font-size: 14;
+font-weight:600;
+    height: 100%;
+    color:$primary;
+  border-radius: 52px;
+  text-align: center;
+    div{
+    position: relative;
+    top:7px;
+    }
+  }
+  .my-on{
+    color:#fff;
+    background:$primary;
+    width: 50%;
+  }
+  .my-off{
+    color:$primary;
+    background:#fff;
+    width: 50%;
+  }
+  padding: 4px;
+  width: 102px;
+  height: 43px;
+  border-radius: 52px;
+  background-color: #fff ;
+  display: inline-block;
+}
+
+.hex-dropdown{
+  position:absolute;
+   background:#fff;
+   border: 2px $primary solid;
+   padding:0.375rem 0.75rem ;
+   //margin: 0.375rem -0.75rem;
+ }
+ .hexcube{
+   width: 25px;
+   height: 25px;
+   display: block;
+ }
+ #action-buttons{
+   background: $primary;
+   .btn{
+       border-radius:0 ;
+       margin: 0;
+       }
+ }
+
+ .btn-add-color {
+   outline-style: dotted;
+   width: 110px;
+   font-size: 11px;
+   height: 29px;
+   text-align: center;
+   cursor: pointer;
+ }
+
+
+.color-trash-icon {
+  margin-left: 4px;
+  font-size: 18px;
+  display: inline;
+}
+
+.unseen-count-pill {
+  color: black;
+  background: white;
+  margin-left: 5px;
 }

@@ -10,7 +10,7 @@
                 data-class="animated fadeInUp"
                 data-timeout="250"
                 data-offset="-100">
-                Užsakymo forma </h1>
+                {{ __('Užsakymo forma') }} </h1>
                
             
             </div>
@@ -38,30 +38,50 @@
                         <form  action="{{route('orders.store')}}" method="post" role="form" enctype="multipart/form-data">
                         @csrf
                         <div class="custom-form-group">
-                            <h1 class="h4 m-0">1. Užsakymo pavadinimas</h1>
-                                <input type="text" placeholder="Pavadinimas" name="title" class=" btn-round order-btn-grey form-btn form-btn2" >
+                            <h1 class="h4 m-0">1. {{ __('Užsakymo pavadinimas')}}*</h1>
+                                <input type="text" placeholder="{{ __('Pavadinimas') }}" name="title" class=" btn-round order-btn-grey form-btn form-btn2" >
                         </div>  
                         <div class="custom-form-group">
-                            <h1 class="h4 m-0">2. Pasirinkite užsakymo tipą</h1>
+                            <h1 class="h4 m-0">2. {{ __('Pasirinkite sukurtą įmonės prekės ženklą') }}</h1>
+                            <select name="brand" class=" minimal btn-round order-btn-grey form-btn form-btn2" style="width:auto" >
+                            
+                            <option> {{ __('Nepasirinkta') }}</option >
+
+                            @foreach ($allBrands as $oneBrand)
+                                @if((Auth::user()->id === $oneBrand->user_id))
+
+                                    <option> {{$oneBrand->name}}</option >
+
+                                @endif	
+                            @endforeach	
+
+                            @if(count($allBrands) == 0)
+                                <option> {{ __('Nepasirinkta') }}</option >
+                            @endif
+                            </select>
+                        </div>
+
+                        <div class="custom-form-group">
+                            <h1 class="h4 m-0">3. {{ __('Pasirinkite užsakymo tipą') }}</h1>
                             <select name="type" class=" minimal btn-round order-btn-grey form-btn form-btn2" style="width:auto" >
                             
-                            <option> Soc. medijų baneris</option >   
-                            <option> Vizitinė kortelė</option >
-                                <option> Nuolaidų kuponas</option >
-                                <option> Lankstinukas</option >   
-                            <option> Prezentacija</option >
-                                <option> Kvietimas</option >
-                                <option> Ikona</option >   
-                            <option> Nuotraukų redagavimas</option >
-                                <option> FB, IG Story dizainas</option >
-                                <option> Lauko reklama</option >   
-                            <option> Lipdukas</option >
-                                <option> Pakuočių dizainas</option >
-                                <option> Skrajutės</option >   
-                            <option> Marškinėlių dizainas</option >
-                                <option> Infografika</option >
-                                <option> Sąs. faktūrų dizainas</option >
-                                <option> Etiketė</option >
+                            <option> {{ __('Soc. medijų baneris') }}</option >   
+                            <option> {{ __('Vizitinė kortelė') }}</option >
+                                <option> {{ __('Nuolaidų kuponas') }}</option >
+                                <option> {{ __('Lankstinukas') }}</option >   
+                            <option> {{ __('Prezentacija') }}</option >
+                                <option> {{ __('Kvietimas') }}</option >
+                                <option> {{ __('Ikona') }}</option >   
+                            <option> {{ __('Nuotraukų redagavimas') }}</option >
+                                <option> {{ __('FB, IG Story dizainas') }}</option >
+                                <option> {{ __('Lauko reklama') }}</option >   
+                            <option> {{ __('Lipdukas') }}</option >
+                                <option> {{ __('Pakuočių dizainas') }}</option >
+                                <option> {{ __('Skrajutės') }}</option >   
+                            <option> {{ __('Marškinėlių dizainas') }}</option >
+                                <option> {{ __('Infografika') }}</option >
+                                <option> {{ __('Sąs. faktūrų dizainas') }}</option >
+                                <option> {{ __('Etiketė') }}</option >
 
 
 
@@ -69,28 +89,28 @@
                         </div>
                         
                         <div class="custom-form-group">
-                            <h1 class="h4 m-0">3. Kas turi matytis galutiniame rezultate :</h1>
-                            <textarea name="result" rows="6" class=" btn-round order-btn-grey form-btn form-btn2" placeholder="Pradėti rašyti"></textarea>
+                            <h1 class="h4 m-0">4. {{ __('Kas turi matytis galutiniame rezultate') }}:*</h1>
+                            <textarea name="result" rows="6" class=" btn-round order-btn-grey form-btn form-btn2" placeholder="{{ __('Pradėti rašyti') }}"></textarea>
                         </div>
                         <div class="custom-form-group">
-                            <h1 class="h4 m-0">4. Darbo reikalavimai :</h1>
-                            <textarea rows="6" name="requirements" class=" btn-round order-btn-grey form-btn form-btn2" placeholder="Pradėti rašyti"></textarea>
+                            <h1 class="h4 m-0">5. {{ __('Darbo reikalavimai') }}:*</h1>
+                            <textarea rows="6" name="requirements" class=" btn-round order-btn-grey form-btn form-btn2" placeholder="{{ __('Pradėti rašyti') }}"></textarea>
                         </div>
                         <div class="custom-form-group">
-                            <h1 class="h4 m-0">5. Reikalingi failai / pavyzdžiai :</h1>
-                        <input type="file" name="files[]" id="fileToUpload" multiple><label for="fileToUpload" id="label-fileToUpload" class="btn btn-round order-btn-grey form-btn form-btn2" style="width:auto"><diva id="btn-text" >Prisegti failus </diva>
-                        <i class="fas fa-check-circle file-form"></i></label><div class="  btn-round btn-trash file-input-trash hide pointer"><i class="fa fa-trash trash"></i></div>
+                            <h1 class="h4 m-0">6. {{ __('Reikalingi failai / pavyzdžiai')}}:</h1>
+                        <input type="file" name="files[]" id="fileToUpload" multiple><label for="fileToUpload" id="label-fileToUpload" class="btn btn-round order-btn-grey form-btn form-btn2" style="width:auto"><diva id="btn-text" >{{ __('Prisegti failus') }} </diva>
+                        <i class="fas fa-check-circle file-form"></i></label><div class="  btn-round btn-trash file-input-trash hide click"><i class="fa fa-trash trash"></i></div>
                         </div>
                         
                         <script>
 
                             </script>
                         <div class="custom-form-group">
-                            <h1 class="h4 m-0">6. Papildomi komentarai :</h1>
-                            <textarea rows="3" name="feedback" class=" btn-round order-btn-grey form-btn " placeholder="Pradėti rašyti"></textarea>
+                            <h1 class="h4 m-0">7. {{ __('Papildomi komentarai') }}:</h1>
+                            <textarea rows="3" name="feedback" class=" btn-round order-btn-grey form-btn " placeholder="{{ __('Pradėti rašyti') }}"></textarea>
                         </div>
 
-                        <input type="submit" value="Siųsti užklausą" class="mt-2 btn btn-green btn-primary btn-round">
+                        <input type="submit" value="{{ __('Siųsti užklausą') }}" class="mt-2 btn btn-green btn-primary btn-round">
 
                     <script>
 

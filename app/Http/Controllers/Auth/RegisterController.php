@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\FileNotification;
+use App\Message;
 use Storage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -78,25 +79,25 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $refreshdate = date('U');
-        //$refreshdate= strtotime($refreshdate);
-       // dd($refreshdate+12012151);
-        //$refreshdate= strtotime($refreshdate+86400);
        
         $refreshdate=date('Y-m-d H:i:s',$refreshdate+2592000);
-        if($data['plan'] == 'Hidrosfera')
-            $remaining = 12;
-        else if ($data['plan'] == 'Ekosfera')
-            $remaining = 20;
-        else if ($data['plan'] == 'Atmosfera')
-            $remaining = 40;
-        else
-            $remaining = 8;
+        if(!is_null(User::first()))
+            if($data['plan'] == 'Hidrosfera')
+                $remaining = 12;
+            else if ($data['plan'] == 'Ekosfera')
+                $remaining = 20;
+            else if ($data['plan'] == 'Atmosfera')
+                $remaining = 40;
+            else
+                $remaining = 8;
 
-        FileNotification::create([
-            'user_id' => 1,                 //JEI BUS DAUGIAU NEI VIENAS ADMIN, PAKEISTI SIA EILUTE
-            'message' => 'New user: '.$data['name'],
-            'link' => 'users',
-        ]);
+        // FileNotification::create([
+        //     'user_id' => 1,                 //JEI BUS DAUGIAU NEI VIENAS ADMIN, PAKEISTI SIA EILUTE
+        //     'message' => 'New user: '.$data['name'],
+        //     'link' => 'users',
+        // ]);
+
+        
 
         
         Storage::makeDirectory($data['name']);
@@ -107,20 +108,37 @@ class RegisterController extends Controller
                 'email' => $data['email'],
                 'position' => 'admin',
                 'password' => Hash::make($data['password']),
+                'avatar_image_number' => 0,
                 
             ]);
         }
         else
         {
-            return User::create([
+            $admin=Auth()->user();
+            $user = User::create([
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'position' => 'user',
                 'password' => Hash::make($data['password']),
                 'plan' => $data['plan'],
                 'remaining' => $remaining,
-                'refresh_date' => $refreshdate
+                'refresh_date' => $refreshdate,
+                'avatar_image_number' => 0,
             ]);
+
+            Message::create([
+                'sender_user_id' => 1,
+                'receiver_user_id' => $user->id,
+                'message' => 'Sveiki.'
+            ]);
+
+            Message::create([
+                'sender_user_id' => 1,
+                'receiver_user_id' => $user->id,
+                'message' => 'Jei turėsite klausimų, kurių nerasite atsakymo D.U.K skiltyje, rašykite čia.'
+            ]);
+
+            return $admin;
         }
     }
 

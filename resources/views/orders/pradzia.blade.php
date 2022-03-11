@@ -25,18 +25,28 @@
             <div class="col-md-12 col-xl-12">
                 <div class="col-12 " style="padding-left:1.875rem">
                 @if($user->position!="admin")
+
+
+                @if(count($orders->where('owner_id',$user->id)->where('state', '!=' ,'Projektas uždarytas'))==0)
+                    <a href="{{route('orders.create')}}" class=" btn-round btn btn-primary">{{__('Pradėti užsakymą')}} </a>
+                @else
+                
+
+
                 <table style="overflow:scroll; width:1400px">
-                    <thead >
+                    <thead style="margin-right:15px !important" >
                         
                          <th style="width:516px"><h1 class="h4 m-0">{{__('Pavadinimas')}}</h1></th>
                         <th style="width:293px"><h1 class="h4 m-0">{{__('Užsakymo data')}}</h1></th>
-                        <th style="width:259px"><h1 class="h4 m-0">{{__('Užsakymo tipas')}}</h1></th>
-                        <th style="width:293px"><h1 class="h4 m-0">{{__('Tikėtina už:')}}</h1></th>
+                        <th style="width:319px"><h1 class="h4 m-0">{{__('Užsakymo tipas')}}</h1></th>
+                        <th style="width:233px"><h1 class="h4 m-0">{{__('Tikėtina už')}}:</h1></th>
                         <th style="width:293px"><h1 class="h4 m-0">{{__('Būsena')}}</h1></th>
 
                         <th><h1 class="h4 m-0">{{__('Peržiūrėti')}}</h1></th>
                     </thead>
                 <tbody>
+                @endif
+
                     
                     @foreach($orders->where('owner_id',$user->id)->where('state', '!=' ,'Projektas uždarytas')  as $order)
                         <tr>
@@ -44,16 +54,16 @@
                        
                             <td class="p-1"><a href="{{route('orders.edit',$order->id)}}"><div class="  btn-round btn-primary  order-btn-primary">{{$order->name}}</div></a></td>
                             <td class="p-1"><div class="btn-round order-btn-grey" >{{$order->created_at}}</div></td>
-                            <td class="p-1"><div class="btn-round order-btn-grey" >{{$order->type}}</div></td>
+                            <td class="p-1"><div class="btn-round order-btn-grey" >{{ __($order->type) }}</div></td>
                             <td class="p-1"> <div class="btn-round order-btn-grey expected" style="width:293px" data-time="{{$order->expected_at}}">{{$order->expected_at}}</div></a></td>
                             @if($order->state=="Projektas atliktas") 
-                            <td class="p-1"><div class="  btn-round btn-primary order-btn-primary" >{{$order->state}}</div></td>
+                            <td class="p-1"><div class="  btn-round btn-primary order-btn-primary" >{{ __($order->state) }}</div></td>
                             <td class="p-1"> <a href="{{route('orders.show',$order->id)}}"><div class="btn-primary btn btn-round order-btn-primary">{{__('Peržiūrėti')}}</div></a></td>
                             @elseif($order->state=="Projektas uždarytas")
-                            <td class="p-1"><div class="  btn-round btn-primary order-btn-primary" >{{$order->state}}</div></td>
+                            <td class="p-1"><div class="  btn-round btn-primary order-btn-primary" >{{ __($order->state) }}</div></td>
                             <td class="p-1"><a href="{{route('download',$order->file()->orderby('id','desc')->first()->id)}}"><div class="btn-primary btn btn-round order-btn-primary">{{__('Atsisiųsti')}}</div></a></td>
                             @else
-                             <td class="p-1"><div class=" btn-round order-btn-grey" >{{$order->state}}</div></td>
+                             <td class="p-1"><div class=" btn-round order-btn-grey" >{{ __($order->state) }}</div></td>
                                 @if( $order->state=="Projektas kuriamas")
                                 <td class="p-1"> <a href="{{route('orders.edit',$order->id)}}"><div class="btn-primary btn btn-round order-btn-primary">{{__('Atidaryti')}}</div></a></td>
                                 @else
@@ -75,10 +85,12 @@
                     @foreach($users as $userr)
                     @if($userr->position != 'admin')
                         
+                    
                         <h4 class="my-3">{{$userr->name}}</h4>
+                        
                         @if($orders->where('owner_id',$userr->id)->count() > 0)
                             <table style="overflow:scroll;width:1400px">
-                            <thead>
+                            <thead style="margin-right:15px !important">
                                 
                             <th style="width:400px"><h1 class="h4 m-0">{{__('Pavadinimas')}}</h1></th>
                             <th style="width:230px"><h1 class="h4 m-0">{{__('Užsakymo data')}}</h1></th>
@@ -95,21 +107,17 @@
                         
                                 <td class="p-1"><a href="{{route('orders.edit',$order->id)}}"><div class="  btn-round btn-primary  order-btn-primary">{{$order->name}}</div></a></td>
                                 <td class="p-1"><div class="btn-round order-btn-grey" >{{$order->created_at}}</div></td>
-                                <td class="p-1"><div class="btn-round order-btn-grey" >{{$order->type}}</div></td>
+                                <td class="p-1"><div class="btn-round order-btn-grey" >{{ __($order->type) }}</div></td>
                                 <td class="p-1"> <div class="btn-round order-btn-grey expected" data-time="{{$order->expected_at}}">{{$order->expected_at}}</div></a></td>
                                 @if($order->state=="Projektas atliktas") 
-                                <td class="p-1"><div class="  btn-round btn-primary order-btn-primary" >{{$order->state}}</div></td>
+                                <td class="p-1"><div class="  btn-round btn-primary order-btn-primary" >{{ __($order->state) }} 1</div></td>
                                 <td class="p-1"> <a href="{{route('orders.show',$order->id)}}"><div class="btn-primary btn btn-round order-btn-primary">{{__('Peržiūrėti')}}</div></a></td>
                                 @elseif($order->state=="Projektas uždarytas")
-                                <td class="p-1"><div class="  btn-round btn-primary order-btn-primary" >{{$order->state}}</div></td>
+                                <td class="p-1"><div class="  btn-round btn-primary order-btn-primary" >{{ __($order->state) }} 2</div></td>
                                 <td class="p-1"><a href="{{route('download',$order->file()->orderby('id','desc')->first()->id)}}"><div class="btn-primary btn btn-round order-btn-primary">{{__('Atsisiųsti')}}</div></a></td>
                                 @else
-                                <td class="p-1"><div class=" btn-round order-btn-grey" >{{$order->state}}</div></td>
-                                    @if( $order->state=="Projektas kuriamas")
+                                <td class="p-1"><div class=" btn-round order-btn-grey" >{{ __($order->state) }} </div></td>
                                     <td class="p-1"> <a href="{{route('orders.edit',$order->id)}}"><div class="btn-primary btn btn-round order-btn-primary">{{__('Koreguoti')}}</div></a></td>
-                                    @else
-                                    <td></td>
-                                    @endif
                                 @endif
 
                             
@@ -144,11 +152,11 @@
                                     $(this).html(hours + ":"+ minutes + ":" + seconds);
                                     }
                                     else{
-                                        $(this).html('Laikas baigėsi');
+                                        $(this).html('{{ __("Laikas baigėsi") }}');
                                     }
                                 }
                                 else{
-                                    $(this).html('Laikas baigėsi');
+                                    $(this).html('{{ __("Laikas baigėsi") }}');
                                 }
                                   
                                     
@@ -157,8 +165,7 @@
                         setInterval(function(){
                             var now = new Date().getTime();
                             $('.expected').each(function(){
-                                
-                                //alert($(this).attr('data-time'));
+                            
                                 
                                 if($(this).attr('data-time') !="0000-00-00 00:00:00")
                                 {
@@ -175,11 +182,11 @@
                                     $(this).html(hours + ":"+ minutes + ":" + seconds);
                                     }
                                     else{
-                                        $(this).html('Laikas baigėsi');
+                                        $(this).html('{{ __("Laikas baigėsi") }}');
                                     }
                                 }
                                 else{
-                                    $(this).html('Laikas baigėsi');
+                                    $(this).html('{{ __("Laikas baigėsi") }}');
                                 }
                                    
                             
@@ -190,6 +197,7 @@
                         
 
                         </script>
+                        
                 </div>
             </div>
         </div>

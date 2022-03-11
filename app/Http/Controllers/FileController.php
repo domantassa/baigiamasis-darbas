@@ -59,9 +59,10 @@ class FileController extends Controller
      */
     public function store(Request $request, $user)
     {
-        if($user !=  Auth()->User()->id || Auth()->user()->position != 'admin') {
-            event(new MyEvent('Įkeltas failas'));
-        }
+        // if($user !=  Auth()->User()->id || Auth()->user()->position != 'admin') {
+        //     event(new MyEvent('Įkeltas failas naujas failas!', $user));
+        // }
+
         if(Auth()->user()->id == $user || Auth()->user()->position == 'admin')
         {
             $user = User::findOrFail($user);  
@@ -70,7 +71,6 @@ class FileController extends Controller
             ]);
             
             $file = $request->file;  
-            // Generate a file name with extension
             $fileName = $file->getClientOriginalName();
                 
             $naujasFile = file::create([
@@ -81,18 +81,7 @@ class FileController extends Controller
             ]);
             
             
-            // Save the file
             $file->storeAs('public/'.$user->name, $fileName);
-        // $files = file::where('name', $fileName)->get();
-            //foreach($files as $file)
-            //{
-        //     $result = $file;
-            //}
-            
-            
-            //$file = file::findOrFail($fileId);  
-
-            //27
 
             function toLongString(string $str) {
                 if(strlen($str) > 27) {
@@ -105,16 +94,17 @@ class FileController extends Controller
                 }
             }
             
-            if($user->id != 1)
-            {
+            //Issiusti notification 
+            // if($user->id != 1)
+            // {
                 
-                $fileNotification = FileNotification::create([
-                'user_id' => $user->id,
-                'message' => 'Naujas failas: '.toLongString($file->getClientOriginalName()),
-                'link' => 'files',
-                'fileId' => $naujasFile->id,
-                ]);
-            }
+            //     $fileNotification = FileNotification::create([
+            //     'user_id' => $user->id,
+            //     'message' => 'Naujas failas: '.toLongString($file->getClientOriginalName()),
+            //     'link' => 'files',
+            //     'fileId' => $naujasFile->id,
+            //     ]);
+            // }
 
             
             //event(new FileCreatedEvent($user->id, $result->name));
@@ -200,14 +190,14 @@ class FileController extends Controller
         $user = User::find($order->owner_id);
         //$order_user = User::find($order->owner_id);
             if(  Auth()->user()->id == $order->owner_id || Auth()->user()->position == 'admin' ){
-                return Storage::download('public/'.$user->name.'/'.$file->name);
+                return Storage::download('public/'.$file->path.'/'.$file->name);
             }
         }
         else{
         if(Auth()->user()->id == $file->owner_id  || Auth()->user()->position == 'admin' )
         {
             
-            return Storage::download('public/'.$user->name.'/'.$file->name);
+            return Storage::download('public/'.$file->path.'/'.$file->name);
             //return 1;
         }
      }

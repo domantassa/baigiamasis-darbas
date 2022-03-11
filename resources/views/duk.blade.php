@@ -1,6 +1,7 @@
 @extends('layouts.backend', ['user' => $user, 'users' => $users, 'notif' => $notif])
 
 @section('content')
+
 <!-- Hero -->
 <div class="bg-body-light">
         <div class="content content-full pt-2" >

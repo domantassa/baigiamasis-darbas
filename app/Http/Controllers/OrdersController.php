@@ -41,6 +41,10 @@ class OrdersController extends Controller
      */
     public function create()
     {
+
+        if(Auth()->User()->remaining < 1)
+            abort(404);
+
         //$data=array(['data'=>'Naujas užsakymas nuo '.'Auth()->User()->name','link'=>'orders/'.'1/edit']);
         //Mail::to('deividassabaliauskas@gmail.com')->send(new Notification($data));
         //Mail::to('domantassabaliauskas@gmail.com')->send(new Notification());
@@ -58,26 +62,19 @@ class OrdersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {/*
-        $validator=$request->validate([
-            'name' => 'required',
-                'requirements' => 'required',
-                'comment' => 'required',
-                'result' => 'required',
-                'state' => 'required',
-                'type' => 'required',
-        ]);
-*/
+    {
 
 
         if(Auth()->User()->remaining < 1)
             abort(404);
+
         $input=$request->files->all();
-        //dd($input["files"]);
+
         $order=new Order;
         $order->requirements=$request->requirements;
         $order->comment=$request->comment;
         $order->name=$request->title;
+        $order->brand=$request->brand;
         $order->result=$request->result;
         $order->feedback=$request->feedback;
         $order->owner_id=Auth()->user()->id;
@@ -85,11 +82,15 @@ class OrdersController extends Controller
         $order->type=$request->type;
         
         $user=Auth()->user();
+
+        $owner = User::find($order->owner_id);
+
         $order->save();
 
-        
         $expected=strtotime($order->created_at)+86400;
+
         $order->expected_at=date('Y-m-d H:i:s',$expected);
+
         $order->save();
         if($input != null)
         {
@@ -99,21 +100,21 @@ class OrdersController extends Controller
                 
             $naujasFile = new file;
             $naujasFile->name =  $file->getClientOriginalName();
-            $naujasFile->path =  $user->name;
-            //$naujasFile->owner_id = $user->id;
+            $naujasFile->path =  $owner->name;
             $naujasFile->order_id = $order->id;
-            $naujasFile->owner_id = $user->id;
+            $naujasFile->owner_id = $owner->id;
+
             $naujasFile->save();
             
             // Save the file
-            $file->move('storage/'.$user->name, $fileName);
+            $file->move('public/'.$owner->name, $fileName);
             $order->file_id=$naujasFile->id;
            }
         }
             $order->save();
 
 
-            if($user->id != 1)
+            if($owner->id != 1)
             {
                 
                 FileNotification::create([
@@ -129,11 +130,11 @@ class OrdersController extends Controller
             }
 
             
-            $user = Auth()->User();
-            $remaining = $user->remaining;
+
+            $remaining = $owner->remaining;
             $remaining = $remaining - 1;
-            $user->remaining = $remaining;
-            $user->save();
+            $owner->remaining = $remaining;
+            $owner->save();
         
             return view('responses.project-new',['user' => Auth()->User(), 'users' => User::all() , 'notif' => Auth()->User()->notifications()->get() ]);
            
@@ -183,7 +184,6 @@ class OrdersController extends Controller
     }
     public function dashboard_orders(){
         $notif = Auth()->User()->notifications()->get();
-        //$orders = Order::where('owner_id', Auth()->User()->id)->get();
         $orders=Order::all();
         return view('orders.pradzia', ['user' => Auth()->User(), 'users' => User::all(), 'orders'=>$orders, 'notif' => $notif]);   
     }
@@ -196,20 +196,19 @@ class OrdersController extends Controller
      */
     public function update(Request $request,  $id)
     {
-        //
-               
+                  
         $input=$request->files->all();
-        //dd($request);
         $order=Order::find($id);
         $order->requirements=$request->requirements;
         $order->comment=$request->comment;
         $order->name=$request->title;
+        $order->brand=$request->brand;
         $order->result=$request->result;
         $order->feedback=$request->feedback;
         $order->state=$request->state;
         $order->type=$request->type;
         $order->expected_at=$request->expected_at;
-        $user=Auth()->user();
+        $owner = User::find($order->owner_id);
         $order->save();
         if($input != null)
         {
@@ -220,21 +219,21 @@ class OrdersController extends Controller
                 
             $naujasFile = new file;
             $naujasFile->name =  $file->getClientOriginalName();
-            $naujasFile->path =  $user->name;
-            //$naujasFile->owner_id = $user->id;
+            $naujasFile->path =  $owner->name;
             $naujasFile->order_id = $order->id;
-            $naujasFile->owner_id = $user->id;
+            $naujasFile->owner_id = $owner->id;
             $naujasFile->save();
-            $owner=User::find($order->owner_id);
             // Save the file
             $file->move('storage/'.$owner->name, $fileName);
+            //$file->move('public/'.$owner->name, $fileName);
             $order->file_id=$naujasFile->id;
            }
         }
             $order->save();
 
+        $user = Auth()->User();
 
-            if($user->id == 1)
+        if($user->id == 1)
             {
                 FileNotification::create([
                     'user_id' => $order->owner_id,                 //JEI BUS DAUGIAU NEI VIENAS ADMIN, PAKEISTI SIA EILUTE
@@ -246,6 +245,9 @@ class OrdersController extends Controller
                 //mail($user1->email,'Pakeista užsakymo būsena',view('mail.notification',['data'=>'Pakeista užsakymo '.$order->name. ' būsena','link'=>'orders-dashboard']),$headers);
                 $data=array(['data'=>'Pakeista užsakymo '.$order->name. ' būsena','link'=>'orders-dashboard']);
                 //Mail::to($user1->email)->send(new Notification($data));
+                $notif = Auth()->User()->notifications()->get();
+                $orders=Order::all();
+                return view('orders.pradzia', ['user' => Auth()->User(), 'users' => User::all(), 'orders'=>$orders, 'notif' => $notif]);   
             }
             
         
@@ -343,17 +345,5 @@ class OrdersController extends Controller
         $data=array(['data'=>'Naujas atsiliepimas užsakymui "'.$order->name.'"','link'=>'orders/'.$id.'/edit']);
         //Mail::to($admin->email)->send(new Notification($data));
         return view('responses.feedback',['user' => Auth()->User() , 'users' => User::all() , 'notif' => Auth()->User()->notifications()->get() ]);
-    }
-    public function preview($id)
-    {
-        $order=Order::find($id);
-        
-        if($order->owner_id== Auth()->User()->id || Auth()->User()->position == 'admin')
-        {
-        return view('orders.preview', ['user' => Auth()->User() , 'users' => User::all() , 'order'=>$order , 'notif' => Auth()->User()->notifications()->get() ]);
-        }
-        else{
-            abort(404);
-        }
     }
 }
