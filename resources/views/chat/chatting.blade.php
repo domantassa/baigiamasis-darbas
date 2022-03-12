@@ -27,13 +27,13 @@
                 @endforeach
                 </div>
 
-                <form class="message-form" >
+                <form id="message-form" class="message-form" >
                     <div class="row">
                         <div class="col-10">
-                    <input type="text" name="message" id="message" class="form-control message_input" placeholder="Write a message...">
+                    <input required type="text" name="message" id="message" class="form-control message_input" placeholder="Write a message...">
                         </div>
                         <div class="col-2">
-                            <button type="button" id="send-message" class="message_send btn btn-primary"><span class="show-on-monitor">{{__('Siųsti žinutę')}}</span ><span class="show-on-phone">></span></button>
+                            <button type="submit" id="send-message" class="message_send btn btn-primary"><span class="show-on-monitor">{{__('Siųsti žinutę')}}</span ><span class="show-on-phone">></span></button>
                             
                         </div>
                     </div>
@@ -69,7 +69,7 @@ $.ajaxSetup({
         $senderId = {{$user->id}};
     }
 
-    $('#send-message').on('click',function(event){
+    $('#message-form').on('submit',function(event){
         event.preventDefault();
         $object=document.createElement('p');
         $($object).html($('#message').val());
