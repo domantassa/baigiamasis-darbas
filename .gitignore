@@ -1,6 +1,6 @@
 /vendor/
 node_modules/
-public/
+
 npm-debug.log
 yarn-error.log
 
@@ -32,3 +32,4 @@ smooth.css
 laravel.app.js
 oneui.app.js 
 tables_datatables.js 
+/public/
