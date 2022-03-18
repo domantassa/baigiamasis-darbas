@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\file;
-use App\Events\EndPool;
+
 use App\FileNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;

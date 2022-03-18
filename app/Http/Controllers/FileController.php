@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Order;
 use App\file;
-use App\Events\EndPool;
 use App\Events\MyEvent;
 use App\FileNotification;
 use Illuminate\Http\Request;
@@ -33,7 +32,6 @@ class FileController extends Controller
                     
        
         $notif = Auth()->User()->notifications()->get();
-        //event(new NewMessageOrFile('hello world'));
         
         $files = file::where('owner_id', Auth()->User()->id)->get();
         

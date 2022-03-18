@@ -9,8 +9,9 @@
                 data-class="animated fadeInUp"
                 data-timeout="250"
                 data-offset="-100">
-                {{__('Įmonės prekės ženklas')}}   </h1>
-            </div>
+                {{__('Įmonės prekės ženklas')}} <div style="vertical-align: middle;" class="btn-round btn-trash color-trash-icon click" id="brand-trash"><a href="{{ route('brand.delete', $brand->id) }}"><i class="fa fa-trash trash"></i></div>   </h1>
+                
+            </div> 
                 
             
        </div>

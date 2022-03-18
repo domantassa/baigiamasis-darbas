@@ -19,21 +19,7 @@ class Locale
     {
         $locale=$request->session()->get('locale');
         App::setLocale($locale);
-        //dd($locale);
-        /*
-        if(!$locale)
-        {
-         Session::put('locale','en');
-         App::setLocale('lt');
-        }
-        else if(App::getLocale()=='en')
-        {
-        App::setLocale('lt');
-        }
-        else if(App::getLocale()=='lt'){
-            App::setLocale('en');
-        }
-*/
+
         return $next($request);
     }
 }

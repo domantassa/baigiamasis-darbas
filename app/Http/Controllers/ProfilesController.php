@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Events\NewMessageOrFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\User;
@@ -20,24 +19,14 @@ class ProfilesController extends Controller
         
         $expiresAt = now()->addMinutes(5);
         $now = now();
-       
-        //Cache::put('user-is-online-' . Auth::user()->id, true, $expiresAt);
-        
     }
 
 
     public function index()
     {
         
-        //$user = User::findOrFail($user);
-       // return view('dashboard', [
-        //    'user' => $user,
-       // ]);
-       
-            
-            //dd($refresh_date);
             $notif = Auth()->User()->notifications()->get();
-            //event(new NewMessageOrFile('hello world'));
+
             
             $files = file::where('owner_id', Auth()->User()->id)->get();
 
@@ -82,7 +71,7 @@ class ProfilesController extends Controller
     {
         
         $user = User::findOrFail($id);
-        //event(new NewMessageOrFile('hello world'));
+
         $notif = Auth()->User()->notifications()->get();
         $files = file::where('owner_id', $id)->get();
         

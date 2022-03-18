@@ -11,15 +11,7 @@ use Illuminate\Http\Request;
 
 class BrandController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -28,7 +20,7 @@ class BrandController extends Controller
      */
     public function create()
     {
-
+        return view('brands/brand-page')->with(['user'=>Auth()->User(),'users' =>User::all(),'notif'=>Auth()->User()->notifications()->get()]);
     }
 
     /**
@@ -60,10 +52,6 @@ class BrandController extends Controller
             }
         }
         
-        
-        
-     
-
         if($request->files->all())
         {
         $input=$request->files->all();
@@ -130,57 +118,50 @@ class BrandController extends Controller
     public function update(Request $request, $id)
     {
 
-        $brand= brand::find($id);
-        //
-        $colors=$brand->colors()->delete();
-       // foreach($request->color){
-
-       //
-               
-       $brand->name=$request->title;
-       $brand->website=$request->website;
-       $brand->industry=$request->industry;
-       $brand->style=$request->description;
-       $brand->save();
-       
-
-
-       $inputs=$request->all();
-       foreach($inputs as $key=>$value){
-           if(str_contains($key,'hex-select'))
-           {             
-           $brandColor=new BrandColor;
-           $brandColor->brand_id = $brand->id;
-           $brandColor->color_code = $value;
-           $brandColor->save();
-           }
-       }
-       
-       
-       
-    
-
-       if($request->files->all())
-       {
-       $input=$request->files->all();
-       foreach($input['files'] as $file)
-           {
-        
-
-           $brandFile = new BrandFile;
-           $brandFile->name = $file->getClientOriginalName();
-           $brandFile->brand_id = $brand->id;
-           $brandFile->path = 'brand';
-           $brandFile->save();
-           
-           $file->move('storage/'.Auth()->user()->name.'/brands', $fileName);
-          }
-       }
-
-           
-       
-           if($brand->user_id== Auth()->User()->id || Auth()->User()->position == 'admin')
+        if($brand->user_id== Auth()->User()->id || Auth()->User()->position == 'admin')
         {
+            $brand= brand::find($id);
+            $colors=$brand->colors()->delete();
+                    
+            $brand->name=$request->title;
+            $brand->website=$request->website;
+            $brand->industry=$request->industry;
+            $brand->style=$request->description;
+            $brand->save();
+            
+
+
+            $inputs=$request->all();
+            foreach($inputs as $key=>$value){
+                if(str_contains($key,'hex-select'))
+                {             
+                $brandColor=new BrandColor;
+                $brandColor->brand_id = $brand->id;
+                $brandColor->color_code = $value;
+                $brandColor->save();
+                }
+            }
+            
+            
+            
+            
+
+            if($request->files->all())
+            {
+            $input=$request->files->all();
+            foreach($input['files'] as $file)
+                {
+                
+
+                $brandFile = new BrandFile;
+                $brandFile->name = $file->getClientOriginalName();
+                $brandFile->brand_id = $brand->id;
+                $brandFile->path = 'brand';
+                $brandFile->save();
+                
+                $file->move('storage/'.Auth()->user()->name.'/brands', $fileName);
+                }
+            }
             return back();
         }
         else {
@@ -194,8 +175,17 @@ class BrandController extends Controller
      * @param  \App\brand  $brand
      * @return \Illuminate\Http\Response
      */
-    public function destroy(brand $brand)
+    public function destroy($id)
     {
-        //
+        $brand=brand::find($id);
+        if($brand->user_id== Auth()->User()->id || Auth()->User()->position == 'admin')
+        {
+            $brand->delete();
+            return redirect('/dashboard');
+        }
+        else {
+            abort(404);
+        }
+        
     }
 }

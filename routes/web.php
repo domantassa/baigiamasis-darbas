@@ -5,11 +5,6 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\App;
 
-/*if(count($users)>0)
-{
-  Route::get('register','Auth\RegisterController@showRegistrationForm')->name('register')->middleware('admin');
-  Route::post('register','Auth\RegisterController@showRegistrationForm')->middleware('admin');;
-}*/
 
 Auth::routes();
 
@@ -22,12 +17,17 @@ Route::prefix('dashboard')->middleware('auth')->group(function(){
   
   Route::get('chatting', 'ChattingController@chattingWithAdmin')->name('chatting');;
 
-  Route::get('brand', function(){
-    return view('brands/brand-page')->with(['user'=>Auth::user(),'users' =>User::all(),'notif'=>Auth()->User()->notifications()->get()]);
-  })->name('brand');
+  Route::get('brand', 'BrandController@create')->name('brand');
+  Route::get('image-feedback', function() {
+    return view('orders/image-feedback')->with(['user'=>Auth::user(),'users' =>User::all(),'notif'=>Auth()->User()->notifications()->get()]);
+  });
+  Route::get('image-comparer', function() {
+    return view('orders/image-comparer')->with(['user'=>Auth::user(),'users' =>User::all(),'notif'=>Auth()->User()->notifications()->get()]);
+  });
   Route::post('brands/store', 'BrandController@store')->name('brand.store');
   Route::post('brands/update/{id}', 'BrandController@update')->name('brand.update');
   Route::get('brand/edit/{id}', 'BrandController@edit')->name('brand.edit');
+  Route::get('brand/delete/{id}', 'BrandController@destroy')->name('brand.delete');
 
   Route::get('chatting/{user}', 'ChattingController@index')->name('chattingadmin');
 
