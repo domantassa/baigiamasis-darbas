@@ -26,6 +26,7 @@ class AddOrdersTable extends Migration
             $table->text('requirements')->nullable();
             $table->text('comment')->nullable();
             $table->text('feedback')->nullable();
+            $table->unsignedInteger('number_of_revisions')->nullable();
             $table->timestamp('expected_at');
             
             $table->timestamps();

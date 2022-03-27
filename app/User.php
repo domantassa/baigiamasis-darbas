@@ -45,6 +45,10 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\file','owner_id');
     }
+    public function brands()
+    {
+        return $this->hasMany('App\brand', 'user_id');
+    }
     public function orders()
     {
         return $this->hasMany('App\Order','owner_id');
@@ -62,5 +66,16 @@ class User extends Authenticatable
     public function isOnline()
     {
         //return Cache::has('user-is-online-' . $this->id);
+    }
+
+    function userNameShort($lenght = 27) {
+        if(strlen($this->name) > $lenght) {
+            $strr = substr($this->name, 0, $lenght-4);
+            $strr .= "...";
+            return $strr;
+        }
+        else {
+            return $this->name;
+        }
     }
 }

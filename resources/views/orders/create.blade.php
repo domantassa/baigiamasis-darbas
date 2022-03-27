@@ -14,13 +14,7 @@
                
             
             </div>
-                            
-            <!-- parsisiųsti pavyzdį
-            <label class="custom-file-upload btn btn-round btn-primary btn-green" >    
-                <input type="file"/>
-                Parsisiųsti pavyzdį
-            </label>
-            -->
+        
                 
        </div>
     </div>
@@ -55,9 +49,7 @@
                                 @endif	
                             @endforeach	
 
-                            @if(count($allBrands) == 0)
-                                <option> {{ __('Nepasirinkta') }}</option >
-                            @endif
+
                             </select>
                         </div>
 

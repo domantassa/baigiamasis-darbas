@@ -68,7 +68,17 @@ class BrandController extends Controller
             $file->move('storage/'.Auth()->user()->name.'/brands', $file->getClientOriginalName());
            }
         }
-        return back();
+
+        
+        
+        $colors=BrandFile::where('brand_id', $brand->id)->get();
+        $files=BrandColor::where('brand_id', $brand->id)->get();
+        $colors=$brand->colors()->get();
+        $files=$brand->files()->get();
+
+
+        
+        return redirect("dashboard/brand/edit/".$brand->id);
         
     }
 

@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\file;
+use App\ImageRevision;
+use App\Order;
+
 
 use App\FileNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Events\FileCreatedEvent;
-use App\Order;
+
 use Illuminate\Support\Facades\Mail;
 use App\Mail\Notification;
 class OrdersController extends Controller
@@ -33,6 +36,91 @@ class OrdersController extends Controller
         $orders=Order::all();
         return view('orders.index', ['user' => Auth()->User(), 'users' => User::all(), 'orders'=>$orders, 'notif' => $notif]);    
     }
+
+    /**
+     * Display admin page to upload results
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function uploadResult($id)
+    {
+        $notif = Auth()->User()->notifications()->get();
+
+        $order=Order::find($id);
+
+        return view('orders.order-result-upload', ['user' => Auth()->User(), 'users' => User::all(), 'order'=>$order, 'notif' => $notif]);    
+    }
+
+    /**
+     * Display admin page to upload results
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showResults($id)
+    {
+        $notif = Auth()->User()->notifications()->get();
+        $order=Order::find($id);
+        $imageRevisions = ImageRevision::where('order_id', $id)->get();
+
+        return view('orders.order-result-page', ['user' => Auth()->User(), 'imageRevisions' => $imageRevisions, 'users' => User::all(), 'order'=>$order, 'notif' => $notif]);    
+    }
+
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function uploadResultStore(Request $request, $id)
+    {   
+        dd($request);
+        $input=$request->files->all();
+
+        $order=Order::find($id);
+
+
+        
+        $order->comment=$request->comment;
+        
+        $owner = User::find($order->owner_id);
+
+
+        $order->save();
+
+
+        if($input != null)
+        {
+            foreach($input["files"] as $file)
+            {
+            $fileName = $file->getClientOriginalName();
+                dd($file);
+            $number = $order->number_of_revisions + 1;
+            $order->number_of_revisions = $order->number_of_revisions + 1;
+            $order->save();
+            $newImageRevision = new ImageRevision;
+            $newImageRevision->name =  $file->getClientOriginalName();
+            $newImageRevision->path =  $owner->name;
+            $newImageRevision->order_id = $order->id;
+            $newImageRevision->status = 'revision';
+            $newImageRevision->number = $number;
+            $newImageRevision->save();
+            $newImageRevision->original_id = $newImageRevision->id;
+            $newImageRevision->save();
+            
+            // Save the file
+            $file->move('storage/'.$owner->name, $fileName);
+           }
+        }
+            $order->save();
+
+            $notif = Auth()->User()->notifications()->get();
+            $imageRevisions = ImageRevision::where('order_id', $id)->get();
+
+            return view('orders.order-result-page', ['user' => Auth()->User(), 'imageRevisions' => $imageRevisions, 'users' => User::all(), 'order'=>$order, 'notif' => $notif]);
+    }
+
+    
 
     /**
      * Show the form for creating a new resource.
@@ -64,7 +152,6 @@ class OrdersController extends Controller
     public function store(Request $request)
     {
 
-
         if(Auth()->User()->remaining < 1)
             abort(404);
 
@@ -89,17 +176,17 @@ class OrdersController extends Controller
 
         $expected=strtotime($order->created_at)+86400;
 
-        $order->expected_at=date('Y-m-d H:i:s',$expected);
+        $order->expected_at=date('Y-m-d-H:i:s',$expected);
 
         $order->save();
         if($input != null)
         {
             foreach($input["files"] as $file)
             {
-            $fileName = $file->getClientOriginalName();
+            $fileName = date('Y-m-d-H-i-s',time()) . '-'.$file->getClientOriginalName();
                 
             $naujasFile = new file;
-            $naujasFile->name =  $file->getClientOriginalName();
+            $naujasFile->name =  $fileName;
             $naujasFile->path =  $owner->name;
             $naujasFile->order_id = $order->id;
             $naujasFile->owner_id = $owner->id;
@@ -107,7 +194,7 @@ class OrdersController extends Controller
             $naujasFile->save();
             
             // Save the file
-            $file->move('public/'.$owner->name, $fileName);
+            $file->move('storage/'.$owner->name, $fileName);
             $order->file_id=$naujasFile->id;
            }
         }
@@ -283,12 +370,12 @@ class OrdersController extends Controller
     public function download($file)
     {
         $file = file::find($file);
-       // $user = User::find($file->owner_id);
+        $user = User::find($file->owner_id);
         $notif = Auth()->User()->notifications()->get();
         $files = file::where('owner_id', Auth()->User()->id)->get();
         if(Auth()->user()->id != $file->owner_id || Auth()->user()->position != 'admin')
         {
-            return Storage::download('public/'.Auth()->user()->name.'/'.$file->name);
+            return Storage::download('public/'.$user->name.'/'.$file->name);
         }
         
         return back();

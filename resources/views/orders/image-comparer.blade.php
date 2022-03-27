@@ -3,7 +3,9 @@
 @section('content')
 <style >
 
+
 </style>
+
 
 
 
@@ -13,19 +15,59 @@
         Open modal
     </button>
 
-    <div class="modal fade" id="reg-modal" tabindex="-1" aria-labelledby="model-title" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" >
+    <div class="modal fade" style="text-align: center;" id="reg-modal" tabindex="-1" aria-labelledby="model-title" aria-hidden="true">
+        <div style="max-width: 100%; width: auto !important; display: inline-block;"  class="modal-dialog modal-dialog-centered modal-dialog-scrollable" >
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modal-title">Get latest</h5>
+                    <h5 class="modal-title" id="modal-title">{{ __('Results comparison and selection')}}</h5>
                 </div>
                 <div class="modal-body">
                     <div class="row">
 
-                        <div style="border: red" class="col-md-6 "><img class="vector filteris" src="{{asset('media/vectors/Problem solving-amico.svg')}}"></div>
-                        <div style="border: red" class="col-md-6 "><img class="vector filteris" src="{{asset('media/vectors/Problem solving-amico.svg')}}"></div>
+                        <div style="border: red" class="col-md-6 ">
+                        <div class="dropdown">
+                            <button class="btn  dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Dropdown
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                <button class="dropdown-item" type="button">Action</button>
+                                <button class="dropdown-item" type="button">Another action</button>
+                                <button class="dropdown-item" type="button">Something else here</button>
+                            </div>
+                        </div>
+                        
+                        <div class="resource">
+                            <img class="vector filteris" src="{{asset('media/vectors/Problem solving-amico.svg')}}">
+                            <div id="fadein-overlay">
+                            <p class="fa fa-check fa-4x img-icon"></p>
+                            </div>
+                        </div>
+                        </div>
+                        <div style="border: red" class="col-md-6 ">
+                        <div class="dropdown">
+                        <button class="btn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Dropdown
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                            <button class="dropdown-item" type="button">Action</button>
+                            <button class="dropdown-item" type="button">Another action</button>
+                            <button class="dropdown-item" type="button">Something else here</button>
+                        </div>
+                        </div>
+                        
+                        <div class="resource">
+                            <img src="{{asset('media/vectors/Problem solving-amico.svg')}}">
+                            <div id="fadein-overlay">
+                            <p class="fa fa-check fa-4x img-icon"></p>
+                            </div>
+                        </div>
+                        </div>
 
                     </div>
+
+                    <a href="http://127.0.0.1:8000/register" class="btn btn-sm btn-dual  btn-round btn-white mr-2 d-none d-lg-inline-block">
+                                Patvirtinti
+                    </a>
                 </div>
             </div>
         </div>

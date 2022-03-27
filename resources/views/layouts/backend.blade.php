@@ -95,7 +95,7 @@
         <script>window.Laravel = {!! json_encode(['csrfToken' => csrf_token(),]) !!};</script>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/3.4.0/js/bootstrap-colorpicker.min.js" integrity="sha512-94dgCw8xWrVcgkmOc2fwKjO4dqy/X3q7IjFru6MHJKeaAzCvhkVtOS6S+co+RbcZvvPBngLzuVMApmxkuWZGwQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>	
+        
         
         <script src="{{ asset('js/echo.iife.js') }}"></script>
         <script src="{{ asset('js/echo.js') }}"></script>
@@ -333,6 +333,9 @@
                                 <span class="nav-main-link-name">{{__('Prekės ženklas')}}</span>	
                             </a>
                             
+
+                            @if(Auth::user()->brands->count() < 5)
+
                             <ul class="nav-main-submenu">	
                                     <li class="nav-main-item">	
                                         <a class="nav-main-link" href="{{ route('brand')}}">	
@@ -341,6 +344,8 @@
                                         </a>	
                                     </li>	
                             </ul>
+
+                            @endif
 
                             @foreach ($allBrands as $oneBrand)
 
@@ -422,7 +427,7 @@
                             @endforeach	
                          @endif	
                        </ul>
-                    <div id="MySidebarBlock" class="sidebar-dark"  style="width:100%;height:20%; position:fixed; bottom:0px; left:0; border-top:0px solid ;">	
+                    <div id="MySidebarBlock" class="sidebar-dark"  style="z-index: -10;width:100%;height:20%; position:fixed; bottom:0px; left:0; border-top:0px solid ;">	
                         	
                         	
                         	

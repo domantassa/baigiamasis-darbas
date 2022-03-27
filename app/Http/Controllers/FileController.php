@@ -69,10 +69,10 @@ class FileController extends Controller
             ]);
             
             $file = $request->file;  
-            $fileName = $file->getClientOriginalName();
+            $fileName = date('Y-m-d-H-i-s',time()) . '-'.$file->getClientOriginalName();
                 
             $naujasFile = file::create([
-                'name' => $file->getClientOriginalName(),
+                'name' => $fileName,
                 'path' => $user->name,
                 'owner_id' => $user->id,
                 

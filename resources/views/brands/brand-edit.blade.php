@@ -9,7 +9,7 @@
                 data-class="animated fadeInUp"
                 data-timeout="250"
                 data-offset="-100">
-                {{__('Įmonės prekės ženklas')}} <div style="vertical-align: middle;" class="btn-round btn-trash color-trash-icon click" id="brand-trash"><a href="{{ route('brand.delete', $brand->id) }}"><i class="fa fa-trash trash"></i></div>   </h1>
+                {{__('Įmonės prekės ženklas')}} <div style="vertical-align: middle;" class="btn-round btn-trash color-trash-icon click" id="brand-trash"><a href="{{ route('brand.delete', $brand->id) }}"><i class="fa fa-trash trash"></i></a></div>   </h1>
                 
             </div> 
                 
@@ -50,6 +50,8 @@
                         
                         <div class="custom-form-group">
                             <h1 class="h4 m-0">5. {{__('Įmonės prekės ženklo failai / pavyzdžiai')}}:</h1>
+                            
+                         
                         <input type="file" name="files[]" id="fileToUpload" multiple><label for="fileToUpload" id="label-fileToUpload" class="btn btn-round order-btn-grey form-btn form-btn2 mt-2" style="width:auto"><diva id="btn-text" >{{ __('Prisegti failus') }} </diva>
                         <i class="fas fa-check-circle file-form"></i></label><div class=" mt-2 btn-round btn-trash file-input-trash hide click"><i class="fa fa-trash trash"></i></div>
                         </div>
@@ -81,7 +83,7 @@
                         </div>
                         <div class="  btn-round btn-add-color mt-2" id="hex-add" >{{__('Pridėti spalvą')}}</div>
 
-                        <input type="submit" value="{{ __('Siųsti užklausą') }}" class="mt-3 btn btn-green btn-primary btn-round">
+                        <input type="submit" value="{{ __('Sukurti') }}" class="mt-3 btn btn-green btn-primary btn-round">
 
                     <script>
 

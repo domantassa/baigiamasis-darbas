@@ -65,7 +65,7 @@
                                                 <td colspan="col">{{ __($user1->plan) }}</td>
                                                 <td colspan="col"><a
                                                         href="{{ route('deleteUser', ['user' => $user1->id]) }} "
-                                                        data-toggle="tooltip" data-placement="top" title="Remove User"><i
+                                                        ><i
                                                             class="fas fa-user-minus"></i></a></td>
                                                 <td colspan="col"><a
                                                         href="{{ route('user.show', ['user' => $user1->id]) }} "><i

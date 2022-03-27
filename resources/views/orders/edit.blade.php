@@ -208,34 +208,24 @@
 
                         <div class="custom-form-group">
                             <h1 class="h4 m-0"> {{ __('7. Papildomi komentarai') }}:</h1>
-                            <textarea rows="3" name="feedback" class=" btn-round order-btn-grey form-btn" placeholder="{{ __('Pradėti rašyti') }}">{{$order->feedback}}</textarea>
+                            <textarea rows="3" name="feedback" class=" btn-round order-btn-grey form-btn" readonly placeholder="{{ __('Pradėti rašyti') }}">{{$order->feedback}}</textarea>
                         </div>
+                        
                         <div class="custom-form-group">
-                            <h1 class="h4 m-0">8. {{ __('Užsakymo būsena') }}:</h1>
-                            <input type="hidden" name="state" value="{{$order->state}}">
-                            <select class="minimal btn-round order-btn-grey form-btn"  style="width:auto" disabled>
-                            <option selected>{{ __($order->state) }}</option>
-                            <option> {{ __('Projektas atliktas') }}</option >   
-                            <option> {{ __('Projektas kuriamas') }}</option >
-                                <option> {{ __('Projektas atšauktas') }}</option >
-                            </select>
-                        </div>
-                        <div class="custom-form-group">
-                            <h1 class="h4 m-0">9. {{ __('Tikėtina darbo pabaiga') }}:</h1>
+                            <h1 class="h4 m-0">8. {{ __('Tikėtina darbo pabaiga') }}:</h1>
                                 <input type="text" placeholder="{{ __('Tikėtina') }}" name="expected_at" value="{{$order->expected_at}}"  class=" btn-round order-btn-grey form-btn" readonly>
                         </div> 
                         @endif
 
-                        <input type="submit" value="{{ __('Patvirtinti') }}" class="mt-2 btn btn-green btn-primary btn-round">
-                        </form>
 
+                            <input id="input-1" type="submit" class="d-none">
+                           
+                        </form>
+                        <label for="input-1" type="submit" class="mt-2 btn btn-green <?php if( $user->position == 'admin') echo 'btn-red' ?>   btn-primary btn-round">{{ __('Grįžti') }}</label>
+                        @if( $user->position == 'admin')
+                        <a style="color:white; margin-bottom: 7px;" href="{{route('upload-orders-result',$order->id)}}" style="display: inline-block" value="{{ __('Įkelti rezultatus') }}" class="mt-2 btn btn-green btn-primary btn-round"> {{ __('Įkelti rezultatus') }}</a>
+                        @endif
                     <div class="block-content">
-                        <p class="font-size-sm text-muted">
-                            
-                        </p>
-                        <p class="font-size-sm text-muted">
-                             <strong></strong>
-                        </p>
 
                         <form action="{{ route('upload', ['user' => $user]) }}" method="post" role="form" enctype="multipart/form-data">
                             @csrf

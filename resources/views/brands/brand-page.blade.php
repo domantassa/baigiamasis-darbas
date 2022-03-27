@@ -69,7 +69,7 @@
                         </div>
                         <div class="  btn-round btn-add-color mt-2" id="hex-add" >{{__('Pridėti spalvą')}}</div>
 
-                        <input type="submit" value="{{ __('Siųsti užklausą') }}" class="mt-3 btn btn-green btn-primary btn-round">
+                        <input type="submit" value="{{ __('Sukurti') }}" class="mt-3 btn btn-green btn-primary btn-round">
 
                     <script>
 

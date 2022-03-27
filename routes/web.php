@@ -47,10 +47,17 @@ Route::prefix('dashboard')->middleware('auth')->group(function(){
   Route::post('orders/feedback/{id}', 'OrdersController@feedback')->name('orders.feedback');
   Route::put('orders/feedback/{id}', 'OrdersController@feedback')->name('orders.update');
   Route::post('orders/feedback', 'OrdersController@feedback')->name('orders.store');
-  Route::get('orders/show/{id}', 'OrdersController@show')->name('orders.show');   
+  Route::get('orders/show/{id}', 'OrdersController@show')->name('orders.show');
+  Route::get('orders/results/{id}', 'OrdersController@showResults')->name('orders.show-results');   
+
   Route::resource('orders','OrdersController');
 
-  //Route::get('orders')
+  Route::get('/delete/image-revision/{orderId}/{imageRevisionId}', 'ImageRevisionController@destroy')->name('imageRevision.destroy');
+  Route::get('/download/image-revision/{orderId}/{imageRevisionId}', 'ImageRevisionController@download')->name('imageRevision.download');
+  Route::get('/edit/image-revision/{imageRevisionId}', 'ImageCommentController@edit')->name('imageComment.edit');
+  Route::post('/store/image-revision/{imageRevisionId}', 'ImageCommentController@store')->name('imageComment.store');
+	//Route::resource('dots','DotsController');
+
 
   Route::get('orders-dashboard','OrdersController@dashboard_orders')->name('orders.dashboard');
   Route::get('destroy/{file}', 'FileController@destroy')->name('deleteFile');
@@ -67,6 +74,9 @@ Route::prefix('dashboard')->middleware('auth')->group(function(){
     Route::get('/destroyUser/{user}', 'ProfilesController@destroy')->name('deleteUser');
     Route::get('/delete/{user}', 'ProfilesController@deleteDirectoryFiles')->name('deleteDir');
     Route::match(['get', 'post'], '/{user}', 'ProfilesController@getShow')->name('showUser');
+
+    Route::get('orders/upload-result/{id}', 'OrdersController@uploadResult')->name('upload-orders-result');
+    Route::post('orders/upload-result/{id}', 'ImageRevisionController@store')->name('upload-order-result-store');
 
   });
 });
