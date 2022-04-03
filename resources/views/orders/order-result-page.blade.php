@@ -18,9 +18,9 @@
             <div class="custom-form-group">
                             <h1 class="h4 m-0" style="display:inline-block;"> {{ __('Dizainerio komentaras') }}</h1>
                             <a style="color:white: display: inline-block; color: white; margin-bottom: 5px;" class="custom-file-upload btn btn-round btn-primary btn-green" >        
-                                {{__('Atsisiųsti rezultatus ')}}        
+                                {{__('Atsisiųsti rezultatus')}}        
                             </a>
-                            <textarea class=" btn-round order-btn-grey form-btn placeholder" name="comment" placeholder="{{ __('Komentaras klientui') }}" style="max-width:1295px;width:100%;min-height:138px" readonly></textarea>
+                            <textarea style="display:block;" class=" btn-round order-btn-grey form-btn placeholder" name="comment" placeholder="{{ __('Komentaras klientui') }}" style="max-width:1295px;width:100%;min-height:138px" readonly></textarea>
             </div>
             
         </div>
@@ -28,10 +28,6 @@
     <!-- END Hero -->
 
     <!-- Page Content -->
-
-    <button class="btn btn-primary" id="reg-toggle" data-bs-toggle="modal" data-bs-target="#reg-modal">
-        Open modal
-    </button>
 
     <div class="content">
         <div class="row justify-content-center">
@@ -44,7 +40,7 @@
 
                         
                             <div class="table-responsive table-wrapper-scroll-x my-custom-scrollbar ">
-                                <table class="table table-hover .table-responsive">
+                                <table  class="table table-hover table-responsive">
                                     <thead>
                                     <tr>
                                         
@@ -58,7 +54,7 @@
                                     </tr>
                                         <tr>
                                             <th colspan="7">{{ __('Pavadinimas') }}</th>
-                                            <th scope="col">{{ __('Atnaujinta') }}</th>
+                                            <th scope="col">{{ __('Versijų skaičius') }}</th>
                                             <th scope="col">{{ __('Komentarai') }}</th>
                                             <th scope="col"><i class="fas fa-comment"></i></th>
                                             <th scope="col"><i class="fas fa-trash-alt"></i></th>
@@ -87,35 +83,35 @@
                                             }
                                             ?>
 
-                                            <tr>
+                                            <tr <?php echo"id='tr-image-revision-$imageRevision->id'" ?> <?php if($imageRevision->original_id != $imageRevision->id) echo "style='display: none;'" ?>>
                                                 
                                                 <td colspan="7">
                                                     @if($secondaryRevisions > 0)
-                                                    <a href="{{ url('dashboard/1') }}">{{ $imageRevision->name }}</a>
+                                                    <a class="reg-toggle" data-bs-toggle="modal" data-bs-target="#reg-modal" data_id="{{$imageRevision->id}}" href="#">{{ $imageRevision->name }}</a>
                                                     @else
                                                     {{ $imageRevision->name }}
                                                     @endif
                                                 </td>
-                                                <td colspan="col">{{ $imageRevision->updated_at }}</td>
-                                                <td colspan="col">{{ $imageRevision->comments_count ? $imageRevision->comments_count : '0' }}</td>
+                                                <td colspan="col">{{ $imageRevision->imageRevisions()->count() }}</td>
+                                                <td colspan="col">{{ $imageRevision->comment_count }}</td>
                                                 <td colspan="col">
-                                                    <a href="{{ route('imageComment.edit',$imageRevision->id) }} ">
+                                                    <a rev_id="{{ $imageRevision->id }}" class="edit" href="{{ route('imageComment.edit',$imageRevision->id) }} ">
                                                         <i class="fas fa-comment"></i>
                                                     </a> 
                                                 </td>
                                                 <td colspan="col">
-                                                     <a href="{{ route('imageRevision.destroy', ['orderId' => $order->id, 'imageRevisionId' => $imageRevision->id]) }} ">
+                                                     <a rev_id="{{ $imageRevision->id }}" class="destroy"  href="{{ route('imageRevision.destroy', ['orderId' => $order->id, 'imageRevisionId' => $imageRevision->id]) }} ">
                                                         <i class="fas fa-trash-alt"></i>
                                                     </a> 
                                                 </td>
                                                 <td colspan="col">
-                                                     <a  href="{{ route('imageRevision.download', ['orderId' => $order->id, 'imageRevisionId' => $imageRevision->id]) }} ">
+                                                     <a rev_id="{{ $imageRevision->id }}" class="download"   href="{{ route('imageRevision.download', ['orderId' => $order->id, 'imageRevisionId' => $imageRevision->id]) }} ">
                                                         <i class="fas fa-file-download"></i>
                                                     </a> 
                                                 </td>
                                                 @if($user->position == 'admin')
                                                 <td colspan="col">
-                                                     <a  href="{{ route('imageRevision.download', ['orderId' => $order->id, 'imageRevisionId' => $imageRevision->id]) }} ">
+                                                     <a rev_id="{{ $imageRevision->id }}" class="upload"   href="{{ route('imageRevision.createNewUpload', $imageRevision->id) }} ">
                                                         <i class="fas fa-upload"></i>
                                                     </a> 
                                                 </td>
@@ -166,16 +162,16 @@
                             <button class="btn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Dropdown
                             </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                    <button class="dropdown-item" type="button">Action</button>
-                                    <button class="dropdown-item" type="button">Another action</button>
-                                    <button class="dropdown-item" type="button">Something else here</button>
+                                <div class="dropdown-menu prev-sel-1" aria-labelledby="dropdownMenu2">
+                                @foreach ($imageRevisions as $imageRevision)
+                                    <button original_id="{{$imageRevision->original_id}}" id="dropdown-image-revision-{{$imageRevision->id}}" revision_id="{{$imageRevision->id}}" class="dropdown-item img-src" type="button" data_src='{{asset("storage/".$imageRevision->path."/".$imageRevision->name)}}'> {{ $imageRevision->name }} </button>
+                                    @endforeach
                                 </div>
                             </div>
                             
                                 <div class="resource">
-                                    <img src="{{asset('media/vectors/Problem solving-amico.svg')}}">
-                                    <div id="fadein-overlay">
+                                    <img id="prev-1" src="{{asset('media/vectors/Problem solving-amico.svg')}}" revision_id="0">
+                                    <div id="fadein-overlay" class="prev-1" data_target="#prev-1">
                                     <p class="fa fa-check fa-4x img-icon"></p>
                                 </div>
                             </div>
@@ -185,34 +181,120 @@
                             <button class="btn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Dropdown
                             </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                    <button class="dropdown-item" type="button">Action</button>
-                                    <button class="dropdown-item" type="button">Another action</button>
-                                    <button class="dropdown-item" type="button">Something else here</button>
+                                <div class="dropdown-menu  prev-sel-2" aria-labelledby="dropdownMenu2">
+                                @foreach ($imageRevisions as $imageRevision)
+                                    <button original_id="{{$imageRevision->original_id}}" id="dropdown-image-revision-{{$imageRevision->id}}" revision_id="{{$imageRevision->id}}" class="dropdown-item img-src" type="button" data_src='{{asset("storage/".$imageRevision->path."/".$imageRevision->name)}}'> {{ $imageRevision->name }} </button>
+                                    @endforeach
+  
                                 </div>
                             </div>
                             
                                 <div class="resource">
-                                    <img src="{{asset('media/vectors/Problem solving-amico.svg')}}">
-                                    <div id="fadein-overlay">
+                                    <img id="prev-2" src="{{asset('media/vectors/Problem solving-amico.svg')}}" revision_id="0">
+                                    <div id="fadein-overlay" class="prev-2" data_target="#prev-2">
                                     <p class="fa fa-check fa-4x img-icon"></p>
                                 </div>
                             </div>
                         </div>
 
                     </div>
-
+<!--
                     <a style="margin-top: 5px;" href="http://127.0.0.1:8000/register" class="btn btn-sm btn-dual  btn-round btn-white mr-2 d-none d-lg-inline-block">
                                 Patvirtinti
-                    </a>
+                    </a>-->
+                    <button id="apply-revision" type="button" class=" btn btn-sm btn-dual  btn-round btn-white mr-2 d-none d-lg-inline-block">Patvirtinti</button>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-    $('#reg-toggle').on('click',function(){
-        $('#reg-modal').modal('toggle');
+        var selected_revision_id=0;
+        var original_id;
+
+        $('.reg-toggle').on('click',function(){
+        $('.img-selected').removeClass('img-selected');
+        $('#prev-1').prop('src',old_src);
+        $('#reg-modal').modal('show');
+         original_id=$(this).attr('data_id');
+        var new_src = $(this).attr('data_src');
+    
+        $('[original_id]').removeClass('d-block');
+        $('[original_id='+original_id+']').addClass('d-block');
+        var new_src = $('[revision_id='+original_id+'].img-src').attr('data_src');
+    
+        $('#prev-1').prop('src',new_src);
+        $('#prev-1').attr('revision_id',original_id);
+
+        //    $('[original_id='+original_id+']').attr('');
+     
+        $('[original_id='+original_id+']').each(function(){
+            if($(this).attr('revision_id') != original_id){
+                $('#prev-2').prop('src',$(this).attr('data_src'));
+                $('#prev-2').attr('revision_id',$(this).attr('revision_id'));
+            }
+        });
+     
+        /*
+        $('#prev-2').prop('src',new_src);
+        $('#prev-2').attr('revision_id',original_id);
+    */
+    });
+    var old_src = $('#prev-1').prop('src');
+    $('.prev-sel-1 .img-src').on('click',function(){
+        $('.img-selected').removeClass('img-selected');
+        var new_src = $(this).attr('data_src');
+        $('#prev-1').prop('src',new_src);
+        $('#prev-1').attr('revision_id',$(this).attr('revision_id'));
+    });
+    $('.prev-sel-2 .img-src').on('click',function(){
+        $('.img-selected').removeClass('img-selected');
+        var new_src = $(this).attr('data_src');
+        $('#prev-2').prop('src',new_src);
+        $('#prev-2').attr('revision_id',$(this).attr('revision_id'));
+    });
+    
+    $('.prev-1 , .prev-2').on('click',function(){
+        
+        selected_revision_id=$($(this).attr('data_target')).attr('revision_id');
+        if(!$(this).hasClass('img-selected')){
+            $('.img-selected').removeClass('img-selected');
+            $(this).addClass('img-selected');
+        }
+        else $('.img-selected').removeClass('img-selected');
+        console.log('selected:', selected_revision_id);
+    });
+    $('#apply-revision').on('click',function(){
+        var new_elem= $('[revision_id='+selected_revision_id+'].img-src');
+        var elem = $('[data_id='+ original_id+'].reg-toggle');
+        $(elem).attr('data_id',$(new_elem).attr('revision_id'));
+        $(elem).html($(new_elem).html());
+        var domain = document.location.origin;
+            domain= domain+'/dashboard';
+        //var url = domain + '/' + 'delete/image-revision';
+        $('[rev_id='+original_id+']').attr('rev_id', selected_revision_id);
+        $('[rev_id='+selected_revision_id+'].edit').prop('href',domain+ '/edit/image-revision/'+selected_revision_id );
+        $('[rev_id='+selected_revision_id+'].destroy').prop('href',domain+ '/destroy/image-revision/'+selected_revision_id );
+        $('[rev_id='+selected_revision_id+'].download').prop('href',domain+ '/download/image-revision/'+selected_revision_id );
+        $('[rev_id='+selected_revision_id+'].upload').prop('href',domain+ '/upload/image-revision/'+selected_revision_id );
+    //    console.log('selected_after:', selected_revision_id);
+    
+    $('[original_id='+original_id+']').attr('original_id',selected_revision_id);
+    
+    
+    
+        $.ajax({
+                url: domain+ '/select/image-revision/'+selected_revision_id ,
+                data:{}
+                }).done(function(data) {
+                ;
+        });
+    
+        $('#reg-modal').modal('hide');
+    
+    
+    
+    
     });
     </script>
 

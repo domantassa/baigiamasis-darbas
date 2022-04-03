@@ -103,16 +103,19 @@ class ProfilesController extends Controller
         $user = User::find($user);
         $files = $user->files()->get();
         $orders = $user->orders()->get();
+        $brands = $user->brands()->get();
         $notifications = $user->notifications()->get();
         if(count($files) > 0)
             $user->files()->delete();
+        if(count($brands) > 0)
+            $user->brands()->delete();
         if(count($orders) > 0)
             $user->orders()->delete();
         if(count($notifications) > 0)
             $user->notifications()->delete();
         $user->delete();
         Storage::deleteDirectory($user->name);
-        return redirect('users');
+        return redirect('dashboard/users');
     }
 
     public function update(Request $request)

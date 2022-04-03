@@ -32,6 +32,7 @@
         
 
         <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+        <script src="//fast.appcues.com/111145.js"></script>
         <script>
 
             $(function(){
@@ -581,7 +582,7 @@
                                                 <input type="hidden" name="link" value="{{$oneNotif->link}}" />
                                                 <input type="submit" id="submitas-{{$oneNotif->id}}" class="d-none" value="">
                                                
-                                                <div class="font-w600"><i class=" mr-2 ml-3 fa fa-fw fa-check-circle"></i><small class="text-muted">{{$oneNotif->message}}</small>
+                                                <div class="font-w600"><i class=" mr-2 ml-3 fa fa-fw fa-check-circle"></i><small class="text-muted"><?php if(strlen($oneNotif->message) > 27) { echo substr($oneNotif->message, 0, 34); echo "..."; } else { echo $oneNotif->message; } ?></small>
                                                 <br><small class=" mr-2 ml-5 text-muted">{{$oneNotif->created_at}}</small>
                                                </div>
                                                </label>

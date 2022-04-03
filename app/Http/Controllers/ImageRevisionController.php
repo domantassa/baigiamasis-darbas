@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\ImageRevision;
 use App\Order;
 use App\User;
+use App\FileNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Events\FileCreatedEvent;
@@ -22,7 +23,76 @@ class ImageRevisionController extends Controller
         $order=Order::find($id);
         $imageRevisions = ImageRevision::where('order_id', $id)->get();
 
+        
+
         return view('orders.order-result-page', ['user' => Auth()->User(), 'imageRevisions' => $imageRevisions, 'users' => User::all(), 'order'=>$order, 'notif' => $notif]);    
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function createNewUpload($id)
+    {
+        $notif = Auth()->User()->notifications()->get();
+
+        $imageRevision=ImageRevision::find($id);
+        $order=Order::find($imageRevision->order_id);
+
+        return view('orders.order-result-upload-revision', ['user' => Auth()->User(), 'users' => User::all(), 'imageRevision'=>$imageRevision, 'order'=>$order, 'notif' => $notif]);  
+    }
+
+    public function storeNewUpload(Request $request, $id)
+    {
+
+        $input=$request->files->all();
+        $imageRevision=ImageRevision::find($id);
+        $order=Order::find($imageRevision->order_id);
+
+        $owner = User::find($order->owner_id);
+
+
+        $order->save();
+
+
+        if($input != null)
+        {
+            foreach($input["files"] as $file)
+            {
+            //dd($file);
+                $fileName = date('Y-m-d-H-i-s',time()) . '-'.$file->getClientOriginalName();
+            
+            $number = $order->number_of_revisions + 1;
+            $order->number_of_revisions = $order->number_of_revisions + 1;
+            $order->save();
+            $newImageRevision = new ImageRevision;
+            $newImageRevision->name =  $fileName;
+            $newImageRevision->path =  $owner->name;
+            $newImageRevision->order_id = $order->id;
+            $newImageRevision->status = 'addition-revision';
+            $newImageRevision->number = $number;
+            $newImageRevision->save();
+            $newImageRevision->original_id = $imageRevision->id;
+            $newImageRevision->save();
+            
+            // Save the file
+            //$file->storeAs('public/'.$user->name, $fileName);
+            $file->move('storage/'.$owner->name, $fileName);
+           }
+        }
+            $order->save();
+
+            FileNotification::create([
+                'user_id' => $order->owner_id,            
+                'message' => 'Nauji rezultatai užsakymui '.$order->name.'.',
+                'link' => 'orders/results/'.$order->id,
+            ]);
+
+            $notif = Auth()->User()->notifications()->get();
+            $imageRevisions = ImageRevision::where('order_id', $id)->get();
+
+            return redirect("dashboard/orders/results/".$order->id);
     }
 
     /**
@@ -87,6 +157,12 @@ class ImageRevisionController extends Controller
            }
         }
             $order->save();
+
+            FileNotification::create([
+                'user_id' => $order->owner_id,            
+                'message' => 'Nauji rezultatai užsakymui '.$order->name.'.',
+                'link' => 'orders/results/'.$order->id,
+            ]);
 
             $notif = Auth()->User()->notifications()->get();
             $imageRevisions = ImageRevision::where('order_id', $id)->get();
@@ -166,5 +242,19 @@ class ImageRevisionController extends Controller
             $imageRevision->delete();
         }
         return back();
+    }
+    public function select($id)
+    { 
+        $imageRevision = ImageRevision::find($id);
+        
+        $imageRevisions =ImageRevision::where('original_id',$imageRevision->original_id)->get();
+        foreach($imageRevisions as $imgRev)
+        {
+            $imgRev->original_id=$imageRevision->id;
+            $imgRev->save(); 
+        }
+        
+        return 0;
+        
     }
 }

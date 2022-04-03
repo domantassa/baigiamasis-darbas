@@ -26594,18 +26594,49 @@ input.my-check-toggle-round-flat:checked + label:after {
 }
 
 .card {
-  margin: 15px;
-  border-radius: 12px;
+  padding: 10px;
+  border: 2px solid lightgray;
+  background: #e6e6e6;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  margin-right: 10px;
+  margin-left: 10px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
 }
 .card .c-head {
-  border-bottom: 1px solid #ccc;
-  display: block;
-  height: 35px;
-  width: 100%;
+  /*
+    border-bottom: 1px solid #ccc ;
+    display:block;
+    height:35px;
+    width: 100%;*/
+}
+.card .c-body {
+  display: flex;
+  flex-direction: column;
+}
+.card .c-body .c-body-top-row .c-body-bottom-row-name {
+  font-weight: bold;
+  font-size: 16px;
+}
+.card .c-body .c-body-top-row .c-body-bottom-row-date {
+  font-size: 12px;
+}
+.card .c-body .c-body-bottom-row {
+  font-size: 12px;
 }
 .card .c-user {
-  height: 25px;
-  width: 25px;
+  margin-right: 20px;
+  width: 36px;
+  height: 36px;
+}
+.card .c-user-dot {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  right: 150;
+  bottom: 50;
 }
 
 .input-card {
@@ -26628,12 +26659,44 @@ input.my-check-toggle-round-flat:checked + label:after {
 .input-card textarea {
   border: none;
 }
-.input-card .close {
+.input-card .close, .input-card .delete {
   position: relative;
   right: 0px;
   font-size: 18px;
   cursor: pointer;
   top: 4px;
+  float: right;
+  font-weight: 600;
+  line-height: 1;
+  color: #000;
+  text-shadow: 0 1px 0 #fff;
+  opacity: 0.5;
+}
+
+[original_id] {
+  display: none;
+}
+
+.img-selected {
+  opacity: 1 !important;
+}
+
+.comments-page-inputs-container {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  border: 2px solid lightgray;
+  background: #e6e6e6;
+  border-radius: 5px;
+  margin-right: 10px;
+  margin-left: 10px;
+  padding: 10px;
+}
+
+.dots-submit {
+  display: inline-block;
+  width: auto;
+  margin: auto;
 }
 
 .color-primary {

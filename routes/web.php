@@ -56,8 +56,10 @@ Route::prefix('dashboard')->middleware('auth')->group(function(){
   Route::get('/download/image-revision/{orderId}/{imageRevisionId}', 'ImageRevisionController@download')->name('imageRevision.download');
   Route::get('/edit/image-revision/{imageRevisionId}', 'ImageCommentController@edit')->name('imageComment.edit');
   Route::post('/store/image-revision/{imageRevisionId}', 'ImageCommentController@store')->name('imageComment.store');
+  Route::get('/create/image-revision/new-upload/{imageRevisionId}', 'ImageRevisionController@createNewUpload')->name('imageRevision.createNewUpload');
+  Route::post('/store/image-revision/new-upload/{imageRevisionId}', 'ImageRevisionController@storeNewUpload')->name('imageRevision.storeNewUpload');
 	//Route::resource('dots','DotsController');
-
+  Route::get('/select/image-revision/{id}', 'ImageRevisionController@select')->name('imageRevision.select');
 
   Route::get('orders-dashboard','OrdersController@dashboard_orders')->name('orders.dashboard');
   Route::get('destroy/{file}', 'FileController@destroy')->name('deleteFile');

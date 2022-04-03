@@ -92,17 +92,17 @@ class FileController extends Controller
                 }
             }
             
-            //Issiusti notification 
-            // if($user->id != 1)
-            // {
+
+            if($user->id != 1)
+            {
                 
-            //     $fileNotification = FileNotification::create([
-            //     'user_id' => $user->id,
-            //     'message' => 'Naujas failas: '.toLongString($file->getClientOriginalName()),
-            //     'link' => 'files',
-            //     'fileId' => $naujasFile->id,
-            //     ]);
-            // }
+                $fileNotification = FileNotification::create([
+                'user_id' => $user->id,
+                'message' => 'Naujas failas: '.toLongString($file->getClientOriginalName()),
+                'link' => 'files',
+                'fileId' => $naujasFile->id,
+                ]);
+            }
 
             
             //event(new FileCreatedEvent($user->id, $result->name));

@@ -32,7 +32,7 @@ class OrdersController extends Controller
     public function index()
     {
         $notif = Auth()->User()->notifications()->get();
-        //$orders = Order::where('owner_id', Auth()->User()->id)->get();
+
         $orders=Order::all();
         return view('orders.index', ['user' => Auth()->User(), 'users' => User::all(), 'orders'=>$orders, 'notif' => $notif]);    
     }
@@ -62,6 +62,7 @@ class OrdersController extends Controller
         $order=Order::find($id);
         $imageRevisions = ImageRevision::where('order_id', $id)->get();
 
+
         return view('orders.order-result-page', ['user' => Auth()->User(), 'imageRevisions' => $imageRevisions, 'users' => User::all(), 'order'=>$order, 'notif' => $notif]);    
     }
 
@@ -74,7 +75,9 @@ class OrdersController extends Controller
      */
     public function uploadResultStore(Request $request, $id)
     {   
-        dd($request);
+        if(Auth()->User()->position != 'admin')
+            abort(404);
+
         $input=$request->files->all();
 
         $order=Order::find($id);
@@ -114,6 +117,17 @@ class OrdersController extends Controller
         }
             $order->save();
 
+            
+                
+            
+            FileNotification::create([
+                'user_id' => $order->owner_id,            
+                'message' => 'Nauji rezultatai užsakymui '.$order->name.'.',
+                'link' => 'orders/'.$order->id.'/edit',
+            ]);
+
+            
+
             $notif = Auth()->User()->notifications()->get();
             $imageRevisions = ImageRevision::where('order_id', $id)->get();
 
@@ -151,6 +165,7 @@ class OrdersController extends Controller
      */
     public function store(Request $request)
     {
+
 
         if(Auth()->User()->remaining < 1)
             abort(404);
@@ -200,13 +215,23 @@ class OrdersController extends Controller
         }
             $order->save();
 
+            function toLongString(string $str, int $ilg) {
+                if(strlen($str) > $ilg) {
+                    $strr = substr($str, 0, $ilg-4);
+                    $strr .= "...";
+                    return $strr;
+                }
+                else {
+                    return $str;
+                }
+            }
 
             if($owner->id != 1)
             {
                 
                 FileNotification::create([
                     'user_id' => 1,                 //JEI BUS DAUGIAU NEI VIENAS ADMIN, PAKEISTI SIA EILUTE
-                    'message' => 'Naujas užsakymas nuo '.Auth()->User()->name,
+                    'message' => 'Naujas užsakymas nuo '.toLongString(Auth()->User()->name, 11),
                     'link' => 'orders/'.$order->id.'/edit',
                 ]);
                 $admin=User::find(1);
@@ -383,7 +408,7 @@ class OrdersController extends Controller
     public function finished($id)
     {
         $order=Order::find($id);
-        $order->state='Projektas uždarytas';
+        $order->state='Projektas pabaigtas';
         $order->save();
         FileNotification::create([
             'user_id' => $order->owner_id,                 //JEI BUS DAUGIAU NEI VIENAS ADMIN, PAKEISTI SIA EILUTE

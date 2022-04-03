@@ -47,13 +47,20 @@ class ImageCommentController extends Controller
      */
     public function store(Request $request)
     {
+
+        
+       
         $inputs= $request->input();
         $i=1;
         $t='text-'.$i;
+        $imageRevision = ImageRevision::find($inputs['image_revision_id']);
+        $imageRevision->comment_count = 0;
 
         $comments= ImageComment::where('image_revision_id',$inputs['image_revision_id'])->delete();
         while($request->$t && $inputs['text-'.$i] != null)
         {
+        $imageRevision->comment_count = $imageRevision->comment_count + 1;
+        
         $comment = New ImageComment;
         $comment->comment=$inputs['text-'.$i];
         $comment->x=$inputs['x-'.$i];
@@ -63,6 +70,7 @@ class ImageCommentController extends Controller
         $i++;
         $t='text-'.$i;
         }
+        $imageRevision->save();
 
         return back();
     }

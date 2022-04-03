@@ -127,12 +127,12 @@ class BrandController extends Controller
      */
     public function update(Request $request, $id)
     {
-
+        $brand= brand::find($id);
         if($brand->user_id== Auth()->User()->id || Auth()->User()->position == 'admin')
         {
-            $brand= brand::find($id);
-            $colors=$brand->colors()->delete();
-                    
+            //dd($brand->colors()->get());
+            $colors=$brand->colors();
+            $colors->delete();
             $brand->name=$request->title;
             $brand->website=$request->website;
             $brand->industry=$request->industry;

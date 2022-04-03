@@ -8,9 +8,12 @@
 <div id="cont" class="d-flex justify-content-between">
 <div id="con" class="con">
     <img class="image" src="{{asset('storage/'.$image_revision->path.'/'.$image_revision->name)}}">
-    <label class="d-block btn btn-primary" for="dots-submit">submit</label>
 </div>
 <div id="inputs">
+    <div class="comments-page-inputs-container">
+    <a href="{{route('orders.show-results', $image_revision->order_id)}}" class="m-auto"><div class="dots-back btn-primary btn btn-round order-btn-primary">{{__('Grįžti')}}</div></a> 
+    <label for="dots-submit" class=" dots-submit btn-primary btn btn-round order-btn-primary">{{__('Išsaugoti')}}</label>
+    </div>
 @php
 $i=0;
 @endphp

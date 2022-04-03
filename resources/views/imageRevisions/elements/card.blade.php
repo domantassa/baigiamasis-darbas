@@ -9,7 +9,7 @@
         @lang('Pridėkite komentarą')
             
             <span class="close"><i class="fa fa-times"></i></span>
-            <span style="margin-right: 10px" class="close"><i class="fa fa-trash"></i></span>
+            <span style="margin-right: 10px" class="delete"><i class="fa fa-trash"></i></span>
 
         </div>    
         <div class="c-body">

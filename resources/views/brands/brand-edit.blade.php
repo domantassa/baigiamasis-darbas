@@ -91,6 +91,9 @@
                     </script>    
                 </form>
                         <script>
+                            $('.color-trash-icon').on("click",function(){
+                                        $(this).parent().remove(); 
+                            }); 
                             $('form').submit(function(){
                                     $b=false;
                                         $('input.form-btn').each(function(){
