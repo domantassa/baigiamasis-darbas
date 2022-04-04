@@ -246,10 +246,10 @@
 
                 </div>
 
-                <div class="content-side content-side-full">
+                <div style="overflow: visible;" class="content-side content-side-full">
                     <ul class="nav-main">
                         <li class="nav-main-item">
-                            <a class="nav-main-link" href="/dashboard">
+                            <a style="padding-left: 20px; padding-right: 0px;" class="nav-main-link" href="/dashboard">
                                 <i class="nav-main-link-icon fas fa-user-tie"></i>
                                 <span class="nav-main-link-name">{{ Auth::user()->name }}</span>
                             </a>
@@ -258,7 +258,8 @@
                         <li class="nav-main-heading">{{__('Meniu')}}</li>
                         <li class="nav-main-item open">	
                                 <a class="nav-main-link" href="{{route('orders.dashboard')}}">	
-                                    <span class="nav-main-link-name">{{__('Aktyvūs projektai')}}</span>
+                                    <span class="nav-main-link-name ">{{__('Aktyvūs projektai')}}
+                                        </span>
                                 </a>
                         </li>
                        
@@ -520,7 +521,10 @@
                             });
                             </script>
                                 <div class="p-2">
-                            
+                                    <a id="help-button" class="dropdown-item d-flex align-items-center justify-content-between " href="#">
+                                        <span>{{__('Pagalba')}}</span>
+                                        <i class="si si-check ml-1"></i>
+                                    </a>
                                     <a id="save-avatar-button" class="dropdown-item d-flex align-items-center justify-content-between disabled" href="dummy-route">
                                         <span>{{__('Išsaugoti')}}</span>
                                         <i class="si si-check ml-1"></i>
@@ -631,9 +635,29 @@
                 </div>
             </header>
             <main id="main-container" class="bg-body-light">
-                
-            @yield('content')
+
+            @include('tooltips/cus-tooltip',['title'=>'Pradėti užsakymą','text'=>'Čia galite įkelti diskusijos metu aptartus failus, jie nebūtinai turi priklausyti užsakymui ar įmonės ženklui.','id'=>0, 'left'=>500, 'top'=>8])            
+
+            @include('tooltips/cus-tooltip',['title'=>'Temos pasirinkimas','text'=>'Čia galite įkelti diskusijos metu aptartus failus, jie nebūtinai turi priklausyti užsakymui ar įmonės ženklui.','id'=>1, 'left'=>220, 'top'=>8])
+
+            @include('tooltips/cus-tooltip',['title'=>'Aktyvūs projektai','text'=>'Čia galite įkelti diskusijos metu aptartus failus, jie nebūtinai turi priklausyti užsakymui ar įmonės ženklui.','id'=>2, 'left'=>210, 'top'=>170])
+
+            @include('tooltips/cus-tooltip',['title'=>'Mano failai','text'=>'Čia galite įkelti diskusijos metu aptartus failus, jie nebūtinai turi priklausyti užsakymui ar įmonės ženklui.','id'=>3, 'left'=>210, 'top'=>210])
+
+            @include('tooltips/cus-tooltip',['title'=>'Užsakymo istorija','text'=>'Čia galite įkelti diskusijos metu aptartus failus, jie nebūtinai turi priklausyti užsakymui ar įmonės ženklui.','id'=>4, 'left'=>210, 'top'=>250])
+
+            @include('tooltips/cus-tooltip',['title'=>'D.U.K','text'=>'Čia galite įkelti diskusijos metu aptartus failus, jie nebūtinai turi priklausyti užsakymui ar įmonės ženklui.','id'=>5, 'left'=>210, 'top'=>290])
+
+            @include('tooltips/cus-tooltip',['title'=>'Žinutės','text'=>'Čia galite įkelti diskusijos metu aptartus failus, jie nebūtinai turi priklausyti užsakymui ar įmonės ženklui.','id'=>6, 'left'=>210, 'top'=>330])
+
+            @include('tooltips/cus-tooltip',['title'=>'Prekės ženklas','text'=>'Čia galite įkelti diskusijos metu aptartus failus, jie nebūtinai turi priklausyti užsakymui ar įmonės ženklui.','id'=>7, 'left'=>210, 'top'=>370])
+
             
+
+            
+
+            @yield('content')
+
             </main>
 
 
@@ -645,6 +669,27 @@
         
 
     </body>
+
+    <script>
+        $('#help-button').on('click',function(e){
+            e.preventDefault();
+            $('.cus-tooltip-container').css('visibility','hidden');
+            $('.cus-tooltip-container').first().css('visibility','visible');
+        });
+        $('.cus-tooltip-hide-steps-text').on('click', function(e){
+            e.preventDefault();
+            var ele=$(this).parents('.cus-tooltip-container');
+            $(ele).css('visibility','hidden');
+        });
+        $('.cus-tooltip-next-step-button').on('click',function(e){
+            e.preventDefault();
+            var ele=$(this).parents('.cus-tooltip-container');
+            var id = $(ele).attr('data_id');
+            $(ele).css('visibility','hidden');
+            id++;
+            $('#cus-tooltip-container-'+id).css('visibility','visible');
+        });
+    </script>
     
     <script>
         window.Laravel = {csrfToken: '{{ csrf_token() }}'};

@@ -26699,6 +26699,88 @@ input.my-check-toggle-round-flat:checked + label:after {
   margin: auto;
 }
 
+.cus-tooltip-container {
+  color: black;
+  z-index: 10000;
+  position: fixed;
+  width: 300px;
+  background: #f3f3f3;
+  border: #f3f3f3 solid 2px;
+  border-radius: 5px;
+  padding: 15px;
+  box-shadow: 10px 5px 5px lightgrey;
+}
+
+.cus-tooltip-container:after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-width: 10px;
+  border-style: solid;
+  border-color: transparent #f3f3f3 transparent transparent;
+  top: 11px;
+  left: -20px;
+}
+
+.cus-tooltip-upper-box {
+  margin-bottom: 15px;
+}
+
+.cus-tooltip-title {
+  margin-bottom: 15px;
+  color: black;
+}
+
+.cus-tooltip-text {
+  font-size: 15px;
+  color: black;
+}
+
+.cus-tooltip-hide-steps-text {
+  color: gray;
+  font-size: 12px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.cus-tooltip-next-step-button {
+  margin-top: 0px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  background: #ebeaea;
+  float: right;
+  display: block;
+  cursor: pointer;
+}
+
+.cus-tooltip-next-step-button:hover {
+  margin-top: 0px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  background: black;
+  color: white;
+  float: right;
+  display: block;
+  cursor: pointer;
+}
+
+.cus-tooltip-caller .cus-tooltip-container {
+  visibility: hidden;
+}
+
+.cus-tooltip-caller:hover .cus-tooltip-container {
+  visibility: visible;
+}
+
 .color-primary {
   color: #006A56;
 }

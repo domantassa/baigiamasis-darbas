@@ -28,9 +28,7 @@
                 <div class=" {{ $files->count() ? 'block' : '' }}">
 
                     <div class="block-content">
-                        <p class="font-size-sm text-muted">
-
-                        </p>
+                        
                         <p class="font-size-sm text-muted">
                             <strong></strong>
                         </p>
