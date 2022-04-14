@@ -55,20 +55,15 @@ class User extends Authenticatable
     }
     public function notifications()
     {
-        return $this->hasMany('App\FileNotification');
+        return $this->hasMany('App\FileNotification', 'user_id');
     }
 
     public function messages()
     {
-        return $this->hasMany(Message::class);
+        return $this->hasMany('App\Message', 'receiver_user_id');
     }
 
-    public function isOnline()
-    {
-        //return Cache::has('user-is-online-' . $this->id);
-    }
-
-    function userNameShort($lenght = 27) {
+    public function userNameShort($lenght = 27) {
         if(strlen($this->name) > $lenght) {
             $strr = substr($this->name, 0, $lenght-4);
             $strr .= "...";

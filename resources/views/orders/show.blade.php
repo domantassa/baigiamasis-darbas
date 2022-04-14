@@ -1,4 +1,4 @@
-@extends('layouts.backend', ['user' => $user, 'users' => $users, 'notif' => $notif])
+@extends('layouts.layout', ['user' => $user, 'users' => $users, 'notif' => $notif])
 
 @section('content')
 <div class="bg-body-light">

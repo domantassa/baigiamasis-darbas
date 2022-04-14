@@ -1,4 +1,4 @@
-@extends('layouts.backend', ['user' => $user, 'users' => $users, 'notif' => $notif])
+@extends('layouts.layout', ['user' => $user, 'users' => $users, 'notif' => $notif])
 
 @section('content')
     <!-- Hero -->
@@ -111,9 +111,9 @@
                 </form>
                         <script>
                             $('form').submit(function(){
-                                //alert(1);
+
                                     $b=false;
-                                        //return false;
+
                                         $('input.form-btn').each(function(){
                                            
                                             if($(this).val() == "")
@@ -188,7 +188,7 @@
                        
                     
                     <div id="tableDiv" style="display:none" class="table-responsive table-wrapper-scroll-x my-custom-scrollbar">
-                    <table id="FileTable" class="table table-hover .table-responsive">
+                    <table  id="FileTable" class="table table-hover">
                         <thead>
                           <tr>
                             <th scope="col">#</th>
@@ -234,3 +234,5 @@
     </div>
     <!-- END Page Content -->
 @endsection
+
+<!--<script src="{{asset('js/custom/ordersCreateBlade.js')}}"></script> identical code (for easier calculation of js) -->

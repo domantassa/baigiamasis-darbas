@@ -103,7 +103,6 @@
         <script>
         
         var APP_URL = {!! json_encode(url('/')) !!}
-        console.log(APP_URL);
         
             
         function myFunction() {
@@ -521,9 +520,9 @@
                             });
                             </script>
                                 <div class="p-2">
-                                    <a id="help-button" class="dropdown-item d-flex align-items-center justify-content-between " href="#">
+                                    <a id="help-button" class=" dropdown-item d-flex align-items-center justify-content-between display-none-on-medium <?php if($user->position=='admin') { echo 'disabled'; } ?> " href="#">
                                         <span>{{__('Pagalba')}}</span>
-                                        <i class="si si-check ml-1"></i>
+                                        <i class="si si-info ml-1"></i>
                                     </a>
                                     <a id="save-avatar-button" class="dropdown-item d-flex align-items-center justify-content-between disabled" href="dummy-route">
                                         <span>{{__('Išsaugoti')}}</span>
@@ -636,21 +635,21 @@
             </header>
             <main id="main-container" class="bg-body-light">
 
-            @include('tooltips/cus-tooltip',['title'=>'Pradėti užsakymą','text'=>'Čia galite įkelti diskusijos metu aptartus failus, jie nebūtinai turi priklausyti užsakymui ar įmonės ženklui.','id'=>0, 'left'=>500, 'top'=>8])            
+            @include('tooltips/cus-tooltip',['title'=>'Pradėti užsakymą','text'=>'Čia galite užpildyti užsakymo informaciją. Užsakymas gali būti tiek viena nuotrauka, tiek visa jų kolekcija. Skaičius šalia simbolizuoja kiek užsakymų liko šiam mėnesiui.','id'=>0, 'left'=>500, 'top'=>8])            
 
-            @include('tooltips/cus-tooltip',['title'=>'Temos pasirinkimas','text'=>'Čia galite įkelti diskusijos metu aptartus failus, jie nebūtinai turi priklausyti užsakymui ar įmonės ženklui.','id'=>1, 'left'=>220, 'top'=>8])
+            @include('tooltips/cus-tooltip',['title'=>'Temos pasirinkimas','text'=>'Čia galite pasirinkti vieną iš 6 svetainės spalvų palečių ir pakeisti svetainės išvaizdą.','id'=>1, 'left'=>220, 'top'=>8])
 
-            @include('tooltips/cus-tooltip',['title'=>'Aktyvūs projektai','text'=>'Čia galite įkelti diskusijos metu aptartus failus, jie nebūtinai turi priklausyti užsakymui ar įmonės ženklui.','id'=>2, 'left'=>210, 'top'=>170])
+            @include('tooltips/cus-tooltip',['title'=>'Aktyvūs projektai','text'=>'Čia galite matyti aktyvių projektų būseną. Kai užsakymas turės rezultatų paruoštų peržiūrai gausite pranešimą. Nuėjus į rezultatų puslapį prie užsakymo bus galima palikti komentarą arba jeigu viskas tinka atsisiųsti rezultatus ir pakeisti užsakymo būseną į pabaigtą.','id'=>2, 'left'=>210, 'top'=>170])
 
             @include('tooltips/cus-tooltip',['title'=>'Mano failai','text'=>'Čia galite įkelti diskusijos metu aptartus failus, jie nebūtinai turi priklausyti užsakymui ar įmonės ženklui.','id'=>3, 'left'=>210, 'top'=>210])
 
-            @include('tooltips/cus-tooltip',['title'=>'Užsakymo istorija','text'=>'Čia galite įkelti diskusijos metu aptartus failus, jie nebūtinai turi priklausyti užsakymui ar įmonės ženklui.','id'=>4, 'left'=>210, 'top'=>250])
+            @include('tooltips/cus-tooltip',['title'=>'Užsakymo istorija','text'=>'Čia galite matyti pabaigtus arba atšauktus projektus, galima juos peržiūrėti, redaguoti ir jeigu apsigalvojote pakeisti būseną į redaguojama, kas pavers jį aktyviu.','id'=>4, 'left'=>210, 'top'=>250])
 
-            @include('tooltips/cus-tooltip',['title'=>'D.U.K','text'=>'Čia galite įkelti diskusijos metu aptartus failus, jie nebūtinai turi priklausyti užsakymui ar įmonės ženklui.','id'=>5, 'left'=>210, 'top'=>290])
+            @include('tooltips/cus-tooltip',['title'=>'D.U.K','text'=>'Čia galite rasti atsakymą į dažniausiai užduodamus klausimus, jeigu atsakymo neradote visada galite tiesiogiai rašyti dizaineriams.','id'=>5, 'left'=>210, 'top'=>290])
 
-            @include('tooltips/cus-tooltip',['title'=>'Žinutės','text'=>'Čia galite įkelti diskusijos metu aptartus failus, jie nebūtinai turi priklausyti užsakymui ar įmonės ženklui.','id'=>6, 'left'=>210, 'top'=>330])
+            @include('tooltips/cus-tooltip',['title'=>'Žinutės','text'=>'Čia galite aptarti su dizaineriu užsakymo eigą, būseną, iškilusius klausimus bei pastebėjimus, įkelti failus galima "Mano Failai" skiltyje, kad reikiami failai nepasimestų tarp žinučių, kai jų bus labai daug.','id'=>6, 'left'=>210, 'top'=>330])
 
-            @include('tooltips/cus-tooltip',['title'=>'Prekės ženklas','text'=>'Čia galite įkelti diskusijos metu aptartus failus, jie nebūtinai turi priklausyti užsakymui ar įmonės ženklui.','id'=>7, 'left'=>210, 'top'=>370])
+            @include('tooltips/cus-tooltip',['title'=>'Prekės ženklas','text'=>'Jeigu turėsite užsakymų, kurie turės tą pačią spalvų paletę ar panašią tematiką, galite susikurti įmonės prekės ženklą ir užsakymo kūrimo metu pridėti jį.','id'=>7, 'left'=>210, 'top'=>370])
 
             
 
@@ -690,6 +689,8 @@
             $('#cus-tooltip-container-'+id).css('visibility','visible');
         });
     </script>
+    
+    <!--<script src="{{asset('js/custom/mainLayout.js')}}"></script> identical code (for easier calculation of js) -->
     
     <script>
         window.Laravel = {csrfToken: '{{ csrf_token() }}'};

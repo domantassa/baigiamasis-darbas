@@ -1,4 +1,4 @@
-@extends('layouts.backend', ['user' => $user, 'users' => $users, 'notif' => $notif])
+@extends('layouts.layout', ['user' => $user, 'users' => $users, 'notif' => $notif])
 
 @section('content')
     <!-- Hero -->
@@ -39,7 +39,7 @@
 
                         @if ($users->count())
                             <div class="table-responsive table-wrapper-scroll-x my-custom-scrollbar ">
-                                <table class="table table-hover .table-responsive">
+                                <table class="table table-hover ">
                                     <thead>
                                         <tr>
                                             <td colspan="8">{{ __('Vardas') }} & {{ __('Pavardė') }}</td>

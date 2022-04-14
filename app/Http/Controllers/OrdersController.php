@@ -75,6 +75,9 @@ class OrdersController extends Controller
      */
     public function uploadResultStore(Request $request, $id)
     {   
+
+
+
         if(Auth()->User()->position != 'admin')
             abort(404);
 
@@ -97,7 +100,6 @@ class OrdersController extends Controller
             foreach($input["files"] as $file)
             {
             $fileName = $file->getClientOriginalName();
-                dd($file);
             $number = $order->number_of_revisions + 1;
             $order->number_of_revisions = $order->number_of_revisions + 1;
             $order->save();

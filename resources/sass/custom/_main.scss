@@ -448,6 +448,7 @@ height:
   margin-left: 5px;
   font-size: 18px;
   display: inline;
+  vertical-align: middle;
 }
 
 .disabled-button {
@@ -578,7 +579,6 @@ height:
         
         width: 100%;
         height: 100%;
-        background-color: $primary;
         color:#fff;
         
       }
@@ -749,6 +749,7 @@ font-weight:600;
 }
 
 .resource {
+  object-fit: cover;
   margin: 2px;
   width: 450px;
   height: 500px;
@@ -973,14 +974,16 @@ textarea{
   position: fixed;
   width: 300px;
   background: #f3f3f3;
-  border: rgb(243, 243, 243) solid 2px;
+  border: rgb(243, 243, 243) solid 3px;
   border-radius: 5px;
   padding: 15px;
   box-shadow: 10px 5px 5px lightgrey;
 }
 
-@media screen {
-  
+.display-none-on-medium {
+  @media (max-width: 990px) {
+    display: none !important;
+  }
 }
 
 .cus-tooltip-container:after {
@@ -1055,4 +1058,19 @@ textarea{
 
 .cus-tooltip-caller:hover .cus-tooltip-container {
   visibility: visible;
+}
+
+.img-preview-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.img-preview-container-item {
+  max-width:180px;
+  max-height:180px;
+  width: 180px;
+  height: 180px;
+  box-shadow: 5px 5px 5px lightgray;
+  //object-fit: cover;
 }

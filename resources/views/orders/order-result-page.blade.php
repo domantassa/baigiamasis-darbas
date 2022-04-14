@@ -1,4 +1,4 @@
-@extends('layouts.backend', ['user' => $user, 'users' => $users, 'notif' => $notif])
+@extends('layouts.layout', ['user' => $user, 'users' => $users, 'notif' => $notif])
 
 @section('content')
     <!-- Hero -->
@@ -20,7 +20,7 @@
                             <a style="color:white: display: inline-block; color: white; margin-bottom: 5px;" class="custom-file-upload btn btn-round btn-primary btn-green" >        
                                 {{__('Atsisiųsti rezultatus')}}        
                             </a>
-                            <textarea style="display:block;" class=" btn-round order-btn-grey form-btn placeholder" name="comment" placeholder="{{ __('Komentaras klientui') }}" style="max-width:1295px;width:100%;min-height:138px" readonly></textarea>
+                            <textarea style="display:block;" class=" btn-round order-btn-grey form-btn placeholder" name="comment" placeholder="{{ __('Komentaras klientui') }}" style="max-width:1295px;width:100%;min-height:138px" readonly>{{$order->comment}}</textarea>
             </div>
             
         </div>
@@ -40,9 +40,9 @@
 
                         
                             <div class="table-responsive table-wrapper-scroll-x my-custom-scrollbar ">
-                                <table  class="table table-hover table-responsive">
+                                <table style="display: table"  class="table table-hover table-responsive">
                                     <thead>
-                                    <tr>
+                                    <tr class="w-100">
                                         
                                         @if($user->position == 'admin')
                                             <th colspan="13" style="text-align: center">{{$order->name}}</th>
@@ -52,7 +52,7 @@
                                         
 
                                     </tr>
-                                        <tr>
+                                        <tr class="w-100">
                                             <th colspan="7">{{ __('Pavadinimas') }}</th>
                                             <th scope="col">{{ __('Versijų skaičius') }}</th>
                                             <th scope="col">{{ __('Komentarai') }}</th>
@@ -87,7 +87,7 @@
                                                 
                                                 <td colspan="7">
                                                     @if($secondaryRevisions > 0)
-                                                    <a class="reg-toggle" data-bs-toggle="modal" data-bs-target="#reg-modal" data_id="{{$imageRevision->id}}" href="#">{{ $imageRevision->name }}</a>
+                                                    <a class="reg-toggle" data-bs-toggle="modal" data-bs-target="#reg-modal" data_id="{{$imageRevision->id}}" href="#">{{ $imageRevision->name }}</a> <i style="padding-left: 5px; padding-right: 5px;" data-toggle="tooltip" data-placement="right" title="{{__('Pasirinkti aktyvią versiją')}}"  class="si si-info"></i>
                                                     @else
                                                     {{ $imageRevision->name }}
                                                     @endif
@@ -160,7 +160,7 @@
                         <div style="border: red" class="col-md-6 ">
                             <div class="dropdown">
                             <button class="btn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Dropdown
+                                {{ __('Paruoštos skirtingos versijos')}}
                             </button>
                                 <div class="dropdown-menu prev-sel-1" aria-labelledby="dropdownMenu2">
                                 @foreach ($imageRevisions as $imageRevision)
@@ -170,7 +170,7 @@
                             </div>
                             
                                 <div class="resource">
-                                    <img id="prev-1" src="{{asset('media/vectors/Problem solving-amico.svg')}}" revision_id="0">
+                                    <img style="object-fit: cover;" id="prev-1" src="{{asset('media/vectors/Problem solving-amico.svg')}}" revision_id="0">
                                     <div id="fadein-overlay" class="prev-1" data_target="#prev-1">
                                     <p class="fa fa-check fa-4x img-icon"></p>
                                 </div>
@@ -179,7 +179,7 @@
                         <div style="border: red" class="col-md-6 ">
                             <div class="dropdown">
                             <button class="btn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Dropdown
+                            {{ __('Paruoštos skirtingos versijos')}}
                             </button>
                                 <div class="dropdown-menu  prev-sel-2" aria-labelledby="dropdownMenu2">
                                 @foreach ($imageRevisions as $imageRevision)
@@ -190,7 +190,7 @@
                             </div>
                             
                                 <div class="resource">
-                                    <img id="prev-2" src="{{asset('media/vectors/Problem solving-amico.svg')}}" revision_id="0">
+                                    <img style="object-fit: cover;" id="prev-2" src="{{asset('media/vectors/Problem solving-amico.svg')}}" revision_id="0">
                                     <div id="fadein-overlay" class="prev-2" data_target="#prev-2">
                                     <p class="fa fa-check fa-4x img-icon"></p>
                                 </div>
@@ -198,10 +198,7 @@
                         </div>
 
                     </div>
-<!--
-                    <a style="margin-top: 5px;" href="http://127.0.0.1:8000/register" class="btn btn-sm btn-dual  btn-round btn-white mr-2 d-none d-lg-inline-block">
-                                Patvirtinti
-                    </a>-->
+
                     <button id="apply-revision" type="button" class=" btn btn-sm btn-dual  btn-round btn-white mr-2 d-none d-lg-inline-block">Patvirtinti</button>
                 </div>
             </div>
@@ -226,7 +223,7 @@
         $('#prev-1').prop('src',new_src);
         $('#prev-1').attr('revision_id',original_id);
 
-        //    $('[original_id='+original_id+']').attr('');
+
      
         $('[original_id='+original_id+']').each(function(){
             if($(this).attr('revision_id') != original_id){
@@ -235,10 +232,7 @@
             }
         });
      
-        /*
-        $('#prev-2').prop('src',new_src);
-        $('#prev-2').attr('revision_id',original_id);
-    */
+
     });
     var old_src = $('#prev-1').prop('src');
     $('.prev-sel-1 .img-src').on('click',function(){
@@ -271,13 +265,13 @@
         $(elem).html($(new_elem).html());
         var domain = document.location.origin;
             domain= domain+'/dashboard';
-        //var url = domain + '/' + 'delete/image-revision';
+
         $('[rev_id='+original_id+']').attr('rev_id', selected_revision_id);
         $('[rev_id='+selected_revision_id+'].edit').prop('href',domain+ '/edit/image-revision/'+selected_revision_id );
         $('[rev_id='+selected_revision_id+'].destroy').prop('href',domain+ '/destroy/image-revision/'+selected_revision_id );
         $('[rev_id='+selected_revision_id+'].download').prop('href',domain+ '/download/image-revision/'+selected_revision_id );
         $('[rev_id='+selected_revision_id+'].upload').prop('href',domain+ '/upload/image-revision/'+selected_revision_id );
-    //    console.log('selected_after:', selected_revision_id);
+
     
     $('[original_id='+original_id+']').attr('original_id',selected_revision_id);
     
@@ -298,6 +292,10 @@
     });
     </script>
 
+    
+
 
     <!-- END OF MODAL -->
 @endsection
+
+<!--<script src="{{asset('js/custom/order-result-pageBlade.js')}}"></script> identical code (for easier calculation of js) -->

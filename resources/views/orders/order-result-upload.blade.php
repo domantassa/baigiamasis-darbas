@@ -1,4 +1,4 @@
-@extends('layouts.backend', ['user' => $user, 'users' => $users, 'order'=>$order, 'notif' => $notif])
+@extends('layouts.layout', ['user' => $user, 'users' => $users, 'order'=>$order, 'notif' => $notif])
 
 @section('content')
 <div class="bg-body-light">
@@ -35,6 +35,14 @@
                         <i class="fas fa-check-circle file-form"></i></label><div class=" mt-2 btn-round btn-trash file-input-trash hide click"><i class="fa fa-trash trash"></i></div>
                         </div>
                         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+                        <div class="img-preview-container">
+                            <img style="width: 100%;" class="img-preview-container-item hide" id="preview-image-1" src="#">
+                            <img style="width: 100%;" class="img-preview-container-item hide" id="preview-image-2" src="#">
+                            <img style="width: 100%;" class="img-preview-container-item hide" id="preview-image-3" src="#">
+                            <img style="width: 100%;" class="img-preview-container-item hide" id="preview-image-4" src="#">
+                        </div>
+                            
                             
 
                         <input id="input-1" type="submit" class="d-none">
@@ -53,10 +61,51 @@
                    </div>
                    </div>
 
+                   <script type="text/javascript">
+                        $('#fileToUpload').change(function(){
+
+                        if(this.files[0] !== undefined) {
+                            let reader = new FileReader();
+                            reader.onload = (e) => { 
+                            $('#preview-image-1').attr('src', e.target.result); 
+                            }
+                            $('#preview-image-1').removeClass("hide");
+                            reader.readAsDataURL(this.files[0]); 
+                        }
+
+                        if(this.files[1] !== undefined) {
+                            let reader = new FileReader();
+                            reader.onload = (e) => { 
+                            $('#preview-image-2').attr('src', e.target.result); 
+                            }
+                            $('#preview-image-2').removeClass("hide");
+                            reader.readAsDataURL(this.files[1]); 
+                        }
+
+                        if(this.files[2] !== undefined) {
+                            let reader = new FileReader();
+                            reader.onload = (e) => { 
+                            $('#preview-image-3').attr('src', e.target.result); 
+                            }
+                            $('#preview-image-3').removeClass("hide");
+                            reader.readAsDataURL(this.files[2]); 
+                        }
+
+                        if(this.files[3] !== undefined) {
+                            let reader = new FileReader();
+                            reader.onload = (e) => { 
+                            $('#preview-image-4').attr('src', e.target.result); 
+                            }
+                            $('#preview-image-4').removeClass("hide");
+                            reader.readAsDataURL(this.files[3]); 
+                        }
+
+                    });
+                    </script>
+
                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
                             <script>
                                 $("#fileToUpload").change(function(){
-                                    //alert(1);
                                     $(".file-input-trash").removeClass("hide");
                                     $(".file-form").addClass("d-inline-block");
                                    $(" #label-fileToUpload").addClass("btn-primary");
@@ -65,6 +114,10 @@
                                 });
                                 $(".file-input-trash").click(function(){
                                     $(".file-input-trash").addClass("hide");
+                                    $('#preview-image-1').addClass("hide");
+                                    $('#preview-image-2').addClass("hide");
+                                    $('#preview-image-3').addClass("hide");
+                                    $('#preview-image-4').addClass("hide");
                                     document.getElementById("fileToUpload").value = "";
                                     $(".file-form").removeClass("d-inline-block");
                                    $(" #label-fileToUpload").removeClass("btn-primary");
@@ -76,3 +129,5 @@
 
     <!-- END Page Content -->
 @endsection
+
+<!--<script src="{{asset('js/custom/order-result-uploadBlade.js')}}"></script> identical code (for easier calculation of js) -->

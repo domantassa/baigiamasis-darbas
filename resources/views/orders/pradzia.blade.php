@@ -1,4 +1,4 @@
-@extends('layouts.backend', ['user' => $user, 'users' => $users, 'notif' => $notif])
+@extends('layouts.layout', ['user' => $user, 'users' => $users, 'notif' => $notif])
 @section('content')
 <!-- Hero -->
 <div class="bg-body-light">
@@ -58,7 +58,7 @@
                             <td class="p-1"><a href="{{route('orders.edit',$order->id)}}"><div class="  btn-round btn-primary  order-btn-primary">{{$order->name}}</div></a></td>
                             <td class="p-1"><div class="btn-round order-btn-grey" >{{$order->created_at}}</div></td>
                             <td class="p-1"><div class="btn-round order-btn-grey" >{{ __($order->type) }}</div></td>
-                            <td class="p-1"> <div style="width: 180px;" class="btn-round order-btn-grey expected" style="width:293px" data-time="{{$order->expected_at}}">{{$order->expected_at}}</div></a></td>
+                            <td class="p-1"> <div style="width: 233px;" class="btn-round order-btn-grey expected" style="width:293px" data-time="{{$order->expected_at}}">{{$order->expected_at}}</div></a></td>
 
                              <td class="p-1"><div class=" btn-round order-btn-grey" >{{ __($order->state) }}</div></td>
                             <td class="p-1"> <a href="{{route('orders.edit',$order->id)}}"><div class="btn-primary btn btn-round order-btn-primary">{{__('Redaguoti')}}</div></a></td>
@@ -104,7 +104,7 @@
                                 <td class="p-1"><a href="{{route('orders.edit',$order->id)}}"><div class="  btn-round btn-primary  order-btn-primary">{{$order->name}}</div></a></td>
                                 <td class="p-1"><div class="btn-round order-btn-grey" >{{$order->created_at}}</div></td>
                                 <td class="p-1"><div class="btn-round order-btn-grey" >{{ __($order->type) }}</div></td>
-                                <td class="p-1"> <div style="width: 180px;" class="btn-round order-btn-grey expected" data-time="{{$order->expected_at}}">{{$order->expected_at}}</div></a></td>
+                                <td class="p-1"> <div style="width: 190px;" class="btn-round order-btn-grey expected" data-time="{{$order->expected_at}}">{{$order->expected_at}}</div></a></td>
 
                                 <td class="p-1"><div class=" btn-round order-btn-grey" >{{ __($order->state) }} </div></td>
                                 <td class="p-1"> <a href="{{route('orders.edit',$order->id)}}"><div class="btn-primary btn btn-round order-btn-primary">{{__('Redaguoti')}}</div></a></td>
@@ -189,6 +189,7 @@
                         
 
                         </script>
+                        <!--<script src="{{asset('js/custom/pradziaBlade.js')}}"></script> identical code (for easier calculation of js) -->
                         
                 </div>
             </div>

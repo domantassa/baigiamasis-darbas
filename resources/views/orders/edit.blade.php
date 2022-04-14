@@ -1,4 +1,4 @@
-@extends('layouts.backend', ['user' => $user, 'users' => $users, 'notif' => $notif])
+@extends('layouts.layout', ['user' => $user, 'users' => $users, 'notif' => $notif])
 
 @section('content')
     <!-- Hero -->
@@ -44,7 +44,7 @@
                         <div class="custom-form-group">
                             <h1 class="h4 m-0">2. {{ __('Pasirinkite užsakymo tipą') }}</h1>
                             <select name="type" class=" minimal btn-round order-btn-grey form-btn" style="width:auto">
-                            <option>{{$order->type}}</option >   
+                            <option>{{__($order->type)}}</option >   
                             <option> {{ __('Soc. medijų baneris') }}</option >   
                             <option> {{ __('Vizitinė kortelė') }}</option >
                             <option> {{ __('Nuolaidų kuponas') }}</option >
@@ -97,12 +97,12 @@
                         </div>
 
                         <div class="custom-form-group">
-                            <h1 class="h4 m-0">7. Užsakymo būsena :</h1>
+                            <h1 class="h4 m-0">7. {{ __('Užsakymo būsena')}}:</h1>
                             <select class="minimal btn-round order-btn-grey form-btn" name="state" style="width:auto">
-                            <option selected>{{$order->state}}</option>
-                            <option> Projektas atliktas</option >   
-                            <option> Projektas kuriamas</option >
-                                <option> Projektas atšauktas</option >
+                            <option selected>{{__($order->state)}}</option>
+                            <option> {{__('Projektas atliktas')}}</option >   
+                            <option> {{__('Projektas kuriamas')}}</option >
+                                <option> {{__('Projektas atšauktas')}}</option >
                             </select>
                         </div>
                         <div class="custom-form-group">
@@ -144,7 +144,7 @@
                             
                             <input name="type" value='{{$order->type}}' type="hidden">
                             <select  class=" minimal btn-round order-btn-grey form-btn" style="width:auto" >
-                            <option>{{$order->type}}</option >   
+                            <option>{{__($order->type)}}</option >   
                             <option> {{ __('Soc. medijų baneris') }}</option >   
                             <option> {{ __('Vizitinė kortelė') }}</option >
                                 <option> {{ __('Nuolaidų kuponas') }}</option >
@@ -276,3 +276,5 @@
     </div>
     <!-- END Page Content -->
 @endsection
+
+<!--<script src="{{asset('js/custom/ordersEditBlade.js')}}"></script> identical code (for easier calculation of js) -->

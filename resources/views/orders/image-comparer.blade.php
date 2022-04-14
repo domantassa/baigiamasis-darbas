@@ -1,4 +1,4 @@
-@extends('layouts.backend', ['user' => $user, 'users' => $users, 'notif' => $notif])
+@extends('layouts.layout', ['user' => $user, 'users' => $users, 'notif' => $notif])
 
 @section('content')
 <style >
@@ -92,3 +92,5 @@ $('#reg-toggle').on('click',function(){
 
 </div>
 @endsection
+
+<!--<script src="{{asset('js/custom/image-comparerBlade.js')}}"></script> identical code (for easier calculation of js) -->

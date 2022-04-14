@@ -1,4 +1,4 @@
-@extends('layouts.backend', ['user' => $user, 'users' => $users, 'notif' => $notif])
+@extends('layouts.layout', ['user' => $user, 'users' => $users, 'notif' => $notif])
 
 @section('content')
 <!-- Hero -->
@@ -174,32 +174,7 @@
                                     $($child).toggleClass('d-none');
                                     }
                                 });
-                                /*
-                                $('.hex-select').on('input',function(){
-                                    hex=$(this).val();
-                                    var Hex1=hex.substring(0,2);
-                                    var Hex2=hex.substring(2,4);
-                                    var Hex3=hex.substring(4,6);
-                                    
-                                    if(hex.length==8 || hex.length==6 ){
-                                        RGB['R']=hex_to_dec(Hex1);
-                                        RGB['G']=hex_to_dec(Hex2);
-                                        RGB['B']=hex_to_dec(Hex3);
-                                    }
-                                    if(hex.length==8){
-                                    var Hex4=hex.substring(6,8);        
-                                    RGB['%']=hex_to_dec(Hex4);
-                                    }
-                                    if(hex.length==6 || hex.length==8 ){
-                                        $('.hex-range').each(function(){
-                                            var id = $(this).attr('role');
-                                            $(this).val(RGB[id]);
-                                        });
-                                    }
 
-                                    $('.hexcube').css('background',"#"+hex);
-                                });
-                                */
                                 function range(x){
                                     $('#editor-color-picker-container-'+x+' .hex-range').on('input',function(){
                                     $parent=$(this).parents('#editor-color-picker-container-'+x).find('.editor-color-picker');
@@ -282,6 +257,8 @@
                                 });
                                 </script>
 
+                                <!--<script src="{{asset('js/custom/brandColorsCreate.js')}}"></script> identical code (for easier calculation of js) -->
+
                     <div class="block-content">
                         <p class="font-size-sm text-muted">
                             
@@ -328,7 +305,7 @@
                        
                     
                     <div id="tableDiv" style="display:none" class="table-responsive table-wrapper-scroll-x my-custom-scrollbar">
-                    <table id="FileTable" class="table table-hover .table-responsive">
+                    <table id="FileTable" class="table table-hover ">
                         <thead>
                           <tr>
                             <th scope="col">#</th>

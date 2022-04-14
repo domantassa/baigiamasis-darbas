@@ -1,4 +1,4 @@
-@extends('layouts.backend')
+@extends('layouts.layout')
 @section('content')
 <div class="contentShadowInset">
         

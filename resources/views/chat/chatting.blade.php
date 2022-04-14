@@ -1,4 +1,4 @@
-@extends('layouts.backend', ['user' => $user, 'users' => $users, 'notif' => $notif])
+@extends('layouts.layout', ['user' => $user, 'users' => $users, 'notif' => $notif])
 
 @section('content')
     <!-- Hero -->
@@ -110,6 +110,8 @@ $.ajaxSetup({
 
 
     </script>
+
+    <!--<script src="{{asset('js/custom/chatting.js')}}"></script> identical code (for easier calculation of js) -->
     
       
     <!-- END Page Content -->

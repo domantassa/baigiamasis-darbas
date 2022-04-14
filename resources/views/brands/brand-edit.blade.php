@@ -1,4 +1,4 @@
-@extends('layouts.backend', ['user' => $user, 'users' => $users, 'notif' => $notif])
+@extends('layouts.layout', ['user' => $user, 'users' => $users, 'notif' => $notif])
 
 @section('content')
 <!-- Hero -->
@@ -63,13 +63,13 @@
                             
                             @foreach($colors as $color)
                             
-                            <div id="editor-color-picker-container-{{$i}}" class="d-block m-2">
+                            <div id="editor-color-picker-container-{{$i}}" class="d-block m-2 con-ed">
                                 <button type="button" id="editor-color-picker-{{$i}}" class="btn btn-primary editor-color-picker" ><div id="hexcube-{{$i}}" class="hexcube" style="background:#{{$color->color_code}}"></div></button>
                                 <ul id="hex-dropdown-{{$i}}"  class="d-none hex-dropdown"> 
-                                <div class="d-block">R<input type="range" class="hex-range"  max="255" class="hex-select-R" id="hex-select-R-{{$i}}" role="R" ></div>
-                                <div class="d-block">G<input type="range" class="hex-range"  max="255" class="hex-select-G" id="hex-select-G-{{$i}}" role="G"></div>
-                                <div class="d-block">B<input type="range" class="hex-range"  max="255" class="hex-select-B" id="hex-select-B-{{$i}}" role="B"></div>
-                                <div class="d-block">%<input type="range" class="hex-range"  max="100" class="hex-select-%" id="hex-select-%-{{$i}}" role="%"></div>
+                                <div class="d-block">R<input type="range" class="hex-range hex-select-R"   max="255" id="hex-select-R-{{$i}}" role="R" ></div>
+                                <div class="d-block">G<input type="range" class="hex-range hex-select-G"   max="255" id="hex-select-G-{{$i}}" role="G"></div>
+                                <div class="d-block">B<input type="range" class="hex-range hex-select-B"   max="255" id="hex-select-B-{{$i}}" role="B"></div>
+                                <div class="d-block">%<input type="range" class="hex-range hex-select-% hex-select-p"   max="100" id="hex-select-%-{{$i}}" role="%"></div>
                                     #<input type="text" name="hex-select-{{$i}}" value="{{$color->color_code}}" class="hex-select" id="hex-select-{{$i}}">
                                     
                                 </ul>
@@ -80,6 +80,53 @@
                             $i++;
                             @endphp
                             @endforeach
+                            <script>
+                            $('.con-ed').each(function(){
+                                
+                                var hex = $(this).find('.hex-select').val();
+                                //alert(HEX);
+                                var Hex1=hex.substring(0,2);
+                                var Hex2=hex.substring(2,4);
+                                var Hex3=hex.substring(4,6);
+                                ///alert(hex.length);
+                                if(hex.length == 8) var Hex4=hex.substring(6,8);
+                                //alert(Hex4);
+                                console.log(hex_to_dec(Hex1),hex_to_dec(Hex2),hex_to_dec(Hex3));
+                                //alert($(this).find('.hex-select-R').prop('id'));
+                                 
+                                 $(this).find('.hex-select-R').attr('value' , hex_to_dec(Hex1));
+                                 $(this).find('.hex-select-G').val(hex_to_dec(Hex2));
+                                 $(this).find('.hex-select-B').val(hex_to_dec(Hex3));
+                                 
+                                if(hex.length == 8){
+                                    $(this).find('.hex-select-p').val(hex_to_dec(Hex4));
+                                }
+                                else $(this).find('.hex-select-p').val(255);
+                                 
+                                //$(this).find('.hex-select-%').val(2);
+                            });
+
+
+                            function hex_to_dec(Hex){
+                                    var Hex1= Hex.substring(0,1);
+                                    var Hex2= Hex.substring(1,2);
+                                    if(Hex1=='A' || Hex1=='a') Hex1=10;
+                                    if(Hex1=='B' || Hex1=='b') Hex1=11;
+                                    if(Hex1=='C' || Hex1=='c') Hex1=12;
+                                    if(Hex1=='D' || Hex1=='d') Hex1=13;
+                                    if(Hex1=='E' || Hex1=='e') Hex1=14;
+                                    if(Hex1=='F' || Hex1=='f') Hex1=15;
+                                    if(Hex2=='A' || Hex2=='a') Hex2=10;
+                                    if(Hex2=='B' || Hex2=='b') Hex2=11;
+                                    if(Hex2=='C' || Hex2=='c') Hex2=12;
+                                    if(Hex2=='D' || Hex2=='d') Hex2=13;
+                                    if(Hex2=='E' || Hex2=='e') Hex2=14;
+                                    if(Hex2=='F' || Hex2=='f') Hex2=15;
+                                    Hex1=parseInt(Hex1);
+                                    Hex2=parseInt(Hex2);
+                                    return Hex1*16+Hex2;
+                                }
+                            </script>
                         </div>
                         <div class="  btn-round btn-add-color mt-2" id="hex-add" >{{__('Pridėti spalvą')}}</div>
 
@@ -179,7 +226,7 @@
                                     //});
                                 });
 
-                                $(document).on('click','.editor-color-picker',function(){ // refresh dom
+                                $(document).on('click','.editor-color-picker',function(){ 
                                     var bool=false;
                                     $parent=$(this).parent();
                                     $child=$($parent).find(".hex-dropdown");
@@ -191,32 +238,7 @@
                                     $($child).toggleClass('d-none');
                                     }
                                 });
-                            /*
-                                $('.hex-select').on('input',function(){
-                                    hex=$(this).val();
-                                    var Hex1=hex.substring(0,2);
-                                    var Hex2=hex.substring(2,4);
-                                    var Hex3=hex.substring(4,6);
-                                    
-                                    if(hex.length==8 || hex.length==6 ){
-                                        RGB['R']=hex_to_dec(Hex1);
-                                        RGB['G']=hex_to_dec(Hex2);
-                                        RGB['B']=hex_to_dec(Hex3);
-                                    }
-                                    if(hex.length==8){
-                                    var Hex4=hex.substring(6,8);        
-                                    RGB['%']=hex_to_dec(Hex4);
-                                    }
-                                    if(hex.length==6 || hex.length==8 ){
-                                        $('.hex-range').each(function(){
-                                            var id = $(this).attr('role');
-                                            $(this).val(RGB[id]);
-                                        });
-                                    }
-                                
-                                    $('.hexcube').css('background',"#"+hex);
-                                });
-                            */
+
                                 function range(x){
                                     $('#editor-color-picker-container-'+x+' .hex-range').on('input',function(){
                                     $parent=$(this).parents('#editor-color-picker-container-'+x).find('.editor-color-picker');
@@ -266,8 +288,6 @@
                                 }
 
 
-
-                                //range(0);
                                 $i={{$i}};
                                 for(var i = 0 ; i < $i ; i++)
                                 {
@@ -289,20 +309,15 @@
                                     
                                     $( $ob ).appendTo( "#hex-all" );
                                     range($i);
-                                    /*
-                                    $('#editor-color-picker-'+$i).on('click',function(){
-                                        $parent=$(this).parent();
-                                        $child=$($parent).find(".hex-dropdown");
-                                        $($child).toggleClass('d-block');
-                                        $($child).toggleClass('d-none');
-                                    });
-                                    */
+
                                     $('#color-trash-'+$i).on('click',function(){
                                         $(this).parent().remove(); 
 
                                     });
                                 });
                                 </script>
+
+                            <!--<script src="{{asset('js/custom/brandColors.js')}}"></script> identical code (for easier calculation of js) -->    
 
                     <div class="block-content">
                         <p class="font-size-sm text-muted">
@@ -329,7 +344,6 @@
                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
                             <script>
                                 $("#fileToUpload").change(function(){
-                                    //alert(1);
                                     $(".file-input-trash").removeClass("hide");
                                     $(".file-form").addClass("d-inline-block");
                                    $(" #label-fileToUpload").addClass("btn-primary");
@@ -344,13 +358,13 @@
                                    $(" #label-fileToUpload").addClass("order-btn-grey");
                                    $("#btn-text").text("{{ __('Prisegti failus') }}");
                                 });
-                                </script>
-                                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                            </script>
+                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
                        
                     
                     <div id="tableDiv" style="display:none" class="table-responsive table-wrapper-scroll-x my-custom-scrollbar">
-                    <table id="FileTable" class="table table-hover .table-responsive">
+                    <table id="FileTable" class="table table-hover ">
                         <thead>
                           <tr>
                             <th scope="col">#</th>

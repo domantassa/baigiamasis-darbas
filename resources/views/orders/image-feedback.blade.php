@@ -1,4 +1,4 @@
-@extends('layouts.backend', ['user' => $user, 'users' => $users, 'notif' => $notif])
+@extends('layouts.layout', ['user' => $user, 'users' => $users, 'notif' => $notif])
 
 @section('content')
 <style >
@@ -57,9 +57,7 @@
 
        offsetX=event.pageX-position.left;
        offsetY=event.pageY-position.top;
-    //    console.log(position.left);
-    //    console.log(event.pageX);
-    //    console.log(offsetX);
+
 
   var $dotElement = $('<div class="dot" style="top:'+offsetY+'px;left:'+offsetX+'px">'+id+'</div>');
   var $input = $('<input type="text" class="d-block" id="input-'+id+'" >');
@@ -89,3 +87,5 @@
 
 </script>
 @endsection
+
+<!--<script src="{{asset('js/custom/image-feedbackBlade.js')}}"></script> identical code (for easier calculation of js) -->
