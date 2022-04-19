@@ -31,7 +31,7 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
-
+        //dd($request,$request->request);
         $brand=new brand;
         $brand->user_id = Auth()->user()->id;
         $brand->name=$request->title;

@@ -6,7 +6,7 @@ use App\User;
 use App\file;
 use App\ImageRevision;
 use App\Order;
-
+use App\Setting;
 
 use App\FileNotification;
 use Illuminate\Http\Request;
@@ -29,11 +29,39 @@ class OrdersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $user=Auth()->user();
         $notif = Auth()->User()->notifications()->get();
+        if($request->filter_by){
+            $request->request->add(['class' => 'file']);
+            $files=$this->filter($request);
+        }
+        else{
+            $files=file::all();
+        }
 
-        $orders=Order::all();
+        if($request->order_by){
+            $request->request->add(['class' => 'file']);
+            $files=$this->sort($request);
+        }
+        else{
+            $pagination_count=9;    
+            if(Setting::where('attribute','pagination_count')->first())
+            {  
+                $setting=Setting::where('attribute','pagination_count')->first(); 
+                
+                $pagination_count=$setting->value;
+            }
+            if(Setting::where('attribute',$user->name.'_'.'pagination_count')->first())
+            {  
+                $setting=Setting::where('attribute',$user->name.'_'.'pagination_count')->first(); 
+                
+                $pagination_count=$setting->value;
+            }
+            $orders=Order::paginate($pagination_count);        
+        }
+        //$orders=Order::all();
         return view('orders.index', ['user' => Auth()->User(), 'users' => User::all(), 'orders'=>$orders, 'notif' => $notif]);    
     }
 
@@ -47,7 +75,6 @@ class OrdersController extends Controller
         $notif = Auth()->User()->notifications()->get();
 
         $order=Order::find($id);
-        
 
         return view('orders.order-result-upload', ['user' => Auth()->User(), 'users' => User::all(), 'order'=>$order, 'notif' => $notif]);    
     }
@@ -62,10 +89,9 @@ class OrdersController extends Controller
         $notif = Auth()->User()->notifications()->get();
         $order=Order::find($id);
         $imageRevisions = ImageRevision::where('order_id', $id)->get();
-        $files = file::all();
 
 
-        return view('orders.order-result-page', ['user' => Auth()->User(), 'imageRevisions' => $imageRevisions, 'users' => User::all(), 'order'=>$order, 'notif' => $notif, 'files' => $files]);    
+        return view('orders.order-result-page', ['user' => Auth()->User(), 'imageRevisions' => $imageRevisions, 'users' => User::all(), 'order'=>$order, 'notif' => $notif]);    
     }
 
 
@@ -151,11 +177,13 @@ class OrdersController extends Controller
         if(Auth()->User()->remaining < 1)
             abort(404);
 
-    
+        //$data=array(['data'=>'Naujas užsakymas nuo '.'Auth()->User()->name','link'=>'orders/'.'1/edit']);
+        //Mail::to('deividassabaliauskas@gmail.com')->send(new Notification($data));
+        //Mail::to('domantassabaliauskas@gmail.com')->send(new Notification());
         $notif = Auth()->User()->notifications()->get();
-       
+       // $orders = Order::where('owner_id', Auth()->User()->id)->get();
         $orders=Order::all();
-
+        //dd($orders);
         return view('orders.create', ['user' => Auth()->User(), 'users' => User::all(), 'orders'=>$orders, 'notif' => $notif]);    
     }
 
@@ -298,7 +326,23 @@ class OrdersController extends Controller
     }
     public function dashboard_orders(){
         $notif = Auth()->User()->notifications()->get();
-        $orders=Order::all();
+        //$orders=Order::all();
+        $user = Auth()->user();
+        $pagination_count=9;    
+        if(Setting::where('attribute','pagination_count')->first())
+        {  
+            $setting=Setting::where('attribute','pagination_count')->first(); 
+            
+            $pagination_count=$setting->value;
+        }
+        if(Setting::where('attribute',$user->name.'_'.'pagination_count')->first())
+        {  
+            $setting=Setting::where('attribute',$user->name.'_'.'pagination_count')->first(); 
+            
+            $pagination_count=$setting->value;
+        }
+        $orders=Order::paginate($pagination_count);    
+        
         return view('orders.pradzia', ['user' => Auth()->User(), 'users' => User::all(), 'orders'=>$orders, 'notif' => $notif]);   
     }
     /**
@@ -319,11 +363,9 @@ class OrdersController extends Controller
         $order->brand=$request->brand;
         $order->result=$request->result;
         $order->feedback=$request->feedback;
-        if(Auth()->User()->position == 'admin') {
-            $order->state=$request->state;
-            $order->expected_at=$request->expected_at;
-        }
+        $order->state=$request->state;
         $order->type=$request->type;
+        $order->expected_at=$request->expected_at;
         $owner = User::find($order->owner_id);
         $order->save();
         if($input != null)
@@ -352,7 +394,7 @@ class OrdersController extends Controller
         if($user->id == 1)
             {
                 FileNotification::create([
-                    'user_id' => $order->owner_id,                 
+                    'user_id' => $order->owner_id,                 //JEI BUS DAUGIAU NEI VIENAS ADMIN, PAKEISTI SIA EILUTE
                     'message' => 'Pakeista užsakymo '.$order->name. ' būsena',
                     'link' => 'orders-dashboard',
                 ]);

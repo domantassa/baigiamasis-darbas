@@ -28,6 +28,7 @@
         <meta property="og:title" content="Reklamos ekositema klientų sistema" />
         <meta property="og:url" content="http://klientams.reklamosekosistema.lt" />
         <meta property="og:image" content="https://reklamosekosistema.lt/wp-content/uploads/2019/11/reklamos-ekosistema-logo.png" />
+        
     </head>
     <body>
 

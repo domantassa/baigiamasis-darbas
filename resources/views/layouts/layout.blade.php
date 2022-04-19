@@ -150,7 +150,7 @@
         <meta property="og:url" content="http://klientams.reklamosekosistema.lt" />
         <meta property="og:image" content="https://reklamosekosistema.lt/wp-content/uploads/2019/11/reklamos-ekosistema-logo.png" />
     </head>
-    <body onload="myFunction()">
+    <body onload="myFunction()" class="d-body-none">
 
     
 
@@ -528,6 +528,10 @@
                                         <span>{{__('Išsaugoti')}}</span>
                                         <i class="si si-check ml-1"></i>
                                     </a>
+                                    <a id="save-avatar-button" class="dropdown-item d-flex align-items-center justify-content-between" href="{{route('settings.index')}}">
+                                        <span>{{__('Nustatymai')}}</span>
+                                        <i class="fa fa-cog ml-1"></i>
+                                    </a>
 
                                     <script> 
                                     $.ajaxSetup({
@@ -688,6 +692,9 @@
             id++;
             $('#cus-tooltip-container-'+id).css('visibility','visible');
         });
+        $(function(){
+            $('body').removeClass("d-body-none");
+        })
     </script>
     
     <!--<script src="{{asset('js/custom/mainLayout.js')}}"></script> identical code (for easier calculation of js) -->

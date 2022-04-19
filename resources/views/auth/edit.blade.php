@@ -34,47 +34,34 @@
                                         </span>
                                         @endif
                                     </div>
-                                    @if($user->position !== 'admin')
-                                        <div data-toggle="tooltip" data-placement="bottom" title="Galimų mėnesinių užsakymų atsinaujinimas"> 
-                                            <div class="form-group">
-                                                <input type="refresh_date" value="{{$user->refresh_date}}" style="text-align: center;" class="mx-auto form-control login-input  {{ $errors->has('refresh_date') ? ' is-invalid' : '' }}" id="refresh_date" name="refresh_date" placeholder="refresh_date" >
-                                                @if ($errors->has('refresh_date'))
-                                                <span class="invalid-feedback" role="alert" style="text-align: center">
-                                                    <strong>{{ $errors->first('refresh_date') }}</strong>
-                                                </span>
-                                                @endif
-                                            </div>
-                                        </div>
-                                    
-                                    
-                                    
-                                    <div data-toggle="tooltip" data-placement="bottom" title="Likę užsakymai">
-                                        <div class="custom-form-group" style="text-align: center;" >
-                                            <input type="number" min="0" style="text-align: center;" class="mx-auto form-control login-input  {{ $errors->has('remaining') ? ' is-invalid' : '' }}" id="remaining" name="remaining" value="{{ $user->remaining }}">
-                                        </div>
+                                    <div class="form-group">
+                                        <input type="refresh_date" value="{{$user->refresh_date}}" style="text-align: center;" class="mx-auto form-control login-input  {{ $errors->has('refresh_date') ? ' is-invalid' : '' }}" id="refresh_date" name="refresh_date" placeholder="refresh_date" >
+                                        @if ($errors->has('refresh_date'))
+                                        <span class="invalid-feedback" role="alert" style="text-align: center">
+                                            <strong>{{ $errors->first('refresh_date') }}</strong>
+                                        </span>
+                                        @endif
                                     </div>
                                     
                                     
-                                    <div  class="custom-form-group mt-3 mb-3" style="text-align: center;" >
+
+                                    <div data-toggle="tooltip" data-placement="bottom" title="Likę užsakymai">
+                                    <div class="custom-form-group" style="text-align: center;" >
+                                        <input type="number" min="0" style="text-align: center;" class="mx-auto form-control login-input  {{ $errors->has('remaining') ? ' is-invalid' : '' }}" id="remaining" name="remaining" value="{{ $user->remaining }}">
+                                    </div>
+                                    </div>
+                                    
+                                    
+                                    <div  class="custom-form-group mt-3" style="text-align: center;" >
                                         <select name="plan"  class=" minimal btn-round form-btn" style="width:auto" >
                                         <option selected>{{$user->plan}}</option>
-                                        <option> {{__('8 darbai')}}</option > 
+                                        <option> {{__('8 jobs')}}</option > 
                                         <option> Hidrosfera</option >   
                                         <option> Ekosfera</option >   
                                         <option> Atmosfera</option >   
                                                      
                                         </select>
                                     </div>
-                                    @endif
-
-                                    <div data-toggle="tooltip" data-placement="bottom" title="{{__('Slaptažodis. Galima palikti tuščią')}}">
-                                        <div class="custom-form-group" style="text-align: center;" >
-                                            <input  type="password" style="text-align: center;" class="mx-auto form-control login-input  {{ $errors->has('password') ? ' is-invalid' : '' }}" id="password" name="password" >
-                                        </div>
-                                    </div>
-
-
-
                                     <input type="hidden" id="id" name="id" value="{{$user->id}}">
 
                                 </div>

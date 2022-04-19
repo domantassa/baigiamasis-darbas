@@ -18,7 +18,6 @@ class CreateFilesTable extends Migration
             $table->unsignedInteger('owner_id');
             $table->unsignedInteger('order_id')->nullable();
             $table->string('name')->nullable();
-            $table->string('isResult')->nullable();
             $table->string('path');
             $table->timestamps();
         });

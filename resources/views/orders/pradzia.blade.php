@@ -2,16 +2,20 @@
 @section('content')
 <!-- Hero -->
 <div class="bg-body-light">
-        <div class="content content-full pt-2" >
-            <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
+        <div class="content content-full pt-2 pb-0" >
+            <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-start">
                 <h1 class="flex-sm-fill h2 my-2 invisible" data-toggle="appear"
                 data-class="animated fadeInUp"
                 data-timeout="250"
                 data-offset="-100">
                 {{__('Aktyvūs projektai')}}</h1>
-            </div>
+                <div class="d-flex" id="calendar">
+ <?php//                date('Y') date('m');?>
+                @include('widgets.calendar',['Y'=>2022,'M'=>4,'events'=>$orders])
+                </div>
+    </div>
                 
-            
+           
        </div>
     </div>
     <!-- END Hero -->
@@ -29,7 +33,7 @@
 
                     
                 <a style="margin-bottom: 20px;" href="{{route('orders.create')}}" class=" btn-round btn btn-primary">{{__('Pradėti užsakymą')}} </a>
-                
+                @include('widgets.filter')
                 <table style="overflow:scroll; width:1400px">
                     
                 
@@ -197,3 +201,12 @@
     </div>
 </div>
 @stop
+
+
+@section('js_after')
+<script src="{{asset('js/custom/calendar.js')}}"></script>
+<script >
+    calendar();
+</script>
+
+@endsection

@@ -1,0 +1,172 @@
+.calendar-cont{
+    margin-top:150px;
+    margin-bottom:150px;
+}
+table.calendar{
+    margin-bottom:10px;
+    margin-left:auto;
+    margin-right:20px;
+    margin-top:13px;
+    border:1px;
+    border-style: solid;
+    border-color: $dark;
+        th{
+            border: 1px;
+            border-style: solid;
+        border-color: $dark;
+       
+            color:#fff;
+            background-color: $primary;
+            text-align:center;
+              padding: 10px 20px 10px 20px;
+              border-width: 0px 1px 1px 1px;
+              border-style:solid;
+            border-color:$primary;
+          
+        }
+        td{
+            border:1px;
+            border-style: solid;
+        border-color: $dark;
+        width: 25px;
+        height:25px;
+        text-align: center;
+        }
+        [class^=event]{
+            background-color: $primary;
+            color:$white;
+            transition: 0.25s;
+            &:hover{
+                background-color: $primary-dark;
+            }
+            cursor:pointer;
+            button{
+                cursor:pointer;
+            }
+            }
+            button{
+                cursor: default;
+                border:none;
+                background-color: transparent;
+                width:100%;
+                height:100%;
+            }
+    
+    
+    }
+
+
+
+    
+.event_description{
+    position: absolute;
+    margin-left:-335px; //-320-45px;
+    //margin:auto;     
+    background: #fff;
+    .close {
+        padding: 1rem 1rem;
+        margin: 0rem 0rem 0rem auto;
+        &:hover{
+            cursor:pointer;
+        }
+      }
+      z-index: 2; //galery conflict
+    //border-top: 4px $primary solid !important;
+    
+      .card-body{
+        flex: 1 1 auto;
+        padding: 1.5rem 1.5rem;
+      }
+      .card-text{
+        font-size: 0.875rem !important;
+        color:#5c6082;
+        margin-bottom:1.25rem;
+      }
+      .card-title {
+        margin-bottom: .75rem;
+      }
+transition:0.25s;
+width:320px;
+
+box-shadow: 0 .275rem .75rem -0.0625rem rgba(19,16,34,.06),0 .125rem .4rem -0.0625rem rgba(19,16,34,.03) !important;
+border-radius:8px;
+      .spec-btn{
+        //background-color: rgb(64, 68, 238);
+        //border-color: rgb(64, 68, 238);
+        
+        background-color: $primary;
+        border-color: $primary;
+        color: #fff;
+        border-radius: 4px;
+        font-size: 0.75rem;
+        &:hover{
+            color: #fff;
+            opacity: 0.8;    
+        }
+      }
+        .event{
+            //text-transform: capitalize;           
+            width:100%;
+            //padding: 20px;
+            //border-bottom: 4px $primary solid;
+            
+            .list-group-item
+            {
+                // border-bottom: 2px $primary solid !important;
+                // border-top: 2px $primary solid !important;
+            }
+        }  
+                   
+
+@include for-md{
+    margin-top: 1rem;
+    position:relative;
+    margin-bottom: 1rem;
+    margin-left: 15px;
+}
+
+}
+.inactive-cal{
+
+opacity: 0.5;
+ font-weight :500 !important;   
+}
+
+
+.cal-buttons:hover{
+    transition: 0.25s;
+    cursor:pointer;
+    background:$primary-dark;
+    font-weight: 600;
+    color :$white;
+}
+.cal-today{
+    font-weight: bold;
+}
+
+.inactive-eve{
+
+    display:none;
+    }
+
+.active-eve{
+        display:block;
+}
+
+
+.holiday{
+    &:not(.inactive-cal){
+    //color:red !important;
+    font-weight: 900;
+    }
+}
+
+.cal-load{
+    thead,tbody{
+    background-color: rgba(0,0,0,0.1);
+    }
+    //opacity: 0.9;
+    //filter: blur(1px);
+    //filter: grayscale(80%);
+    //filter: brightness(0);
+}

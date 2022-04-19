@@ -26,6 +26,7 @@
             <div class="col-md-12 col-xl-12">
                 <div class="col-12 " style="padding-left:1.875rem">
                 @if(count($orders->where('owner_id',$user->id)->where('state','Projektas atliktas'))>0)
+                @include('widgets.filter')
                 <table style="overflow:scroll;width:1200px">
                     <thead>
                         
@@ -58,6 +59,7 @@
                     @if(count($orders->where('owner_id',$user1->id)->where('state','Projektas atliktas'))>0)
                     @if($user1->position != 'admin')
                     <h4 class="my-3">{{$user1->name}}</h4>
+                    
                     <table style="overflow:scroll;width:1400px">
                     <thead>
                         

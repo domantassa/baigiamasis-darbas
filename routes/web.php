@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\App;
 Auth::routes();
 
 Route::prefix('dashboard')->middleware('auth')->group(function(){ 
+  Route::get('calendar', function(){
+    return view('widgets.calendarPage')->with(['user'=>Auth::user(),'users' =>User::all(),'notif'=>Auth()->User()->notifications()->get()]);
+  })->name('calendar');
+  Route::post('calendar', 'Controller@calendar_update')->name('calendar.update');
   Route::get('duk', function(){
     
     return view('duk')->with(['user'=>Auth::user(),'users' =>User::all(),'notif'=>Auth()->User()->notifications()->get()]);
@@ -41,7 +45,6 @@ Route::prefix('dashboard')->middleware('auth')->group(function(){
   Route::get('/deleteNotifications/{user}', 'FileNotificationController@delete')->name('notifications.delete');
   Route::get('files', 'FileController@index')->name('files');
   Route::post('store/{user}', 'FileController@store')->name('upload');
-  Route::post('store/order-final-result/{orderId}', 'FileController@storeFinalResult')->name('uploadFinalResult');
   Route::get('file/{file}', 'FileController@download')->name('download');
   Route::post('orders/feedback-finished/{id}', 'OrdersController@feedback_finished')->name('orders.feedback.finished');
   Route::post('orders/finished/{id}', 'OrdersController@finished')->name('orders.finished');
@@ -76,11 +79,25 @@ Route::prefix('dashboard')->middleware('auth')->group(function(){
     Route::post('/userupdate', 'ProfilesController@update')->name('user.update');
     Route::get('/destroyUser/{user}', 'ProfilesController@destroy')->name('deleteUser');
     Route::get('/delete/{user}', 'ProfilesController@deleteDirectoryFiles')->name('deleteDir');
-    Route::match(['get', 'post'], '/{user}', 'ProfilesController@getShow')->name('showUser');
-
     Route::get('orders/upload-result/{id}', 'OrdersController@uploadResult')->name('upload-orders-result');
     Route::post('orders/upload-result/{id}', 'ImageRevisionController@store')->name('upload-order-result-store');
-
+    Route::get('settings/create','SiteSettingsController@create')->name('settings.create');
+    Route::get('settings/{id}','SiteSettingsController@show')->name('settings.show');
+    Route::get('settings/{id}/edit','SiteSettingsController@edit')->name('settings.edit');
+    Route::post('settings/store','SiteSettingsController@store')->name('settings.store');
+    Route::get('/settings','SiteSettingsController@index')->name('settings.index');
+    Route::put('settings/{id}/update','SiteSettingsController@update')->name('settings.update');
+    Route::delete('settings/{id}/delete','SiteSettingsController@destroy')->name('settings.destroy');
+  
+  
+  
+  
+  
+    Route::match(['get', 'post'], '/{user}', 'ProfilesController@getShow')->name('showUser');
+   
+  
+  
+  
   });
 });
 Route::get('/', 'ProfilesController@index')->middleware('auth');

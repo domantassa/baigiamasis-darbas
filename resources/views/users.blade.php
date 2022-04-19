@@ -38,7 +38,9 @@
 
 
                         @if ($users->count())
+                       
                             <div class="table-responsive table-wrapper-scroll-x my-custom-scrollbar ">
+                            @include('widgets.filters')
                                 <table class="table table-hover ">
                                     <thead>
                                         <tr>

@@ -23,8 +23,11 @@ export default class Tools {
             if (themeEl.length) {
                 themeEl.attr('href', themeName);
             } else {
+                
+                //jQuery('#css-main')
+                //    .before('<link rel="stylesheet" id="css-theme" href="' + themeName + '">'); */
                 jQuery('#css-main')
-                    .after('<link rel="stylesheet" id="css-theme" href="' + themeName + '">');
+                    .after('<link rel="stylesheet" id="css-theme" href="' + themeName + '">'); 
             }
         }
     }
