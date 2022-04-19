@@ -41,7 +41,6 @@ class RegisterController extends Controller
      * @return void
      */
 
-    //private $roomId;
 
     public function __construct()
     {
@@ -90,14 +89,6 @@ class RegisterController extends Controller
                 $remaining = 40;
             else
                 $remaining = 8;
-
-        // FileNotification::create([
-        //     'user_id' => 1,                 //JEI BUS DAUGIAU NEI VIENAS ADMIN, PAKEISTI SIA EILUTE
-        //     'message' => 'New user: '.$data['name'],
-        //     'link' => 'users',
-        // ]);
-
-        
 
         
         Storage::makeDirectory($data['name']);

@@ -801,14 +801,13 @@ font-weight:600;
   top:0;
   left:0;
   height:100%;
-  border:1px solid #ebebeb;
   background:#fbfbfb;
 }
 #inputs{
   width:280px;
   display:inline-block;
   height:100%;
-  border:solid #ebebeb 1px;
+  border-left:solid #ebebeb 1px;
   background:#fff;
 }
 .input{
@@ -910,7 +909,9 @@ font-weight:600;
   position: absolute;
   left:30px;
   top:-30px;
+  width: 250px;
   z-index: 1000;
+  border:solid #ebebeb 1px;
   background-color: #fff;
   .c-head{
   border-bottom: 1px solid #ccc ;

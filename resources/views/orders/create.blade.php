@@ -41,6 +41,10 @@
                             
                             <option> {{ __('Nepasirinkta') }}</option >
 
+                            @if(count($allBrands) == 0)
+                                <option> {{ __('Nepasirinkta') }}</option >
+                            @endif
+
                             @foreach ($allBrands as $oneBrand)
                                 @if((Auth::user()->id === $oneBrand->user_id))
 
@@ -89,14 +93,11 @@
                             <textarea rows="6" name="requirements" class=" btn-round order-btn-grey form-btn form-btn2" placeholder="{{ __('Pradėti rašyti') }}"></textarea>
                         </div>
                         <div class="custom-form-group">
-                            <h1 class="h4 m-0">6. {{ __('Reikalingi failai / pavyzdžiai')}}:</h1>
+                            <h1 style="margin-bottom :5px; !important" class="h4 m-0">6. {{ __('Reikalingi failai / pavyzdžiai')}}:</h1>
                         <input type="file" name="files[]" id="fileToUpload" multiple><label for="fileToUpload" id="label-fileToUpload" class="btn btn-round order-btn-grey form-btn form-btn2" style="width:auto"><diva id="btn-text" >{{ __('Prisegti failus') }} </diva>
-                        <i class="fas fa-check-circle file-form"></i></label><div class="  btn-round btn-trash file-input-trash hide click"><i class="fa fa-trash trash"></i></div>
+                        <i class="fas fa-check-circle file-form"></i></label><div style="vertical-align: revert;" class="  btn-round btn-trash file-input-trash hide click"><i class="fa fa-trash trash"></i></div>
                         </div>
                         
-                        <script>
-
-                            </script>
                         <div class="custom-form-group">
                             <h1 class="h4 m-0">7. {{ __('Papildomi komentarai') }}:</h1>
                             <textarea rows="3" name="feedback" class=" btn-round order-btn-grey form-btn " placeholder="{{ __('Pradėti rašyti') }}"></textarea>

@@ -15,13 +15,61 @@
 
                 </div>
             </div>
+
+            <div class="col-12 " style="padding-bottom:1.875rem">
+                        <table>
+                            <tbody>
+                                    @foreach ($files->where('order_id' , $order->id)->where('isResult' , 'orderResult') as $file)
+                                        
+                                    <tr>
+                                        
+                                            <td style="width:100%"><div  class=" col btn-round btn-grey mr-2" style="text-align:left">{{$file->name}}</div></td>
+                                            <td style="width:100px"><a href="{{route('download',$file->id)}}"><div  class=" btn btn-round btn-primary btn-green">{{__('Parsisiųsti')}}</div></a></td>
+                                            <td  style="width:30px"><div  class="  btn-round btn-trash"><a href="{{ route('deleteFile', ['file' => $file->id]) }}"><i class="fa fa-trash trash"></i></a></div></td>
+                                        
+                                        </tr>
+                                        @endforeach
+                            </tbody>
+                        </table>
+                        </div>
+
             <div class="custom-form-group">
                             <h1 class="h4 m-0" style="display:inline-block;"> {{ __('Dizainerio komentaras') }}</h1>
-                            <a style="color:white: display: inline-block; color: white; margin-bottom: 5px;" class="custom-file-upload btn btn-round btn-primary btn-green" >        
-                                {{__('Atsisiųsti rezultatus')}}        
-                            </a>
+                            
+                            <label class="custom-file-upload btn btn-round btn-primary btn-green" for="file-upload" >
+                            
+                                {{__('Prisegti rezultatus')}}
+                            
+                                
+                            </label>
+
+                            <form action="{{ route('uploadFinalResult', ['orderId' => $order->id]) }}" method="post" role="form" class="file-form" enctype="multipart/form-data">
+                             @csrf    
+
+                            <input id="file-upload" type="file" name="file" />
+                            <button type="submit" class="file-custom btn " data-toggle="tooltip" data-placement="top" title="Press to submit" >
+                                <span style="font-size: 17px;">
+                                    <i class="fas fa-upload"></i>
+                                </span>    
+                            </button>
+                            </form>
+                            
                             <textarea style="display:block;" class=" btn-round order-btn-grey form-btn placeholder" name="comment" placeholder="{{ __('Komentaras klientui') }}" style="max-width:1295px;width:100%;min-height:138px" readonly>{{$order->comment}}</textarea>
             </div>
+
+            
+
+            
+                    
+                    
+                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                            <script>
+                                $("#file-upload").change(function(){
+                                   $(".file-form").addClass("d-inline-block");
+                                });
+                            </script>
+
+                        
             
         </div>
     </div>

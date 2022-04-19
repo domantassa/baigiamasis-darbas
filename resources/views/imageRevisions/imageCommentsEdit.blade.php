@@ -37,10 +37,7 @@ $i++;
 @endphp
 @include('imageRevisions/elements/card',['number'=>$i,'user'=>$user,'text'=>$dot->comment,'x'=>$dot->x,'y'=>$dot->y])
 
-<?php /* <div class="dotcont" id="dotcont-{{$i}}" style="top:{{$dot->y}}px;left:{{$dot->x}}px">
-    <div class="dot" id="dot-{{$i}}">{{$i}}</div>
-    <textarea name="text-{{$i}}" class="hidinput d-none" id="hidinput-{{$i}}" placeholder="Pateikite savo įžvalgą">{{$dot->text}}</textarea>
-    <input type="hidden" name="x-{{$i}}" value="{{$dot->x}}"><input type="hidden" name="y-{{$i}}" value="{{$dot->y}}"></div>*/?>
+
 @endforeach
 </div>
 <input id="dots-submit" type="submit" class="d-none">

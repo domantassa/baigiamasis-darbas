@@ -41,6 +41,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function(){
   Route::get('/deleteNotifications/{user}', 'FileNotificationController@delete')->name('notifications.delete');
   Route::get('files', 'FileController@index')->name('files');
   Route::post('store/{user}', 'FileController@store')->name('upload');
+  Route::post('store/order-final-result/{orderId}', 'FileController@storeFinalResult')->name('uploadFinalResult');
   Route::get('file/{file}', 'FileController@download')->name('download');
   Route::post('orders/feedback-finished/{id}', 'OrdersController@feedback_finished')->name('orders.feedback.finished');
   Route::post('orders/finished/{id}', 'OrdersController@finished')->name('orders.finished');

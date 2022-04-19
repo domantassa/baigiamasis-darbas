@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\User;
 use App\file;
 use App\Message;
-use App\FileNotification;
 
 
 class ChattingController extends Controller
@@ -42,10 +41,12 @@ class ChattingController extends Controller
 
     public function chattingWithAdmin()
     {
-        $user = Auth()->user();
+        $user = Auth()
+                ->user();
         
         $messagesFromReceiver = Message::where('sender_user_id', 1)
-        ->where('receiver_user_id', $user->id)->get();
+        ->where('receiver_user_id', $user->id)
+        ->get();
 
         foreach ($messagesFromReceiver as $message) {
             if($message->seen_date == null) {

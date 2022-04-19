@@ -26534,7 +26534,6 @@ input.my-check-toggle-round-flat:checked + label:after {
   top: 0;
   left: 0;
   height: 100%;
-  border: 1px solid #ebebeb;
   background: #fbfbfb;
 }
 
@@ -26542,7 +26541,7 @@ input.my-check-toggle-round-flat:checked + label:after {
   width: 280px;
   display: inline-block;
   height: 100%;
-  border: solid #ebebeb 1px;
+  border-left: solid #ebebeb 1px;
   background: #fff;
 }
 
@@ -26645,7 +26644,9 @@ input.my-check-toggle-round-flat:checked + label:after {
   position: absolute;
   left: 30px;
   top: -30px;
+  width: 250px;
   z-index: 1000;
+  border: solid #ebebeb 1px;
   background-color: #fff;
 }
 .input-card .c-head {

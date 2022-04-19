@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\User;
 use App\file;
 use App\FileNotification;
@@ -38,8 +39,7 @@ class ProfilesController extends Controller
                 $refresh_date = $user->refresh_date;
                 
                 $refresh_dateTime = strtotime($refresh_date);
-                //$refresh_dateTime =date('U',$refresh_date)
-                //dd($refresh_dateTime);
+
                 $nowTime = time();
                 $remaining = 8;
                 if($refresh_dateTime - $nowTime < 0)
@@ -76,13 +76,6 @@ class ProfilesController extends Controller
         $files = file::where('owner_id', $id)->get();
         
         return view('dashboard', ['user' => $user, 'users' => User::all(), 'files'=>$files, 'notif' => $notif]);
-    }
-
-    public function store(Request $request, $user)
-    {
-        
-        
-        
     }
 
     public function deleteDirectoryFiles($user)
@@ -126,21 +119,12 @@ class ProfilesController extends Controller
         $user->plan=$request->plan;
         $user->remaining=$request->remaining;
         $user->refresh_date = $request->refresh_date;
+        $user->password = Hash::make($request->password);
         $user->save();
         $notif = Auth()->User()->notifications()->get();
         $files = file::where('owner_id', Auth()->User()->id)->get();
         
         return view('users', ['user' => Auth()->User(), 'users' => User::all(), 'files'=>$files, 'notif' => $notif]);
-    }
-
-    public function getAdminProfile()
-    {
-        //
-    }
-
-    public function postProfile()
-    {
-        //
     }
 
     public function show($user)

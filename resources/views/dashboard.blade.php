@@ -93,7 +93,7 @@
                         @if ($files->first() && Auth::user()->position == 'admin')
 
                         <form action="{{ route('deleteDir', ['user' => $user]) }}">
-                            <input type="submit" class="btn btn-primary" value="{{__('Delete')}} {{ __('all')}}" />
+                            <input type="submit" class="btn btn-primary" value="{{__('Ištrinti visus')}}" />
                             
                         </form>
                         @endif 
