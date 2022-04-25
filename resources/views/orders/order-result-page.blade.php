@@ -17,9 +17,9 @@
             </div>
             <div class="custom-form-group">
                             <h1 class="h4 m-0" style="display:inline-block;"> {{ __('Dizainerio komentaras') }}</h1>
-                            <a style="color:white: display: inline-block; color: white; margin-bottom: 5px;" class="custom-file-upload btn btn-round btn-primary btn-green" >        
+                            <!--<a style="color:white: display: inline-block; color: white; margin-bottom: 5px;" class="custom-file-upload btn btn-round btn-primary btn-green" >        
                                 {{__('Atsisiųsti rezultatus')}}        
-                            </a>
+                            </a>-->
                             <textarea style="display:block;" class=" btn-round order-btn-grey form-btn placeholder" name="comment" placeholder="{{ __('Komentaras klientui') }}" style="max-width:1295px;width:100%;min-height:138px" readonly>{{$order->comment}}</textarea>
             </div>
             

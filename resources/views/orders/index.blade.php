@@ -26,13 +26,7 @@
             <div class="col-md-12 col-xl-12">
                 <div class="col-12 " style="padding-left:1.875rem">
                 @if(count($orders->where('owner_id',$user->id)->where('state','Projektas atliktas'))>0)
-                @include('widgets.filters',['class'=>'Order', 'attributes'=>[
-                    'name',
-                    'type',
-                    'state',
-                    'expected_at',
-                    'created_at'
-                    ]])
+
                 <table style="overflow:scroll;width:1200px">
                     <thead>
                         
@@ -60,13 +54,7 @@
                 @if((Auth::user()->position == 'admin'))	
                     <h1 class="my-3">{{__('Visi užsakymai')}}</h1>
                     @if(count($orders->where('state','Projektas atliktas'))>0)
-                    @include('widgets.filters',['class'=>'Order','attributes'=>[
-                    'name',
-                    'type',
-                    'state',
-                    'expected_at',
-                    'created_at'
-                    ]])                
+              
                     @foreach($users as $user1)
                     @if(count($orders->where('owner_id',$user1->id)->where('state','Projektas atliktas'))>0)
                     @if($user1->position != 'admin')

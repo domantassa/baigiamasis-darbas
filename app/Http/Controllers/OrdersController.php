@@ -437,7 +437,6 @@ class OrdersController extends Controller
      */
     public function update(Request $request,  $id)
     {
-                  
         $input=$request->files->all();
         $order=Order::find($id);
         $order->requirements=$request->requirements;
@@ -448,6 +447,8 @@ class OrdersController extends Controller
         $order->feedback=$request->feedback;
         if(Auth()->User()->position != 'admin') {
             $order->state='Projektas kuriamas';
+        } else {
+            $order->state=$request->state;
         }
 
         $order->type=$request->type;
