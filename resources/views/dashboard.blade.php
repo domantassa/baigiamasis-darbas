@@ -87,12 +87,7 @@
 
                         <div class="text-center">
 
-                        @if ($files->first() && Auth::user()->position == 'admin')
-
-                        <form action="{{ route('deleteDir', ['user' => $user]) }}">
-                            <input type="submit" class="btn btn-primary" value="{{__('Delete')}} {{ __('all')}}" />
-                        </form>
-                        @endif
+                        
                      
                     </div>   
                 </div>

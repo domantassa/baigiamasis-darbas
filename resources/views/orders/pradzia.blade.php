@@ -10,8 +10,11 @@
                 data-offset="-100">
                 {{__('Aktyvūs projektai')}}</h1>
                 <div class="d-flex" id="calendar">
- <?php//                date('Y') date('m');?>
-                @include('widgets.calendar',['Y'=>2022,'M'=>4,'events'=>$orders])
+ <?php
+ $y=date('Y');
+ $m= date('m');
+ ?>
+                @include('widgets.calendar',['Y'=>$y,'M'=>$m,'events'=>$orders])
                 </div>
     </div>
                 

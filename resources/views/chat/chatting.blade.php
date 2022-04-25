@@ -30,7 +30,7 @@
                 <form id="message-form" class="message-form" >
                     <div class="row">
                         <div class="col-10">
-                    <input required type="text" name="message" id="message" class="form-control message_input" placeholder="Write a message...">
+                    <input required type="text" name="message" id="message" class="form-control message_input" placeholder="{{__('Write a message...')}}">
                         </div>
                         <div class="col-2">
                             <button type="submit" id="send-message" class="message_send btn btn-primary"><span class="show-on-monitor">{{__('Siųsti žinutę')}}</span ><span class="show-on-phone">></span></button>
