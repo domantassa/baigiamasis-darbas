@@ -298,7 +298,7 @@ class OrdersController extends Controller
                 
                 FileNotification::create([
                     'user_id' => 1,
-                    'message' => 'Naujas užsakymas nuo '.toLongString(Auth()->User()->name, 11),
+                    'message' => 'Naujas užsakymas nuo '.Auth()->User()->name,
                     'link' => 'orders/'.$order->id.'/edit',
                 ]);
                 $admin=User::find(1);

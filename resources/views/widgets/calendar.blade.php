@@ -1,7 +1,5 @@
 <?php
-//$events=[];
-//$Y=2022;
-//$M=4;
+
 $holidays=[
     ['m'=>'01','d'=>'01'],
     ['m'=>'02','d'=>'16'],
@@ -20,25 +18,17 @@ foreach($events as $event)
  $event->start_datetime=$event->created_at;
  $event->end_datetime=$event->expected_at;
 }
-$events = $events->where('state','Projektas kuriamas');
-//require_once('C:\Users\Deividas\Documents\Laravel\KABG\resources\views\events\classes.php');
-/*
-$holiday1= new Holiday(12,26,$Y);
-$holiday2= new Holiday(date('m',easter_date($Y)),date('d',easter_date($Y))+1,$Y);
-$holiday3= new Holiday(2,11,$Y);
-$holiday4= new Holiday(2,16,$Y);
-$holidayBreaks= [
-    new HolidayBreak($holiday1,2,'Kalėdų'),
-    new HolidayBreak($holiday2,1,'Pavasario'),
-    new HolidayBreak($holiday3,1,'Rudens'),
-    new HolidayBreak($holiday3,1,'Žiemos')
-];
-*/
-/*
-foreach( $holidayBreaks as $holidayBreak){
-    $holidayBreak->data();
+if(Auth()->User()->position == 'admin')
+{
+    $events = $events->where('state','Projektas kuriamas');
 }
-*/
+else 
+{
+    $events = $events->where('state','Projektas kuriamas')->where('owner_id', Auth()->User()->id);
+}
+
+
+
 $month=date('F', mktime(0, 0, 0, $M,1));
 $calendar=CAL_GREGORIAN;
 $W=gregoriantojd($M,1,$Y);
