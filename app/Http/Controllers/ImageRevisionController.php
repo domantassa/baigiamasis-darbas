@@ -229,11 +229,13 @@ class ImageRevisionController extends Controller
         {
             Storage::deleteDirectory($imageRevision->name);   
             $imageRevision->delete();
+            return back();
         }
         else if( Auth()->user()->position == 'admin')
         {
             Storage::deleteDirectory($imageRevision->name);   
             $imageRevision->delete();
+            return back();
         } 
         else
         {
