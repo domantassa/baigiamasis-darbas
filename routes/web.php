@@ -49,8 +49,8 @@ Route::prefix('dashboard')->middleware('auth')->group(function(){
   Route::post('orders/feedback-finished/{id}', 'OrdersController@feedback_finished')->name('orders.feedback.finished');
   Route::post('orders/finished/{id}', 'OrdersController@finished')->name('orders.finished');
   Route::post('orders/feedback/{id}', 'OrdersController@feedback')->name('orders.feedback');
-  Route::put('orders/feedback/{id}', 'OrdersController@feedback')->name('orders.update');
-  Route::post('orders/feedback', 'OrdersController@feedback')->name('orders.store');
+  
+  Route::post('orders/store', 'OrdersController@store')->name('orders.store');
   Route::get('orders/show/{id}', 'OrdersController@show')->name('orders.show');
   Route::get('orders/results/{id}', 'OrdersController@showResults')->name('orders.show-results');   
 
@@ -58,6 +58,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function(){
   Route::get('orders/{order}/edit','OrdersController@edit')->name('orders.edit');
   Route::get('orders/create','OrdersController@create')->name('orders.create');
   Route::get('orders/{id}','OrdersController@show')->name('orders.show');
+  Route::put('orders/update/{id}', 'OrdersController@update')->name('orders.update');
 
   Route::delete('orders/{order}','OrdersController@destroy')->name('orders.destroy');
 
