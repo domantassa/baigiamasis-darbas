@@ -56,9 +56,10 @@
             <div class="col-md-12 col-xl-12">
             <div class="col-12 " style="padding-left:1.875rem">
             @if(count($files)>0)
+            <!--
             @include('widgets.filters',['class'=>"files",
             'attributes'=>['name','created_at']
-            ])
+            ]) -->
             @endif
             <table>
                 <tbody>

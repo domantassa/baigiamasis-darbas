@@ -42,12 +42,14 @@
 
     
                 @if(count($orders->where('owner_id',$user->id)->where('state', '==' ,'Projektas kuriamas'))!=0)
+                <!--
                 @include('widgets.filters',['class'=>'Order', 'attributes'=>[
                     'name',
                     'type',
                     'expected_at',
                     'created_at'
-                    ]])
+                    ]]) 
+                -->
                 @endif
                 
 
@@ -107,12 +109,14 @@
                         <h4 class="my-3">{{$userr->name}}</h4>
                         
                         @if($orders->where('owner_id',$userr->id)->where('state', '==' ,'Projektas kuriamas')->count() > 0)
+                        <!--
                         @include('widgets.filters',['class'=>'Order', 'attributes'=>[
                     'name',
                     'type',
                     'expected_at',
                     'created_at'
                     ]])
+                        -->
                          <table style="overflow:scroll;width:1400px">
                             <thead style="margin-right:15px !important">
                                 
