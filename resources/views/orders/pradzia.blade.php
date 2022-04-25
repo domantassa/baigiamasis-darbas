@@ -14,7 +14,18 @@
  $y=date('Y');
  $m= date('m');
  ?>
+    @if($user->position!="admin")
+
+    @if(count($orders->where('owner_id',$user->id)->where('state', '==' ,'Projektas kuriamas'))!=0)
                 @include('widgets.calendar',['Y'=>$y,'M'=>$m,'events'=>$orders])
+    @endif
+
+    @else
+
+    
+                @include('widgets.calendar',['Y'=>$y,'M'=>$m,'events'=>$orders])
+
+    @endif
                 </div>
     </div>
                 
