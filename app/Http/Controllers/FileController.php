@@ -10,7 +10,7 @@ use App\FileNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Events\FileCreatedEvent;
-
+use App\Setting;
 class FileController extends Controller
 {
 

@@ -9,7 +9,6 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use App\Order;
 use App\User;
-use App\Setting;
 use DB;
 class Controller extends BaseController
 {

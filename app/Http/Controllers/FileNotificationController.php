@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\FileNotification;
 use Illuminate\Http\Request;
 use App\User;
-
+use App\Setting;
 class FileNotificationController extends Controller
 {
     /**
