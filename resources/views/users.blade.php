@@ -97,5 +97,9 @@
             //alert($(this).html());
             if($(this).prop('value')=="name") $(this).html("{{__('Vardas')}}");
         });
+        $("select.order-input option").each(function(){
+            //alert($(this).html());
+            if($(this).prop('value')=="name") $(this).html("{{__('Vardas')}}");
+        });
     </script>
 @endsection
