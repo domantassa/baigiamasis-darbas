@@ -237,7 +237,7 @@ class BrandController extends Controller
                 $brandFile->brand_id = $brand->id;
                 $brandFile->path = 'brand';
                 $brandFile->save();
-                
+                $fileName=$brandFile->name;
                 $file->move('storage/'.Auth()->user()->name.'/brands', $fileName);
                 }
             }
@@ -276,7 +276,7 @@ class BrandController extends Controller
                 $brandFile->brand_id = $brand->id;
                 $brandFile->path = 'brand';
                 $brandFile->save();
-                
+                $fileName=$brandFile->name;
                 $file->move('storage/'.Auth()->user()->name.'/brands', $fileName);
                 }
             }
