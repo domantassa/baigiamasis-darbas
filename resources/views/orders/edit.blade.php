@@ -191,7 +191,7 @@
                         </div>
                         @else
                         <div class="custom-form-group">
-                            <h1 class="h4 m-0">7. {{ __('Prisegtų failų nėra') }}</h1>
+                            <h1 class="h4 m-0">6. {{ __('Prisegtų failų nėra') }}</h1>
                         <div>
                         @endif
                         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

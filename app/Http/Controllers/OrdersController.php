@@ -446,7 +446,10 @@ class OrdersController extends Controller
         $order->brand=$request->brand;
         $order->result=$request->result;
         $order->feedback=$request->feedback;
-        $order->state=$request->state;
+        if(Auth()->User()->position != 'admin') {
+            $order->state='Projektas kuriamas';
+        }
+
         $order->type=$request->type;
         $order->expected_at=$request->expected_at;
         $owner = User::find($order->owner_id);
