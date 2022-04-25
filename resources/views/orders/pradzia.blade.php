@@ -39,11 +39,8 @@
 
                     
                 <a style="margin-bottom: 20px;" href="{{route('orders.create')}}" class=" btn-round btn btn-primary">{{__('Pradėti užsakymą')}} </a>
-                @if($user->position!="admin")
 
     
-
-
                 @if(count($orders->where('owner_id',$user->id)->where('state', '==' ,'Projektas kuriamas'))!=0)
                 @include('widgets.filters',['class'=>'Order', 'attributes'=>[
                     'name',
