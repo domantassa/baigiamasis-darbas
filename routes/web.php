@@ -56,7 +56,9 @@ Route::prefix('dashboard')->middleware('auth')->group(function(){
 
   Route::get('orders','OrdersController@index')->name('orders.index');
   Route::get('orders/{order}/edit','OrdersController@edit')->name('orders.edit');
+  Route::get('orders/create','OrdersController@create')->name('orders.create');
   Route::get('orders/{id}','OrdersController@show')->name('orders.show');
+
   Route::delete('orders/{order}','OrdersController@destroy')->name('orders.destroy');
 
   Route::get('/delete/image-revision/{orderId}/{imageRevisionId}', 'ImageRevisionController@destroy')->name('imageRevision.destroy');
