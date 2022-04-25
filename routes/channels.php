@@ -13,7 +13,5 @@
 
 Broadcast::channel('pool.{id}', function ($user, $user_id) {
     
-    //$pool = FileNotification::find($poolId);
-    //(int) $user->id === (int) $user_id
     return true;
 });

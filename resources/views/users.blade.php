@@ -40,7 +40,10 @@
                         @if ($users->count())
                        
                             <div class="table-responsive table-wrapper-scroll-x my-custom-scrollbar ">
-                            @include('widgets.filters')
+                            @include('widgets.filters',[
+                            'class'=>'User',
+                            "attributes"=>['name','created_at','plan']
+                            ])
                                 <table class="table table-hover ">
                                     <thead>
                                         <tr>

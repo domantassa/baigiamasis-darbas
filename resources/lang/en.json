@@ -105,7 +105,7 @@
     "Laikas baigėsi":"Time is over",
     "Atidaryti":"Open",
     "Peržiūrėti":"Preview",
-    "Tikėtina už":"Expected time",
+
     "Būsena":"State",
     "Žinutės":"Messages",
     "Įmonės prekės ženklas":"Brand",
@@ -184,32 +184,45 @@
     "Paslėpti":"Hide guide",
     "Kitas":"Next",
     "Pasirinkti aktyvią versiją":"Choose active version",
-    "":"",
-    "":"",
-    "":"",
-    "":"",
-    "":"",
-    "":"",
-    "":"",
-    "":"",
-    "":"",
-    "":"",
-    "":"",
-    "":"",
-    "":"",
-    "":"",
-    "":"",
-    "":"",
-    "":"",
-    "":"",
-    "":"",
-    "":"",
-    "":"",
-    "":"",
+    "attribute":"Atributas",
+    "nustatymai":"settings",
+    "Nustatymai":"Settings",
     
+    "":"",
+    "created_at":"Date",
+    "":"",
+    "":"",
+    "":"",
+    "":"",
+    "user_id":"User",
+    "Pi":"M",
+    "A":"T",
+    "T":"W",
+    "K":"T",
+    "Pe":"F",
+    "Š":"S",
+    "S":"S",
+    "":"",
+    "":"",
+
+
+    
+    "Tipas":"Type",
+    "Pradžios data":"Start date",
+    "Pabaigos data":"Estimated at",
+    "Likęs laikas":"Time left",
 
 
 
+
+
+    "Pagalba":"Help",
+    "nustatymai":"settings",
+    "Nustatymai":"Settings",
+
+
+    "Puslapio nustatymai":"Page settings",
+    "puslapio nustatymai":"page settings",
 
     "":""
 }

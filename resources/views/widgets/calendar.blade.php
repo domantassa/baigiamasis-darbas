@@ -81,10 +81,10 @@ if(strlen($M)<2) $M='0'.$M;
     <div class="card-body">
         <h5 class="card-title">{{$event->name}}</h5>
         <p class="card-text">
-        Tipas: {{$event->type}}<br>
-        Pradžios data: {{$event->created_at}}<br>
-        Pabaigos data: {{$event->expected_at}}<br>
-        Likęs laikas : <span  class="expected" data-time="{{$event->expected_at}}">01:43:09</span>
+        {{__('Tipas')}}: {{__($event->type)}}<br>
+        {{__('Pradžios data')}}: {{$event->created_at}}<br>
+        {{__('Pabaigos data')}}: {{$event->expected_at}}<br>
+        {{__('Likęs laikas')}} : <span  class="expected" data-time="{{$event->expected_at}}">00:00:00</span>
         </p>
         <a href="{{route('orders.edit',$event->id)}}" class="btn spec-btn">{{__('Peržiūrėti')}}</a>
     </div>
@@ -96,7 +96,7 @@ if(strlen($M)<2) $M='0'.$M;
 
 </div>
 
-<table class=" calendar">
+<table class=" calendar" style="width:200px">
     <thead>
     <tr>
         
@@ -107,11 +107,11 @@ if(strlen($M)<2) $M='0'.$M;
     <i class="fas fa-chevron-right"></i></th>
     </tr>
         <tr>
-            <td>{{__('P')}}</td>
+            <td>{{__('Pi')}}</td>
             <td>{{__('A')}}</td>
             <td>{{__('T')}}</td>
             <td>{{__('K')}}</td>
-            <td>{{__('P')}}</td>
+            <td>{{__('Pe')}}</td>
             <td>{{__('Š')}}</td>
             <td>{{__('S')}}</td>
         </tr>

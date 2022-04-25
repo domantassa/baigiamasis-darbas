@@ -1585,3 +1585,30 @@ a.block.block-link-shadow:active {
 .language-toggle .my-off {
   color: #a68ad4;
 }
+
+table.calendar th {
+  background-color: #a68ad4;
+  border-color: #a68ad4;
+}
+table.calendar th:hover {
+  background-color: #a68ad4;
+  border-color: #a68ad4;
+}
+table.calendar [class^=event] {
+  background-color: #a68ad4;
+}
+table.calendar [class^=event]:hover {
+  background-color: #a68ad4;
+}
+table.calendar .cal-buttons:hover {
+  transition: 0.25s;
+  cursor: pointer;
+  background: #a68ad4;
+  font-weight: 600;
+  color: #FFF;
+}
+
+.event_description .spec-btn {
+  background-color: #a68ad4;
+  border-color: #a68ad4;
+}

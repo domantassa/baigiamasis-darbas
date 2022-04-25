@@ -25,7 +25,7 @@ class ImageRevisionController extends Controller
         else{
             $imageRevisions = ImageRevision::all();
         }
-        $imageRevisions = ImageRevision::where('order_id', $id);//->get();
+        $imageRevisions = ImageRevision::where('order_id', $id);
 
         
 
@@ -121,7 +121,6 @@ class ImageRevisionController extends Controller
         {
             foreach($input["files"] as $file)
             {
-            //dd($file);
                 $fileName = date('Y-m-d-H-i-s',time()) . '-'.$file->getClientOriginalName();
             
             $number = $order->number_of_revisions + 1;
@@ -137,8 +136,6 @@ class ImageRevisionController extends Controller
             $newImageRevision->original_id = $newImageRevision->id;
             $newImageRevision->save();
             
-            // Save the file
-            //$file->storeAs('public/'.$user->name, $fileName);
             $file->move('storage/'.$owner->name, $fileName);
            }
         }
@@ -164,7 +161,7 @@ class ImageRevisionController extends Controller
      */
     public function show(ImageRevision $imageRevision)
     {
-        //
+
     }
 
     public function download($orderId, $imageRevisionId)
@@ -173,12 +170,16 @@ class ImageRevisionController extends Controller
         $order = Order::find($orderId);
         $user = User::find($order->owner_id);
         
-        if(Auth()->user()->id != $order->owner_id || Auth()->user()->position != 'admin')
+        if(Auth()->user()->id != $order->owner_id)
         {
             return Storage::download('public/'.$imageRevision->path.'/'.$imageRevision->name);
         }
-        
-        return back();
+        else if(Auth()->user()->position != 'admin'){
+            return Storage::download('public/'.$imageRevision->path.'/'.$imageRevision->name);
+        }
+        else{
+            return back();
+        }
     }
 
     /**
@@ -207,7 +208,7 @@ class ImageRevisionController extends Controller
      */
     public function update(Request $request, ImageRevision $imageRevision)
     {
-        //
+
     }
 
     /**
@@ -220,14 +221,20 @@ class ImageRevisionController extends Controller
     {   
         $order = Order::find($orderId);
         $imageRevision = ImageRevision::find($imageRevisionId);
-        if(Auth()->user()->id == $order->owner_id || Auth()->user()->position == 'admin')
+        if(Auth()->user()->id == $order->owner_id )
         {
-            //TODO CHECK THIS
-            Storage::deleteDirectory($imageRevision->name);
-            
+            Storage::deleteDirectory($imageRevision->name);   
             $imageRevision->delete();
         }
-        return back();
+        else if( Auth()->user()->position == 'admin')
+        {
+            Storage::deleteDirectory($imageRevision->name);   
+            $imageRevision->delete();
+        } 
+        else
+        {
+            return back();
+        }
     }
     public function select($id)
     { 

@@ -26,7 +26,13 @@
             <div class="col-md-12 col-xl-12">
                 <div class="col-12 " style="padding-left:1.875rem">
                 @if(count($orders->where('owner_id',$user->id)->where('state','Projektas atliktas'))>0)
-                @include('widgets.filter')
+                @include('widgets.filters',['class'=>'Order', 'attributes'=>[
+                    'name',
+                    'type',
+                    'state',
+                    'expected_at',
+                    'created_at'
+                    ]])
                 <table style="overflow:scroll;width:1200px">
                     <thead>
                         
@@ -54,7 +60,13 @@
                 @if((Auth::user()->position == 'admin'))	
                     <h1 class="my-3">{{__('Visi užsakymai')}}</h1>
                     @if(count($orders->where('state','Projektas atliktas'))>0)
-                    
+                    @include('widgets.filters',['class'=>'Order','attributes'=>[
+                    'name',
+                    'type',
+                    'state',
+                    'expected_at',
+                    'created_at'
+                    ]])                
                     @foreach($users as $user1)
                     @if(count($orders->where('owner_id',$user1->id)->where('state','Projektas atliktas'))>0)
                     @if($user1->position != 'admin')
@@ -66,7 +78,6 @@
                         <th style="width:250px"><h1 class="h4 m-0">{{__('Pavadinimas')}}</h1></th>
                         <th style="width:200px"><h1 class="h4 m-0">{{__('Užsakymo data')}}</h1></th>
                         <th style="width:250px"><h1 class="h4 m-0">{{__('Užsakymo tipas')}}</h1></th>
-                        <th style="width:150px"><h1 class="h4 m-0">{{__('Versijų skaičius')}}</h1></th>
                         <th style="width:150px"><h1 class="h4 m-0">{{__('Peržiūrėti')}}</h1></th>
                     
                     </thead>
@@ -79,7 +90,6 @@
                             <td class="p-1"><div class="btn-primary  btn-round  order-btn-primary">{{ $order->name }}</div></td>
                             <td class="p-1"><div class="  btn-round order-btn-grey" >{{ $order->created_at }}</div></td>
                             <td class="p-1"><div class="  btn-round order-btn-grey" >{{ __($order->type) }}</div></td>
-                            <td class="p-1"><div class="  btn-round order-btn-grey" >{{ __($order->number_of_revisions) }}</div></td>
                             <td class="p-1"> <a href="{{route('orders.edit',$order->id)}}"><div style="width: auto" class="btn-primary btn btn-round order-btn-primary">{{ __('Peržiūrėti') }}</div></a></td>
                         
                             </tr>
@@ -98,6 +108,7 @@
                     <a href="{{route('orders.create')}}" class=" btn-round btn btn-primary">{{__('Pradėti užsakymą')}} </a>
                     @endif
                 @endif
+                {{$orders->links()}}
                 </div>
             </div>
         </div>

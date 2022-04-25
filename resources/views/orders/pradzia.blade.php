@@ -33,7 +33,12 @@
 
                     
                 <a style="margin-bottom: 20px;" href="{{route('orders.create')}}" class=" btn-round btn btn-primary">{{__('Pradėti užsakymą')}} </a>
-                @include('widgets.filter')
+                @include('widgets.filters',['class'=>'Order', 'attributes'=>[
+                    'name',
+                    'type',
+                    'expected_at',
+                    'created_at'
+                    ]])
                 <table style="overflow:scroll; width:1400px">
                     
                 
@@ -89,13 +94,19 @@
                         <h4 class="my-3">{{$userr->name}}</h4>
                         
                         @if($orders->where('owner_id',$userr->id)->where('state', '==' ,'Projektas kuriamas')->count() > 0)
-                            <table style="overflow:scroll;width:1400px">
+                        @include('widgets.filters',['class'=>'Order', 'attributes'=>[
+                    'name',
+                    'type',
+                    'expected_at',
+                    'created_at'
+                    ]])
+                         <table style="overflow:scroll;width:1400px">
                             <thead style="margin-right:15px !important">
                                 
                             <th style="width:400px"><h1 class="h4 m-0">{{__('Peržiūrėti')}}</h1></th>
                             <th style="width:230px"><h1 class="h4 m-0">{{__('Užsakymo data')}}</h1></th>
                             <th style="width:280px"><h1 class="h4 m-0">{{__('Užsakymo tipas')}}</h1></th>
-                            <th style="width:190px"><h1 class="h4 m-0">{{__('Tikėtina už:')}}</h1></th>
+                            <th style="width:190px"><h1 class="h4 m-0">{{__('Tikėtina už')}}:</h1></th>
                             <th style="width:272px"><h1 class="h4 m-0">{{__('Būsena')}}</h1></th>
                             <th><h1 class="h4 m-0">{{__('Veiksmai')}}</h1></th>
                             
@@ -127,7 +138,7 @@
                         @endforeach
                         
                         @endif
-
+                        {{$orders->links()}}
                         <script>
                          $('.expected').each(function(){
                                 var now = new Date().getTime();

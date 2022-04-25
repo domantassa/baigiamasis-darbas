@@ -54,7 +54,10 @@ Route::prefix('dashboard')->middleware('auth')->group(function(){
   Route::get('orders/show/{id}', 'OrdersController@show')->name('orders.show');
   Route::get('orders/results/{id}', 'OrdersController@showResults')->name('orders.show-results');   
 
-  Route::resource('orders','OrdersController');
+  Route::get('orders','OrdersController@index')->name('orders.index');
+  Route::get('orders/{order}/edit','OrdersController@edit')->name('orders.edit');
+  Route::get('orders/{id}','OrdersController@show')->name('orders.show');
+  Route::delete('orders/{order}','OrdersController@destroy')->name('orders.destroy');
 
   Route::get('/delete/image-revision/{orderId}/{imageRevisionId}', 'ImageRevisionController@destroy')->name('imageRevision.destroy');
   Route::get('/download/image-revision/{orderId}/{imageRevisionId}', 'ImageRevisionController@download')->name('imageRevision.download');
@@ -62,7 +65,6 @@ Route::prefix('dashboard')->middleware('auth')->group(function(){
   Route::post('/store/image-revision/{imageRevisionId}', 'ImageCommentController@store')->name('imageComment.store');
   Route::get('/create/image-revision/new-upload/{imageRevisionId}', 'ImageRevisionController@createNewUpload')->name('imageRevision.createNewUpload');
   Route::post('/store/image-revision/new-upload/{imageRevisionId}', 'ImageRevisionController@storeNewUpload')->name('imageRevision.storeNewUpload');
-	//Route::resource('dots','DotsController');
   Route::get('/select/image-revision/{id}', 'ImageRevisionController@select')->name('imageRevision.select');
 
   Route::get('orders-dashboard','OrdersController@dashboard_orders')->name('orders.dashboard');
@@ -70,9 +72,9 @@ Route::prefix('dashboard')->middleware('auth')->group(function(){
   Route::match(['get', 'post'], '/', 'ProfilesController@index', ['user' => Auth::user()]);
   Route::post('postmsg','AjaxController@index')->name('postmsg');
   Route::post('postavatar','AjaxController@changeAvatar')->name('postavatar');
+  Route::get('notifications','FileNotificationController@index')->name('notifications.index');
+  Route::get('brands/create','BrandController@create')->name('brands.create');
 
- 
-  
   Route::middleware('admin')->group(function(){ 
     Route::get('users', 'ProfilesController@users')->name('users');
     Route::get('/user/{user}', 'ProfilesController@show')->name('user.show');
@@ -82,15 +84,15 @@ Route::prefix('dashboard')->middleware('auth')->group(function(){
     Route::get('orders/upload-result/{id}', 'OrdersController@uploadResult')->name('upload-orders-result');
     Route::post('orders/upload-result/{id}', 'ImageRevisionController@store')->name('upload-order-result-store');
     Route::get('settings/create','SiteSettingsController@create')->name('settings.create');
-    Route::get('settings/{id}','SiteSettingsController@show')->name('settings.show');
     Route::get('settings/{id}/edit','SiteSettingsController@edit')->name('settings.edit');
     Route::post('settings/store','SiteSettingsController@store')->name('settings.store');
     Route::get('/settings','SiteSettingsController@index')->name('settings.index');
     Route::put('settings/{id}/update','SiteSettingsController@update')->name('settings.update');
     Route::delete('settings/{id}/delete','SiteSettingsController@destroy')->name('settings.destroy');
   
-  
-  
+    Route::get('brands','BrandController@index')->name('brands.index');
+    
+    
   
   
     Route::match(['get', 'post'], '/{user}', 'ProfilesController@getShow')->name('showUser');

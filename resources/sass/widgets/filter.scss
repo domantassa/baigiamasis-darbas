@@ -14,3 +14,22 @@ border: none;
         color: rgb(66, 66, 66);
     }
 }
+.order-group, .filter-group{
+    display: inline-block;
+    visibility:hidden;
+    &.active{
+        visibility:visible;
+    }
+
+}
+.filter-check-group,
+.order-check-group{
+    margin-left: 5px;
+    width: 40px;
+    //border-radius:0px;
+    &.active{
+        background-color: $primary-dark;
+        //filter:brightness(0.8);
+        box-shadow: 0 0 0 0.2rem rgba($primary-dark , 0.5);
+    }
+}

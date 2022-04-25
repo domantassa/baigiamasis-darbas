@@ -26803,15 +26803,6 @@ input.my-check-toggle-round-flat:checked + label:after {
   box-shadow: 5px 5px 5px lightgray;
 }
 
-body {
-  transition: 0.15s;
-}
-
-.d-body-none {
-  transition: 0.15s;
-  opacity: 0;
-}
-
 .calendar-cont {
   margin-top: 150px;
   margin-bottom: 150px;
@@ -26974,10 +26965,21 @@ table.calendar button {
   color: #424242;
 }
 
-.color-primary {
-  color: #006A56;
+.order-group, .filter-group {
+  display: inline-block;
+  visibility: hidden;
+}
+.order-group.active, .filter-group.active {
+  visibility: visible;
 }
 
-.background-primary {
+.filter-check-group,
+.order-check-group {
+  margin-left: 5px;
+  width: 40px;
+}
+.filter-check-group.active,
+.order-check-group.active {
   background-color: #006A56;
+  box-shadow: 0 0 0 0.2rem rgba(0, 106, 86, 0.5);
 }

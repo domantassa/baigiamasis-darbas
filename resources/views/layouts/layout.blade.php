@@ -299,6 +299,22 @@
                                 <span class="nav-main-link-name">{{__('Visos paskyros')}}</span>	
                             </a>
                         </li>
+                        <li class="nav-main-item open">	
+                            <a class="nav-main-link" href="{{route('brands.index')}}">	
+                                <span class="nav-main-link-name">{{__('Brands')}}</span>	
+                            </a>
+                        </li>
+                        </li>
+                        <li class="nav-main-item open">	
+                            <a class="nav-main-link" href="{{route('settings.index')}}">	
+                                <span class="nav-main-link-name">{{__('Nustatymai')}}</span>	
+                            </a>
+                        </li>
+                        <li class="nav-main-item open">	
+                            <a class="nav-main-link" href="{{route('notifications.index')}}">	
+                                <span class="nav-main-link-name">{{__('Pranešimai')}}</span>	
+                            </a>
+                        </li>
                         @endif
                         	
                         </li>	
@@ -600,6 +616,17 @@
                                             @endforeach	
                                         </div>
                                         <li class="notif-item">
+                                            
+                                            <a class="" href="{{route('notifications.index')}}">
+
+                                            <div class="p-2 text-center">
+                                                <h5 class="dropdown-header text-uppercase">{{__('Peržiūrėti pranešimus')}}</h5>
+                                            </div>
+                                    
+                                            </a>
+                                        </li>
+                                        <li class="notif-item">
+                                            
                                             <a class="" href="{{route('notifications.delete', ['user' => $user->id])}}">
 
                                             <div class="p-2 text-center">
@@ -665,8 +692,8 @@
 
 
         </div>
-        <script src="{{ asset('js/oneui.app.js') }}"></script>
-
+        <script src="{{asset('js/oneui.app.js') }}"></script>
+        <script src="{{asset('js/custom/filters.js')}}"></script>
 
         @yield('js_after')
         
@@ -702,4 +729,5 @@
     <script>
         window.Laravel = {csrfToken: '{{ csrf_token() }}'};
     </script>
+    
 </html>

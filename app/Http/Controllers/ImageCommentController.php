@@ -20,7 +20,7 @@ class ImageCommentController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -31,11 +31,8 @@ class ImageCommentController extends Controller
     public function create($id)
     {
         $imageRevision = ImageRevision::find($id);
-        //$order = Order::find($orderId);
-        
         $notif = Auth()->User()->notifications()->get();
         $imageComments=$imageRevision->imageComments()->get();
-
         return view('imageRevisions.imageCommentsEdit')->with(['user'=>Auth::user(), 'image_revision'=>$imageRevision, 'users' =>User::all(),'notif'=>Auth()->User()->notifications()->get()]);
     }
 
@@ -83,7 +80,7 @@ class ImageCommentController extends Controller
      */
     public function show(ImageComment $imageComment)
     {
-        //
+        
     }
 
     /**
@@ -95,8 +92,6 @@ class ImageCommentController extends Controller
     public function edit($id)
     {
         $imageRevision = ImageRevision::find($id);
-        //$order = Order::find($orderId);
-        
         $notif = Auth()->User()->notifications()->get();
         $imageComments=$imageRevision->imageComments()->get();
 
@@ -112,7 +107,7 @@ class ImageCommentController extends Controller
      */
     public function update(Request $request, ImageComment $imageComment)
     {
-        //
+        
     }
 
     /**
@@ -123,6 +118,6 @@ class ImageCommentController extends Controller
      */
     public function destroy(ImageComment $imageComment)
     {
-        //
+        
     }
 }

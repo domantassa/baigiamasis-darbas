@@ -1114,5 +1114,38 @@
         .my-off{
     color:$brand-primary;
         }
+
+
+
+    }
+
+    table.calendar{
+        th{
+            background-color: $brand-primary;
+            border-color: $brand-primary;
+            &:hover{
+                background-color: $brand-primary;
+                border-color: $brand-primary;
+            }
+        }
+        [class^=event]{
+            background-color: $brand-primary;
+            &:hover{
+                background-color: $brand-primary;
+            }
+        }
+        
+        .cal-buttons:hover{
+            transition: 0.25s;
+            cursor:pointer;
+            background:$brand-primary;
+            font-weight: 600;
+            color :$white;
+        }
+
+    }
+    .event_description .spec-btn{
+        background-color: $brand-primary;
+        border-color: $brand-primary;
     }
 }

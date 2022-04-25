@@ -30,6 +30,7 @@
     },
     "dependencies": {
         "bootstrap-colorpicker": "^3.4.0",
+        "cloc": "^2.9.0",
         "laravel-echo": "^1.11.4",
         "pusher-js": "^5.1.1",
         "vanilla-picker": "^2.12.1"

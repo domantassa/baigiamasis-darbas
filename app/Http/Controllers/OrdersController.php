@@ -33,35 +33,24 @@ class OrdersController extends Controller
     {
         $user=Auth()->user();
         $notif = Auth()->User()->notifications()->get();
-        if($request->filter_by){
-            $request->request->add(['class' => 'file']);
-            $files=$this->filter($request);
+        $class='Order';
+        $objects='orders';
+        $Settings="App\\Setting";
+        if($request->filter_by || $request->order_by){
+            $request->request->add(['class' => $class]);
+            $$objects=$this->filter($request);
         }
         else{
-            $files=file::all();
-        }
-
-        if($request->order_by){
-            $request->request->add(['class' => 'file']);
-            $files=$this->sort($request);
-        }
-        else{
+            $Class="App\\".$class;
             $pagination_count=9;    
-            if(Setting::where('attribute','pagination_count')->first())
+            if($Settings::where('attribute','pagination_count')->first())
             {  
-                $setting=Setting::where('attribute','pagination_count')->first(); 
-                
+                $setting=$Settings::where('attribute','pagination_count')->first(); 
                 $pagination_count=$setting->value;
             }
-            if(Setting::where('attribute',$user->name.'_'.'pagination_count')->first())
-            {  
-                $setting=Setting::where('attribute',$user->name.'_'.'pagination_count')->first(); 
-                
-                $pagination_count=$setting->value;
-            }
-            $orders=Order::paginate($pagination_count);        
+            $$objects=$Class::paginate($pagination_count);
         }
-        //$orders=Order::all();
+        
         return view('orders.index', ['user' => Auth()->User(), 'users' => User::all(), 'orders'=>$orders, 'notif' => $notif]);    
     }
 
@@ -141,7 +130,6 @@ class OrdersController extends Controller
             $newImageRevision->original_id = $newImageRevision->id;
             $newImageRevision->save();
             
-            // Save the file
             $file->move('storage/'.$owner->name, $fileName);
            }
         }
@@ -177,13 +165,8 @@ class OrdersController extends Controller
         if(Auth()->User()->remaining < 1)
             abort(404);
 
-        //$data=array(['data'=>'Naujas užsakymas nuo '.'Auth()->User()->name','link'=>'orders/'.'1/edit']);
-        //Mail::to('deividassabaliauskas@gmail.com')->send(new Notification($data));
-        //Mail::to('domantassabaliauskas@gmail.com')->send(new Notification());
         $notif = Auth()->User()->notifications()->get();
-       // $orders = Order::where('owner_id', Auth()->User()->id)->get();
         $orders=Order::all();
-        //dd($orders);
         return view('orders.create', ['user' => Auth()->User(), 'users' => User::all(), 'orders'=>$orders, 'notif' => $notif]);    
     }
 
@@ -238,7 +221,6 @@ class OrdersController extends Controller
 
             $naujasFile->save();
             
-            // Save the file
             $file->move('storage/'.$owner->name, $fileName);
             $order->file_id=$naujasFile->id;
            }
@@ -260,15 +242,13 @@ class OrdersController extends Controller
             {
                 
                 FileNotification::create([
-                    'user_id' => 1,                 //JEI BUS DAUGIAU NEI VIENAS ADMIN, PAKEISTI SIA EILUTE
+                    'user_id' => 1,
                     'message' => 'Naujas užsakymas nuo '.toLongString(Auth()->User()->name, 11),
                     'link' => 'orders/'.$order->id.'/edit',
                 ]);
                 $admin=User::find(1);
                 $headers = "Content-Type: text/html; charset=UTF-8\r\n";
-               // mail($admin->email,'Naujas užsakymas',view('mail.notification',['data'=>'Naujas užsakymas nuo '.Auth()->User()->name,'link'=>'orders/'.$order->id.'/edit']),$headers);
                 $data=array(['data'=>'Naujas užsakymas nuo '.Auth()->User()->name,'link'=>'orders/'.$order->id.'/edit']);
-                //Mail::to($admin->email)->send(new Notification($data));
             }
 
             
@@ -292,13 +272,15 @@ class OrdersController extends Controller
      */
     public function show($id)
     {
-        //
-        //return view('responses.project-finished',['user' => Auth()->User() , 'users' => User::all() , 'notif' => Auth()->User()->notifications()->get() ]);
         $order=Order::find($id);
         
-        if($order->owner_id== Auth()->User()->id || Auth()->User()->position == 'admin')
+        if($order->owner_id== Auth()->User()->id )
         {
-        return view('orders.show', ['user' => Auth()->User() , 'users' => User::all() , 'order'=>$order , 'notif' => Auth()->User()->notifications()->get() ]);
+            return view('orders.show', ['user' => Auth()->User() , 'users' => User::all() , 'order'=>$order , 'notif' => Auth()->User()->notifications()->get() ]);
+        }
+        else if(Auth()->User()->position == 'admin')
+        {
+            return view('orders.show', ['user' => Auth()->User() , 'users' => User::all() , 'order'=>$order , 'notif' => Auth()->User()->notifications()->get() ]);    
         }
         else{
             abort(404);
@@ -313,36 +295,45 @@ class OrdersController extends Controller
      */
     public function edit($id)
     {
-        //
+        
         $order=Order::find($id);
         
-        if($order->owner_id== Auth()->User()->id || Auth()->User()->position == 'admin')
+        if($order->owner_id== Auth()->User()->id)
         {
-        return view('orders.edit', ['user' => Auth()->User() , 'users' => User::all() , 'order'=>$order , 'notif' => Auth()->User()->notifications()->get() ]);
+            return view('orders.edit', ['user' => Auth()->User() , 'users' => User::all() , 'order'=>$order , 'notif' => Auth()->User()->notifications()->get() ]);
+        }
+        else if(Auth()->User()->position == 'admin'){
+            return view('orders.edit', ['user' => Auth()->User() , 'users' => User::all() , 'order'=>$order , 'notif' => Auth()->User()->notifications()->get() ]);
         }
         else{
             abort(404);
         }
     }
-    public function dashboard_orders(){
+    public function dashboard_orders(Request $request){
         $notif = Auth()->User()->notifications()->get();
-        //$orders=Order::all();
-        $user = Auth()->user();
-        $pagination_count=9;    
-        if(Setting::where('attribute','pagination_count')->first())
-        {  
-            $setting=Setting::where('attribute','pagination_count')->first(); 
-            
-            $pagination_count=$setting->value;
-        }
-        if(Setting::where('attribute',$user->name.'_'.'pagination_count')->first())
-        {  
-            $setting=Setting::where('attribute',$user->name.'_'.'pagination_count')->first(); 
-            
-            $pagination_count=$setting->value;
-        }
-        $orders=Order::paginate($pagination_count);    
         
+        
+        $class='Order';
+        $classes="orders";
+        if($request->filter_by || $request->order_by){
+            $request->request->add(['class' => $class]);
+            $$classes=$this->filter($request);
+        }
+        else{
+            $Class="App\\".$class;
+            $pagination_count=9;    
+            if(Setting::where('attribute','pagination_count')->first())
+            {  
+                $setting=Setting::where('attribute','pagination_count')->first(); 
+                $pagination_count=$setting->value;
+            }
+            $$classes=$Class::paginate($pagination_count);
+        }
+
+
+
+        
+
         return view('orders.pradzia', ['user' => Auth()->User(), 'users' => User::all(), 'orders'=>$orders, 'notif' => $notif]);   
     }
     /**
@@ -372,7 +363,6 @@ class OrdersController extends Controller
         {
             foreach($input["files"] as $file)
             {
-            // Generate a file name with extension
             $fileName = $file->getClientOriginalName();
                 
             $naujasFile = new file;
@@ -381,9 +371,7 @@ class OrdersController extends Controller
             $naujasFile->order_id = $order->id;
             $naujasFile->owner_id = $owner->id;
             $naujasFile->save();
-            // Save the file
             $file->move('storage/'.$owner->name, $fileName);
-            //$file->move('public/'.$owner->name, $fileName);
             $order->file_id=$naujasFile->id;
            }
         }
@@ -394,17 +382,34 @@ class OrdersController extends Controller
         if($user->id == 1)
             {
                 FileNotification::create([
-                    'user_id' => $order->owner_id,                 //JEI BUS DAUGIAU NEI VIENAS ADMIN, PAKEISTI SIA EILUTE
+                    'user_id' => $order->owner_id,                 
                     'message' => 'Pakeista užsakymo '.$order->name. ' būsena',
                     'link' => 'orders-dashboard',
                 ]);
                 $user1=User::find($order->owner_id);
                 $headers = "Content-Type: text/html; charset=UTF-8\r\n";
-                //mail($user1->email,'Pakeista užsakymo būsena',view('mail.notification',['data'=>'Pakeista užsakymo '.$order->name. ' būsena','link'=>'orders-dashboard']),$headers);
                 $data=array(['data'=>'Pakeista užsakymo '.$order->name. ' būsena','link'=>'orders-dashboard']);
-                //Mail::to($user1->email)->send(new Notification($data));
                 $notif = Auth()->User()->notifications()->get();
-                $orders=Order::all();
+                
+                $class='Order';
+                $classes="orders";
+                if($request->filter_by || $request->order_by){
+                    $request->request->add(['class' => $class]);
+                    $$classes=$this->filter($request);
+                }
+                else{
+                    $Class="App\\".$class;
+                    $pagination_count=9;    
+                    if(Setting::where('attribute','pagination_count')->first())
+                    {  
+                        $setting=Setting::where('attribute','pagination_count')->first(); 
+                        $pagination_count=$setting->value;
+                    }
+                    $$classes=$Class::paginate($pagination_count);
+                }
+
+
+
                 return view('orders.pradzia', ['user' => Auth()->User(), 'users' => User::all(), 'orders'=>$orders, 'notif' => $notif]);   
             }
             
@@ -425,11 +430,14 @@ class OrdersController extends Controller
     {
         $file = file::find($file);
         $user = User::find($file->owner_id);
-        if(Auth()->user()->id == $file->owner_id || Auth()->user()->position == 'admin')
+        if(Auth()->user()->id == $file->owner_id )
         {
-            
             Storage::deleteDirectory($file->name);
-            
+            $file->delete();
+            return redirect('dashboard');
+        }
+        else if( Auth()->user()->position == 'admin'){
+            Storage::deleteDirectory($file->name);
             $file->delete();
             return redirect('dashboard');
         }
@@ -444,12 +452,16 @@ class OrdersController extends Controller
         $user = User::find($file->owner_id);
         $notif = Auth()->User()->notifications()->get();
         $files = file::where('owner_id', Auth()->User()->id)->get();
-        if(Auth()->user()->id != $file->owner_id || Auth()->user()->position != 'admin')
+        if(Auth()->user()->id != $file->owner_id )
         {
             return Storage::download('public/'.$user->name.'/'.$file->name);
         }
-        
+        else if(Auth()->user()->position != 'admin'){
+            return Storage::download('public/'.$user->name.'/'.$file->name);    
+        }
+        else{
         return back();
+        }
     }
     public function finished($id)
     {
@@ -457,15 +469,13 @@ class OrdersController extends Controller
         $order->state='Projektas pabaigtas';
         $order->save();
         FileNotification::create([
-            'user_id' => $order->owner_id,                 //JEI BUS DAUGIAU NEI VIENAS ADMIN, PAKEISTI SIA EILUTE
+            'user_id' => $order->owner_id,                
             'message' => 'Order "'.$order->name.'" finished',
             'link' => 'orders',
         ]);
         $admin=User::find(1);
         $headers = "Content-Type: text/html; charset=UTF-8\r\n";
-        //mail($admin->email,'Užsakymo atsiliepimas',view('mail.notification',['data'=>'Order "'.$order->name.'" finished','link'=>'orders']),$headers);
         $data=array(['data'=>'Order "'.$order->name.'" finished','link'=>'orders']);
-        //Mail::to($admin->email)->send(new Notification($data));
         return view('responses.project-finished',['user' => Auth()->User(),'order' => $order , 'users' => User::all() , 'notif' => Auth()->User()->notifications()->get() ]);
     }
     public function feedback_finished(Request $request,$id)
@@ -474,16 +484,14 @@ class OrdersController extends Controller
         $order->feedback=$request->feedback;
         $order->save();
         FileNotification::create([
-            'user_id' => 1,                 //JEI BUS DAUGIAU NEI VIENAS ADMIN, PAKEISTI SIA EILUTE
+            'user_id' => 1,            
             'message' => 'Order "'.$order->name.'" finished',
             'link' => 'orders',
         ]);
         $admin=User::find(1);
         $headers = "Content-Type: text/html; charset=UTF-8\r\n";
         $data=array(['data'=>'Order "'.$order->name.'" finished','link'=>'orders']);
-        //Mail::to($admin->email)->send(new Notification($data));
-        //mail($admin->email,'Užsakymo atsiliepimas',view('mail.notification',['data'=>'Order "'.$order->name.'" finished','link'=>'orders']),$headers);
-       
+        
         return view('responses.project-finished-feedback',['user' => Auth()->User() , 'users' => User::all() , 'notif' => Auth()->User()->notifications()->get() ]);
     }
     public function feedback(Request $request,$id)
@@ -493,15 +501,157 @@ class OrdersController extends Controller
         $order->state="Projektas kuriamas";
         $order->save();
         FileNotification::create([
-            'user_id' => 1,                 //JEI BUS DAUGIAU NEI VIENAS ADMIN, PAKEISTI SIA EILUTE
+            'user_id' => 1,                 
             'message' => 'Naujas atsiliepimas užsakymui "'.$order->name.'"',
             'link' => 'orders/'.$id.'/edit',
         ]);
         $headers = "Content-Type: text/html; charset=UTF-8\r\n";
         $admin=User::find(1);
-        //mail($admin->email,'Užsakymo atsiliepimas',view('mail.notification',['data'=>'Naujas atsiliepimas užsakymui "'.$order->name.'"','link'=>'orders/'.$id.'/edit']),$headers);
         $data=array(['data'=>'Naujas atsiliepimas užsakymui "'.$order->name.'"','link'=>'orders/'.$id.'/edit']);
-        //Mail::to($admin->email)->send(new Notification($data));
-        return view('responses.feedback',['user' => Auth()->User() , 'users' => User::all() , 'notif' => Auth()->User()->notifications()->get() ]);
+          return view('responses.feedback',['user' => Auth()->User() , 'users' => User::all() , 'notif' => Auth()->User()->notifications()->get() ]);
     }
+
+
+    public function filter($request){
+        $user=Auth()->user();
+        $pagination_count=9;
+        if(Setting::where('attribute',$user->name.'_'.'pagination_count')->first())
+        {  
+                $setting=Setting::where('attribute',$user->name.'_'.'pagination_count')->first(); 
+                $pagination_count=$setting->value;
+        }
+        if(Setting::where('attribute',$user->name.'_'.'order')->first() && !$request->order)
+        {
+            $setting=Setting::where('attribute',$user->name.'_'.'order')->first();
+            $request->request->add(['order' => $setting->value]);
+        
+        }
+        if(Setting::where('attribute',$user->name.'_'.'order_by')->first() && !$request->order_by)
+        {
+            $setting=Setting::where('attribute',$user->name.'_'.'order_by')->first();
+            $request->request->add(['order_by' => $setting->value]);
+        }
+        if(Setting::where('attribute',$user->name.'_'.'filter_by')->first() && !$request->filter_by)
+        {   
+            $setting=Setting::where('attribute',$user->name.'_'.'filter_by')->first();
+            $request->request->add(['filter_by' => $setting->value]);
+        }
+        if(Setting::where('attribute',$user->name.'_'.'filter_value')->first() && !$request->filter_value)
+        {   
+            $setting=Setting::where('attribute',$user->name.'_'.'filter_value')->first();
+            $request->request->add(['filter_value' => $setting->value]);
+        }
+    if(Setting::where('attribute','pagination_count')->first())
+    {  
+            $setting=Setting::where('attribute','pagination_count')->first(); 
+            $pagination_count=$setting->value;
+    }
+    if(Setting::where('attribute','order')->first() && !$request->order)
+    {
+        $setting=Setting::where('attribute','order')->first();
+        $request->request->add(['order' => $setting->value]);
+    
+    }
+    if(Setting::where('attribute','order_by')->first() && !$request->order_by)
+    {
+        $setting=Setting::where('attribute','order_by')->first();
+        $request->request->add(['order_by' => $setting->value]);
+    }
+    if(Setting::where('attribute','filter_by')->first() && !$request->filter_by)
+    {   
+        $setting=Setting::where('attribute','filter_by')->first();
+        $request->request->add(['filter_by' => $setting->value]);
+    }
+    if(Setting::where('attribute','filter_value')->first() && !$request->filter_value)
+    {   
+        $setting=Setting::where('attribute','filter_value')->first();
+        $request->request->add(['filter_value' => $setting->value]);
+    }
+    if(!$request->pagination_count)
+    {
+            $request->request->add(['pagination_count' => 9]);
+    }
+    if(!$request->order)
+    {
+        $request->request->add(['order' => 'desc']);
+    }
+    if(!$request->order_by){
+        $request->request->add(['order_by' => 'id']);
+    }
+    if(!$request->filter_by){
+        $request->request->add(['filter_by' => 'attribute']);
+    }
+    if(!$request->filter_value){
+        $request->request->add(['filter_value' => '!']);
+    }
+    if(!$request->filter_operator)
+    {
+         $request->request->add(['filter_operator' => '!=']);
+    }
+    if($request->filter_value=='!'){
+        $request->request->remove('filter_check');
+    }
+    if($request->filter_value==''){
+        $request->request->remove('filter_check');
+    }
+    $order=$request->order; 
+    $filter_by=$request->filter_by; 
+    $filter_value=$request->filter_value;
+    $order_by=$request->order_by; 
+    $filter_operator=$request->filter_operator;
+    $Class="App\\".$request->class;
+    $objects=$Class::where('id','!=','0');
+
+    if($filter_by == 'user_id' ){
+        if( $filter_operator == 'LIKE' && User::where('name',$filter_operator,"%".$filter_value."%")->first()){
+            $names = User::where('name',$filter_operator,"%".$filter_value."%")->get();
+            $objects=$Class::where('user_id',0)->get();
+            foreach($names as $name ){
+            $temp=$Class::where('user_id',$name->id)->get();
+            $objects = $objects->merge($temp);
+            }
+            
+                if($order=='desc'){
+                    $sorted = $objects->sortByDesc($order_by);
+                }
+                if($order=='asc'){
+                    $sorted = $objects->sortBy($order_by);
+                }
+                $objects = $sorted->values()->collect();
+            $objects = $objects->paginate($pagination_count)->appends([
+                'order_by'=>$order_by,
+                'order'=>$order,
+                'filter_by'=>$filter_by,
+                'filter_value'=>$filter_value,
+                'filter_operator'=>$filter_operator
+            ]);        
+            return $objects;
+        }
+        else if( User::where('name',$filter_value)->first()){
+            $name = User::where('name',$filter_value)->first();
+            $filter_value=$name->id;
+        }
+        
+    }
+
+
+    if($user->position=='admin' && $request->filter_check){
+        if($filter_operator=='LIKE' ||$filter_operator=='NOT LIKE') {
+            $objects = $Class::where($filter_by,$filter_operator,"%".$filter_value."%");
+        }
+        else $objects = $Class::where($filter_by,$filter_operator,$filter_value);
+    }
+    else if($request->filter_check)
+    {
+        if($filter_operator=='LIKE' || $filter_operator=='NOT LIKE') {
+            $objects = $Class::where($filter_by,$filter_operator,"%".$filter_value."%");
+        }
+        else $objects = $Class::where($filter_by,$filter_operator,$filter_value);
+        
+        $objects = $objects->where('owner_id',$user->id);
+    }
+    $objects->orderBy($order_by,$order);
+    $objects = $objects->paginate($pagination_count)->appends(['order_by'=>$order_by,'order'=>$order,'filter_by'=>$filter_by,'filter_value'=>$filter_value,'filter_operator'=>$filter_operator]);
+    return $objects;
+}
 }

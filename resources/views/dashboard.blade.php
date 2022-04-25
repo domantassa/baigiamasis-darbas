@@ -55,37 +55,34 @@
             
             <div class="col-md-12 col-xl-12">
             <div class="col-12 " style="padding-left:1.875rem">
+            @if(count($files)>0)
+            @include('widgets.filters',['class'=>"files",
+            'attributes'=>['name','created_at']
+            ])
+            @endif
             <table>
                 <tbody>
-                        @foreach ($files->where('order_id',null) as $file)
-                            
+                            @foreach ($files->where('order_id',null) as $file)
                            <tr>
                             
                                 <td style="width:100%"><div  class=" col btn-round btn-grey mr-2" style="text-align:left">{{$file->name}}</div></td>
                                 <td style="width:100px"><a href="{{route('download',$file->id)}}"><div  class=" btn btn-round btn-primary btn-green">{{__('Parsisiųsti')}}</div></a></td>
                                 <td  style="width:30px"><div  class="  btn-round btn-trash"><a href="{{ route('deleteFile', ['file' => $file->id]) }}"><i class="fa fa-trash trash"></i></a></div></td>
-                            
+
                             </tr>
                             @endforeach
-                </tbody>
+                    </tbody>
             </table>
-            </div>
+            {{$files->links()}}
                 
+            </div>
                 <div class=" {{ $files->count() ? 'blockWithTopMargin' : '' }}">
-
                     <div class="block-content">
-                        <p class="font-size-sm text-muted">
-                            
-                        </p>
-                        <p class="font-size-sm text-muted">
-                             <strong></strong>
-                        </p>
+
 
                         <form action="{{ route('upload', ['user' => $user]) }}" method="post" role="form" enctype="multipart/form-data">
                             @csrf
                             <input type="file" name="file" id="file" aria-label="File browser example">
-                            
-                            
                         </form>
 
                         <div class="text-center">
@@ -94,19 +91,13 @@
 
                         <form action="{{ route('deleteDir', ['user' => $user]) }}">
                             <input type="submit" class="btn btn-primary" value="{{__('Delete')}} {{ __('all')}}" />
-                            
                         </form>
-                        @endif 
-                           
-                        
-                    </div>
-                            
-                        
-                        
-                    </div>
-
+                        @endif
+                     
+                    </div>   
                 </div>
             </div>
+        </div>
         </div>
     </div>
     <!-- END Page Content -->

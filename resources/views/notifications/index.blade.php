@@ -9,7 +9,7 @@
                     <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
                         <h1 class="flex-sm-fill h2 my-2 invisible" data-toggle="appear" data-class="animated fadeInUp"
                             data-timeout="250" data-offset="-100">
-                            {{ __('Puslapio nustatymai') }} </h1>
+                            {{ __('Pranešimai') }} </h1>
                     </div>
 
 
@@ -32,12 +32,12 @@
 
 
 
-                        @if ($settings->count())
+                        
                             <div class="table-responsive table-wrapper-scroll-x my-custom-scrollbar ">
-                            @include('widgets.filters',['class'=>'Setting','attributes'=>[
-                                'attribute',
-                                'value'
-                                ]
+                            @include('widgets.filters',['class'=>'FileNotification', 'attributes'=>[
+                            'message',
+                            'created_at'
+                            ]
                                 ])  
                                 <table class="table table-hover ">
                                     <thead>
@@ -45,34 +45,32 @@
                                       
                                     </tr>
                                     <tr>
-                                        <th>{{__('Attribute')}}</th>
-                                        <th>{{__('Value')}}</th>
-                                        <th scope="col"><i class="fas fa-edit"></i></th>
+                                        <th>{{__('Žinutė')}}</th>
+                                        
+                                        <th>{{__('Data')}}</th>
                                         <th scope="col"><i class="fas fa-trash"></i></th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach( $settings as $setting)
+                                    @foreach( $notifications as $notification)
                                         <tr>
-                                            <td>{{$setting->attribute}}</td>
-                                            <td>{{$setting->value}}</td>
-                                            <td><a href="{{route('settings.edit',$setting->id)}}" ><i
-                                                            class="fas fa-edit"></i></a></a></td>
-                                            <td> 
-                                                <form method="post" action="{{route('settings.destroy',$setting->id)}}">
+                                            <td><a href="/dashboard/{{$notification->link}}">{{$notification->message}}</a></td>
+
+                                            <td>{{$notification->created_at}}</td>
+                                            <td>    
+                                                <form method="post" action="{{route('notifications.destroy',$notification->id)}}">
                                                 <input type="hidden" name="_method" value="DELETE">
                                                 @csrf    
-                                                <label for="form-delete-{{$setting->id}}" syle="cursor:pointer"><i class="fas fa-trash"></i></label>
-                                                <input id="form-delete-{{$setting->id}}" type="submit" class="d-none">
+                                                <a href="{{ route('notifications.destroy',$notification->id) }} "><i
+                                                            class="fas fa-trash"></i></a>
                                                 </form>
                                             </td>
                                         </tr>
                                     @endforeach
                                     </tbody>
                                 </table>
-                                {{$settings->links()}}
+                                <?php /* {{$settings->links()}}*/?>
                             </div>
-                        @endif
                     </div>
                 </div>
                 <div class="block-header">
