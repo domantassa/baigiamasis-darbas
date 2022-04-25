@@ -204,6 +204,7 @@ class BrandController extends Controller
     public function update(Request $request, $id)
     {
         $brand= brand::find($id);
+        $user = User::find($brand->user_id);
         if($brand->user_id== Auth()->User()->id )
         {
             $colors=$brand->colors();
@@ -238,7 +239,7 @@ class BrandController extends Controller
                 $brandFile->path = 'brand';
                 $brandFile->save();
                 $fileName=$brandFile->name;
-                $file->move('storage/'.Auth()->user()->name.'/brands', $fileName);
+                $file->move('storage/'.$user->name.'/brands', $fileName);
                 }
             }
             return back();
@@ -277,7 +278,7 @@ class BrandController extends Controller
                 $brandFile->path = 'brand';
                 $brandFile->save();
                 $fileName=$brandFile->name;
-                $file->move('storage/'.Auth()->user()->name.'/brands', $fileName);
+                $file->move('storage/'.$user->name.'/brands', $fileName);
                 }
             }
             return back();
