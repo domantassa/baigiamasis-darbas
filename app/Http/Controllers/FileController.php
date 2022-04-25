@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Order;
 use App\file;
+use App\brand;
+use App\BrandFile;
 use App\Events\MyEvent;
 use App\FileNotification;
 use Illuminate\Http\Request;
@@ -166,25 +168,35 @@ class FileController extends Controller
         $file = file::find($id);
 
         if($file)
-        {
-        $user = User::find($file->owner_id);
-        if($file->order_id)
-        {
-        $order = Order::find($file->order_id);
-        $user = User::find($order->owner_id);
-            if(  Auth()->user()->id == $order->owner_id || Auth()->user()->position == 'admin' ){
-                return Storage::download('public/'.$file->path.'/'.$file->name);
+            {
+            $user = User::find($file->owner_id);
+            if($file->order_id)
+            {
+            $order = Order::find($file->order_id);
+            $user = User::find($order->owner_id);
+                if(  Auth()->user()->id == $order->owner_id || Auth()->user()->position == 'admin' ){
+                    return Storage::download('public/'.$file->path.'/'.$file->name);
+                }
+            }
+            else{
+                if(Auth()->user()->id == $file->owner_id  || Auth()->user()->position == 'admin' )
+                {  
+                    return Storage::download('public/'.$file->path.'/'.$file->name);
+                }
             }
         }
-        else{
-        if(Auth()->user()->id == $file->owner_id  || Auth()->user()->position == 'admin' )
-        {  
-            return Storage::download('public/'.$file->path.'/'.$file->name);
-        }
-     }
-    }
         return back();
     }
+
+    public function brandDownload($id) {
+        $brandFile = BrandFile::find($id);
+        $brand = brand::find($brandFile->brand_id);
+        $user = User::find($brand->user_id);
+        return Storage::download('public/'.$user->name.'/brands/'.$brandFile->name);
+
+
+    }
+
     public function form()
     {
         $notif = Auth()

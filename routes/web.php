@@ -46,6 +46,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function(){
   Route::get('files', 'FileController@index')->name('files');
   Route::post('store/{user}', 'FileController@store')->name('upload');
   Route::get('file/{file}', 'FileController@download')->name('download');
+  Route::get('brandfile/{file}', 'FileController@brandDownload')->name('brands.download');
   Route::post('orders/feedback-finished/{id}', 'OrdersController@feedback_finished')->name('orders.feedback.finished');
   Route::post('orders/finished/{id}', 'OrdersController@finished')->name('orders.finished');
   Route::post('orders/feedback/{id}', 'OrdersController@feedback')->name('orders.feedback');

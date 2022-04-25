@@ -50,7 +50,12 @@
                         
                         <div class="custom-form-group">
                             <h1 class="h4 m-0">5. {{__('Įmonės prekės ženklo failai / pavyzdžiai')}}:</h1>
-                            
+                            @foreach($brand->files()->get() as $file)
+                            <div>
+                            <a href="{{route('brands.download',$file->id)}}"><label class="btn btn-round order-btn-grey form-btn mr-2" style="width:auto" >{{ __('Atsisiųsti') }}</label></a>
+                            {{$file->name}}
+                            </div>
+                            @endforeach
                          
                         <input type="file" name="files[]" id="fileToUpload" multiple><label for="fileToUpload" id="label-fileToUpload" class="btn btn-round order-btn-grey form-btn form-btn2 mt-2" style="width:auto"><diva id="btn-text" >{{ __('Prisegti failus') }} </diva>
                         <i class="fas fa-check-circle file-form"></i></label><div class=" mt-2 btn-round btn-trash file-input-trash hide click"><i class="fa fa-trash trash"></i></div>

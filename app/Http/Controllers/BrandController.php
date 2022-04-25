@@ -113,7 +113,7 @@ class BrandController extends Controller
             $brandFile->save();
             
             $file->move(
-                'storage/'.Auth()->user()->name.'/brands', 
+                'storage/'.Auth()->user()->name.'/brand', 
                 $file->getClientOriginalName()
             );
            }
