@@ -105,7 +105,7 @@
                                                     </a> 
                                                 </td>
                                                 <td colspan="col">
-                                                     <a rev_id="{{ $imageRevision->id }}" class="download"   href="{{ route('imageRevision.download', ['orderId' => $order->id, 'imageRevisionId' => $imageRevision->id]) }} ">
+                                                     <a rev_id="{{ $imageRevision->id }}" class="download" or_id="{{$order->id}}"   href="{{ route('imageRevision.download', ['orderId' => $order->id, 'imageRevisionId' => $imageRevision->id]) }} ">
                                                         <i class="fas fa-file-download"></i>
                                                     </a> 
                                                 </td>
@@ -261,15 +261,16 @@
     $('#apply-revision').on('click',function(){
         var new_elem= $('[revision_id='+selected_revision_id+'].img-src');
         var elem = $('[data_id='+ original_id+'].reg-toggle');
+        
         $(elem).attr('data_id',$(new_elem).attr('revision_id'));
         $(elem).html($(new_elem).html());
         var domain = document.location.origin;
             domain= domain+'/dashboard';
-
+        var order_id=$('[rev_id='+selected_revision_id+'].download').attr('or_id');
         $('[rev_id='+original_id+']').attr('rev_id', selected_revision_id);
         $('[rev_id='+selected_revision_id+'].edit').prop('href',domain+ '/edit/image-revision/'+selected_revision_id );
         $('[rev_id='+selected_revision_id+'].destroy').prop('href',domain+ '/destroy/image-revision/'+selected_revision_id );
-        $('[rev_id='+selected_revision_id+'].download').prop('href',domain+ '/download/image-revision/'+selected_revision_id );
+        $('[rev_id='+selected_revision_id+'].download').prop('href',domain+ '/download/image-revision/'+order_id+'/'+selected_revision_id );
         $('[rev_id='+selected_revision_id+'].upload').prop('href',domain+ '/upload/image-revision/'+selected_revision_id );
 
     
