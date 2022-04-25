@@ -32,7 +32,10 @@ class OrdersController extends Controller
     public function index(Request $request)
     {
         $user=Auth()->user();
-        $notif = Auth()->User()->notifications()->get();
+        $notif = Auth()
+                    ->User()
+                    ->notifications()
+                    ->get();
         $class='Order';
         $objects='orders';
         $Settings="App\\Setting";
@@ -45,13 +48,20 @@ class OrdersController extends Controller
             $pagination_count=9;    
             if($Settings::where('attribute','pagination_count')->first())
             {  
-                $setting=$Settings::where('attribute','pagination_count')->first(); 
+                $setting=$Settings::where('attribute','pagination_count')
+                            ->first(); 
                 $pagination_count=$setting->value;
             }
             $$objects=$Class::paginate($pagination_count);
         }
         
-        return view('orders.index', ['user' => Auth()->User(), 'users' => User::all(), 'orders'=>$orders, 'notif' => $notif]);    
+        return view(
+            'orders.index', [
+                'user' => Auth()->User(), 
+                'users' => User::all(), 
+                'orders'=>$orders, 
+                'notif' => $notif
+            ]);    
     }
 
     /**
@@ -61,11 +71,20 @@ class OrdersController extends Controller
      */
     public function uploadResult($id)
     {
-        $notif = Auth()->User()->notifications()->get();
+        $notif = Auth()
+                    ->User()
+                    ->notifications()
+                    ->get();
 
         $order=Order::find($id);
 
-        return view('orders.order-result-upload', ['user' => Auth()->User(), 'users' => User::all(), 'order'=>$order, 'notif' => $notif]);    
+        return view(
+            'orders.order-result-upload', [
+                'user' => Auth()->User(), 
+                'users' => User::all(), 
+                'order'=>$order, 
+                'notif' => $notif
+            ]);    
     }
 
     /**
@@ -75,12 +94,25 @@ class OrdersController extends Controller
      */
     public function showResults($id)
     {
-        $notif = Auth()->User()->notifications()->get();
+        $notif = Auth()
+                    ->User()
+                    ->notifications()
+                    ->get();
+
         $order=Order::find($id);
-        $imageRevisions = ImageRevision::where('order_id', $id)->get();
+
+        $imageRevisions = ImageRevision::where('order_id', $id)
+                            ->get();
 
 
-        return view('orders.order-result-page', ['user' => Auth()->User(), 'imageRevisions' => $imageRevisions, 'users' => User::all(), 'order'=>$order, 'notif' => $notif]);    
+        return view(
+            'orders.order-result-page', [
+                'user' => Auth()->User(), 
+                'imageRevisions' => $imageRevisions, 
+                'users' => User::all(), 
+                'order'=>$order, 
+                'notif' => $notif
+            ]);    
     }
 
 
@@ -98,7 +130,8 @@ class OrdersController extends Controller
         if(Auth()->User()->position != 'admin')
             abort(404);
 
-        $input=$request->files->all();
+        $input=$request->files
+                ->all();
 
         $order=Order::find($id);
 
@@ -135,9 +168,7 @@ class OrdersController extends Controller
         }
             $order->save();
 
-            
-                
-            
+
             FileNotification::create([
                 'user_id' => $order->owner_id,            
                 'message' => 'Nauji rezultatai užsakymui '.$order->name.'.',
@@ -146,10 +177,22 @@ class OrdersController extends Controller
 
             
 
-            $notif = Auth()->User()->notifications()->get();
-            $imageRevisions = ImageRevision::where('order_id', $id)->get();
+            $notif = Auth()
+                        ->User()
+                        ->notifications()
+                        ->get();
 
-            return view('orders.order-result-page', ['user' => Auth()->User(), 'imageRevisions' => $imageRevisions, 'users' => User::all(), 'order'=>$order, 'notif' => $notif]);
+            $imageRevisions = ImageRevision::where('order_id', $id)
+                                ->get();
+
+            return view(
+                'orders.order-result-page', [
+                    'user' => Auth()->User(), 
+                    'imageRevisions' => $imageRevisions, 
+                    'users' => User::all(), 
+                    'order'=>$order, 
+                    'notif' => $notif
+                ]);
     }
 
     
@@ -165,9 +208,20 @@ class OrdersController extends Controller
         if(Auth()->User()->remaining < 1)
             abort(404);
 
-        $notif = Auth()->User()->notifications()->get();
+        $notif = Auth()
+                ->User()
+                ->notifications()
+                ->get();
+
         $orders=Order::all();
-        return view('orders.create', ['user' => Auth()->User(), 'users' => User::all(), 'orders'=>$orders, 'notif' => $notif]);    
+
+        return view(
+            'orders.create', [
+                'user' => Auth()->User(), 
+                'users' => User::all(), 
+                'orders'=>$orders, 
+                'notif' => $notif
+            ]);    
     }
 
     /**
@@ -183,7 +237,8 @@ class OrdersController extends Controller
         if(Auth()->User()->remaining < 1)
             abort(404);
 
-        $input=$request->files->all();
+        $input=$request->files
+                ->all();
 
         $order=new Order;
         $order->requirements=$request->requirements;
@@ -248,7 +303,10 @@ class OrdersController extends Controller
                 ]);
                 $admin=User::find(1);
                 $headers = "Content-Type: text/html; charset=UTF-8\r\n";
-                $data=array(['data'=>'Naujas užsakymas nuo '.Auth()->User()->name,'link'=>'orders/'.$order->id.'/edit']);
+                $data=array([
+                    'data'=>'Naujas užsakymas nuo '.Auth()->User()->name,
+                    'link'=>'orders/'.$order->id.'/edit'
+                ]);
             }
 
             
@@ -258,7 +316,12 @@ class OrdersController extends Controller
             $owner->remaining = $remaining;
             $owner->save();
         
-            return view('responses.project-new',['user' => Auth()->User(), 'users' => User::all() , 'notif' => Auth()->User()->notifications()->get() ]);
+            return view(
+                'responses.project-new',[
+                    'user' => Auth()->User(), 
+                    'users' => User::all() , 
+                    'notif' => Auth()->User()->notifications()->get() 
+                ]);
            
         
         
@@ -276,11 +339,23 @@ class OrdersController extends Controller
         
         if($order->owner_id== Auth()->User()->id )
         {
-            return view('orders.show', ['user' => Auth()->User() , 'users' => User::all() , 'order'=>$order , 'notif' => Auth()->User()->notifications()->get() ]);
+            return view(
+                'orders.show', [
+                    'user' => Auth()->User() , 
+                    'users' => User::all() , 
+                    'order'=>$order , 
+                    'notif' => Auth()->User()->notifications()->get() 
+                ]);
         }
         else if(Auth()->User()->position == 'admin')
         {
-            return view('orders.show', ['user' => Auth()->User() , 'users' => User::all() , 'order'=>$order , 'notif' => Auth()->User()->notifications()->get() ]);    
+            return view(
+                'orders.show', [
+                    'user' => Auth()->User() , 
+                    'users' => User::all() , 
+                    'order'=>$order , 
+                    'notif' => Auth()->User()->notifications()->get() 
+                ]);    
         }
         else{
             abort(404);
@@ -300,17 +375,32 @@ class OrdersController extends Controller
         
         if($order->owner_id== Auth()->User()->id)
         {
-            return view('orders.edit', ['user' => Auth()->User() , 'users' => User::all() , 'order'=>$order , 'notif' => Auth()->User()->notifications()->get() ]);
+            return view(
+                'orders.edit', [
+                    'user' => Auth()->User() , 
+                    'users' => User::all() , 
+                    'order'=>$order , 
+                    'notif' => Auth()->User()->notifications()->get() 
+                ]);
         }
         else if(Auth()->User()->position == 'admin'){
-            return view('orders.edit', ['user' => Auth()->User() , 'users' => User::all() , 'order'=>$order , 'notif' => Auth()->User()->notifications()->get() ]);
+            return view(
+                'orders.edit', [
+                    'user' => Auth()->User() , 
+                    'users' => User::all() , 
+                    'order'=>$order , 
+                    'notif' => Auth()->User()->notifications()->get() 
+                ]);
         }
         else{
             abort(404);
         }
     }
     public function dashboard_orders(Request $request){
-        $notif = Auth()->User()->notifications()->get();
+        $notif = Auth()
+                    ->User()
+                    ->notifications()
+                    ->get();
         
         
         $class='Order';
@@ -324,17 +414,19 @@ class OrdersController extends Controller
             $pagination_count=9;    
             if(Setting::where('attribute','pagination_count')->first())
             {  
-                $setting=Setting::where('attribute','pagination_count')->first(); 
+                $setting=Setting::where('attribute','pagination_count')
+                            ->first(); 
                 $pagination_count=$setting->value;
             }
             $$classes=$Class::paginate($pagination_count);
         }
 
-
-
-        
-
-        return view('orders.pradzia', ['user' => Auth()->User(), 'users' => User::all(), 'orders'=>$orders, 'notif' => $notif]);   
+        return view('orders.pradzia', [
+            'user' => Auth()->User(), 
+            'users' => User::all(), 
+            'orders'=>$orders, 
+            'notif' => $notif
+        ]);   
     }
     /**
      * Update the specified resource in storage.
@@ -402,7 +494,8 @@ class OrdersController extends Controller
                     $pagination_count=9;    
                     if(Setting::where('attribute','pagination_count')->first())
                     {  
-                        $setting=Setting::where('attribute','pagination_count')->first(); 
+                        $setting=Setting::where('attribute','pagination_count')
+                                    ->first(); 
                         $pagination_count=$setting->value;
                     }
                     $$classes=$Class::paginate($pagination_count);
@@ -410,11 +503,20 @@ class OrdersController extends Controller
 
 
 
-                return view('orders.pradzia', ['user' => Auth()->User(), 'users' => User::all(), 'orders'=>$orders, 'notif' => $notif]);   
+                return view('orders.pradzia', [
+                    'user' => Auth()->User(), 
+                    'users' => User::all(), 
+                    'orders'=>$orders, 
+                    'notif' => $notif
+                ]);   
             }
             
         
-            return view('responses.project-edited',['user' => Auth()->User(), 'users' => User::all() , 'notif' => Auth()->User()->notifications()->get() ]);
+            return view('responses.project-edited',[
+                'user' => Auth()->User(), 
+                'users' => User::all() , 
+                'notif' => Auth()->User()->notifications()->get() 
+            ]);
            
         
         
@@ -450,8 +552,12 @@ class OrdersController extends Controller
     {
         $file = file::find($file);
         $user = User::find($file->owner_id);
-        $notif = Auth()->User()->notifications()->get();
-        $files = file::where('owner_id', Auth()->User()->id)->get();
+        $notif = Auth()
+                    ->User()
+                    ->notifications()
+                    ->get();
+        $files = file::where('owner_id', Auth()->User()->id)
+                    ->get();
         if(Auth()->user()->id != $file->owner_id )
         {
             return Storage::download('public/'.$user->name.'/'.$file->name);
@@ -460,7 +566,7 @@ class OrdersController extends Controller
             return Storage::download('public/'.$user->name.'/'.$file->name);    
         }
         else{
-        return back();
+            return back();
         }
     }
     public function finished($id)
@@ -476,7 +582,12 @@ class OrdersController extends Controller
         $admin=User::find(1);
         $headers = "Content-Type: text/html; charset=UTF-8\r\n";
         $data=array(['data'=>'Order "'.$order->name.'" finished','link'=>'orders']);
-        return view('responses.project-finished',['user' => Auth()->User(),'order' => $order , 'users' => User::all() , 'notif' => Auth()->User()->notifications()->get() ]);
+        return view('responses.project-finished',[
+            'user' => Auth()->User(),
+            'order' => $order , 
+            'users' => User::all() , 
+            'notif' => Auth()->User()->notifications()->get() 
+        ]);
     }
     public function feedback_finished(Request $request,$id)
     {
@@ -490,9 +601,16 @@ class OrdersController extends Controller
         ]);
         $admin=User::find(1);
         $headers = "Content-Type: text/html; charset=UTF-8\r\n";
-        $data=array(['data'=>'Order "'.$order->name.'" finished','link'=>'orders']);
+        $data=array([
+            'data'=>'Order "'.$order->name.'" finished',
+            'link'=>'orders'
+        ]);
         
-        return view('responses.project-finished-feedback',['user' => Auth()->User() , 'users' => User::all() , 'notif' => Auth()->User()->notifications()->get() ]);
+        return view('responses.project-finished-feedback',[
+            'user' => Auth()->User(), 
+            'users' => User::all() , 
+            'notif' => Auth()->User()->notifications()->get() 
+        ]);
     }
     public function feedback(Request $request,$id)
     {
@@ -507,7 +625,10 @@ class OrdersController extends Controller
         ]);
         $headers = "Content-Type: text/html; charset=UTF-8\r\n";
         $admin=User::find(1);
-        $data=array(['data'=>'Naujas atsiliepimas užsakymui "'.$order->name.'"','link'=>'orders/'.$id.'/edit']);
+        $data=array([
+            'data'=>'Naujas atsiliepimas užsakymui "'.$order->name.'"',
+            'link'=>'orders/'.$id.'/edit'
+        ]);
           return view('responses.feedback',['user' => Auth()->User() , 'users' => User::all() , 'notif' => Auth()->User()->notifications()->get() ]);
     }
 
@@ -517,82 +638,101 @@ class OrdersController extends Controller
         $pagination_count=9;
         if(Setting::where('attribute',$user->name.'_'.'pagination_count')->first())
         {  
-                $setting=Setting::where('attribute',$user->name.'_'.'pagination_count')->first(); 
+                $setting=Setting::where('attribute',$user->name.'_'.'pagination_count')
+                            ->first(); 
                 $pagination_count=$setting->value;
         }
         if(Setting::where('attribute',$user->name.'_'.'order')->first() && !$request->order)
         {
-            $setting=Setting::where('attribute',$user->name.'_'.'order')->first();
+            $setting=Setting::where('attribute',$user->name.'_'.'order')
+                        ->first();
             $request->request->add(['order' => $setting->value]);
         
         }
         if(Setting::where('attribute',$user->name.'_'.'order_by')->first() && !$request->order_by)
         {
-            $setting=Setting::where('attribute',$user->name.'_'.'order_by')->first();
+            $setting=Setting::where('attribute',$user->name.'_'.'order_by')
+                        ->first();
             $request->request->add(['order_by' => $setting->value]);
         }
         if(Setting::where('attribute',$user->name.'_'.'filter_by')->first() && !$request->filter_by)
         {   
-            $setting=Setting::where('attribute',$user->name.'_'.'filter_by')->first();
+            $setting=Setting::where('attribute',$user->name.'_'.'filter_by')
+                        ->first();
             $request->request->add(['filter_by' => $setting->value]);
         }
         if(Setting::where('attribute',$user->name.'_'.'filter_value')->first() && !$request->filter_value)
         {   
-            $setting=Setting::where('attribute',$user->name.'_'.'filter_value')->first();
+            $setting=Setting::where('attribute',$user->name.'_'.'filter_value')
+                        ->first();
             $request->request->add(['filter_value' => $setting->value]);
         }
     if(Setting::where('attribute','pagination_count')->first())
     {  
-            $setting=Setting::where('attribute','pagination_count')->first(); 
+            $setting=Setting::where('attribute','pagination_count')
+                        ->first(); 
             $pagination_count=$setting->value;
     }
     if(Setting::where('attribute','order')->first() && !$request->order)
     {
-        $setting=Setting::where('attribute','order')->first();
-        $request->request->add(['order' => $setting->value]);
+        $setting=Setting::where('attribute','order')
+                            ->first();
+        $request->request
+                    ->add(['order' => $setting->value]);
     
     }
     if(Setting::where('attribute','order_by')->first() && !$request->order_by)
     {
         $setting=Setting::where('attribute','order_by')->first();
-        $request->request->add(['order_by' => $setting->value]);
+        $request->request
+                    ->add(['order_by' => $setting->value]);
     }
     if(Setting::where('attribute','filter_by')->first() && !$request->filter_by)
     {   
         $setting=Setting::where('attribute','filter_by')->first();
-        $request->request->add(['filter_by' => $setting->value]);
+        $request->request
+                    ->add(['filter_by' => $setting->value]);
     }
     if(Setting::where('attribute','filter_value')->first() && !$request->filter_value)
     {   
         $setting=Setting::where('attribute','filter_value')->first();
-        $request->request->add(['filter_value' => $setting->value]);
+        $request->request
+                    ->add(['filter_value' => $setting->value]);
     }
     if(!$request->pagination_count)
     {
-            $request->request->add(['pagination_count' => 9]);
+            $request->request
+                        ->add(['pagination_count' => 9]);
     }
     if(!$request->order)
     {
-        $request->request->add(['order' => 'desc']);
+        $request->request
+                    ->add(['order' => 'desc']);
     }
     if(!$request->order_by){
-        $request->request->add(['order_by' => 'id']);
+        $request->request
+                    ->add(['order_by' => 'id']);
     }
     if(!$request->filter_by){
-        $request->request->add(['filter_by' => 'attribute']);
+        $request->request
+                    ->add(['filter_by' => 'attribute']);
     }
     if(!$request->filter_value){
-        $request->request->add(['filter_value' => '!']);
+        $request->request
+                    ->add(['filter_value' => '!']);
     }
     if(!$request->filter_operator)
     {
-         $request->request->add(['filter_operator' => '!=']);
+         $request->request
+                    ->add(['filter_operator' => '!=']);
     }
     if($request->filter_value=='!'){
-        $request->request->remove('filter_check');
+        $request->request
+                    ->remove('filter_check');
     }
     if($request->filter_value==''){
-        $request->request->remove('filter_check');
+        $request->request
+                    ->remove('filter_check');
     }
     $order=$request->order; 
     $filter_by=$request->filter_by; 
@@ -603,22 +743,30 @@ class OrdersController extends Controller
     $objects=$Class::where('id','!=','0');
 
     if($filter_by == 'user_id' ){
-        if( $filter_operator == 'LIKE' && User::where('name',$filter_operator,"%".$filter_value."%")->first()){
-            $names = User::where('name',$filter_operator,"%".$filter_value."%")->get();
+        if( $filter_operator == 'LIKE' && User::where('name',$filter_operator,"%".$filter_value."%")
+                                            ->first()){
+            $names = User::where('name',$filter_operator,"%".$filter_value."%")
+                        ->get();
             $objects=$Class::where('user_id',0)->get();
             foreach($names as $name ){
-            $temp=$Class::where('user_id',$name->id)->get();
-            $objects = $objects->merge($temp);
+            $temp=$Class::where('user_id',$name->id)
+                    ->get();
+            $objects = $objects
+                        ->merge($temp);
             }
             
                 if($order=='desc'){
-                    $sorted = $objects->sortByDesc($order_by);
+                    $sorted = $objects
+                        ->sortByDesc($order_by);
                 }
                 if($order=='asc'){
-                    $sorted = $objects->sortBy($order_by);
+                    $sorted = $objects
+                        ->sortBy($order_by);
                 }
                 $objects = $sorted->values()->collect();
-            $objects = $objects->paginate($pagination_count)->appends([
+            $objects = $objects
+                        ->paginate($pagination_count)
+                        ->appends([
                 'order_by'=>$order_by,
                 'order'=>$order,
                 'filter_by'=>$filter_by,
@@ -627,8 +775,10 @@ class OrdersController extends Controller
             ]);        
             return $objects;
         }
-        else if( User::where('name',$filter_value)->first()){
-            $name = User::where('name',$filter_value)->first();
+        else if( User::where('name',$filter_value)
+                    ->first()){
+            $name = User::where('name',$filter_value)
+                        ->first();
             $filter_value=$name->id;
         }
         
@@ -648,10 +798,13 @@ class OrdersController extends Controller
         }
         else $objects = $Class::where($filter_by,$filter_operator,$filter_value);
         
-        $objects = $objects->where('owner_id',$user->id);
+        $objects = $objects
+                    ->where('owner_id',$user->id);
     }
     $objects->orderBy($order_by,$order);
-    $objects = $objects->paginate($pagination_count)->appends(['order_by'=>$order_by,'order'=>$order,'filter_by'=>$filter_by,'filter_value'=>$filter_value,'filter_operator'=>$filter_operator]);
+    $objects = $objects
+                ->paginate($pagination_count)
+                ->appends(['order_by'=>$order_by,'order'=>$order,'filter_by'=>$filter_by,'filter_value'=>$filter_value,'filter_operator'=>$filter_operator]);
     return $objects;
 }
 }

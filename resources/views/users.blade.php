@@ -24,8 +24,8 @@
     <!-- Page Content -->
     <div class="content">
         <div class="row justify-content-center">
-            <div class="col-md-8 col-xl-8">
-                <div class=" {{ $files->count() ? 'block' : '' }}">
+            <div class="col-md-9 col-xl-9">
+                <div>
 
                     <div class="block-content">
                         
@@ -37,7 +37,7 @@
                         </p>
 
 
-                        @if ($users->count())
+                        
                        
                             <div class="table-responsive table-wrapper-scroll-x my-custom-scrollbar ">
                             @include('widgets.filters',[
@@ -47,7 +47,7 @@
                                 <table class="table table-hover ">
                                     <thead>
                                         <tr>
-                                            <td colspan="8">{{ __('Vardas') }} & {{ __('Pavardė') }}</td>
+                                            <th colspan="8">{{ __('Vardas') }} & {{ __('Pavardė') }}</th>
                                             <th scope="col">{{ __('Užsiregistravo') }}</th>
                                             <th scope="col">{{ __('Planas') }}</th>
                                             <th scope="col"><i class="fas fa-user-minus"></i></th>
@@ -80,7 +80,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                        @endif
+                        
                     </div>
                 </div>
                 <div class="block-header">
@@ -91,4 +91,11 @@
     </div>
     </div>
     <!-- END Page Content -->
+
+    <script>
+        $("select.filter-input option").each(function(){
+            //alert($(this).html());
+            if($(this).prop('value')=="name") $(this).html("{{__('Vardas')}}");
+        });
+    </script>
 @endsection

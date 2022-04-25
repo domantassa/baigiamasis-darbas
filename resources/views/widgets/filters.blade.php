@@ -30,7 +30,7 @@
 ?>
 <div class="d-flex justify-content-between align-items-center" style="max-width:1400px;">
 <form id="filter-sort-form" method="GET" action="" style="">
-
+<div class="filter-main-group">
     <label for="filter-check" class="ml-2 filter-check-group btn btn-primary <?php if($_REQUEST['filter_check']) echo "active"?>" >
         <i class="fas fa-filter"></i>
     </label>
@@ -47,13 +47,12 @@
         <option <?php if($_REQUEST['filter_operator']=='=') echo 'selected'?>>=</option>
         <option <?php if($_REQUEST['filter_operator']=='!=') echo 'selected'?>>!=</option>
         <option  <?php if($_REQUEST['filter_operator']=='LIKE') echo 'selected'?> value="LIKE">{{__('LIKE')}}</option>
-        <option  <?php if($_REQUEST['filter_operator']=='NOT LIKE') echo 'selected'?> value="NOT LIKE">{{__('NOT LIKE')}}</option>
     </select>
 
     <input type="text" name="filter_value" placeholder="{{__('Filter value')}}" style="width:200px" class="filter-input m-2" value="{{ $_REQUEST['filter_value'] }}" <?php //disabled?>>
     </div>
-
-
+</div>
+        <div class="order-main-group">
         <label for="order-check" type="button" class="btn btn-primary order-check-group  <?php if($_REQUEST['order_check']) echo 'active'?>">
             <i class="fas fa-arrows-alt-v"></i>
         </label>
@@ -72,8 +71,9 @@
         </div>
          <label for="filter-order-submit" class=" d-none filter-order-submit btn btn-primary "><i class="fas fa-check"></i></label>        
             <input type="submit" id="filter-order-submit" class="d-none">
+        </div>
     </form>
-<a class="filter-check-group btn btn-primary mr-2" href="{{ URL::current() }}"><i class="fas fa-redo"></i></a>
+<a class="refresh-btn btn btn-primary mr-2" href="{{ URL::current() }}"><i class="fas fa-redo"></i></a>
 </div>
 
 

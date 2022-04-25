@@ -16,15 +16,15 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $listen = [
 
-        'App\Events\FileCreatedEvent' => [
-            'App\Listeners\NotificationInTab',
-            'App\Listeners\NotificationInPage'
-        ],
+        // 'App\Events\FileCreatedEvent' => [
+        //     'App\Listeners\NotificationInTab',
+        //     'App\Listeners\NotificationInPage'
+        // ],
 
-        'App\Events\NewMessageOrFile' => [
-            'App\Listeners\PopupOnPage',
-            'App\Listeners\MessageInTab'
-        ],
+        // 'App\Events\NewMessageOrFile' => [
+        //     'App\Listeners\PopupOnPage',
+        //     'App\Listeners\MessageInTab'
+        // ],
     ];
 
     /**

@@ -16,7 +16,11 @@ class ImageRevisionController extends Controller
 
     public function index(Request $request,$id)
     {
-        $notif = Auth()->User()->notifications()->get();
+        $notif = Auth()
+                    ->User()
+                    ->notifications()
+                    ->get();
+                    
         $order=Order::find($id);
         if($request->filter_by){
             $request->request->add(['class' => 'file']);

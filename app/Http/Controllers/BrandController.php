@@ -19,15 +19,18 @@ class BrandController extends Controller
         $objects='brands';
         $Settings="App\\Setting";
         if($request->filter_by || $request->order_by){
-            $request->request->add(['class' => $class]);
-            $$objects=$this->filter($request);
+            $request->request
+                        ->add(['class' => $class]);
+            $$objects=$this
+                        ->filter($request);
         }
         else{
             $Class="App\\".$class;
             $pagination_count=9;    
             if($Settings::where('attribute','pagination_count')->first())
             {  
-                $setting=$Settings::where('attribute','pagination_count')->first(); 
+                $setting=$Settings::where('attribute','pagination_count')
+                            ->first(); 
                 $pagination_count=$setting->value;
             }
             $$objects=$Class::paginate($pagination_count);
@@ -36,11 +39,12 @@ class BrandController extends Controller
        
         
         
-        return view('brands.index')->with([
-            'user'=>Auth()->User(),
-            'users' =>User::all(),
-            'notif'=>Auth()->User()->notifications()->get(),
-            'brands'=>$brands
+        return view('brands.index')
+            ->with([
+                'user'=>Auth()->User(),
+                'users' =>User::all(),
+                'notif'=>Auth()->User()->notifications()->get(),
+                'brands'=>$brands
         ]);
     }
     /**
@@ -50,7 +54,16 @@ class BrandController extends Controller
      */
     public function create()
     {
-        return view('brands/brand-page')->with(['user'=>Auth()->User(),'users' =>User::all(),'notif'=>Auth()->User()->notifications()->get()]);
+        return view(
+            'brands/brand-page'
+            )->with([
+                'user'=>Auth()->User(),
+                'users' =>User::all(),
+                'notif'=>Auth()
+                            ->User()
+                            ->notifications()
+                            ->get()
+                ]);
     }
 
     /**
@@ -62,15 +75,19 @@ class BrandController extends Controller
     public function store(Request $request)
     {
         $brand=new brand;
-        $brand->user_id = Auth()->user()->id;
+        $brand->user_id = Auth()
+                            ->user()
+                            ->id;
         $brand->name=$request->title;
         $brand->website=$request->website;
         $brand->industry=$request->industry;
         $brand->style=$request->description;
                
         $brand->save();
-        $inputs=$request->all();
-        foreach($inputs as $key=>$value){
+        $inputs=$request
+                    ->all();
+        foreach($inputs as $key=>$value)
+        {
             if(str_contains($key,'hex-select'))
             {             
             $brandColor=new BrandColor;
@@ -82,30 +99,38 @@ class BrandController extends Controller
         
         if($request->files->all())
         {
-        $input=$request->files->all();
+        $input=$request->files
+                            ->all();
         foreach($input['files'] as $file)
             {
 
 
             $brandFile = new BrandFile;
-            $brandFile->name = $file->getClientOriginalName();
+            $brandFile->name = $file
+                                ->getClientOriginalName();
             $brandFile->brand_id = $brand->id;
             $brandFile->path = 'brand';
             $brandFile->save();
             
-            $file->move('storage/'.Auth()->user()->name.'/brands', $file->getClientOriginalName());
+            $file->move(
+                'storage/'.Auth()->user()->name.'/brands', 
+                $file->getClientOriginalName()
+            );
            }
         }
 
         
         
-        $colors=BrandFile::where('brand_id', $brand->id)->get();
-        $files=BrandColor::where('brand_id', $brand->id)->get();
+        $colors=BrandFile::where('brand_id', $brand->id)
+                    ->get();
+        $files=BrandColor::where('brand_id', $brand->id)
+                    ->get();
         $colors=$brand->colors()->get();
         $files=$brand->files()->get();
 
 
-        if(!$request->isMockTest) {
+        if(!$request->isMockTest) 
+        {
             return redirect("dashboard/brand/edit/".$brand->id);
         }
         else {
@@ -113,16 +138,7 @@ class BrandController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\brand  $brand
-     * @return \Illuminate\Http\Response
-     */
-    public function show(brand $brand)
-    {
-        
-    }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -134,18 +150,44 @@ class BrandController extends Controller
     {
         $brand=brand::find($id);
         
-        $colors=BrandFile::where('brand_id', $id)->get();
-        $files=BrandColor::where('brand_id', $id)->get();
-        $colors=$brand->colors()->get();
-        $files=$brand->files()->get();
+        $colors=BrandFile::where('brand_id', $id)
+                ->get();
+        $files=BrandColor::where('brand_id', $id)
+                ->get();
+        $colors=$brand->colors()
+                        ->get();
+        $files=$brand->files()
+                        ->get();
         
         if($brand->user_id== Auth()->User()->id )
         {
-            return view('brands.brand-edit', ['user' => Auth()->User() , 'users' => User::all(), 'brand'=>$brand, 'colors'=>$colors, 'files'=>$files, 'notif' => Auth()->User()->notifications()->get()]);
+            return view(
+                'brands.brand-edit', [
+                    'user' => Auth()->User() , 
+                    'users' => User::all(), 
+                    'brand'=>$brand, 
+                    'colors'=>$colors, 
+                    'files'=>$files, 
+                    'notif' => Auth()
+                                ->User()
+                                ->notifications()
+                                ->get()
+            ]);
         }
         else if(Auth()->User()->position == 'admin')
         {
-            return view('brands.brand-edit', ['user' => Auth()->User() , 'users' => User::all(), 'brand'=>$brand, 'colors'=>$colors, 'files'=>$files, 'notif' => Auth()->User()->notifications()->get()]);
+            return view(
+                'brands.brand-edit', [
+                    'user' => Auth()->User() , 
+                    'users' => User::all(), 
+                    'brand'=>$brand, 
+                    'colors'=>$colors, 
+                    'files'=>$files, 
+                    'notif' => Auth()
+                                ->User()
+                                ->notifications()
+                                ->get()
+            ]);
         }
         else {
             abort(404);
@@ -256,7 +298,8 @@ class BrandController extends Controller
         $brand=brand::find($id);
         if($brand->user_id== Auth()->User()->id )
         {
-            if($brand->name == 'routeTesting') {
+            if($brand->name == 'routeTesting') 
+            {
                 $brand->delete();
                 return 1;
             } else {
@@ -266,10 +309,12 @@ class BrandController extends Controller
             
         }
         else if(Auth()->User()->position == 'admin'){
-            if($brand->name == 'routeTesting') {
+            if($brand->name == 'routeTesting') 
+            {
                 $brand->delete();
                 return 1;
-            } else {
+            } else 
+            {
                 $brand->delete();
                 return redirect('/dashboard');
             }
@@ -356,10 +401,12 @@ class BrandController extends Controller
         {
              $request->request->add(['filter_operator' => '!=']);
         }
-        if($request->filter_value=='!'){
+        if($request->filter_value=='!')
+        {
             $request->request->remove('filter_check');
         }
-        if($request->filter_value==''){
+        if($request->filter_value=='')
+        {
             $request->request->remove('filter_check');
         }
         $order=$request->order; 
@@ -370,11 +417,14 @@ class BrandController extends Controller
         $Class="App\\".$request->class;
         $objects=$Class::where('id','!=','0');
 
-        if($filter_by == 'user_id' ){
-            if( $filter_operator == 'LIKE' && User::where('name',$filter_operator,"%".$filter_value."%")->first()){
+        if($filter_by == 'user_id' )
+        {
+            if( $filter_operator == 'LIKE' && User::where('name',$filter_operator,"%".$filter_value."%")->first())
+            {
                 $names = User::where('name',$filter_operator,"%".$filter_value."%")->get();
                 $objects=$Class::where('user_id',0)->get();
-                foreach($names as $name ){
+                foreach($names as $name )
+                {
                 $temp=$Class::where('user_id',$name->id)->get();
                 $objects = $objects->merge($temp);
                 }
@@ -395,7 +445,8 @@ class BrandController extends Controller
                 ]);        
                 return $objects;
             }
-            else if( User::where('name',$filter_value)->first()){
+            else if( User::where('name',$filter_value)->first())
+            {
                 $name = User::where('name',$filter_value)->first();
                 $filter_value=$name->id;
             }
@@ -403,23 +454,35 @@ class BrandController extends Controller
         }
   
 
-        if($user->position=='admin' && $request->filter_check){
-            if($filter_operator=='LIKE' ||$filter_operator=='NOT LIKE') {
+        if($user->position=='admin' && $request->filter_check)
+        {
+            if($filter_operator=='LIKE') {
                 $objects = $Class::where($filter_by,$filter_operator,"%".$filter_value."%");
             }
             else $objects = $Class::where($filter_by,$filter_operator,$filter_value);
         }
         else if($request->filter_check)
         {
-            if($filter_operator=='LIKE' || $filter_operator=='NOT LIKE') {
+            if($filter_operator=='LIKE' ) 
+            {
                 $objects = $Class::where($filter_by,$filter_operator,"%".$filter_value."%");
             }
-            else $objects = $Class::where($filter_by,$filter_operator,$filter_value);
-            
+            else 
+            {
+                $objects = $Class::where($filter_by,$filter_operator,$filter_value);
+            }
             $objects = $objects->where('owner_id',$user->id);
         }
         $objects->orderBy($order_by,$order);
-        $objects = $objects->paginate($pagination_count)->appends(['order_by'=>$order_by,'order'=>$order,'filter_by'=>$filter_by,'filter_value'=>$filter_value,'filter_operator'=>$filter_operator]);
+        $objects = $objects
+                    ->paginate($pagination_count)
+                    ->appends([
+                        'order_by'=>$order_by,
+                        'order'=>$order,
+                        'filter_by'=>$filter_by,
+                        'filter_value'=>$filter_value,
+                        'filter_operator'=>$filter_operator
+                    ]);
         return $objects;
     }
 }

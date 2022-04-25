@@ -14,11 +14,22 @@
 
 
                 </div>
+                
 
 
             </div>
+            <div style="margin-left:30px">
+                <a href="{{route('settings.create')}}" style="color:white;" class=" btn btn-round btn-primary btn-green"  >
+                                
+                {{__('Sukurti naują atributą')}}
+                            
+                                
+                </a>
+            </div>
         </div>
     </div>
+
+    
     <!-- END Hero -->
 
     <!-- Page Content -->

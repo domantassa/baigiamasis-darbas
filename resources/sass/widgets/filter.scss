@@ -1,3 +1,11 @@
+@mixin for-filter-sm(){
+    @media (max-width:1150px){
+      @content
+    }
+    
+  }
+  
+
 .filter-input,.order-input{
 font-weight: 600;
 text-align: left;
@@ -23,7 +31,7 @@ border: none;
 
 }
 .filter-check-group,
-.order-check-group{
+.order-check-group, .refresh-btn{
     margin-left: 5px;
     width: 40px;
     //border-radius:0px;
@@ -32,4 +40,18 @@ border: none;
         //filter:brightness(0.8);
         box-shadow: 0 0 0 0.2rem rgba($primary-dark , 0.5);
     }
+}
+.refresh-btn{
+    @include for-filter-sm(){
+        display:none;
+      }
+}
+.order-main-group, .filter-main-group{
+display: inline-block;
+    @include for-md(){
+    display:block;
+  }
+  @include for-filter-sm(){
+    display:none;
+  }
 }

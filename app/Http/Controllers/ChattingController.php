@@ -18,10 +18,13 @@ class ChattingController extends Controller
         $files = file::where('owner_id', $id)->get();
 
         $messagesFromReceiver = Message::where('sender_user_id', $user->id)
-        ->where('receiver_user_id', 1)->get();
+                                    ->where('receiver_user_id', 1)
+                                    ->get();
 
-        foreach ($messagesFromReceiver as $message) {
-            if($message->seen_date == null) {
+        foreach ($messagesFromReceiver as $message) 
+        {
+            if($message->seen_date == null) 
+            {
                 $message->seen_date = date('Y-m-d H:i:s',date('U'));
                 $message->save();
             }
@@ -30,14 +33,25 @@ class ChattingController extends Controller
         $messagesFromSender = Message::where('sender_user_id', 1)
         ->where('receiver_user_id', $user->id);
 
-        foreach ($messagesFromSender as $message) {
-            if($message->seen_date == null) {
+        foreach ($messagesFromSender as $message) 
+        {
+            if($message->seen_date == null) 
+            {
                 $message->seen_date = date('Y-m-d H:i:s',date('U'));
                 $message->save();
             }
         }
 
-        return view('chat/chatting', ['user' => $user, 'users' => User::all(), 'files' => $files, 'notif' => Auth()->User()->notifications()->get()]);  
+        return view(
+            'chat/chatting', [
+                'user' => $user, 
+                'users' => User::all(), 
+                'files' => $files, 
+                'notif' => Auth()
+                            ->User()
+                            ->notifications()
+                            ->get()
+        ]);  
     }
 
     public function chattingWithAdmin()
@@ -45,27 +59,40 @@ class ChattingController extends Controller
         $user = Auth()->user();
         
         $messagesFromReceiver = Message::where('sender_user_id', 1)
-        ->where('receiver_user_id', $user->id)->get();
+                                ->where('receiver_user_id', $user->id)
+                                ->get();
 
-        foreach ($messagesFromReceiver as $message) {
-            if($message->seen_date == null) {
+        foreach ($messagesFromReceiver as $message) 
+        {
+            if($message->seen_date == null) 
+            {
                 $message->seen_date = date('Y-m-d H:i:s',date('U'));
                 $message->save();
             }
         }
 
         $messagesFromSender = Message::where('sender_user_id', $user->id)
-        ->where('receiver_user_id', 1);
+                                ->where('receiver_user_id', 1);
 
         foreach ($messagesFromSender as $message) {
-            if($message->seen_date == null) {
+            if($message->seen_date == null) 
+            {
                 $message->seen_date = date('Y-m-d H:i:s',date('U'));
                 $message->save();
             }
         }
 
-        $files = file::where('owner_id', $user->id)->get();
-        return view('chat/chatting')->with(['user'=>Auth()->user(),'users' =>User::all(),'notif'=>Auth()->User()->notifications()->get()]);
+        $files = file::where('owner_id', $user->id)
+                    ->get();
+        return view(
+            'chat/chatting')->with([
+                'user'=>Auth()->user(),
+                'users' =>User::all(),
+                'notif'=>Auth()
+                            ->User()
+                            ->notifications()
+                            ->get()
+                        ]);
     }
 }
 

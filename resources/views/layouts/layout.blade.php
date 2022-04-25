@@ -305,16 +305,6 @@
                             </a>
                         </li>
                         </li>
-                        <li class="nav-main-item open">	
-                            <a class="nav-main-link" href="{{route('settings.index')}}">	
-                                <span class="nav-main-link-name">{{__('Nustatymai')}}</span>	
-                            </a>
-                        </li>
-                        <li class="nav-main-item open">	
-                            <a class="nav-main-link" href="{{route('notifications.index')}}">	
-                                <span class="nav-main-link-name">{{__('Pranešimai')}}</span>	
-                            </a>
-                        </li>
                         @endif
                         	
                         </li>	
@@ -536,19 +526,22 @@
                             });
                             </script>
                                 <div class="p-2">
+                                    @if($user->position == 'admin')
                                     <a id="help-button" class=" dropdown-item d-flex align-items-center justify-content-between display-none-on-medium <?php if($user->position=='admin') { echo 'disabled'; } ?> " href="#">
                                         <span>{{__('Pagalba')}}</span>
                                         <i class="si si-info ml-1"></i>
                                     </a>
+                                    @endif
                                     <a id="save-avatar-button" class="dropdown-item d-flex align-items-center justify-content-between disabled" href="dummy-route">
                                         <span>{{__('Išsaugoti')}}</span>
                                         <i class="si si-check ml-1"></i>
                                     </a>
+                                    @if($user->position == 'admin') 
                                     <a id="save-avatar-button" class="dropdown-item d-flex align-items-center justify-content-between" href="{{route('settings.index')}}">
                                         <span>{{__('Nustatymai')}}</span>
                                         <i class="fa fa-cog ml-1"></i>
                                     </a>
-
+                                    @endif
                                     <script> 
                                     $.ajaxSetup({
                                     headers: {
@@ -589,6 +582,7 @@
                                     <span id="notifCount" class="badge badge-dark badge-pill">{{$notif->count()}}</span>
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-0 border-0 font-size-sm" aria-labelledby="page-header-notifications-dropdown">
+                                    @
                                     <div class="p-2 bg-primary text-center">
                                         <h5 class="dropdown-header text-uppercase text-white">{{__('Pranešimai')}}</h5>
                                     </div>

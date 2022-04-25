@@ -26974,12 +26974,32 @@ table.calendar button {
 }
 
 .filter-check-group,
-.order-check-group {
+.order-check-group, .refresh-btn {
   margin-left: 5px;
   width: 40px;
 }
 .filter-check-group.active,
-.order-check-group.active {
+.order-check-group.active, .refresh-btn.active {
   background-color: #006A56;
   box-shadow: 0 0 0 0.2rem rgba(0, 106, 86, 0.5);
+}
+
+@media (max-width: 1150px) {
+  .refresh-btn {
+    display: none;
+  }
+}
+
+.order-main-group, .filter-main-group {
+  display: inline-block;
+}
+@media (max-width: 768px) {
+  .order-main-group, .filter-main-group {
+    display: block;
+  }
+}
+@media (max-width: 1150px) {
+  .order-main-group, .filter-main-group {
+    display: none;
+  }
 }

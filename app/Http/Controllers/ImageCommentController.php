@@ -13,15 +13,7 @@ use Illuminate\Support\Facades\Storage;
 
 class ImageCommentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        
-    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -32,8 +24,15 @@ class ImageCommentController extends Controller
     {
         $imageRevision = ImageRevision::find($id);
         $notif = Auth()->User()->notifications()->get();
-        $imageComments=$imageRevision->imageComments()->get();
-        return view('imageRevisions.imageCommentsEdit')->with(['user'=>Auth::user(), 'image_revision'=>$imageRevision, 'users' =>User::all(),'notif'=>Auth()->User()->notifications()->get()]);
+        $imageComments=$imageRevision->imageComments()
+                            ->get();
+        return view(
+            'imageRevisions.imageCommentsEdit')->with([
+                'user'=>Auth::user(), 
+                'image_revision'=>$imageRevision, 
+                'users' =>User::all(),
+                'notif'=>Auth()->User()->notifications()->get()
+            ]);
     }
 
     /**
@@ -53,7 +52,8 @@ class ImageCommentController extends Controller
         $imageRevision = ImageRevision::find($inputs['image_revision_id']);
         $imageRevision->comment_count = 0;
 
-        $comments= ImageComment::where('image_revision_id',$inputs['image_revision_id'])->delete();
+        $comments= ImageComment::where('image_revision_id',$inputs['image_revision_id'])
+                        ->delete();
         while($request->$t && $inputs['text-'.$i] != null)
         {
         $imageRevision->comment_count = $imageRevision->comment_count + 1;
@@ -73,17 +73,6 @@ class ImageCommentController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\ImageComment  $imageComment
-     * @return \Illuminate\Http\Response
-     */
-    public function show(ImageComment $imageComment)
-    {
-        
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\ImageComment  $imageComment
@@ -92,32 +81,19 @@ class ImageCommentController extends Controller
     public function edit($id)
     {
         $imageRevision = ImageRevision::find($id);
-        $notif = Auth()->User()->notifications()->get();
-        $imageComments=$imageRevision->imageComments()->get();
+        $notif = Auth()->User()->notifications()
+                    ->get();
+        $imageComments=$imageRevision->imageComments()
+                            ->get();
 
-        return view('imageRevisions.imageCommentsEdit')->with(['user'=>Auth::user(), 'image_revision'=>$imageRevision, 'users' =>User::all(),'notif'=>Auth()->User()->notifications()->get()]);
+        return view(
+            'imageRevisions.imageCommentsEdit')->with([
+                'user'=>Auth::user(), 
+                'image_revision'=>$imageRevision, 
+                'users' =>User::all(),
+                'notif'=>Auth()->User()->notifications()->get()
+            ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ImageComment  $imageComment
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, ImageComment $imageComment)
-    {
-        
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\ImageComment  $imageComment
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(ImageComment $imageComment)
-    {
-        
-    }
 }

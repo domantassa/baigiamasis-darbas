@@ -34,6 +34,8 @@
                                         </span>
                                         @endif
                                     </div>
+                                    @if($user->position != 'admin')
+                                    <div data-toggle="tooltip" data-placement="bottom" title="{{__('Užsakymų atnaujinimo data')}}">
                                     <div class="form-group">
                                         <input type="refresh_date" value="{{$user->refresh_date}}" style="text-align: center;" class="mx-auto form-control login-input  {{ $errors->has('refresh_date') ? ' is-invalid' : '' }}" id="refresh_date" name="refresh_date" placeholder="refresh_date" >
                                         @if ($errors->has('refresh_date'))
@@ -42,10 +44,12 @@
                                         </span>
                                         @endif
                                     </div>
+                                    </div>
+                                    
                                     
                                     
 
-                                    <div data-toggle="tooltip" data-placement="bottom" title="Likę užsakymai">
+                                    <div data-toggle="tooltip" data-placement="bottom" title="{{__('Likę užsakymai')}}">
                                     <div class="custom-form-group" style="text-align: center;" >
                                         <input type="number" min="0" style="text-align: center;" class="mx-auto form-control login-input  {{ $errors->has('remaining') ? ' is-invalid' : '' }}" id="remaining" name="remaining" value="{{ $user->remaining }}">
                                     </div>
@@ -62,6 +66,8 @@
                                                      
                                         </select>
                                     </div>
+
+                                    @endif
                                     <input type="hidden" id="id" name="id" value="{{$user->id}}">
 
                                 </div>

@@ -19,14 +19,21 @@ class Controller extends BaseController
             $month=(int)$request->M;
             $year=(int)$request->Y;
             $user=Auth()->user();
-            if($user->position == 'admin'){
+            if($user->position == 'admin')
+            {
                 $orders=Order::all();  
             }
             else
             {
-                $orders=Order::where('owner_id',$user->id)->get();
+                $orders=Order::where('owner_id',$user->id)
+                            ->get();
             }
-            return  view('widgets.calendar',['M'=>$month,'Y'=>$year,'events'=>$orders]);
+            return  view(
+                'widgets.calendar',[
+                    'M'=>$month,
+                    'Y'=>$year,
+                    'events'=>$orders
+                ]);
         }
 
        

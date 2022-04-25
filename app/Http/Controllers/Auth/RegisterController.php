@@ -48,7 +48,7 @@ class RegisterController extends Controller
         $users=User::all();
         if(count($users)==0)
         {
-        $this->middleware('guest');
+            $this->middleware('guest');
         }
         else{
             $this->middleware('admin');
@@ -82,20 +82,23 @@ class RegisterController extends Controller
        
         $refreshdate=date('Y-m-d H:i:s',$refreshdate+2592000);
         if(!is_null(User::first()))
-            if($data['plan'] == 'Hidrosfera')
+            if($data['plan'] == 'Hidrosfera') 
+            {
                 $remaining = 12;
+            }
             else if ($data['plan'] == 'Ekosfera')
+            {
                 $remaining = 20;
+            }
             else if ($data['plan'] == 'Atmosfera')
+            {
                 $remaining = 40;
+            }
             else
+            {
                 $remaining = 8;
+            }
 
-        // FileNotification::create([
-        //     'user_id' => 1,                 //JEI BUS DAUGIAU NEI VIENAS ADMIN, PAKEISTI SIA EILUTE
-        //     'message' => 'New user: '.$data['name'],
-        //     'link' => 'users',
-        // ]);
 
         
 

@@ -28,7 +28,7 @@ $users=User::all();
                                         <input type="text" style="text-align: center;" class="mx-auto form-control login-input  {{ $errors->has('name') ? ' is-invalid' : '' }}" id="name" name="name" placeholder="Name" value="{{ old('name') }}">
                                         @if ($errors->has('name'))
                                         <span class="invalid-feedback" role="alert" style="text-align: center">
-                                            <strong>{{ $errors->first('name') }}</strong>
+                                            <strong>{{ __('Vardas nėra tinkamas') }}</strong>
                                         </span>
                                         @endif
                                     </div>
@@ -37,7 +37,7 @@ $users=User::all();
                                         <input type="email" style="text-align: center;" class="mx-auto form-control login-input  {{ $errors->has('email') ? ' is-invalid' : '' }}" id="email" name="email" placeholder="Email" value="{{ old('email') }}">
                                         @if ($errors->has('email'))
                                         <span class="invalid-feedback" role="alert" style="text-align: center">
-                                            <strong>{{ $errors->first('email') }}</strong>
+                                            <strong>{{ __('Prašome įvesti tinkamo formato paštą') }}</strong>
                                         </span>
                                         @endif
                                     </div>
@@ -45,7 +45,7 @@ $users=User::all();
                                         <input type="password" type="password" style="text-align: center;" class="mx-auto form-control login-input  {{ $errors->has('password') ? ' is-invalid' : '' }}" id="password" name="password" placeholder="Password" >
                                         @if ($errors->has('password'))
                                         <span class="invalid-feedback" role="alert" style="text-align: center">
-                                            <strong>{{ $errors->first('password') }}</strong>
+                                            <strong>{{ __('Slaptažodis per trumpas arba nesutampantys') }}</strong>
                                         </span>
                                         @endif
                                     </div>

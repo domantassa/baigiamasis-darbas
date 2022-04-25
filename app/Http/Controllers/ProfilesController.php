@@ -23,18 +23,29 @@ class ProfilesController extends Controller
 
     public function index(Request $request)
     {
-        
             $notif = Auth()->User()->notifications()->get();
 
-            if($request->filter_by){
-                $request->request->add(['class' => 'file']);
-                $files=$this->filter($request);
+            $class='User';
+            $objects='users';
+            $Settings="App\\Setting";
+            if($request->filter_by || $request->order_by){
+                dd($request);
+                $request->request
+                            ->add(['class' => $class]);
+                $$objects=$this
+                            ->filter($request);
             }
             else{
-                $files=file::all();
+                $Class="App\\".$class;
+                $pagination_count=9;    
+                if($Settings::where('attribute','pagination_count')->first())
+                {  
+                    $setting=$Settings::where('attribute','pagination_count')
+                                ->first(); 
+                    $pagination_count=$setting->value;
+                }
+                $$objects=$Class::paginate($pagination_count);
             }
-            $files = file::where('owner_id', Auth()->User()->id);
-            
             $user = Auth()->User();
             
             if($user->refresh_date != null)
@@ -48,11 +59,17 @@ class ProfilesController extends Controller
                 if($refresh_dateTime - $nowTime < 0)
                 {
                     if($plan == 'Hidrosfera')
+                    {
                         $remaining = 12;
+                    }
                     else if ($plan == 'Ekosfera')
+                    {
                         $remaining = 20;
+                    }
                     else if ($plan== 'Atmosfera')
+                    {
                         $remaining = 40;
+                    }
                     $user->remaining = $remaining;
                     
                     $refresh_date=date('Y-m-d H:i:s',$refresh_dateTime+2592000);
@@ -73,14 +90,20 @@ class ProfilesController extends Controller
                 $pagination_count=9;    
                 if($Settings::where('attribute','pagination_count')->first())
                 {  
-                    $setting=$Settings::where('attribute','pagination_count')->first(); 
+                    $setting=$Settings::where('attribute','pagination_count')
+                                ->first(); 
                     $pagination_count=$setting->value;
                 }
                 $$objects=$Class::paginate($pagination_count);
             }
             
-            return view('dashboard', ['user' => Auth()->User(), 'users' => User::all(), 'files'=>$files, 'notif' => $notif,
-        ]);
+            return view(
+                'dashboard', [
+                    'user' => Auth()->User(), 
+                    'users' =>$users, 
+                    'files' =>$files,
+                    'notif' => $notif,
+            ]);
         
 
        
@@ -91,33 +114,40 @@ class ProfilesController extends Controller
         
         $user = User::findOrFail($id);
 
-        $notif = Auth()->User()->notifications()->get();
+        $notif = Auth()
+                    ->User()
+                    ->notifications()
+                    ->get();
+
         $class='file';
         $objects='files';
         $Settings="\App\Setting";
         if($request->filter_by || $request->order_by){
-            $request->request->add(['class' => $class]);
-            $$objects=$this->filter($request);
+            $request->request
+                        ->add(['class' => $class]);
+            $$objects=$this
+                        ->filter($request);
         }
         else{
             $Class="App\\".$class;
             $pagination_count=9;    
             if($Settings::where('attribute','pagination_count')->first())
             {  
-                $setting=$Settings::where('attribute','pagination_count')->first(); 
+                $setting=$Settings::where('attribute','pagination_count')
+                            ->first(); 
                 $pagination_count=$setting->value;
             }
             $$objects=$Class::paginate($pagination_count);
         }
-        return view('dashboard', ['user' => $user, 'users' => User::all(), 'files'=>$files, 'notif' => $notif]);
+        return view(
+            'dashboard', [
+                'user' => $user, 
+                'users' => User::all(), 
+                'files'=>$files, 
+                'notif' => $notif
+            ]);
     }
 
-    public function store(Request $request, $user)
-    {
-        
-        
-        
-    }
 
     public function deleteDirectoryFiles($user)
     {
@@ -126,7 +156,9 @@ class ProfilesController extends Controller
         Storage::deleteDirectory('public/'.$user->name);
         Storage::makeDirectory('public/'.$user->name);
         
-        $file = file::where('owner_id', $user->id)->take(file::where('owner_id', $user->id)->count());
+        $file = file::where('owner_id', $user->id)
+                    ->take(file::where('owner_id', $user->id)
+                    ->count());
             $file->delete();
 
         return redirect('dashboard');
@@ -135,18 +167,40 @@ class ProfilesController extends Controller
     public function destroy($user)
     {
         $user = User::find($user);
-        $files = $user->files()->get();
-        $orders = $user->orders()->get();
-        $brands = $user->brands()->get();
-        $notifications = $user->notifications()->get();
-        if(count($files) > 0)
-            $user->files()->delete();
-        if(count($brands) > 0)
-            $user->brands()->delete();
+
+        $files = $user->files()
+                    ->get();
+
+        $orders = $user->orders()
+                    ->get();
+
+        $brands = $user->brands()
+                    ->get();
+
+        $notifications = $user
+                            ->notifications()
+                            ->get();
+
+        if(count($files) > 0) 
+        {
+            $user->files()
+                    ->delete();
+        }
+        if(count($brands) > 0) 
+        {
+            $user->brands()
+                    ->delete();
+        }
         if(count($orders) > 0)
-            $user->orders()->delete();
+        {
+            $user->orders()
+                    ->delete();
+        }
         if(count($notifications) > 0)
-            $user->notifications()->delete();
+        {
+            $user->notifications()
+                    ->delete();
+        }
         $user->delete();
         Storage::deleteDirectory($user->name);
         return redirect('dashboard/users');
@@ -161,37 +215,72 @@ class ProfilesController extends Controller
         $user->remaining=$request->remaining;
         $user->refresh_date = $request->refresh_date;
         $user->save();
-        $notif = Auth()->User()->notifications()->get();
-        $files = file::where('owner_id', Auth()->User()->id)->get();
+        $notif = Auth()
+                    ->User()
+                    ->notifications()
+                    ->get();
+        $files = file::where('owner_id', Auth()->User()->id)
+                    ->get();
         
-        return view('users', ['user' => Auth()->User(), 'users' => User::all(), 'files'=>$files, 'notif' => $notif]);
-    }
-
-    public function getAdminProfile()
-    {
-        
-    }
-
-    public function postProfile()
-    {
-        
+        return view(
+            'users', [
+                'user' => Auth()->User(), 
+                'users' => User::all(), 
+                'files'=>$files, 
+                'notif' => $notif
+            ]);
     }
 
     public function show($user)
     {
         $user = User::find($user);
-        return view('auth.edit', ['user' => $user]);
+        return view(
+            'auth.edit', [
+                'user' => $user
+            ]);
     }
 
-    public function users()
+    public function users(Request $request)
     {
         
-        $notif = Auth()->User()->notifications()->get();
+        $class='User';
+            $objects='users';
+            $Settings="App\\Setting";
+            if($request->filter_by || $request->order_by){
+                $request->request
+                            ->add(['class' => $class]);
+                $$objects=$this
+                            ->filter($request);
+            }
+            else{
+                $Class="App\\".$class;
+                $pagination_count=9;    
+                if($Settings::where('attribute','pagination_count')->first())
+                {  
+                    $setting=$Settings::where('attribute','pagination_count')
+                                ->first(); 
+                    $pagination_count=$setting->value;
+                }
+                $$objects=$Class::paginate($pagination_count);
+            }
+
+        $notif = Auth()
+                    ->User()
+                    ->notifications()
+                    ->get();
             
             
-        $files = file::where('owner_id', Auth()->User()->id)->get();
+        $files = file::where(
+            'owner_id', 
+            Auth()->User()->id
+            )->get();
             
-        return view('users', ['user' => Auth()->User(), 'users' => User::all(), 'files'=>$files, 'notif' => $notif]);
+        return view('users', [
+                'user' => Auth()->User(), 
+                'users' => $users, 
+                'files'=>$files, 
+                'notif' => $notif
+            ]);
     }
 
     public function filter($request){
@@ -199,38 +288,45 @@ class ProfilesController extends Controller
         $pagination_count=9;
         if(Setting::where('attribute',$user->name.'_'.'pagination_count')->first())
         {  
-                $setting=Setting::where('attribute',$user->name.'_'.'pagination_count')->first(); 
+                $setting=Setting::where('attribute',$user->name.'_'.'pagination_count')
+                            ->first(); 
                 $pagination_count=$setting->value;
         }
         if(Setting::where('attribute',$user->name.'_'.'order')->first() && !$request->order)
         {
-            $setting=Setting::where('attribute',$user->name.'_'.'order')->first();
+            $setting=Setting::where('attribute',$user->name.'_'.'order')
+                        ->first();
             $request->request->add(['order' => $setting->value]);
         
         }
         if(Setting::where('attribute',$user->name.'_'.'order_by')->first() && !$request->order_by)
         {
-            $setting=Setting::where('attribute',$user->name.'_'.'order_by')->first();
+            $setting=Setting::where('attribute',$user->name.'_'.'order_by')
+                        ->first();
             $request->request->add(['order_by' => $setting->value]);
         }
         if(Setting::where('attribute',$user->name.'_'.'filter_by')->first() && !$request->filter_by)
         {   
-            $setting=Setting::where('attribute',$user->name.'_'.'filter_by')->first();
+            $setting=Setting::where('attribute',$user->name.'_'.'filter_by')
+                        ->first();
             $request->request->add(['filter_by' => $setting->value]);
         }
         if(Setting::where('attribute',$user->name.'_'.'filter_value')->first() && !$request->filter_value)
         {   
-            $setting=Setting::where('attribute',$user->name.'_'.'filter_value')->first();
+            $setting=Setting::where('attribute',$user->name.'_'.'filter_value')
+                        ->first();
             $request->request->add(['filter_value' => $setting->value]);
         }
     if(Setting::where('attribute','pagination_count')->first())
     {  
-            $setting=Setting::where('attribute','pagination_count')->first(); 
+            $setting=Setting::where('attribute','pagination_count')
+                        ->first(); 
             $pagination_count=$setting->value;
     }
     if(Setting::where('attribute','order')->first() && !$request->order)
     {
-        $setting=Setting::where('attribute','order')->first();
+        $setting=Setting::where('attribute','order')
+                    ->first();
         $request->request->add(['order' => $setting->value]);
     
     }
@@ -241,40 +337,60 @@ class ProfilesController extends Controller
     }
     if(Setting::where('attribute','filter_by')->first() && !$request->filter_by)
     {   
-        $setting=Setting::where('attribute','filter_by')->first();
+        $setting=Setting::where('attribute','filter_by')
+                    ->first();
         $request->request->add(['filter_by' => $setting->value]);
     }
     if(Setting::where('attribute','filter_value')->first() && !$request->filter_value)
     {   
-        $setting=Setting::where('attribute','filter_value')->first();
-        $request->request->add(['filter_value' => $setting->value]);
+        $setting=Setting::where('attribute','filter_value')
+                    ->first();
+        $request
+            ->request
+            ->add(['filter_value' => $setting->value]);
     }
     if(!$request->pagination_count)
     {
-            $request->request->add(['pagination_count' => 9]);
+            $request
+                ->request
+                ->add(['pagination_count' => 9]);
     }
     if(!$request->order)
     {
-        $request->request->add(['order' => 'desc']);
+        $request
+            ->request
+            ->add(['order' => 'desc']);
     }
     if(!$request->order_by){
-        $request->request->add(['order_by' => 'id']);
+        $request
+            ->request
+            ->add(['order_by' => 'id']);
     }
     if(!$request->filter_by){
-        $request->request->add(['filter_by' => 'attribute']);
+        $request
+            ->request
+            ->add(['filter_by' => 'attribute']);
     }
     if(!$request->filter_value){
-        $request->request->add(['filter_value' => '!']);
+        $request
+            ->request
+            ->add(['filter_value' => '!']);
     }
     if(!$request->filter_operator)
     {
-         $request->request->add(['filter_operator' => '!=']);
+         $request
+            ->request
+            ->add(['filter_operator' => '!=']);
     }
     if($request->filter_value=='!'){
-        $request->request->remove('filter_check');
+        $request
+            ->request
+            ->remove('filter_check');
     }
     if($request->filter_value==''){
-        $request->request->remove('filter_check');
+        $request
+            ->request
+            ->remove('filter_check');
     }
     $order=$request->order; 
     $filter_by=$request->filter_by; 
@@ -286,11 +402,15 @@ class ProfilesController extends Controller
 
     if($filter_by == 'user_id' ){
         if( $filter_operator == 'LIKE' && User::where('name',$filter_operator,"%".$filter_value."%")->first()){
-            $names = User::where('name',$filter_operator,"%".$filter_value."%")->get();
-            $objects=$Class::where('user_id',0)->get();
-            foreach($names as $name ){
-            $temp=$Class::where('user_id',$name->id)->get();
-            $objects = $objects->merge($temp);
+            $names = User::where('name',$filter_operator,"%".$filter_value."%")
+                        ->get();
+            $objects=$Class::where('user_id',0)
+                ->get();
+            foreach($names as $name )
+            {
+                $temp=$Class::where('user_id',$name->id)
+                        ->get();
+                $objects = $objects->merge($temp);
             }
             
                 if($order=='desc'){
@@ -299,18 +419,21 @@ class ProfilesController extends Controller
                 if($order=='asc'){
                     $sorted = $objects->sortBy($order_by);
                 }
-                $objects = $sorted->values()->collect();
-            $objects = $objects->paginate($pagination_count)->appends([
-                'order_by'=>$order_by,
-                'order'=>$order,
-                'filter_by'=>$filter_by,
-                'filter_value'=>$filter_value,
-                'filter_operator'=>$filter_operator
-            ]);        
+                $objects = $sorted->values()
+                            ->collect();
+            $objects = $objects->paginate($pagination_count)
+                        ->appends([
+                            'order_by'=>$order_by,
+                            'order'=>$order,
+                            'filter_by'=>$filter_by,
+                            'filter_value'=>$filter_value,
+                            'filter_operator'=>$filter_operator
+                        ]);        
             return $objects;
         }
         else if( User::where('name',$filter_value)->first()){
-            $name = User::where('name',$filter_value)->first();
+            $name = User::where('name',$filter_value)
+                        ->first();
             $filter_value=$name->id;
         }
         
@@ -318,22 +441,31 @@ class ProfilesController extends Controller
 
 
     if($user->position=='admin' && $request->filter_check){
-        if($filter_operator=='LIKE' ||$filter_operator=='NOT LIKE') {
+        if($filter_operator=='LIKE' ) {
             $objects = $Class::where($filter_by,$filter_operator,"%".$filter_value."%");
         }
         else $objects = $Class::where($filter_by,$filter_operator,$filter_value);
     }
     else if($request->filter_check)
     {
-        if($filter_operator=='LIKE' || $filter_operator=='NOT LIKE') {
+        if($filter_operator=='LIKE' ) {
             $objects = $Class::where($filter_by,$filter_operator,"%".$filter_value."%");
         }
         else $objects = $Class::where($filter_by,$filter_operator,$filter_value);
         
         $objects = $objects->where('owner_id',$user->id);
     }
-    $objects->orderBy($order_by,$order);
-    $objects = $objects->paginate($pagination_count)->appends(['order_by'=>$order_by,'order'=>$order,'filter_by'=>$filter_by,'filter_value'=>$filter_value,'filter_operator'=>$filter_operator]);
+    $objects
+        ->orderBy($order_by,$order);
+    $objects = $objects
+                ->paginate($pagination_count)
+                ->appends([
+                    'order_by'=>$order_by,
+                    'order'=>$order,
+                    'filter_by'=>$filter_by,
+                    'filter_value'=>$filter_value,
+                    'filter_operator'=>$filter_operator
+                ]);
     return $objects;
 }
 }

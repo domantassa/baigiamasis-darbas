@@ -41,60 +41,6 @@ class FileNotificationController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \Clients\FileNotification  $fileNotification
-     * @return \Illuminate\Http\Response
-     */
-    public function show(FileNotification $fileNotification)
-    {
-        
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \Clients\FileNotification  $fileNotification
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(FileNotification $fileNotification)
-    {
-        
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Clients\FileNotification  $fileNotification
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, FileNotification $fileNotification)
-    {
-        
-    }
 
     /**
      * Remove the specified resource from storage.
@@ -257,7 +203,15 @@ class FileNotificationController extends Controller
         $objects = $objects->where('owner_id',$user->id);
     }
     $objects->orderBy($order_by,$order);
-    $objects = $objects->paginate($pagination_count)->appends(['order_by'=>$order_by,'order'=>$order,'filter_by'=>$filter_by,'filter_value'=>$filter_value,'filter_operator'=>$filter_operator]);
+    $objects = $objects
+                ->paginate($pagination_count)
+                ->appends([
+                    'order_by'=>$order_by,
+                    'order'=>$order,
+                    'filter_by'=>$filter_by,
+                    'filter_value'=>$filter_value,
+                    'filter_operator'=>$filter_operator
+                ]);
     return $objects;
 }
 }

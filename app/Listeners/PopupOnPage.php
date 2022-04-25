@@ -2,7 +2,6 @@
 
 namespace App\Listeners;
 
-use App\Events\NewMessageOrFile;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
@@ -18,14 +17,5 @@ class PopupOnPage
         //
     }
 
-    /**
-     * Handle the event.
-     *
-     * @param  NewMessageOrFile  $event
-     * @return void
-     */
-    public function handle(NewMessageOrFile $event)
-    {
-        //
-    }
+
 }
