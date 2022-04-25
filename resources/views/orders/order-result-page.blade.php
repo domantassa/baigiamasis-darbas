@@ -266,8 +266,9 @@
         $(elem).html($(new_elem).html());
         var domain = document.location.origin;
             domain= domain+'/dashboard';
-        var order_id=$('[rev_id='+selected_revision_id+'].download').attr('or_id');
+
         $('[rev_id='+original_id+']').attr('rev_id', selected_revision_id);
+        var order_id=$('[rev_id='+selected_revision_id+'].download').attr('or_id');
         $('[rev_id='+selected_revision_id+'].edit').prop('href',domain+ '/edit/image-revision/'+selected_revision_id );
         $('[rev_id='+selected_revision_id+'].destroy').prop('href',domain+ '/destroy/image-revision/'+selected_revision_id );
         $('[rev_id='+selected_revision_id+'].download').prop('href',domain+ '/download/image-revision/'+order_id+'/'+selected_revision_id );
@@ -287,7 +288,7 @@
     
         $('#reg-modal').modal('hide');
     
-    
+        location.reload();
     
     
     });
