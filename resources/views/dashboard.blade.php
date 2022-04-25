@@ -73,7 +73,7 @@
                             @endforeach
                     </tbody>
             </table>
-            {{$files->links()}}
+            <!--{{$files->links()}} -->
                 
             </div>
                 <div class=" {{ $files->count() ? 'blockWithTopMargin' : '' }}">

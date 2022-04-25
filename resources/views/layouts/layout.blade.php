@@ -582,7 +582,6 @@
                                     <span id="notifCount" class="badge badge-dark badge-pill">{{$notif->count()}}</span>
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-0 border-0 font-size-sm" aria-labelledby="page-header-notifications-dropdown">
-                                    @
                                     <div class="p-2 bg-primary text-center">
                                         <h5 class="dropdown-header text-uppercase text-white">{{__('Pranešimai')}}</h5>
                                     </div>
