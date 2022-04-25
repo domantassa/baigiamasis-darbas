@@ -133,9 +133,7 @@
                                 @endif	
                             @endforeach	
 
-                            @if(count($allBrands) == 0)
-                                <option> {{ __('Nepasirinkta') }}</option >
-                            @endif
+                            
                             </select>
                         </div>
                         
@@ -186,13 +184,18 @@
                         {{$file->name}}
                         </div>
                         @endforeach
-
+                        <input type="file" name="files[]" id="fileToUpload" multiple><label for="fileToUpload" id="label-fileToUpload" class="btn btn-round order-btn-grey form-btn form-btn2" style="width:auto"><diva id="btn-text" >{{ __('Prisegti failus') }} </diva>
+                        <i class="fas fa-check-circle file-form"></i></label><div class="  btn-round btn-trash file-input-trash hide click"><i class="fa fa-trash trash"></i></div>
+                        
                         
                         </div>
                         @else
                         <div class="custom-form-group">
                             <h1 class="h4 m-0">6. {{ __('Prisegtų failų nėra') }}</h1>
                         <div>
+                        <input type="file" name="files[]" id="fileToUpload" multiple><label for="fileToUpload" id="label-fileToUpload" class="btn btn-round order-btn-grey form-btn form-btn2" style="width:auto"><diva id="btn-text" >{{ __('Prisegti failus') }} </diva>
+                        <i class="fas fa-check-circle file-form"></i></label><div class="  btn-round btn-trash file-input-trash hide click"><i class="fa fa-trash trash"></i></div>
+                        </div>
                         @endif
                         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
                             <script>

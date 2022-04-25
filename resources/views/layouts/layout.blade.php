@@ -526,7 +526,7 @@
                             });
                             </script>
                                 <div class="p-2">
-                                    @if($user->position == 'admin')
+                                    @if($user->position != 'admin')
                                     <a id="help-button" class=" dropdown-item d-flex align-items-center justify-content-between display-none-on-medium <?php if($user->position=='admin') { echo 'disabled'; } ?> " href="#">
                                         <span>{{__('Pagalba')}}</span>
                                         <i class="si si-info ml-1"></i>

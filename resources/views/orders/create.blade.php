@@ -94,9 +94,7 @@
                         <i class="fas fa-check-circle file-form"></i></label><div class="  btn-round btn-trash file-input-trash hide click"><i class="fa fa-trash trash"></i></div>
                         </div>
                         
-                        <script>
 
-                            </script>
                         <div class="custom-form-group">
                             <h1 class="h4 m-0">7. {{ __('Papildomi komentarai') }}:</h1>
                             <textarea rows="3" name="feedback" class=" btn-round order-btn-grey form-btn " placeholder="{{ __('Pradėti rašyti') }}"></textarea>
