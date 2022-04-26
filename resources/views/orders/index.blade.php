@@ -41,7 +41,7 @@
                         <tr>
                         
                        
-                            <td class="p-1"><div class=" btn-round  order-btn-primary">{{ $order->name }}</div></td>
+                            <td class="p-1"><a href="{{route('orders.edit',$order->id)}}"><div class=" btn-round  order-btn-primary">{{ $order->name }}</div></a></td>
                             <td class="p-1"><div class="  btn-round order-btn-grey" >{{ $order->created_at }}</div></td>
                             <td class="p-1"><div class="  btn-round order-btn-grey" >{{ __($order->type) }}</div></td>
                             <td class="p-1"> <a href="{{route('orders.edit',$order->id)}}"><div class=" btn btn-round order-btn-black">{{__('Peržiūrėti')}}</div></a></td>
@@ -52,7 +52,18 @@
                 </table>
                 @endif
                 @if((Auth::user()->position == 'admin'))	
+
+                    
+
                     <h1 class="my-3">{{__('Visi užsakymai')}}</h1>
+
+                    @include('widgets.filters',['class'=>'Order', 'attributes'=>[
+                    'name',
+                    'type',
+                    'expected_at',
+                    'created_at'
+                    ]])
+                    
                     @if(count($orders->where('state','Projektas atliktas'))>0)
               
                     @foreach($users as $user1)
@@ -75,7 +86,7 @@
                             <tr>
                             
                         
-                            <td class="p-1"><div class="btn-primary  btn-round  order-btn-primary">{{ $order->name }}</div></td>
+                            <td class="p-1"><a href="{{route('orders.edit',$order->id)}}"><div class="btn-primary  btn-round  order-btn-primary">{{ $order->name }}</div></a></td>
                             <td class="p-1"><div class="  btn-round order-btn-grey" >{{ $order->created_at }}</div></td>
                             <td class="p-1"><div class="  btn-round order-btn-grey" >{{ __($order->type) }}</div></td>
                             <td class="p-1"> <a href="{{route('orders.edit',$order->id)}}"><div style="width: auto" class="btn-primary btn btn-round order-btn-primary">{{ __('Peržiūrėti') }}</div></a></td>

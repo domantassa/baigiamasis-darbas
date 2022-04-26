@@ -203,17 +203,7 @@ class ImageRevisionController extends Controller
         return view('imageRevisions.imageCommentsCreate',['user' => Auth()->User(), 'users' => User::all(), 'notif' => $notif,'imageRevision'=>$imageRevision, 'imageComments'=>$imageComments,'order'=>$order ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ImageRevision  $imageRevision
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, ImageRevision $imageRevision)
-    {
 
-    }
 
     /**
      * Remove the specified resource from storage.
