@@ -140,7 +140,7 @@ class ProfilesController extends Controller
             $$objects=$Class::paginate($pagination_count);
         }
 
-        $files= $files->where('owner_id',$user->id);
+        $files= $files->where('owner_id',$user->id)->paginate($pagination_count);
         return view(
             'dashboard', [
                 'user' => $user, 
