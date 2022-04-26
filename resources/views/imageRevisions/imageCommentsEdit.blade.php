@@ -5,12 +5,12 @@
 <form id="file_edit" action="{{route('imageComment.store', 1)}}" method="post">
     @csrf
     <input value="{{$image_revision->id}}" name="image_revision_id" type="hidden">
-<div id="cont" class="d-flex justify-content-between">
+<div id="cont" style="border: 0" class="d-flex justify-content-between">
 <div id="con" class="con">
     <img class="image" src="{{asset('storage/'.$image_revision->path.'/'.$image_revision->name)}}">
 </div>
-<div id="inputs">
-    <div class="comments-page-inputs-container">
+<div id="inputs" style="border: 0">
+    <div class="comments-page-inputs-container" style="border: 0">
     <a href="{{route('orders.show-results', $image_revision->order_id)}}" class="m-auto"><div class="dots-back btn-primary btn btn-round order-btn-primary">{{__('Grįžti')}}</div></a> 
     <label for="dots-submit" class=" dots-submit btn-primary btn btn-round order-btn-primary">{{__('Išsaugoti')}}</label>
     </div>
