@@ -43,6 +43,7 @@ class OrdersController extends Controller
         $Settings="App\\Setting";
         if($request->filter_by || $request->order_by){
             $request->request->add(['class' => $class]);
+
             $$objects=$this->filter($request);
         }
         else{

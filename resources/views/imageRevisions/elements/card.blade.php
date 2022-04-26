@@ -13,7 +13,7 @@
 
         </div>    
         <div class="c-body">
-            <textarea class="text-input text" name="text-{{$number}}"   data_id="{{$number}}">{{$text}}</textarea>
+            <textarea class="text-input text" name="text-{{$number}}" style="min-width:330px"  data_id="{{$number}}">{{$text}}</textarea>
         </div>
     </div>
 </div>
