@@ -102,7 +102,7 @@
                             <option selected>{{__($order->state)}}</option>
                             <option> {{__('Projektas atliktas')}}</option >   
                             <option> {{__('Projektas kuriamas')}}</option >
-                                <option> {{__('Projektas atšauktas')}}</option >
+
                             </select>
                         </div>
                         <div class="custom-form-group">
