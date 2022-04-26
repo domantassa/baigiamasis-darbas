@@ -4,7 +4,7 @@
                 {{$number}}
             </span> 
 
-             <img id="small-profile-avatar" class=" img-avatar img-avatar-thumb c-user" src="{{asset('media/avatars/avatar'.$user->avatar_image_number.'.png')" alt="Header Avatar">
+             <img id="small-profile-avatar" class=" img-avatar img-avatar-thumb c-user" src="{{asset('media/avatars/avatar'.$user->avatar_image_number.'.png')}}" alt="Header Avatar">
 
         </div>
         <div class="c-body">
