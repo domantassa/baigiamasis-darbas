@@ -1,7 +1,7 @@
 @extends('layouts.layout', ['user' => $user, 'users' => $users, 'notif' => $notif])
 
 @section('content')
-    <!-- Hero -->
+
     <div class="bg-body-light">
         <div class="content content-full" >
 
@@ -49,11 +49,13 @@
     </div>
 
     
-
+    <!--PA21-->
     <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js">
       </script>
 
     <script> 
+
+    
 $.ajaxSetup({
   headers: {
     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

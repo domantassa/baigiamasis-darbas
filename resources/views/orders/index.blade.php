@@ -1,7 +1,9 @@
 @extends('layouts.layout', ['user' => $user, 'users' => $users, 'notif' => $notif])
 
 @section('content')
-<!-- Hero -->
+
+<!--PA19-->
+
 <div class="bg-body-light">
         <div class="content content-full pt-2" >
             <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
@@ -15,9 +17,7 @@
             
        </div>
     </div>
-    <!-- END Hero -->
 
-    <!-- Page Content -->
 
     <div class="contentShadowInset">
         

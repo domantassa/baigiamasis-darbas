@@ -1,7 +1,7 @@
 @extends('layouts.auth')
 
 @section('content')
-
+<!--PA17-->
 <div class="bg-image login-bg" style="background-image: url('{{ asset('media/photos/photo6@2x.jpg')}}');" >
     <div class="hero-static bg-white-90">
         

@@ -50,6 +50,7 @@ class FileNotificationController extends Controller
         
     }
 
+    //PA11
     public function delete($user)
     {
         $fileNotification = FileNotification::where('user_id', $user)->take(FileNotification::where('user_id', $user)->count());

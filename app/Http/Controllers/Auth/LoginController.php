@@ -20,6 +20,21 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
+    //P26 system uses AuthenticateUsers provided logout function, it works similar to one provided below
+    // public function logout(Request $request)
+    // {
+    //     Auth::logout();
+    
+    //     $request->session()->invalidate();
+    
+    //     $request->session()->regenerateToken();
+    
+    //     return redirect('/');
+    // }
+
+    //P17 system uses AuthenticateUsers provided login function
+
+
     /**
      * Where to redirect users after login.
      *

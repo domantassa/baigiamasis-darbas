@@ -5,7 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\App;
 
-
+//PA26
 Auth::routes();
 
 Route::prefix('dashboard')->middleware('auth')->group(function(){ 
@@ -33,6 +33,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function(){
   Route::get('brand/edit/{id}', 'BrandController@edit')->name('brand.edit');
   Route::get('brand/delete/{id}', 'BrandController@destroy')->name('brand.delete');
 
+  //PA21
   Route::get('chatting/{user}', 'ChattingController@index')->name('chattingadmin');
 
   Route::post('/send-message', function() {
@@ -40,8 +41,10 @@ Route::prefix('dashboard')->middleware('auth')->group(function(){
       $request->input['username'], 
       $request->input['message']));
   });
+  //end PA21
 
   Route::get('/deletenotification/{notification}', 'FileNotificationController@destroy')->name('notifications.destroy');
+  //PA11
   Route::get('/deleteNotifications/{user}', 'FileNotificationController@delete')->name('notifications.delete');
   Route::get('files', 'FileController@index')->name('files');
   Route::post('store/{user}', 'FileController@store')->name('upload');
@@ -55,6 +58,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function(){
   Route::get('orders/show/{id}', 'OrdersController@show')->name('orders.show');
   Route::get('orders/results/{id}', 'OrdersController@showResults')->name('orders.show-results');   
 
+  //PA12
   Route::get('orders','OrdersController@index')->name('orders.index');
   Route::get('orders/{order}/edit','OrdersController@edit')->name('orders.edit');
   Route::get('orders/create','OrdersController@create')->name('orders.create');
@@ -75,6 +79,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function(){
   Route::get('destroy/{file}', 'FileController@destroy')->name('deleteFile');
   Route::match(['get', 'post'], '/', 'ProfilesController@index', ['user' => Auth::user()]);
   Route::post('postmsg','AjaxController@index')->name('postmsg');
+  //PA12
   Route::post('postavatar','AjaxController@changeAvatar')->name('postavatar');
   Route::get('notifications','FileNotificationController@index')->name('notifications.index');
   Route::get('brands/create','BrandController@create')->name('brands.create');
@@ -108,6 +113,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function(){
 });
 Route::get('/', 'ProfilesController@index')->middleware('auth');
 
+//PA13
 Route::get('/lang/{locale}', function($locale){
 
  Session::put('locale',$locale);
@@ -123,4 +129,4 @@ Route::get('/lang-toggle',function(){
   Session::put('locale',$locale);
    return back();
  })->name('lang.toggle');
- 
+ //end PA13

@@ -112,6 +112,7 @@ $('#profile-avatar').on('click',function(){
     
 });
 
+//PA12
 $.ajaxSetup({
     headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -131,6 +132,7 @@ $.ajaxSetup({
                 },
             });
         });
+//end PA12
 
 $('#help-button').on('click',function(e){
     e.preventDefault();

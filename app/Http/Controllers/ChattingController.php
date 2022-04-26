@@ -11,6 +11,8 @@ use App\FileNotification;
 
 class ChattingController extends Controller
 {
+
+    //PA21
     public function index($id)
     {
         $user = User::findOrFail($id);

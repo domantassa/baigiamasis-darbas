@@ -31,6 +31,8 @@ class OrdersController extends Controller
      */
     public function index(Request $request)
     {
+        //PA19
+
         $user=Auth()->user();
         $notif = Auth()
                     ->User()

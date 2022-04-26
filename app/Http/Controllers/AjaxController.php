@@ -33,6 +33,7 @@ class AjaxController extends Controller
         return response($request->msg);
     }
 
+    //PA12
     public function changeAvatar(Request $request) {
 
       $user=User::find($request->id);

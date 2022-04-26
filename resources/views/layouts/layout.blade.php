@@ -473,7 +473,7 @@
                         
 
                     </div>
-
+                    <!--PA13-->
                     <div class="d-flex align-items-center">
                             <div class="language-toggle ">
                                 <a class="<?php if(Session::get('locale')!='en') echo"my-on ";
@@ -542,7 +542,9 @@
                                         <i class="fa fa-cog ml-1"></i>
                                     </a>
                                     @endif
-                                    <script> 
+                                    <!--PA12 -->
+                                    <script>
+                                     
                                     $.ajaxSetup({
                                     headers: {
                                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -563,7 +565,8 @@
                                             });
                                         });
                                         </script>
-
+                                    <!--end PA12 --> 
+                                    <!--PA26-->
                                     <a class="dropdown-item d-flex align-items-center justify-content-between" href="{{ route('logout') }} " onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                         <span>{{__('Atsijungti')}}</span>
                                         <i class="si si-logout ml-1"></i>
@@ -618,6 +621,7 @@
                                     
                                             </a>
                                         </li>
+                                        <!--PA11-->
                                         <li class="notif-item">
                                             
                                             <a class="" href="{{route('notifications.delete', ['user' => $user->id])}}">
@@ -628,6 +632,7 @@
                                     
                                             </a>
                                         </li>
+                                        <!--end PA11-->
                         @endif
                     </div>
 
