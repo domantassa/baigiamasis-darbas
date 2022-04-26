@@ -41,7 +41,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function(){
       $request->input['message']));
   });
 
-  Route::post('/deletenotification', 'FileNotificationController@destroy')->name('notifications.destroy');
+  Route::get('/deletenotification/{notification}', 'FileNotificationController@destroy')->name('notifications.destroy');
   Route::get('/deleteNotifications/{user}', 'FileNotificationController@delete')->name('notifications.delete');
   Route::get('files', 'FileController@index')->name('files');
   Route::post('store/{user}', 'FileController@store')->name('upload');

@@ -42,18 +42,11 @@ class FileNotificationController extends Controller
     }
 
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \Clients\FileNotification  $fileNotification
-     * @return \Illuminate\Http\Response
-     */
-
-    public function destroy(Request $request)
+    public function destroy($notification)
     {
-        $fileNotification = FileNotification::where('id', $request->notification)->take(1);
+        $fileNotification = FileNotification::where('id', $notification)->take(1);
         $fileNotification->delete();
-        return (redirect('/dashboard/'.$request->link));
+        return redirect('/dashboard/notifications');
         
     }
 

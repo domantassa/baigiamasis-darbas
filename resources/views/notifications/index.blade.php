@@ -58,12 +58,10 @@
 
                                             <td>{{$notification->created_at}}</td>
                                             <td>    
-                                                <form method="post" action="{{route('notifications.destroy',$notification->id)}}">
-                                                <input type="hidden" name="_method" value="DELETE">
-                                                @csrf    
+                                                  
                                                 <a href="{{ route('notifications.destroy',$notification->id) }} "><i
                                                             class="fas fa-trash"></i></a>
-                                                </form>
+                                                
                                             </td>
                                         </tr>
                                     @endforeach
