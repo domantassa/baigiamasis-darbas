@@ -63,6 +63,8 @@ class ImageCommentController extends Controller
         $comment->x=$inputs['x-'.$i];
         $comment->y=$inputs['y-'.$i];
         $comment->image_revision_id=$inputs['image_revision_id'];
+        $comment->user_id = Auth()->User()->id;
+        $comment->user_name = Auth()->User()->name;
         $comment->save();
         $i++;
         $t='text-'.$i;
