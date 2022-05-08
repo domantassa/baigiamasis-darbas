@@ -67,7 +67,7 @@
                                     @endforeach
                                     </tbody>
                                 </table>
-                                <?php /* {{$settings->links()}}*/?>
+                                 {{$notifications->appends($_GET)->links()}}
                             </div>
                     </div>
                 </div>

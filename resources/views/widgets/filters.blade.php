@@ -37,13 +37,13 @@
     <input class="d-none" name="filter_check" id="filter-check" type="checkbox" <?php if($_REQUEST['filter_check']) echo 'checked'?>>
     
     <div class="filter-group <?php if($_REQUEST['filter_check']) echo "active"?>">
-    <select name="filter_by" class="filter-input m-2"  <?php //disabled ?>>
+    <select name="filter_by" class="filter-input m-2">
     @foreach($attributes as $key=>$value)
                     <option  value="{{$value}}" 
                     <?php if($_REQUEST['filter_by']==$value) echo 'selected'?>>{{__($value)}}</option>
         @endforeach
     </select>
-    <select name="filter_operator" class="filter-input m-2" <?php //disabled?> >
+    <select name="filter_operator" class="filter-input m-2" >
         <option <?php if($_REQUEST['filter_operator']=='=') echo 'selected'?>>=</option>
         <option <?php if($_REQUEST['filter_operator']=='!=') echo 'selected'?>>!=</option>
         <option  <?php if($_REQUEST['filter_operator']=='LIKE') echo 'selected'?> value="LIKE">{{__('LIKE')}}</option>
@@ -58,13 +58,13 @@
         </label>
         <input id="order-check" class="d-none" name="order_check" type="checkbox" <?php if($_REQUEST['order_check']) echo 'checked'?>>
         <div class="order-group ">
-            <select name="order_by" class="order-input m-2" <?php //disabled?> >
+            <select name="order_by" class="order-input m-2" >
                 @foreach($attributes as $key=>$value)
                     <option  value="{{$value}}" 
                     <?php if($_REQUEST['order_by']==$value) echo 'selected'?>>{{__($value)}}</option>
                 @endforeach
             </select>
-            <select name="order" class="order-input m-2" <?php //disabled?>>
+            <select name="order" class="order-input m-2" >
                 <option  <?php if($_REQUEST['order']=='desc') echo 'selected'?>>{{__('desc')}}</option>
                 <option  <?php if($_REQUEST['order']=='asc') echo 'selected'?>>{{__('asc')}}</option>
             </select>

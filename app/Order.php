@@ -16,4 +16,8 @@ class Order extends Model
     {
         return $this->hasMany('App\file');
     }
+    public function revisions()
+    {
+        return $this->hasMany('App\ImageRevision');
+    }
 }

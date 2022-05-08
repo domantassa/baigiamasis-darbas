@@ -29,26 +29,7 @@ class FileController extends Controller
      */
     public function index(Request $request)
     {
-
-        $class='file';
-        $objects='files';
-        $Settings="App\\Setting";
-        if($request->filter_by || $request->order_by){
-            $request->request->add(['class' => $class]);
-            $$objects=$this->filter($request);
-        }
-        else{
-            $Class="App\\".$class;
-            $pagination_count=9;    
-            if($Settings::where('attribute','pagination_count')->first())
-            {  
-                $setting=$Settings::where('attribute','pagination_count')
-                                        ->first(); 
-                $pagination_count=$setting->value;
-            }
-            $$objects=$Class::paginate($pagination_count);
-        }
-
+        $files= Auth()->user()->files()->orderBy('id','desc')->get();
         $notif = Auth()
                     ->User()
                     ->notifications()

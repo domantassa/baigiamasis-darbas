@@ -30,11 +30,11 @@ class FileNotificationController extends Controller
                 $setting=$Settings::where('attribute','pagination_count')->first(); 
                 $pagination_count=$setting->value;
             }
-            $$objects=$Class::paginate($pagination_count);
+            $$objects=$Class::orderBy('id','desc')->paginate($pagination_count);
         }
         $notif = Auth()->User()->notifications()->get();
         return view('notifications.index',[
-                'notifications'=>$notif,
+                'notifications'=>$notifications,
                 'user' => Auth()->User(), 
                 'users' => User::all(), 
                 'notif' => $notif

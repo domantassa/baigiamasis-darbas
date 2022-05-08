@@ -29,7 +29,6 @@ class ProfilesController extends Controller
             $objects='users';
             $Settings="App\\Setting";
             if($request->filter_by || $request->order_by){
-                dd($request);
                 $request->request
                             ->add(['class' => $class]);
                 $$objects=$this

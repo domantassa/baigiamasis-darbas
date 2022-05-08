@@ -31,8 +31,6 @@ class OrdersController extends Controller
      */
     public function index(Request $request)
     {
-        //PA19
-
         $user=Auth()->user();
         $notif = Auth()
                     ->User()
@@ -41,30 +39,65 @@ class OrdersController extends Controller
         $class='Order';
         $objects='orders';
         $Settings="App\\Setting";
-        if($request->filter_by || $request->order_by){
-            $request->request->add(['class' => $class]);
 
-            $$objects=$this->filter($request);
-        }
-        else{
-            $Class="App\\".$class;
+        if(Auth()->User()->position=='admin'){
             $pagination_count=9;    
-            if($Settings::where('attribute','pagination_count')->first())
-            {  
-                $setting=$Settings::where('attribute','pagination_count')
+            if(Setting::where('attribute','pagination_count')->first()){  
+                $setting=Setting::where('attribute','pagination_count')
                             ->first(); 
                 $pagination_count=$setting->value;
             }
-            $$objects=$Class::paginate($pagination_count);
-        }
-        
-        return view(
-            'orders.index', [
+            $class='Order';
+            $classes="orders";
+            if($request->filter_by || $request->order_by){
+                $request->request->add(['class' => $class]);
+                $$classes=$this->filter($request);
+            }
+            else{
+                $Class="App\\".$class;   
+                $$classes=$Class::where('id','!=','0');
+            }
+                $orders = $orders->where('state','!=','Projektas kuriamas')
+                    ->get();
+            return view(
+            'orders.admin.index', [
                 'user' => Auth()->User(), 
                 'users' => User::all(), 
                 'orders'=>$orders, 
                 'notif' => $notif
-            ]);    
+            ]);
+        }
+        
+        if(Auth()->User()->position!='admin'){
+            $pagination_count=9;    
+            if(Setting::where('attribute','pagination_count')->first()){  
+                $setting=Setting::where('attribute','pagination_count')
+                            ->first(); 
+                $pagination_count=$setting->value;
+            }
+            $class='Order';
+            $classes="orders";
+            if($request->filter_by || $request->order_by){
+                $request->request->add(['class' => $class]);
+                $$classes=$this->filter($request);
+            }
+            else{
+                $Class="App\\".$class;   
+                $$classes=$Class::where('id','!=','0');
+            }
+    
+        
+                $orders = $orders->where('state','!=','Projektas kuriamas')
+                ->where('owner_id',Auth()->User()->id)
+                    ->paginate($pagination_count);
+            return view(
+                'orders.user.index', [
+                    'user' => Auth()->User(), 
+                    'users' => User::all(), 
+                    'orders'=>$orders, 
+                    'notif' => $notif
+                ]);
+        }    
     }
 
     /**
@@ -406,30 +439,62 @@ class OrdersController extends Controller
                     ->get();
         
         
-        $class='Order';
-        $classes="orders";
-        if($request->filter_by || $request->order_by){
-            $request->request->add(['class' => $class]);
-            $$classes=$this->filter($request);
-        }
-        else{
-            $Class="App\\".$class;
-            $pagination_count=9;    
-            if(Setting::where('attribute','pagination_count')->first())
-            {  
-                $setting=Setting::where('attribute','pagination_count')
-                            ->first(); 
-                $pagination_count=$setting->value;
-            }
-            $$classes=$Class::paginate($pagination_count);
-        }
+        
+        if(Auth()->User()->position != 'admin'){
+                $pagination_count=9;    
+                if(Setting::where('attribute','pagination_count')->first()){  
+                    $setting=Setting::where('attribute','pagination_count')
+                                ->first(); 
+                    $pagination_count=$setting->value;
+                }
+                $class='Order';
+                $classes="orders";
+                if($request->filter_by || $request->order_by){
+                    $request->request->add(['class' => $class]);
+                    $$classes=$this->filter($request);
+                }
+                else{
+                    $Class="App\\".$class;   
+                    $$classes=$Class::where('id','!=','0');
+                }
 
-        return view('orders.pradzia', [
-            'user' => Auth()->User(), 
-            'users' => User::all(), 
-            'orders'=>$orders, 
-            'notif' => $notif
-        ]);   
+            
+            $orders = $orders->where('state','Projektas kuriamas')
+            ->where('owner_id',Auth()->User()->id)
+                ->paginate($pagination_count);
+            return view('orders.user.pradzia', [
+                    'user' => Auth()->User(), 
+                    'users' => User::all(), 
+                    'orders'=>$orders, 
+                    'notif' => $notif
+                ]);   
+        }
+        if(Auth()->User()->position == 'admin'){
+            $pagination_count=9;    
+                if(Setting::where('attribute','pagination_count')->first()){  
+                    $setting=Setting::where('attribute','pagination_count')
+                                ->first(); 
+                    $pagination_count=$setting->value;
+                }
+                $class='Order';
+                $classes="orders";
+                if($request->filter_by || $request->order_by){
+                    $request->request->add(['class' => $class]);
+                    $$classes=$this->filter($request);
+                }
+                else{
+                    $Class="App\\".$class;   
+                    $$classes=$Class::where('id','!=','0');
+                }
+            $orders = $orders->where('state','Projektas kuriamas')
+                ->get();
+            return view('orders.admin.pradzia', [
+                'user' => Auth()->User(), 
+                'users' => User::all(), 
+                'orders'=>$orders, 
+                'notif' => $notif
+            ]);   
+        }
     }
     /**
      * Update the specified resource in storage.
@@ -455,7 +520,7 @@ class OrdersController extends Controller
         }
 
         $order->type=$request->type;
-        $order->expected_at=$request->expected_at;
+        $order->expected_at= date('Y-m-d H:i:s',strtotime($request->expected_at));
         $owner = User::find($order->owner_id);
         $order->save();
         if($input != null)
@@ -489,41 +554,17 @@ class OrdersController extends Controller
                 $headers = "Content-Type: text/html; charset=UTF-8\r\n";
                 $data=array(['data'=>'Pakeista užsakymo '.$order->name. ' būsena','link'=>'orders-dashboard']);
                 $notif = Auth()->User()->notifications()->get();
-                
-                $class='Order';
-                $classes="orders";
-                if($request->filter_by || $request->order_by){
-                    $request->request->add(['class' => $class]);
-                    $$classes=$this->filter($request);
-                }
-                else{
-                    $Class="App\\".$class;
-                    $pagination_count=9;    
-                    if(Setting::where('attribute','pagination_count')->first())
-                    {  
-                        $setting=Setting::where('attribute','pagination_count')
-                                    ->first(); 
-                        $pagination_count=$setting->value;
-                    }
-                    $$classes=$Class::paginate($pagination_count);
-                }
 
-
-
-                return view('orders.pradzia', [
-                    'user' => Auth()->User(), 
-                    'users' => User::all(), 
-                    'orders'=>$orders, 
-                    'notif' => $notif
-                ]);   
+                return redirect('dashboard');
+                   
             }
-            
-        
-            return view('responses.project-edited',[
-                'user' => Auth()->User(), 
-                'users' => User::all() , 
-                'notif' => Auth()->User()->notifications()->get() 
-            ]);
+            else{
+                return view('responses.project-edited',[
+                    'user' => Auth()->User(), 
+                    'users' => User::all() , 
+                    'notif' => Auth()->User()->notifications()->get() 
+                ]);
+            }
            
         
         
@@ -642,13 +683,7 @@ class OrdersController extends Controller
 
     public function filter($request){
         $user=Auth()->user();
-        $pagination_count=9;
-        if(Setting::where('attribute',$user->name.'_'.'pagination_count')->first())
-        {  
-                $setting=Setting::where('attribute',$user->name.'_'.'pagination_count')
-                            ->first(); 
-                $pagination_count=$setting->value;
-        }
+
         if(Setting::where('attribute',$user->name.'_'.'order')->first() && !$request->order)
         {
             $setting=Setting::where('attribute',$user->name.'_'.'order')
@@ -748,7 +783,7 @@ class OrdersController extends Controller
     $filter_operator=$request->filter_operator;
     $Class="App\\".$request->class;
     $objects=$Class::where('id','!=','0');
-
+   
     if($filter_by == 'user_id' ){
         if( $filter_operator == 'LIKE' && User::where('name',$filter_operator,"%".$filter_value."%")
                                             ->first()){
@@ -771,15 +806,6 @@ class OrdersController extends Controller
                         ->sortBy($order_by);
                 }
                 $objects = $sorted->values()->collect();
-            $objects = $objects
-                        ->paginate($pagination_count)
-                        ->appends([
-                'order_by'=>$order_by,
-                'order'=>$order,
-                'filter_by'=>$filter_by,
-                'filter_value'=>$filter_value,
-                'filter_operator'=>$filter_operator
-            ]);        
             return $objects;
         }
         else if( User::where('name',$filter_value)
@@ -790,8 +816,6 @@ class OrdersController extends Controller
         }
         
     }
-
-
     if($user->position=='admin' && $request->filter_check){
         if($filter_operator=='LIKE' ||$filter_operator=='NOT LIKE') {
             $objects = $Class::where($filter_by,$filter_operator,"%".$filter_value."%");
@@ -808,10 +832,10 @@ class OrdersController extends Controller
         $objects = $objects
                     ->where('owner_id',$user->id);
     }
-    $objects->orderBy($order_by,$order);
-    $objects = $objects
-                ->paginate($pagination_count)
-                ->appends(['order_by'=>$order_by,'order'=>$order,'filter_by'=>$filter_by,'filter_value'=>$filter_value,'filter_operator'=>$filter_operator]);
+    if($request->order_check)
+    {
+        $objects = $objects->orderBy($order_by,$order);
+    }
     return $objects;
 }
 }

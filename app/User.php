@@ -73,4 +73,27 @@ class User extends Authenticatable
             return $this->name;
         }
     }
+
+    public function ordersFiltered(){
+        $orders=$this->orders()->get();
+        
+        $this->ObFilter();
+        
+    }
+/*
+    public function ObFilter(){
+        //dd($_REQUEST);
+        if($filter);{
+        $orders = $orders->where($filter->filter_by, $filter->filter_operator , $filter->filter_value);
+        }
+        if($order){
+        $orders->orderBy($order_by, $order);
+        }
+        if($paginate){
+        $orders->paginate($pagination);
+        }
+        else{
+        $orders->get();
+    }
+*/
 }

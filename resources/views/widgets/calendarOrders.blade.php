@@ -20,15 +20,12 @@ foreach($events as $event)
 }
 if(Auth()->User()->position == 'admin')
 {
-    $events = $events->where('state','Projektas kuriamas')->where('expected_at','>', now() );
+    $events = $events->where('state','!=','Projektas kuriamas');
 }
 else 
 {
-    $events = $events->where('state','Projektas kuriamas')->where('expected_at','>', now())->where('owner_id', Auth()->User()->id);
+    $events = $events->where('state','!=','Projektas kuriamas')->where('owner_id', Auth()->User()->id);
 }
-
-
-
 $month=date('F', mktime(0, 0, 0, $M,1));
 $calendar=CAL_GREGORIAN;
 $W=gregoriantojd($M,1,$Y);
@@ -74,7 +71,6 @@ if(strlen($M)<2) $M='0'.$M;
         {{__('Tipas')}}: {{__($event->type)}}<br>
         {{__('Pradžios data')}}: {{$event->created_at}}<br>
         {{__('Pabaigos data')}}: {{$event->expected_at}}<br>
-        {{__('Likęs laikas')}} : <span  class="expected" data-time="{{$event->expected_at}}">00:00:00</span>
         </p>
         <a href="{{route('orders.edit',$event->id)}}" class="btn spec-btn">{{__('Peržiūrėti')}}</a>
     </div>
@@ -90,10 +86,10 @@ if(strlen($M)<2) $M='0'.$M;
     <thead>
     <tr>
         
-    <th id="calendar-next-t" class="cal-buttons p-0" data_M="{{$M-1}}" data_Y="{{$Y}}" data_url="{{route('calendar.update')}}">
+    <th id="calendar-next-t" class="cal-buttons p-0" data_M="{{$M-1}}" data_Y="{{$Y}}" data_url="{{route('calendar.orders.update')}}">
     <i class="fas fa-chevron-left"></i></th>      
     <th colspan="5" class="px-0 py-1">{{__($month)}} {{$Y}}</th>
-    <th id="calendar-previous-t" class="cal-buttons p-0" data_M="{{$M+1}}" data_Y="{{$Y}}" data_url="{{route('calendar.update')}}">
+    <th id="calendar-previous-t" class="cal-buttons p-0" data_M="{{$M+1}}" data_Y="{{$Y}}" data_url="{{route('calendar.orders.update')}}">
     <i class="fas fa-chevron-right"></i></th>
     </tr>
         <tr>

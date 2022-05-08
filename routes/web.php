@@ -13,6 +13,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function(){
     return view('widgets.calendarPage')->with(['user'=>Auth::user(),'users' =>User::all(),'notif'=>Auth()->User()->notifications()->get()]);
   })->name('calendar');
   Route::post('calendar', 'Controller@calendar_update')->name('calendar.update');
+  Route::post('calendar-orders', 'Controller@calendarOrders_update')->name('calendar.orders.update');
   Route::get('duk', function(){
     
     return view('duk')->with(['user'=>Auth::user(),'users' =>User::all(),'notif'=>Auth()->User()->notifications()->get()]);
