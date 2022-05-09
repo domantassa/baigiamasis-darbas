@@ -23,6 +23,7 @@ class ProfilesController extends Controller
 
     public function index(Request $request)
     {
+        
             $notif = Auth()->User()->notifications()->get();
 
             $class='User';
@@ -110,36 +111,21 @@ class ProfilesController extends Controller
 
     public function getShow($id,Request $request)
     {
+
         
         $user = User::findOrFail($id);
+
+        $files = file::all();
 
         $notif = Auth()
                     ->User()
                     ->notifications()
                     ->get();
 
-        $class='file';
-        $objects='files';
-        $Settings="\App\Setting";
-        if($request->filter_by || $request->order_by){
-            $request->request
-                        ->add(['class' => $class]);
-            $$objects=$this
-                        ->filter($request);
-        }
-        else{
-            $Class="App\\".$class;
-            $pagination_count=9;    
-            if($Settings::where('attribute','pagination_count')->first())
-            {  
-                $setting=$Settings::where('attribute','pagination_count')
-                            ->first(); 
-                $pagination_count=$setting->value;
-            }
-            $$objects=$Class::paginate($pagination_count);
-        }
 
-        $files= $files->where('owner_id',$user->id)->paginate($pagination_count);
+
+        $files= $files->where('owner_id',$user->id);
+
         return view(
             'dashboard', [
                 'user' => $user, 

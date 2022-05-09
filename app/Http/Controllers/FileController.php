@@ -48,14 +48,14 @@ class FileController extends Controller
     public function store(Request $request, $user)
     {
 
-
+        
         if(Auth()->user()->id == $user || Auth()->user()->position == 'admin')
         {
             $user = User::findOrFail($user);  
             $validation = $request->validate([
                 'file'  =>  'required|file|max:20000'
             ]);
-            
+
             $file = $request->file;  
             $fileName = date('Y-m-d-H-i-s',time()) . '-'.$file->getClientOriginalName();
                 
@@ -65,7 +65,7 @@ class FileController extends Controller
                 'owner_id' => $user->id,
                 
             ]);
-            
+
             
             $file->storeAs('public/'.$user->name, $fileName);
 
