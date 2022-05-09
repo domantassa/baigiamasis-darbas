@@ -50,13 +50,13 @@
 
                         <h4 class="my-3">{{$userr->name}}</h4>
                         
-                        @if($userr->orders()->get()->count() > 0)
+                        @if($userr->orders()->where('state','=','Projektas kuriamas')->get()->count() > 0)
                         
-                         <table style="overflow:scroll;width:1400px">
+                         <table style="overflow:scroll;width:1400px; padding-right: 10px">
                             <thead style="margin-right:15px !important">
                                 
                             <th style="width:400px"><h1 class="h4 m-0">{{__('Peržiūrėti')}}</h1></th>
-                            <th style="width:230px"><h1 class="h4 m-0">{{__('Užsakymo data')}}</h1></th>
+                            <th style="width:250px"><h1 class="h4 m-0">{{__('Užsakymo data')}}</h1></th>
                             <th style="width:280px"><h1 class="h4 m-0">{{__('Užsakymo tipas')}}</h1></th>
                             <th style="width:190px"><h1 class="h4 m-0">{{__('Tikėtina už')}}:</h1></th>
                             <th style="width:272px"><h1 class="h4 m-0">{{__('Būsena')}}</h1></th>
@@ -65,7 +65,7 @@
 
                             </thead>
                             <tbody>
-                            @foreach($orders as $order)
+                            @foreach($orders->where('owner_id',$userr->id)->where('state','Projektas kuriamas') as $order)
                             <tr>
                             
                         
@@ -88,10 +88,10 @@
                             @endforeach
                             </tbody>
                             </table>
-                            @else
-                            <h1 class="h4 m-0">{{__('Klientas neturi aktyvių užsakymų')}}</h1>
-                                @endif
+                        @else
+                            <h1 class="h4 m-0">{{__('Klientas neturi aktyvių užsakymų')}}</h1>  
                             @endif
+                        @endif
                         @endforeach
                         <script>
                          $('.expected').each(function(){

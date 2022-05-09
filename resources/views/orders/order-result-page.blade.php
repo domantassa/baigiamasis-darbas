@@ -61,7 +61,7 @@
                             <h1 class="h4 m-0" style="display:inline-block;"> {{ __('Dizainerio komentaras') }}</h1>
                             
 
-                            <textarea style="display:block;" class=" btn-round order-btn-grey form-btn placeholder" name="comment" placeholder="{{ __('Komentaras klientui') }}" style="max-width:1295px;width:100%;min-height:138px" readonly>{{$order->comment}}</textarea>
+                            <textarea style="display:block;" class=" btn-round order-btn-grey form-btn placeholder" name="comment" placeholder="{{ __('Komentaras klientui') }}" style="max-width:1295px;width:100%;min-height:138px" readonly>{{__($order->comment)}}</textarea>
             </div>
             
         </div>
@@ -164,7 +164,7 @@
 
 
                                     @else
-                                    <tr><td style="text-align: center;" colspan="12">{{ __('Užsakymas vykdomas, sugrįžti vėliau ') }}</td></tr>
+                                    <tr><td style="text-align: center;" colspan="12">{{ __('Užsakymas vykdomas, sugrįžti vėliau') }}</td></tr>
 
                                     @endif
 

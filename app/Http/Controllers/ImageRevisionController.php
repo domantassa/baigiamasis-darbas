@@ -113,7 +113,18 @@ class ImageRevisionController extends Controller
 
 
 
-        $order->comment=$request->comment;
+        
+        if($request->comment != null)
+        {
+            $order->comment=$request->comment;
+        }
+        else
+        {
+            if($order->comment == null) 
+            {
+                $order->comment = 'Dizaineris komentaro nepaliko';
+            }
+        } 
         
         $owner = User::find($order->owner_id);
 
@@ -157,16 +168,6 @@ class ImageRevisionController extends Controller
             return redirect("dashboard/orders/results/".$order->id);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\ImageRevision  $imageRevision
-     * @return \Illuminate\Http\Response
-     */
-    public function show(ImageRevision $imageRevision)
-    {
-
-    }
 
     public function download($orderId, $imageRevisionId)
     {

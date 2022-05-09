@@ -16,7 +16,7 @@ class ProfilesController extends Controller
     public function __construct()
     {
         
-        $expiresAt = now()->addMinutes(5);
+        $expiresAt = now()->addMinutes(15);
         $now = now();
     }
 
@@ -223,13 +223,8 @@ class ProfilesController extends Controller
         $files = file::where('owner_id', Auth()->User()->id)
                     ->get();
         
-        return view(
-            'users', [
-                'user' => Auth()->User(), 
-                'users' => User::all(), 
-                'files'=>$files, 
-                'notif' => $notif
-            ]);
+
+        return redirect(route('users'));
     }
 
     public function show($user)

@@ -57,7 +57,7 @@
                 
 
                 
-                <table style="overflow:scroll; width:1400px">
+                <table style="overflow:scroll; width:1400px; padding-right: 10px">
                     
                 
                 @if(count($orders)!=0)

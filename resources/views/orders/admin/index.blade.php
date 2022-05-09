@@ -51,20 +51,20 @@
                             @if($user1->position != 'admin')
                                 <h4 class="my-3">{{$user1->name}}</h4>
                                 
-                                <table style="overflow:scroll;width:1400px">
+                                <table style="overflow:scroll;width:1600px; padding-right: 10px">
                                     <thead>
                                         
-                                        <th style="width:250px"><h1 class="h4 m-0">{{__('Pavadinimas')}}</h1></th>
-                                        <th style="width:200px"><h1 class="h4 m-0">{{__('Užsakymo data')}}</h1></th>
+                                        <th style="width:300px"><h1 class="h4 m-0">{{__('Pavadinimas')}}</h1></th>
+                                        <th style="width:220px"><h1 class="h4 m-0">{{__('Užsakymo data')}}</h1></th>
                                         <th style="width:250px"><h1 class="h4 m-0">{{__('Užsakymo tipas')}}</h1></th>
-                                        <th style="width:150px"><h1 class="h4 m-0">{{__('Peržiūrėti')}}</h1></th>
+                                        <th style="width:200px"><h1 class="h4 m-0">{{__('Peržiūrėti')}}</h1></th>
                                     
                                     </thead>
                                     <tbody>
                                         @foreach($orders->where('owner_id',$user1->id)->where('state','Projektas atliktas') as $order)
                                         
                                             <tr>
-                                            
+                                                
                                                 <td class="p-1"><a href="{{route('orders.edit',$order->id)}}"><div class="btn-primary  btn-round  order-btn-primary">{{ $order->name }}</div></a></td>
                                                 <td class="p-1"><div class="  btn-round order-btn-grey" >{{ $order->created_at }}</div></td>
                                                 <td class="p-1"><div class="  btn-round order-btn-grey" >{{ __($order->type) }}</div></td>
@@ -76,6 +76,11 @@
                                     </tbody>
                                 </table> 
                             @endif
+                        @else
+                        @if($user1->position != 'admin')
+                        <h4 class="my-3">{{$user1->name}}</h4>
+                        <h5 class="my-3">{{__('Nėra uždarytų projektų')}}</h5>   
+                        @endif
                         @endif
                     @endforeach
                     @else

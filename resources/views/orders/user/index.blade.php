@@ -40,7 +40,7 @@
                 <div class="col-12 " style="padding-left:1.875rem">
                 @if(count($orders->where('owner_id',$user->id)->where('state','Projektas atliktas'))>0)
 
-                <table style="overflow:scroll;width:1200px">
+                <table style="overflow:scroll;width:1200px; padding-right: 10px">
                     <thead>
                         
                          <th style="width:516px"><h1 class="h4 m-0">{{__('Pavadinimas')}}</h1></th>
