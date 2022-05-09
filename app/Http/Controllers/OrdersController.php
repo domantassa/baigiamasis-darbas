@@ -560,7 +560,7 @@ class OrdersController extends Controller
                 $data=array(['data'=>'Pakeista užsakymo '.$order->name. ' būsena','link'=>'orders-dashboard']);
                 $notif = Auth()->User()->notifications()->get();
 
-                return redirect('dashboard');
+                return redirect(route('orders.dashboard'));
                    
             }
             else{
