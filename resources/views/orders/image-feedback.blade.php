@@ -88,4 +88,3 @@
 </script>
 @endsection
 
-<!--<script src="{{asset('js/custom/image-feedbackBlade.js')}}"></script> identical code (for easier calculation of js) -->

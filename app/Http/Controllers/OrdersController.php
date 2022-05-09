@@ -140,13 +140,16 @@ class OrdersController extends Controller
         $imageRevisions = ImageRevision::where('order_id', $id)
                             ->get();
 
+        $files=file::all();
+
 
         return view(
             'orders.order-result-page', [
                 'user' => Auth()->User(), 
                 'imageRevisions' => $imageRevisions, 
                 'users' => User::all(), 
-                'order'=>$order, 
+                'order'=>$order,
+                'files'=>$files, 
                 'notif' => $notif
             ]);    
     }
@@ -432,6 +435,7 @@ class OrdersController extends Controller
             abort(404);
         }
     }
+    
     public function dashboard_orders(Request $request){
         $notif = Auth()
                     ->User()

@@ -280,4 +280,3 @@
     <!-- END Page Content -->
 @endsection
 
-<!--<script src="{{asset('js/custom/ordersEditBlade.js')}}"></script> identical code (for easier calculation of js) -->

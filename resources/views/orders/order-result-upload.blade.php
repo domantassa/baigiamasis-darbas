@@ -130,4 +130,4 @@
     <!-- END Page Content -->
 @endsection
 
-<!--<script src="{{asset('js/custom/order-result-uploadBlade.js')}}"></script> identical code (for easier calculation of js) -->
+

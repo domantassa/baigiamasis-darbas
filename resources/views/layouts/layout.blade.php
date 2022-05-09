@@ -592,21 +592,18 @@
                                         <div style="overflow:auto;max-height:300px">
                                             @foreach ($notif->sortByDesc('id') as $oneNotif)	
                                         
-                                        
-                                            <form class="" action="/dashboard/deletenotification" method="POST">
-                                                @csrf
+
+                                            <a href="{{ route('notifications.visit',$oneNotif->id) }}">
                                                 <li class="">
                                                 <label class="click notif-item text-dark media py-2" for="submitas-{{$oneNotif->id}}" id="label-fileToUpload">
-                                                <input type="hidden" name="notification" value="{{$oneNotif->id}}" />
-                                                <input type="hidden" name="link" value="{{$oneNotif->link}}" />
-                                                <input type="submit" id="submitas-{{$oneNotif->id}}" class="d-none" value="">
+
                                                
                                                 <div class="font-w600"><i class=" mr-2 ml-3 fa fa-fw fa-check-circle"></i><small class="text-muted"><?php if(strlen($oneNotif->message) > 27) { echo substr($oneNotif->message, 0, 34); echo "..."; } else { echo $oneNotif->message; } ?></small>
                                                 <br><small class=" mr-2 ml-5 text-muted">{{$oneNotif->created_at}}</small>
                                                </div>
                                                </label>
                                                </li>
-                                            </form>
+                                            </a>
                                         
                                         
                                             @endforeach	

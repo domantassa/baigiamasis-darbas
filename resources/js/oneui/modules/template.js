@@ -1,9 +1,3 @@
-/*
- *  Document   : template.js
- *  Author     : pixelcave
- *  Description: UI Framework custom functionality
- *
- */
 
 // Import global dependencies
 import './../bootstrap';

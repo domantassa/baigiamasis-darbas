@@ -1,9 +1,3 @@
-/*
- *  Document   : tools.js
- *  Author     : pixelcave
- *  Description: Various small tools
- *
- */
 
 // Import global dependencies
 import './../bootstrap';

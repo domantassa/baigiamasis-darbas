@@ -1,9 +1,3 @@
-/*
- *  Document   : helpers.js
- *  Author     : pixelcave
- *  Description: Various jQuery plugins inits as well as custom helpers
- *
- */
 
 // Import global dependencies
 import './../bootstrap';

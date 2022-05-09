@@ -93,4 +93,3 @@ $('#reg-toggle').on('click',function(){
 </div>
 @endsection
 
-<!--<script src="{{asset('js/custom/image-comparerBlade.js')}}"></script> identical code (for easier calculation of js) -->
