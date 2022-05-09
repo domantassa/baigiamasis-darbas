@@ -49,6 +49,7 @@
                     @foreach($users as $user1)
                         @if(count($orders->where('owner_id',$user1->id))>0)
                             @if($user1->position != 'admin')
+                           
                                 <h4 class="my-3">{{$user1->name}}</h4>
                                 
                                 <table style="overflow:scroll;width:1600px; padding-right: 10px">
@@ -61,7 +62,7 @@
                                     
                                     </thead>
                                     <tbody>
-                                        @foreach($orders->where('owner_id',$user1->id)->where('state','Projektas atliktas') as $order)
+                                        @foreach($orders->where('owner_id',$user1->id) as $order)
                                         
                                             <tr>
                                                 

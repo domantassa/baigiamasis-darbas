@@ -50,7 +50,7 @@
 
                         <h4 class="my-3">{{$userr->name}}</h4>
                         
-                        @if($userr->orders()->where('state','=','Projektas kuriamas')->get()->count() > 0)
+                        @if($orders->where('owner_id','=',$userr->id)->where('state','=','Projektas kuriamas')->count() > 0)
                         
                          <table style="overflow:scroll;width:1400px; padding-right: 10px">
                             <thead style="margin-right:15px !important">

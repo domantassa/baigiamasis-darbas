@@ -90,6 +90,7 @@ class OrdersController extends Controller
                 $orders = $orders->where('state','!=','Projektas kuriamas')
                 ->where('owner_id',Auth()->User()->id)
                     ->paginate($pagination_count);
+                    dd($orders);
             return view(
                 'orders.user.index', [
                     'user' => Auth()->User(), 
