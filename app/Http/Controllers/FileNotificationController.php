@@ -50,6 +50,15 @@ class FileNotificationController extends Controller
         
     }
 
+    public function visit($notification)
+    {
+        $fileNotification = FileNotification::where('id', $notification)->take(1)->first();
+        $link = $fileNotification->link;
+        $fileNotification->delete();
+        return redirect('/dashboard/'.$link);
+        
+    }
+
     //PA11
     public function delete($user)
     {

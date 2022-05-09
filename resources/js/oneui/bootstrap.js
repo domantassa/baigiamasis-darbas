@@ -1,9 +1,3 @@
-/*
- *  Document   : bootstrap.js
- *  Author     : pixelcave
- *  Description: Import global dependencies
- *
- */
 
  // Import all vital core JS files..
  import jQuery from 'jquery';

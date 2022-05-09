@@ -44,6 +44,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function(){
   //end PA21
 
   Route::get('/deletenotification/{notification}', 'FileNotificationController@destroy')->name('notifications.destroy');
+  Route::get('visit/notification/{notification}', 'FileNotificationController@visit')->name('notifications.visit');
   //PA11
   Route::get('/deleteNotifications/{user}', 'FileNotificationController@delete')->name('notifications.delete');
   Route::get('files', 'FileController@index')->name('files');
@@ -99,6 +100,8 @@ Route::prefix('dashboard')->middleware('auth')->group(function(){
     Route::put('settings/{id}/update','SiteSettingsController@update')->name('settings.update');
     Route::delete('settings/{id}/delete','SiteSettingsController@destroy')->name('settings.destroy');
   
+
+    Route::post('store/finalResult/{order}', 'FileController@storeFinalResult')->name('uploadFinalResult');
     Route::get('brands','BrandController@index')->name('brands.index');
     
     

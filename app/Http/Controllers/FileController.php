@@ -63,12 +63,7 @@ class FileController extends Controller
     }
 
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request, $user)
     {
 
@@ -118,6 +113,64 @@ class FileController extends Controller
 
 
             return redirect('dashboard/'.$user->id);
+            
+        }
+        return back();
+           
+        
+        
+    }
+
+    public function storeFinalResult(Request $request, $order)
+    {
+
+
+        if( Auth()->user()->position == 'admin')
+        {
+            $order = Order::findOrFail($order); 
+            $user = User::findOrFail($order->owner_id); 
+            $validation = $request->validate([
+                'file'  =>  'required|file|max:20000'
+            ]);
+            
+            $file = $request->file;  
+            $fileName = date('Y-m-d-H-i-s',time()) . '-'.$file->getClientOriginalName();
+                
+            $naujasFile = file::create([
+                'name' => $fileName,
+                'path' => $user->name,
+                'owner_id' => 0, //to seperate which files are for results
+                'order_id' => $order->id,
+            ]);
+            
+            
+            $file->storeAs('public/'.$user->name, $fileName);
+
+            function toLongString(string $str) {
+                if(strlen($str) > 27) {
+                    $strr = substr($str, 0, 23);
+                    $strr .= "...";
+                    return $strr;
+                }
+                else {
+                    return $str;
+                }
+            }
+            
+
+            if($user->id != 1)
+            {
+                
+                $fileNotification = FileNotification::create([
+                'user_id' => $user->id,
+                'message' => 'Galutiniai rezultatai: '.$file->getClientOriginalName(),
+                'link' => 'orders/results/'.$user->id,
+                'fileId' => $naujasFile->id,
+                ]);
+            }
+
+
+            return redirect('dashboard/orders/results/'.$user->id);
             
         }
         return back();

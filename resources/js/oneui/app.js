@@ -1,9 +1,3 @@
-/*
- *  Document   : app.js
- *  Author     : pixelcave
- *  Description: Main entry point
- *
- */
 
 // Import global dependencies
 import './bootstrap';

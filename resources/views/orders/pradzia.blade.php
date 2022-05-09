@@ -28,7 +28,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Page Content -->
 
-    <div class="contentShadowInset">
+    <div style="margin-bottom: 25px" class="contentShadowInset">
         
         <div class="row justify-content-center dashboardas">
             
@@ -224,7 +224,7 @@
                         
 
                         </script>
-                        <!--<script src="{{asset('js/custom/pradziaBlade.js')}}"></script> identical code (for easier calculation of js) -->
+
                         
                 </div>
             </div>

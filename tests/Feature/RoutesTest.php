@@ -109,21 +109,7 @@ class RoutesTest extends TestCase
         }
     }
 
-    // public function testRouteAccessDashboardBrandEditTest()
-    // {
-    //     $user = factory(User::class)->create();
-    //     $user->position = 'admin';
-    //     $user->save();
 
-    //     $response = $this->actingAs($user)
-    //                      ->withSession(['foo' => 'bar'])
-    //                      ->get('/dashboard/brand/edit/'.$user->id);
-
-    //     $response->assertStatus(200);
-    //     if($user) {
-    //         $user->delete();
-    //     }
-    // }
 
     public function testRouteAccessDashboardBrandDeleteTest()
     {
@@ -156,23 +142,7 @@ class RoutesTest extends TestCase
             $user->delete();
         }
     }
-/*
-    public function testRouteAccessDashboardDeleteNotificationTest()
-    {
-        //THIS
-        $user = factory(User::class)->create();
 
-        $response = $this->actingAs($user)
-                         ->withSession(['foo' => 'bar'])
-                         ->get('/dashboard/deleteNotifications/258');
-
-        //Not admin can't reach this page
-        $response->assertStatus(200);
-        if($user) {
-            $user->delete();
-        }
-    }
-*/
     public function testRouteAccessDashboardFilesTest()
     {
         $user = factory(User::class)->create();

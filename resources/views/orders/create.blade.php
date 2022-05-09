@@ -233,4 +233,4 @@
     <!-- END Page Content -->
 @endsection
 
-<!--<script src="{{asset('js/custom/ordersCreateBlade.js')}}"></script> identical code (for easier calculation of js) -->
+

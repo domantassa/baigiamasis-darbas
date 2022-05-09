@@ -1,8 +1,3 @@
-/*
- *  Document   : tables_datatables.js
- *  Author     : pixelcave
- *  Description: Custom JS code used in Plugin Init Example Page
- */
 
 // DataTables, for more examples you can check out https://www.datatables.net/
 class pageTablesDatatables {
